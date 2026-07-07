@@ -1,0 +1,2114 @@
+[
+    {
+        "id_route": "6",
+        "title_route": "วิถีวัฒนธรรมทุ่งกุลากู่กาสิงห์เมืองบัว",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "5",
+                "title": "ปราสาทกู่กาสิงห์",
+                "description": " กู่กาสิงห์ ตั้งอยู่ใน วัดบูรพากู่กาสิงห์ ตำบลกู่กาสิงห์ อำเภอเกษตรวิสัย จังหวัดร้อยเอ็ด ถือว่าเป็นโบราณสถานสถาปัตยกรรมแบบเขมรอีกแห่งหนึ่งที่มีขนาดใหญ่และยังอยู่ในสภาพดีค่ะ ทางสำนักงานโบราณคดีและพิพิธภัณฑสถานแห่งชาติที่ 8 อุบลราชธานี สังกัดกรมศิลปากร ก็เลยได้ดำเนินการขุดแต่งและบูรณะกู่กาสิงห์ให้สวยงามยิ่งขึ้น เพื่อพัฒนาเป็นแหล่งท่องเที่ยวที่สำคัญอีกแห่งหนึ่งในภาคอีสาน\r\n\r\n โดย กู่กาสิงห์ จะประกอบไปด้วยปรางค์ 3 องค์ ตั้งอยู่บนฐานศิลาแลงเดียวกัน มีวิหารรูปสี่เหลี่ยมผืนผ้า ที่เรียกว่าบรรณาลัยอยู่ทางด้านหน้าทั้งสองข้างค่ะ ทั้งหมดจะถูกล้อมด้วยกำแพงที่มีซุ้มประตู 4 ทิศด้วยกัน โดยมีคูน้ำรูปเกือกม้าล้อมรอบอีกชั้นหนึ่ง ปรางค์ประธาน จะหันหน้าไปทางทิศตะวันออก ส่วนปรางค์องค์กลางจะมีขนาดใหญ่ที่สุด\r\n\r\nนอกจากนี้ก็ยังปรากฏลวดลายสลักต่างๆ เช่น ลายกลีบบัวและลายกนก เป็นต้นค่ะ ซึ่งแบบแผนผังและโบราณวัตถุที่พบนั้น บ่งบอกให้ทราบว่า กู่กาสิงห์ ได้รับอิทธิพลจากศิลปะเขมรที่เรียกว่า บาปวน อายุราวๆ ปี พ.ศ.1560-1630 ไว้เพื่อเป็นเทวสถานอุทิศถวายแด่พระอิศวรนั่นเอง",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "กู่กาสิงห์",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5765781",
+        "Longitude": "103.6734207",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-01-26_00-53-59_S__22085682_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-06-12_09-26-10_kukasing-01.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-06-12_09-26-14_kukasing-02.jpg"
+        ]
+    },
+    {
+        "id_route": "6",
+        "title_route": "วิถีวัฒนธรรมทุ่งกุลากู่กาสิงห์เมืองบัว",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "6",
+                "title": "กลุ่มแม่บ้านเกษตรกรบ้านกู่กาสิงห์",
+                "description": "กลุ่มแม่บ้านเกษตรกรบ้านกู่กาสิงห์ ผ้าไหมงามกู่กาสิงห์ ",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "กู่กาสิงห์",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.8820004",
+        "Longitude": "102.9060518",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-07-57_278301367_202550409006046_7815139084336240158_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-08-00_272870934_109242148337060_2060181472589229332_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-08-04_272908771_109241865003755_2830558988712232835_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-08-08_272911684_109252525002689_4532840390672681402_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-08-12_272999073_109253085002633_1644196877364784280_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-08-16_273000752_111080514819890_7664242919899631747_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-08-20_273616326_117781060816502_415160971100444758_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-33-33_IMG_20240126_123521.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-33-39_IMG_20240126_123531.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-33-48_IMG_20240126_123621.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-34-05_IMG_20240126_123640.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-34-15_IMG_20240126_123702.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/6/2024-06-12_10-34-31_IMG_20240126_133005.jpg"
+        ]
+    },
+    {
+        "id_route": "6",
+        "title_route": "วิถีวัฒนธรรมทุ่งกุลากู่กาสิงห์เมืองบัว",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "7",
+                "title": "กู่บ้านเมืองบัว",
+                "description": "กู่เมืองบัว \r\nเป็นศิลปะเขมร แบบบาปวนสมัยขอม ช่วงศตวรรษที่ 16 สร้างจากศิลาแลง มีทับหลังเป็นพระอินทร์ทรงช้างเอราวัณ สร้างขึ้นเพื่อเป็นอโรคยาศาล ขุดพบแท่นหินบดยา เทวบุตร และเทวสตรี มีบารายอยู่ทางทิศเหนือของกู่ ส่วนที่ปรากฏให้เห็นเป็นส่วนยอด ส่วนฐานจมอยู่ใต้ดิน \r\n ความสำคัญกับชาวเมืองบัว เป็นสถานที่ศักดิ์สิทธิ์ มีพิธีสรงกู่ทุกปีในวันขึ้น 8 ค่ำ เดือน 6 กิจกรรมที่สำคัญ คือ\r\n1.วันพุธแรกของเดือนหก ขบวนสะใภ้แห่จากเจ้าปู่อุปฮาดเหง้าแสนเมือง หมู่ 11 ไปทำพิธีบวงสรวงและคารวะเจ้าปู่ขุนเมือง หมู่ 6 โดยประชาชนหมู่ 6 และ หมู่ 11\r\n2.เวลาเย็นวันขึ้น 7 ค่ำเดือนหก \r\n ตั้งบุญคุณหรือเจริญพระพุทธมนต์ ณ ศาลหลักบ้านหมู่ 1\r\n3.เช้าวันขี้น 8 ค่ำ เดือนหก \r\nตักบาตรพระสงฆ์ ณ ศาลหลักบ้าน โดยประชาชน หมู่ 1,2 และ 10\r\nอัญเชิญเทวรูปจากพิพิธภัณฑ์สถานแห่งชาติจังหวัดร้อยเอ็ด มาเข้าขบวนแห่ร่วมกับ เจ้าปู่\r\nของ 6 หมู่บ้าน ได้แก่ ม.1,2,5,6,10 และ 11 ไปประดิษฐานที่ดอนกู่เมืองบัว\r\nกิจกรรมอัญเชิญพระอุปคุต กิจกรรมขนทรายเพื่อทำพิธีตบประทาย \r\nกิจกรรมจำหน่ายดอกไม้ ธูป เทียน เพื่อสมทบกองทุนอนุรักษ์กู่ หมู่ 5 \r\nกิจกรรมตั้งโรงทาน\r\nเวลา 10.00 น. ถวายภัตตาหารเพลพระสงฆ์ \r\nเวลา 11.00 น. ขบวนแห่เทวรูปและเจ้าปู่ถึงบริเวณกู่อัญเชิญประดิษฐานที่แท่นบูชา  อ่านโองการบวงสรวง โดยคุณพ่อไพฑูรย์ ออมอด \r\n พิธีกรรมเสี่ยงทายบั้งไฟ เสี่ยงบ้าน เสี่ยงทายนา เสี่ยงทายสัตว์    เสร็จแล้วเปิดให้ประชาชน บูชา กราบไหว้ และสรงน้ำกู่และเจ้าปู่ของทุกบ้าน มหรสพสมโภชน์ ได้แก่ การแข่งขันชกมวยไทย หมอลำ\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "เมืองบัว",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.604321",
+        "Longitude": "103.5942641",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/7/2024-06-12_11-53-40_IMG_20240126_153506.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/7/2024-06-12_11-53-44_IMG_20240126_153644.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/7/2024-06-12_11-53-48_IMG_20240126_154606.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/7/2024-06-12_11-53-51_IMG_20240126_154617.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/7/2024-06-12_11-53-53_IMG_20240126_160656.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/7/2024-06-12_11-53-55_IMG_20240126_161903.jpg"
+        ]
+    },
+    {
+        "id_route": "6",
+        "title_route": "วิถีวัฒนธรรมทุ่งกุลากู่กาสิงห์เมืองบัว",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "8",
+                "title": "พิพิธภัณฑ์เมืองบัว",
+                "description": "พิพิธภัณฑ์เมืองบัว\r\nจัดแสดงพีธีกรรมฝังศพยุคก่อนประวัติศาสตร์ อายุ 3,280 - 1,504 ปีก่อนประวัติศาสตร์\r\nรูปแบบการฝัง คือ \r\n1.การฝังศพแบบนอนหงายเหยียดยาว ข้างศพมีภาชนะอุทิศขนาดเล็กวางใกล้โครงกระดูก  \r\n2.การฝังศพในภาชนะดินเผา รูปทรงแคปซูล รูปผลส้ม รูปหม้อ รูปโอ่งน้ำ รูปโกศ \r\nลักษณะการฝัง คือ \r\nการฝังศพครั้งที่ 1 ซึ่งในภาชนะบรรจุศพจะพบว่าโครงกระดูกจะมีความสมบูรณ์ \r\nการฝังศพครั้งที่ 2 ในภาชนะฝังศพจะมีเฉพาะกระดูกชิ้นใหญ่ เช่นกะโหลก กระดูกแขน ขา เป็นต้น\r\nรูปแบบการฝังพบว่า มีการฝังแบบเดี่ยว ฝังทับซ้อนใบเดิม ฝังแบบเถาปิ่นโต 3 ชั้น ฝังแบบต่อกัน\r\nสองใบแบบแคปซูล \r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "เมืองบัว",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5944566",
+        "Longitude": "103.4153456",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/8/2024-06-17_12-06-43_MB67-C-005_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/8/2024-06-17_12-06-46_MB67-C-005-1_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/8/2024-06-17_12-06-49_MB67-C-005-2_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/8/2024-06-17_12-06-53_MB67-C-005-3_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/8/2024-06-17_12-06-56_MB67-C-005-4_0.jpg"
+        ]
+    },
+    {
+        "id_route": "6",
+        "title_route": "วิถีวัฒนธรรมทุ่งกุลากู่กาสิงห์เมืองบัว",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "9",
+                "title": "สิมวัดปทุมคงคา",
+                "description": "สิมวัดปทุมคงคา \r\n\tสร้างราว พ.ศ. 2440-2460 \r\n\tสิม เป็นสถานที่ทำสังฆกรรมของพระสงฆ์ เช่น การบวชพระ การสวดปาฏิโมกข์ \r\n\tสิมวัดปทุมคงคา หันหน้าไปทางทิศตะวันตก สันนิษฐานว่า เป็นเรื่องของการเมือง เนื่องจากสมัยนั้น ภาคอีสานขึ้นอยู่กับกรุงเทพมหานคร เวลาสร้างสิมจึงสร้างหันหน้าไปทางทิศตะวันตก \r\n\tศิลปะของช่างชาวญวน การก่อสร้างยกพื้นเป็นฐานปัทม์ มี 3 ห้อง สองห้องแรกมีหน้าต่าง ห้องที่ 3 ทึบไม่มีช่องหน้าต่าง หลังคาเป็นหลังคา 2 ชั้น ปลายหลังคาทั้งสองด้านประดับช่อฟ้า หงส์ทำจากไม้\r\n\tวัสดุก่อสร้างคือ ดินจี่สอปูน \r\nการทำดินจี่ จะนำดินเหนียวจากท่าดินจี่ ลำน้ำเสียวใหญ่ บริเวณทิศตะวันออกเฉียงเหนือของหมู่บ้าน ผสมกับแกลบหรือฟางข้าวสับ แล้วเทลงพิมพ์ไม้สี่เหลี่ยม พอหมาดแล้ว ยกไม้แบบออก รอให้แห้ง แล้วนำไปเผาให้เกิดการแข็งตัว\r\n\tการทำปูน จะนำฟอสซิลหอยที่มีอยู่ทั่วไปในทุ่งกุลามาเผาไฟ นำไปตำในครกให้ละเอียด แล้วผสมยางบง กับหนังสัตว์ แช่น้ำมาผสม นำไปก่อฉาบดินจี่\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "เมืองบัว",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.6052312145",
+        "Longitude": "103.600220198",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/9/2024-06-12_12-04-45_IMG_20240127_090003.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/9/2024-06-12_12-04-53_IMG_20240127_090058.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/9/2024-06-12_12-05-00_IMG_20240127_090141.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "49",
+                "title": "ศูนย์ข้อมูลวัดเกาะบ่อพันขันรัตนโสภณ",
+                "description": "ศูนย์ข้อมูลวัดเกาะบ่อพันขันรัตนโสภณ ",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.574126555935326",
+        "Longitude": "103.94406841586915",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/49/2025-04-08_15-43-32_482855_0.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "15",
+                "title": "เกลือบง ",
+                "description": "เกลือบง เป็นก้อนเกลือโบราณของภาคอีสาน\r\nบ้างก็เรียกว่า เกลือดาน, เกลือก้อน (Salt Cake) เป็นรูปแบบการทำเกลือสินเธาว์แบบโบราณที่เกิดจากการใช้ภาชนะดินเผาที่ใช้ในการต้มเกลือสินเธาว์โบราณ",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.574170479319855",
+        "Longitude": "103.9440576870331",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/15/2024-09-05_10-20-39_S__6283281_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/15/2024-09-05_10-20-42_S__6283283_0.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "16",
+                "title": "เกวียนโบราณ",
+                "description": "เกวียน เกวียนเล่มสุดท้ายที่ขนไปขายที่โตเลสสาปเขมร",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57422539794753",
+        "Longitude": "103.9446685595369",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/16/2024-09-05_10-22-09_S__6283289_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/16/2024-09-05_10-22-12_S__6283291_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/16/2024-09-05_10-22-16_S__6283292_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/16/2024-09-05_15-32-10_IMG_8605.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/16/2024-09-05_15-32-16_IMG_8609.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/16/2024-09-05_15-32-24_IMG_8610.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/16/2024-09-05_15-32-30_IMG_8611.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "27",
+                "title": "จุดชมทุ่งบัวแดง",
+                "description": "สัมผัสความงดงามของ ทะเลบัวแดง ที่บานสะพรั่งไปทั่วผืนน้ำกว้างใหญ่ บัวแดง หรือบัวสายเป็นพืชน้ำที่พบได้ทั่วไปในแหล่งน้ำจืดใช้เป็นอาหารของทั้งคนและสัตว์ บัวแดงจะเริ่มขยายจำนวนและออกดอกสวยงามจำนวนมากในช่วงรอยต่อปลายฤดูฝนกับต้นฤดูหนาวตั้งแต่เดือนพฤศจิกายนเป็นต้นไป ช่วงเวลาที่เหมาะสมที่สุดคือเข้าดรู่จนถึงเวลาสายๆ ซึ่งทะเลบัวแดงที่บึงพันขันจะออกดอกนานเป็นสีชมพูแดงสวยงาม\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57417594084808",
+        "Longitude": "103.9454230232874",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/27/2024-09-05_11-23-38_S__6283325.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "17",
+                "title": "พิพิธภัณฑ์วัดเกาะบ่อพันขันรัตนโสภณ ",
+                "description": "พิพิธภัณฑ์บ่อพันขัน ตั้งอยู่ในพื้นที่ของวัดเกาะบ่อพันขันรัตนโสภณ บ้านหนองคูณ หมู่ที่ 12 ต.เด่นราษฎร์ อ.หนองฮี จ.ร้อยเอ็ด ซึ่งพิพิธภัณฑ์บ่อพันขัน สร้างจัดขึ้นในวันที่ 23กุมภาพันธ์ 2567 โดยได้รับความร่วมมือจากมหาวิทยาลัยราชภัฏร้อยเอ็ดในการจัดสร้างพิพิธภัณฑ์แห่งนี้ขึ้น ภายในพิพิธภัณฑ์ประกอบไปด้วยของโบราณต่าง ๆ ที่พบอยู่ในพื้นที่บริเวณบ่อพันขัน เช่น ฟอสซิลหอย ไม้กลายเป็นหิน เครื่องปั้นดินเผา บงเกลือ อื่น ๆ และยังมีข้อมูลเกี่ยวกับตำนานบ่อพันขัน ประวัติความเป็นมาของวัด และแผนที่แสดงพื้นที่โดยรอบของบ่อพันขัน ",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57384128390327",
+        "Longitude": "103.9452442268563",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-27-23_S__6283297.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-08_S__6283298_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-12_S__6283300_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-15_S__6283301_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-18_S__6283302_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-22_S__6283303_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-25_S__6283304_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-29_S__6283305_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_10-36-32_S__6283307.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_15-47-20_IMG_8702.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_15-47-29_IMG_8704.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_15-47-40_IMG_8706.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_15-47-50_IMG_8708.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/17/2024-09-05_15-48-04_IMG_8714.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "5",
+        "Data_th": [
+            {
+                "id_place": "19",
+                "title": "อุโบสถ",
+                "description": "อุโบสถ วัดเกาะบ่อพันขันรัตนโสภณ ภายในมีพระพุทธบาทจำลอง",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.573813503011666",
+        "Longitude": "103.94489356852077",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/19/2024-09-05_10-40-52_S__6283314.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/19/2024-09-05_15-39-44_IMG_8675.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/19/2024-09-05_15-40-13_IMG_8681.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/19/2024-09-05_15-41-51_IMG_8688.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/19/2024-09-05_15-41-58_IMG_8697.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/19/2024-09-05_16-04-41_IMG_8645.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "6",
+        "Data_th": [
+            {
+                "id_place": "18",
+                "title": "ต้นขว้าว",
+                "description": "ต้นขว้าว เป็นต้นไม้ใหญ่ที่มีอายุยาวนาน รูปทรงสวยงามให้ความร่มเย็นในพื้นที่",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57359305900176",
+        "Longitude": "103.9450441141348",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/18/2024-09-05_10-38-25_S__6283309.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "7",
+        "Data_th": [
+            {
+                "id_place": "20",
+                "title": "วังมัจฉา",
+                "description": "วังมัจฉา เป็นจุดพักผ่อนหย่อนใจ สามารถให้อาหารปลาได้",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57348104689099",
+        "Longitude": "103.944643377831",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/20/2024-09-05_10-54-57_S__6283315.jpg"
+        ]
+    },
+    {
+        "id_route": "8",
+        "title_route": "เส้นทางวัฒนธรรมวัดเกาะบ่อพันขันรัตนโสภณ ",
+        "order": "8",
+        "Data_th": [
+            {
+                "id_place": "14",
+                "title": "เกาะน้อย  ",
+                "description": "เกาะน้อย  เป็นเกาะที่แยกตัวออกจากมาจากฝั่ง ประกอบไปด้วย 2 เกาะที่อยู่ใกล้กัน",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.574783",
+        "Longitude": "103.944037",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/14/2024-09-05_10-18-26_S__6283279.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "10",
+                "title": "พระลานหินทราย",
+                "description": "ธรณีวิทยาของภาคอีสานโดยทั่วไปประกอบด้วยหินชั้นของกลุ่มหินโคราช (Khorat Gruop) พระลานหินทรายที่บ่อพันขันเป็นหินทรายในหมวดหินสารคาม",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.571447",
+        "Longitude": "103.9434816",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/10/2024-11-13_09-05-48_bor1.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "11",
+                "title": "น้ำสร่างครกคู่แฝด",
+                "description": "เป็นแผ่นหินทรายพื้นผิวเรียนที่มีบ่อรูปทรงกระบอกอยู่ตรงกลางทั้งสองแผ่น\r\nเส้นผ่านศูนย์กลางของครกประมาณ 1 ฟุต มีลักษณะคล้ายครกหินโบราณที่พบในหลายประเทศ พื้นผิวภายในครกหินมีลักษณะคล้ายการใช้เครื่องมือกระเทาะ เป็นฝีมือของมนุษย์ที่สร้างขึ้นสันนิษฐานว่าใช้สำหรับตำบดผลผลิตทางการเกษตร อาหาร พืชสมุนไพร หรือเพื่อวัตถุประสงค์อื่นๆ ซึ่งจำเป็นต้องศึกษาวิจัยเพิ่มเติม ทั้งนี้จะสังเกตเห็นน้ำสร่างครกคู่แฝดเฉพาะช่วงเวลาที่น้ำลดลงในกดูแล้งเท่านั้น\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5716",
+        "Longitude": "103.9421251",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/11/2024-11-13_09-07-59_bor2.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "10",
+        "Data_th": [
+            {
+                "id_place": "29",
+                "title": "ฝ่ายน้ำล้นห้วยวังแซว วังข้าวโจ้ ",
+                "description": "ฝ่ายน้ำส้นห้วยวังแซวสร้างโดยกรมชลประทาน ในปี 2535 รับน้ำมาจากคลองปลาค้าวและส่งน้ำให้กับบึงพันขันและเชื่อมต่อกับสำน้ำเสียวตามลำดับ ตามตำนานระบุว่าในสมัย ก่อนชาวบ้านที่นำสัตว์เช่น โคและกระบือ มาเลี้ยง หรือกลุ่ม พ่อค้า/นายฮ้อย ได้หมดยุคพักผ่อนและร่วมรับประทานอาหารกันเป็นกลุ่มที่บริเวณนี้ ภาษาถิ่นอิสานเรียกว่า \r\n\"การโจ้ข้าว\" ปัจจุบันมีความสำคัญทั้งในด้านเกษตรกรรมและการประสมพื้นบ้าน\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "จำปาขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.580607170095591",
+        "Longitude": "103.94119656118",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/29/2024-09-05_12-54-12_S__6283383.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "11",
+        "Data_th": [
+            {
+                "id_place": "30",
+                "title": "โนนหินแห่ และโนนต้อน ",
+                "description": "โนนหินแห่ เป็นแหล่งเรียนรู้ที่สำคัญทางปฐพีวิทยา สามารถพบเห็นชิ้น “หินแห่” หรือ “หันศิลาแลง” ได้อย่างชัดเจน มีเศษภาชนะแบบทุ่งกุลาและแบบร้อยเอ็ดกระจายอยู่เป็นจำนวนมาก ใกล้กันเป็น “โนนต้อน” ที่ตามคำบอกเล่าอาจจะ\r\nมีการต้อนสัตว์พาหนะ กองทัพ หรือผู้คนมาไว้ที่บริเวณนี้ โดยมี “สะพานเด่นราษฎร์” ตั้งอยู่กลางระหว่างโนนถึงสอง เป็นทางน้ำเชื่อมต่อระหว่างบึงพันขันและแม่น้ำเสียว ที่ไหลลงไปสู่แม่น้ำมูลและแม่น้ำโขงตามลำดับ\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5616929",
+        "Longitude": "103.9341455",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/30/2024-09-05_13-44-17_S__6283402.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/30/2024-09-05_13-44-21_S__6283403.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/30/2024-11-13_09-25-46_bor6.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "12",
+        "Data_th": [
+            {
+                "id_place": "31",
+                "title": "ทะเลบัวแดง ",
+                "description": "บัวแดง หรือบัวสายเป็นพืชน้ำที่พบได้ทั่วไปในแหล่งน้ำจืดใช้เป็นอาหารของทั้งคนและสัตว์ บัวแดงจะเริ่มขยายจำนวนและออกดอกสวยงามจำนวนมากในช่วงรอยต่อปลายฤดูฝนกับต้นฤดูหนาวตั้งแต่เดือนพฤศจิกายนเป็นต้นไป ช่วงเวลาที่เหมาะสมที่สุดคือเข้าดรู่จนถึงเวลาสายๆ ซึ่งทะเลบัวแดงที่บึงพันขันจะออกดอกนานเป็นสีชมพูแดงสวยงาม\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57417594084808",
+        "Longitude": "103.9454230232874",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/31/2024-09-05_11-39-00_S__6283325.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/31/2024-11-21_23-37-34_126788427_3766176456754276_8709508070239576781_n.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "13",
+        "Data_th": [
+            {
+                "id_place": "32",
+                "title": "รอยพระพุทธบาทจำลอง ",
+                "description": "ตามตำนานระบุว่าพระโมคคัลลานะอรหันต์ ได้อธิษฐานเท้าซ้ายเหยียบที่ชายจีวร เกิดเป็นรอยเท้าคนขนาดยาว 1 เมตร กว้าง 40 เซนติเมตร อยู่ระหว่างโนนจารย์น้อย กับ บริเวณบ่อพันขัณฑ์ และอธิษฐานเท้าขวาเหยียบที่ชายจีวรห่างกันไปทางทิศใต้ประมาณ 1 กิโลเมตร ตรงบริเวณ คอคีบ ปัจจุบันมีการจำลองพระพุทธบาทไว้ที่บริเวณใกล้กับหนองบัว\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5805495 ",
+        "Longitude": "103.9418076",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/32/2024-11-13_09-36-21_bof7.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "14",
+        "Data_th": [
+            {
+                "id_place": "33",
+                "title": "โนนจารย์น้อย ",
+                "description": "สันนิษฐานว่าตั้งชื่อตาม จารย์น้อย คำว่าจารย์ หมายถึง บุคคลที่ผ่านการอุปสมบทเป็นพระสงฆ์มาแล้ว เมื่อ สิกออกมาจึงเรียกคำว่า \"จารย์\" นำหน้า ที่บริเวณโนนจารย์น้อยแห่งนี้มีเศษภาชนะดินเผากระจายอยู่ทั่วไป มีนาข้าว และพิษสำคัญ เช่น บัวแดง บัวนา แพงพวยน้ำ ผักอีอีน (นิลุบล)ปัจจุบันใช้เป็นท่าเทียบเรือ และที่พักชุมนุมของเกษตรกรและชาวประมงพื้นบ้าน",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5764702 ",
+        "Longitude": "103.9453726",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/33/2024-11-13_09-37-45_bor8.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "15",
+        "Data_th": [
+            {
+                "id_place": "34",
+                "title": "วัดเกาะบ่อพันขันรัตนโสภณ ",
+                "description": "เป็นวัดที่ตั้งอยู่ในพื้นที่บ่อพันขัณฑ์ มีน้ำล้อมรอบ พื้นที่ภายในวัดเป็นอุทยานการศึกษาเฉลินพระเกียรติ 50 ปีและเป็นที่ประดิษฐานพระพุทธสหัสขันธมหามุนีนาถ มีการขุดค้นทางโบราณคดีซึ่งพบหลักฐานความเป็นอยู่ของมนุษย์ในยุคก่อนประวัติศาสตร์",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "17",
+                "title": "Bo Phan Khan Museum",
+                "description": "Bo Phan Khan Museum is located within the grounds of Ko Bo Phan Khan Rattanasophon Temple, Ban Nong Khun, Village No. 12, Den Rat Subdistrict, Nong Hi District, Roi Et Province, Thailand.\r\n\r\nThe museum was officially established on 23 February 2024 through the cooperation and support of Roi Et Rajabhat University in developing and creating this cultural and historical learning center.\r\n\r\nInside the museum, visitors can explore a collection of archaeological and historical artifacts discovered in the Bo Phan Khan area, including shell fossils, petrified wood, pottery, traditional salt-making equipment, and other valuable relics. The museum also presents information about the legend of Bo Phan Khan, the history of the temple, and maps illustrating the surrounding area of Bo Phan Khan.\r\n\r\nThe museum serves as an important center for preserving and sharing the local history, culture, and natural heritage of the community for future generations.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.574269291809362",
+        "Longitude": "103.944507",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/34/2024-09-05_13-00-16_S__6283314.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/34/2024-09-05_16-11-10_IMG_8645.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/34/2024-09-05_16-11-19_IMG_8605.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "16",
+        "Data_th": [
+            {
+                "id_place": "35",
+                "title": "บ่อพันขัน (น้ำสร่างครก) ",
+                "description": "บ่อพันขัน (น้ำสร่างครก) เป็นบ่อน้ำจืดธรรมชาติ ที่มีน้ำพุดขึ้นมาอยู่ตลอดเวลา ตามตำนานได้กล่าวถึงจีวรของพระมหาโมคคัลลานะกลายเป็นแผ่นหินทราย ด้วยเกรงว่าประชาชนต่อไปจะไม่มีน้ำจืดกิน จึงได้อธิษฐานใช้นิ้วชี้ชี้ลงไปตรงผ้าจีวรผืนนั้น เกิดรอยแตกเท่าขันน้ำมีรัศมีกว้าง 9 นิ้ว ความลึกประมาณ 8 นิ้ว มีน้ำไหลออกมาประจำ ชาวบ้านเรียกว่า น้ำสร่างโครก เพราะมีลักษณะเหมือนครกตำข้าวโบราณ และบริเวณ ทั้งหมดทั่วบริเวณนั้น เรียกว่า บ่อพันขัณฑ์",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57170485553252",
+        "Longitude": "103.9438121285162",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/35/2024-09-05_11-48-48_S__6283339.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/35/2025-11-10_13-24-35_bor_pan1.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/35/2025-11-10_13-24-38_bor_pan2.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "17",
+        "Data_th": [
+            {
+                "id_place": "36",
+                "title": "องค์นาคาธิบดีสุวรรณมณีนาโคนาคราช ",
+                "description": "เป็นสถาปัตยกรรมร่วมสมัยการปั้นปูนสดรูปทรงพญานาค ที่เกิดจากแรงศรัทธราของประชาชนในพื้นที่นี้ ตั้งอยู่บริเวณริมบึงพันขัน บริเวณศาลาทางลงไปน้ำสร่างครก(บ่อพันขัน) ในเขตตำบลเด่นราษฎร์ อ.หนองฮี ก่อสร้างในปี พ.ศ. 2563 และต่อมาในปี พ.ศ.2564 ได้เริ่มก่อสร้างเพิ่มเป็นพญานาคคู่",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.571944",
+        "Longitude": "103.943559",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/36/2024-09-05_11-50-51_S__6283344.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/36/2024-09-05_11-50-54_S__6283345.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/36/2024-09-05_15-53-53_IMG_8911.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "18",
+        "Data_th": [
+            {
+                "id_place": "37",
+                "title": "เจ้าปู่ผ่านภูวงศ์ ",
+                "description": "“เจ้าปู่ผ่าน”  หรือ “ปู่ผ่าน” หรือ “เจ้าพ่อพันขัน” เป็นสิ่งศักดิ์สิทธิ์ที่ยืดเหนี่ยวจิตใจของผู้คนในแถบทุ่งกุลาร้องไห้มาตั้งแต่อดีต จนถึงปัจจุบัน มีพิธีกรรมการบวงสรวง เคารพสักการะเซ่นไหว้เป็นประจำทุกปี ในอดีตเมื่อถึงฤดูกาลผลิตเกลือในหน้าแล้ง เมื่อชาวบ้านที่มีอาชีพผลิตเกลือสินเธาว์ ที่ “บ่อเกลือพันขัณฑ์” จะเริ่มผลิตเกลือจะต้องมีการ “เลี้ยงลง” และประกอบพิธีกรรม “เลี้ยงขึ้น” เมื่อ สิ้นสุดฤดูกาลผลิตเกลือ โดยจะมี “จ้ำ” หรือร่างทรงประจำหมู่บ้าน ต่างๆ ในบริเวณนี้ ผลัดเปลี่ยนเป็นผู้นำในการประกอบพิธีในแต่ละปี\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5707801",
+        "Longitude": "103.9433908",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/37/2024-09-05_11-53-01_S__6283352.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/37/2024-09-05_15-57-11_IMG_8777.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/37/2024-09-05_15-57-16_IMG_8778.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/37/2024-09-05_15-57-24_IMG_8780.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/37/2024-09-05_15-58-38_IMG_8769.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "12",
+                "title": "แหล่งหินตัด",
+                "description": "กลุ่มหินทรายที่อยู่ใกล้กับขุมฝรั่ง มีรูปทรงเป็นสี่เหลี่ยมผืนผ้า พบร่องรอยการตัดแต่งหินทรายที่น่าจะเปิดจากฝีมือของมนุษย์ ซึ่งอาจจะเป็นการใช้เครื่องมือโลหะขนาดเล็กเช่น สิ่ว ซึ่งพบวิธีการดังกล่าวคล้ายคลึงกับแหล่งหินดีดที่อำเภอสีคิ้ว จ.นครราชสีมา ตามตำนานเล่าว่าหินทรายที่บ่อเกลือพันขัณฑ์ ถูกนำไปสร้างศาสนสถานหลายแห่งในพื้นที่ทุ่งกุลาร้องให้ โดยเฉพาะโนนขันหมาก ดอนขุมเงิน พระธาตุพันขัน (คู่) ภู่คันธนาม ภู่พระโภนา และภู่กาสิงห์ เป็นต้น ความพิเศษของ แหล่งหิน ตัด\" แห่งนี้คือ หินทรายแดง และหินทรายแป้ง",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.571312",
+        "Longitude": "103.9373286",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/12/2024-11-13_09-19-28_bor4.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/12/2025-03-21_15-11-43_475473_1.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/12/2025-03-21_15-11-46_475474_1.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/12/2025-03-21_15-11-50_475491_0.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "13",
+                "title": "ลานหินต่าง",
+                "description": "\"ลานหินต่าง\" เป็นกลุ่มก้อนหินที่ยกดัวสูงขึ้นกว่าลานหินก้นบ่อเกลือที่จมอยู่ได้น้ำ ทำให้เห็นความแตกต่างจากกลุ่มลานหินที่พื้น ลานหินต่างจะโผล่ขึ้นมาเหนือน้ำในช่วงฤดูแล้ง\r\nเด็กๆ ในชุมชนใช้เป็นที่โดดนำเล่นหรือเล่นสไลเดอร์ รูปกรงของหินมีความแตกต่างกันรอยแยกระหวางก้อนหินพบโคนต้นไม้ รากต้นไม้เป็นหลักฐานที่เชื่อมโยงกับการสร้างฝาย\r\nชลประทานในปี 2524 ทำให้น้ำท่วมพื้นที่ตรงนี้ แต่ก่อนพื้นที่แห่งนี้มีต้นไม้ขึ้นประปรายเป็นที่พักผ่อนของทั้งคนและสัตว์ ชาวบ้านเล่าว่าสมัยก่อนมีการนำช้างมาเลี้ยงที่บริเวณนี้หินต่างมีการยกตัวสูงขึ้น ด้านล่างเป็นเพิงให้ผู้คนได้ใช้หลบแดด หลบฝนได้\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "จำปาขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.576087",
+        "Longitude": "103.941516",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/13/2024-09-05_12-30-53_S__6283376.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "21",
+                "title": "แหล่งเรียนรู้พืชน้ำหายาก ",
+                "description": "ไต้ผืนน้ำที่หนองพันขัน มีโดมเกลือขนาดมหึมา สายน้ำจากคลองปลาค้าวไหลมาสู่หนองพันขันและไปสู่แม่น้ำเสียว ในแต่ละฤดูกาลจึงมีอุณหภูมิ ระดับนำ ความเค็ม สารอาหาร และแร่ธาตุแตกต่างกัน ทำให้พืชน้ำในหนองพันขันมีความหลากหลาย พืชน้ำช่วงปลายฤดูหนาวต้นฤดูร้อนที่ดึงดูดสายดา เช่น สาหร่ายข้าวเหนียว (golden bladderwort) ที่ออกดอกสีเหลืองสวยงาม มีชื่อวิทยาศาสตร์คือ Utriculario aurea เป็นพืชกินแมลงที่มีชื่อเสียงโด่งดัง และ นิยมใช้เป็นไม้ประดับตู้พรรณไม้น้ำหรือดู้ปลา\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5793274",
+        "Longitude": "103.9377953",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/21/2024-09-05_16-32-52_IMG_8569.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "5",
+        "Data_th": [
+            {
+                "id_place": "22",
+                "title": "ขุมฝรั่ง ภาชนะดินเผายุคก่อนประวัติศาสตร์ ",
+                "description": "\"ขุมฝรั่ง\" เป็นคำเรียกของชาวบ้านในแถบนี้ที่เล่าว่ามีฝรั่งนักสำรวจมาจ้างชาวบ้านให้ช่วยชุด ดินเพื่อสำรวจทางโบราณคดี โดยเน้นการศึกษาภาชนะดินเผาในยุคก่อนประวัติศาสตร์ฝรั่งที่ชาวบ้านพูดถึง คือ ศาสตราจารย์ Chaires Ighams นักวิจัยจาก University of Otago ประเทศนิวซีแลนด์ ที่ได้เข้ามาศึกษาในปี พ.ศ. 2513 ที่พื้นที่โนนเดื่อ (บ้านตำแย) ตอนตาพัน (บ้านสว่าง อ.โพนทราย) และบ่อพันขัน (ขุมฝรั่ง บ้านหญ้าหน่อง)\r\nพบหลักฐานก่อนประวัติศาสตร์ในยุคสำริดตอนปลายต่อเนื่องกับยุคโลหะอายุประมาณ 2,000-3,000 ปีมาแล้ว\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5748736",
+        "Longitude": "103.9405381",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/22/2024-11-13_09-22-37_bor5.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "6",
+        "Data_th": [
+            {
+                "id_place": "23",
+                "title": "โนนน้อย ลานต้มเกลือสินเธาว์โบราณ ",
+                "description": "*โนนน้อย เป็นเนินดินสูงที่บรรพบรุษของชุมชนบ้านหญ้าหน่องใช้ในการผลิตเกลือ สินเราว์ในสมัยก่อน พื้นที่สูงทั้งหลายที่อยู่รอบหนองพันขันแห่งนี้ สัณนิษฐานว่าล้วนเกิดจากดินที่เหลือภายหลังจากการต้มเกลือ เมื่อชุมชนผลิตเกลือจำนวนมาก ก็ย่อมเกิดดินที่พอกพูนขึ้นสูงเป็นโนนสูงขึ้นตามลำดับ ปัจจุบันโนนน้อยได้รับการพัฒนาให้เป็นฐานการเรียนรู้กระบวนการต้มเกลือสินเธาว์โบราณ",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57237971063981",
+        "Longitude": "103.9393679522166",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/23/2024-09-05_12-22-17_S__6283373.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "7",
+        "Data_th": [
+            {
+                "id_place": "24",
+                "title": "บึงพันขัน ประมงพื้นบ้าน ",
+                "description": "ภายหลังจากการสร้างฝ่ายกั้นน้ำหนองพันขันโดยกรมชลประทานในปี 2524 พื้นที่บ่อพันขัณฑ์ที่มีพระลานหินทรายและวัตถุดิบในการผลิตเกลือก็อยู่ได้น้ำ เกิดระบบนิเวศในรูปแบบใหม่ชาวบ้านก็มีอาชีพใหม่ คือ ทำประมงพื้นบ้านโดยใช้เรือไม้ขนาดเล็ก มีสัตว์น้ำและพืชน้ำหลากหลายชนิด ปลาน้ำจืดที่พบบ่อย คือ ปลาตะเพียนปลาปักเป้า ปลาไหลนา ปลาชิว ปลากัดพื้นบ้าน นอกจากนี้ยังมีกุ้งน้ำจืด ปูนา ปูหิน และแมลงน้ำตลอดทั้งปี\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5716922",
+        "Longitude": "103.9375948",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/24/2024-09-05_16-39-00_IMG_8561.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "8",
+        "Data_th": [
+            {
+                "id_place": "25",
+                "title": "หอคอยจุดชมวิว โนนคอคีบ ",
+                "description": "สถาปัตยกรรมพื้นบ้านอย่างง่าย โครงสร้างมีสามชั้นสร้างด้วยไม้เกือบทั้งหมด หลังคามุงใบหญ้าคา ไม่มีฝาหนังชาวบ้านหญ้าหน่องได้ร่วมใจดำเนินการก่อสร้างในปี 2560 ที่เรียก โนนคอคีบ เนื่องจากเป็นโนนสูงที่ติดกับ \"คอคีบ\" พื้นที่แห่งนี้เป็นที่สูงที่มีมาแต่โบราณกาล เกิดจากดินเอียดที่ผ่านการต้มเกลือมาแล้ว ทองพูนกันจนเป็นโนนสูง พบเศษภาชนะดินเผายุคก่อนประวัติศาสตร์กระจายอยู่ทั่วไป",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "จำปาขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.569358",
+        "Longitude": "103.938920",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/25/2024-09-05_12-25-22_S__6283369.jpg"
+        ]
+    },
+    {
+        "id_route": "9",
+        "title_route": "เส้นทางท่องเที่ยวพื้นที่บ่อพันขันฑ์",
+        "order": "9",
+        "Data_th": [
+            {
+                "id_place": "26",
+                "title": "สะพานมิตรภาพบ่อพันขัน ",
+                "description": "สะพานไม้ศิลปะพื้นบ้านที่เป็นสัญลักษณ์แห่งมิตรภาพของผู้คนสองฝัง คือ อำเภอสุวรรณภูมิ และอำเภอหนองฮีจังหวัดร้อยเอ็ด พระอาจารย์ชาวสนอาษา เจ้าอาวาสวัดเกาะบ่อพันขันรัตนโสภณได้นำชาวบ้านร่วมใจดำเนินการก่อสร้างในปี 2560 “คอคีบ” แห่งนี้เป็นส่วนที่แคบที่สุดของหนองพันขัน มีความยาวประมาณ 80 เมตร",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5685873433119",
+        "Longitude": "103.9389724775807",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/26/2024-09-05_12-16-36_S__6283366.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/26/2024-09-05_16-21-33_IMG_8823.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/26/2024-09-05_16-21-39_IMG_8825.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/26/2024-09-05_16-21-46_IMG_8827.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/26/2024-09-05_16-21-52_IMG_8829.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/26/2024-09-05_16-21-58_IMG_8831.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/26/2024-09-05_16-22-04_IMG_8832.jpg"
+        ]
+    },
+    {
+        "id_route": "11",
+        "title_route": "เส้นทางปลาทุ่งกุลา (Gastronomy Tourism)",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "45",
+                "title": "คูน้ำคันดินโบราณเมืองบัว",
+                "description": "วัฒนธรรมทวารวดีมีอิทธิพลในอีสาน ราวพุทธศตวรรษที่ 12–16 หลักฐานของทวารวดีคือบ้านเมืองที่\r\n\r\nมีคูน้ำคันดินล้อมรอบ ตัวอย่างเมืองทวารวดีในทุ่งกุลา เช่น\r\n\r\n๑) เมืองบัว อำเภอเกษตรวิสัย จังหวัดร้อยเอ็ด\r\n\r\n๒) เมืองเตา เมืองเสือ เมืองเจีย อำเภอพยัคฆภูมิพิสัย จังหวัดมหาสารคาม\r\n\r\n๓) เมืองไพรขลา เมืองบัว อำเภอชุมพลบุรี จังหวัดสุรินทร์\r\n\r\n๔) เมืองคง อำเภอราษีไศล จังหวัดศรีสะเกษ\r\n\r\n๕) เมืองเตย อำเภอมหาชนะชัย-คำเขื่อนแก้ว จังหวัดยโสธร",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองบัว",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.609804",
+        "Longitude": "103.600405",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/45/2024-10-18_20-12-24_1.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/45/2024-10-18_20-12-28_S__32538749_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/45/2024-10-18_20-12-31_S__32538751_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/45/2024-10-18_20-12-35_S__32538752_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/45/2024-10-18_20-12-38_S__32538778_0.jpg"
+        ]
+    },
+    {
+        "id_route": "11",
+        "title_route": "เส้นทางปลาทุ่งกุลา (Gastronomy Tourism)",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "46",
+                "title": "ทะเลสาบทุ่งกุลา",
+                "description": "ตำนานทะเลสาบทุ่งกุลา\r\nเดิมทุ่งกุลาเป็นพื้นที่แห้งแล้งขนาดใหญ่ครอบคลุมพื้นที่ถึง 5 จังหวัดของภาคอีสาน คือ ร้อยเอ็ด สุรินทร์ มหาสารคาม ศรีสะเกษ และยโสธร ในอดีตแทบจะเรียกได้ว่าเป็นพื้นที่ไร้ประโยชน์ เนื่องจากทำการเกษตรไม่ได้ผลผลิต เจอปัญหาดินที่มีลักษณะเป็นทราย มีรสเค็ม บางช่วงมีน้ำท่วมหนัก และบางช่วงก็แห้งแล้ง จนเมื่อ พ.ศ. 2550 กรมชลประทานได้เลือกพื้นที่ส่วนหนึ่งของทุ่งกุลามาทำแก้มลิงกักเก็บน้ำไว้ เพื่อแก้ปัญหาในฤดูแห้งแล้ง จึงเปลี่ยนทุ่งกุลาร้องไห้มาเป็นทะเลสาบทุ่งกุลา ซึ่งมีพื้นที่กว่า 750 ไร่เลยทีเดียว ปัจจุบันทะเลสาบทุ่งกุลา กลายเป็นสถานที่ท่องเที่ยวขึ้นชื่อแห่งเมืองสุรินทร์ที่คึกคักไปด้วยคนพื้นที่ และนักท่องเที่ยว ลักษณะของทะเลสาบทุ่งกุลา อยู่ในบริเวณของน้ำกร่อย และเมื่อก่อนเคยเป็นพื้นที่ผลิตเกลือสินเธาว์จึงทำให้น้ำใสเป็นสีฟ้าคราม ได้อารมณ์เหมือนมาเที่ยวทะเลจริงๆ การบริการของทะเลสาบทุ่งกุลาจะมีแพส่วนตัวให้เช่า สามารถเลือกได้เลยว่าอยากได้แพแบบใด อย่างแบบชั้นเดียว ซึ่งเหมาะสำหรับมาเป็นกลุ่มเล็กๆ หรือแพสองชั้นสำหรับครอบครัวกลุ่มใหญ่ ซึ่งแพ 1 ลำ จุได้มากสุด 15 คน เลยทีเดียว\r\n\r\nนอกจากนี้ยังมีกิจกรรมอื่นๆ ให้ทำไม่ว่าจะเป็นบานาน่าโบ๊ท ปั่นเรือถีบ หรือปั่นจักรยานชมวิวธรรมชาติ อีกทั้งรอบๆ ยังมีร้านอาหารอีสานนัวๆ ให้ได้อิ่มอร่อย คอยให้บริการ เรียกได้ว่าเล่นน้ำเหนื่อยๆ ก็แวะขึ้นมาเติมพลังกับอาหารรสชาติเยี่ยมได้เลย และอีกไฮไลต์เด็ดเลย คือ การชมพระอาทิตย์ตกดิน เพราะเป็นช่วงสวยที่สุด ได้นั่งชิลรับลมเย็นๆ ท่ามกลางบรรยากาศโรแมนติก เป็นอีกสถานที่ท่องเที่ยวตอบโจทย์ในวันอากาศร้อนอบอ้าวได้ดีสุดๆ",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ไพรขลา",
+        "District": "ชุมพลบุรี",
+        "Province": "สุรินทร์",
+        "Latitude": "15.444861",
+        "Longitude": "103.5540871",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/46/2024-10-18_20-38-18_PL67-L-001.png.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/46/2024-10-18_20-38-21_PL67-L-002.png.jpg"
+        ]
+    },
+    {
+        "id_route": "12",
+        "title_route": "เส้นทางวรมัน (Historical Era Tourism)",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "41",
+                "title": "ปราสาทเมืองบัว",
+                "description": "ปราสาทกู่เมืองบัว ตำบลเมืองบัว อำเภอเกษตรวิสัย จังหวัดร้อยเอ็ด พุทธศตวรรษที่ 16-17 ศิลปะแบบนครวัด ปราสาทก่อด้วยศิลาแลง มีหินทรายประกอบบ้างในส่วนที่รองรับน้ำหนัก ผนังก่อทึบทั้ง 4 ด้าน ทำเป็นทางเข้าด้านทิศตะวันออกเพียงด้านเดียว ด้านอื่นทำเป็นประตูหลอก ซึ่งยังเหลือให้เห็นทางด้านทิศใต้ กู่หันหน้าไปทางด้านทิศตะวันออกมีแนวคูน้ำล้อมรอบ\r\n\r\nบริเวณปราสาทพบทับหลังรูปพระอินทร์ทรงช้างเอราวัณ ศิลปะขอมแบบบาปวน อายุราวพุทธศตวรรษที่ 16 ตกอยู่ 1 ชิ้น ในอดีตเคยมีการขุดบริเวณด้านทิศใต้ของปราสาทประธานประติมากรรมรูปบุรุษและสตรีที่เคยประดิษฐานอยู่บนฐานประติมากรรมที่ตั้งอยู่บริเวณด้านหน้าของปราสาทประธานปัจจุบันได้นำไปเก็บรักษาที่พิพิธภัณฑ์แห่งชาติร้อยเอ็ด ชาวบ้านเชื่อกันว่ามีความเกี่ยวพันกับตำนานพื้นบ้าน  เรื่อง สังข์ศิลป์ชัย และพบเทวรูปมีศีรษะเป็นช้างลำตัวเป็นมนุษย์ซึ่งน่าจะหมายถึงพระคเณศ ซึ่งกลุ่มประติมากรรมรูปบุรุษและสตรี อาจเป็นรูปเคารพของพระศิวะและพระนางอุมา ซึ่งเป็นวงศ์ของพระคเณศและมักพบร่วมกันในโบราณสถานที่อุทิศถวายให้พระศิวะดังนั้นกู่เมืองบัวน่าจะเป็นศาสนสถานในศาสนาฮินดูลัทธิไศวนิกาย รูปแบบศิลปะแบบบาปวนตามรูปแบบทับหลังที่ยังปรากฏอยู่โดยอาจจะมีการดัดแปลงในพุทธศตวรรษที่ 18 เนื่องจากใช้ศิลาแลงเป็นวัสดุในการก่อสร้าง ตามแบบโบราณสถานที่นิยมสร้างในช่วงเวลาดังกล่าวหรืออาจจะนำวัสดุก่อสร้างประเภทหินทราย เช่น ทับหลังของสมัยก่อนกลับมาใช้อีกในราวพุทธศตวรรษที่ 18 ก็เป็นได้ แต่เนื่องจากโบราณสถานแห่งนี้ชำรุดหักพังมากและยังไม่มีการดำเนินการขุดแต่งทางโบราณคดี จึงไม่สามารถกำหนดอายุที่แน่นอนได้ แต่น่าจะมีอายุในช่วงพุทธศตวรรษที่ 17 – 18",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองบัว",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.0830737",
+        "Longitude": "102.482166",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/41/2024-10-18_19-29-39_MB67-C-001.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/41/2024-10-18_19-29-42_MB67-C-001-1.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/41/2024-10-18_19-29-45_MB67-C-001-2.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/41/2024-10-18_19-29-48_MB67-C-001-3.jpg"
+        ]
+    },
+    {
+        "id_route": "12",
+        "title_route": "เส้นทางวรมัน (Historical Era Tourism)",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "5",
+                "title": "ปราสาทกู่กาสิงห์",
+                "description": " กู่กาสิงห์ ตั้งอยู่ใน วัดบูรพากู่กาสิงห์ ตำบลกู่กาสิงห์ อำเภอเกษตรวิสัย จังหวัดร้อยเอ็ด ถือว่าเป็นโบราณสถานสถาปัตยกรรมแบบเขมรอีกแห่งหนึ่งที่มีขนาดใหญ่และยังอยู่ในสภาพดีค่ะ ทางสำนักงานโบราณคดีและพิพิธภัณฑสถานแห่งชาติที่ 8 อุบลราชธานี สังกัดกรมศิลปากร ก็เลยได้ดำเนินการขุดแต่งและบูรณะกู่กาสิงห์ให้สวยงามยิ่งขึ้น เพื่อพัฒนาเป็นแหล่งท่องเที่ยวที่สำคัญอีกแห่งหนึ่งในภาคอีสาน\r\n\r\n โดย กู่กาสิงห์ จะประกอบไปด้วยปรางค์ 3 องค์ ตั้งอยู่บนฐานศิลาแลงเดียวกัน มีวิหารรูปสี่เหลี่ยมผืนผ้า ที่เรียกว่าบรรณาลัยอยู่ทางด้านหน้าทั้งสองข้างค่ะ ทั้งหมดจะถูกล้อมด้วยกำแพงที่มีซุ้มประตู 4 ทิศด้วยกัน โดยมีคูน้ำรูปเกือกม้าล้อมรอบอีกชั้นหนึ่ง ปรางค์ประธาน จะหันหน้าไปทางทิศตะวันออก ส่วนปรางค์องค์กลางจะมีขนาดใหญ่ที่สุด\r\n\r\nนอกจากนี้ก็ยังปรากฏลวดลายสลักต่างๆ เช่น ลายกลีบบัวและลายกนก เป็นต้นค่ะ ซึ่งแบบแผนผังและโบราณวัตถุที่พบนั้น บ่งบอกให้ทราบว่า กู่กาสิงห์ ได้รับอิทธิพลจากศิลปะเขมรที่เรียกว่า บาปวน อายุราวๆ ปี พ.ศ.1560-1630 ไว้เพื่อเป็นเทวสถานอุทิศถวายแด่พระอิศวรนั่นเอง",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "กู่กาสิงห์",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5765781",
+        "Longitude": "103.6734207",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-01-26_00-53-59_S__22085682_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-06-12_09-26-10_kukasing-01.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-06-12_09-26-14_kukasing-02.jpg"
+        ]
+    },
+    {
+        "id_route": "12",
+        "title_route": "เส้นทางวรมัน (Historical Era Tourism)",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "43",
+                "title": "ปราสาทโพนระฆัง ",
+                "description": "ปราสาทโพนระฆัง ตำบลกู่กาสิงห์ อำเภอเกษตรวิสัย จังหวัดร้อยเอ็ด ห่างจากกู่กาสิงห์ไปทางทิศะวันออกเฉียงเหนือ 400 เมตร ปราสาทสร้างหันหน้าไปทางทิศตะวันออก ประกอบด้วยปราสาทประธาน ฐานก่อด้วยศิลาแลง เป็นฐานเขียง 5 ชั้น มีบันไดทางขึ้น 4 ด้าน เรือนธาตุก่อด้วยศิลาแลงและหินทราย มีประตูทางเข้าด้านทิศตะวันออกเพียงด้านเดียว ก่อมุขยื่นออกมาด้านหน้าและเจาะช่องหน้าต่างที่ผนังด้านทิศเหนือและทิศใต้ ด้านหน้าปราสาทประธานมีทางเดินเชื่อมกับซุ้มประตู อยู่กึ่งกลางแนวกำแพงทิศตะวันออก ก่อด้วยศิลาแลงและหินทรายมีผังเป็นรูปกากบาท มีห้องมุขด้านทิศตะวันออก มีบรรณาลัยตั้งอยู่มุมด้านทิศตะวันออกเฉียงใต้ ลักษณะเป็นอาคารรูปสี่เหลี่ยมผืนผ้าก่อด้วยศิลาแลงและหินทราย หันหน้าไปทางทิศตะวันตก โดยรอบก่อกำแพงแก้วด้วยศิลาแลงล้อมรอบทั้ง 4 ด้าน และมีสระน้ำกรุขอบสระด้วยศิลาแลง อยู่ด้านนอกของกำแพงแก้วทางด้านทิศตะวันออกเฉียงเหนือ\r\n\r\nจากจารึกปราสาทตาพรหม ได้กล่าวถึงพระเจ้าชัยวรมันที่ 7 โปรดฯ ให้สร้าง “อโรคยาศาล” หรือ ศาสนสถานประจำโรงพยาบาล ตามเส้นทางจากเมืองพระนครไปยังหัวเมืองต่างๆ จำนวน 102 แห่ง ซึ่งในประเทศไทยพบอโรคยาศาลส่วนใหญ่อยู่ในเขตภาคตะวันออกเฉียงเหนือ เป็นโบราณสถานที่สร้างขึ้นตามรูปแบบสถาปัตยกรรมเขมรศิลปะแบบบายน (ราวพุทธศตวรรษที่ 18) จากลักษณะแผนผังของกู่โพนระฆัง แสดงให้เห็นว่าเป็นหนึ่งในอโรคยาศาลที่ถูกกล่าวถึงในจารึกปราสาทตาพรหม เพราะแผนผังและรูปแบบทางสถาปัตยกรรมของอโรคยาศาลจะเป็นแบบแผนเดียวกัน แต่จะแตกต่างกันในรายละเอียดเล็กน้อยบางอย่าง เช่น ขนาดของอาคาร การเจาะช่องหน้าต่าง และการทำมุขปราสาทประธาน สันนิษฐานว่าโบราณสถานประเภทนี้สร้างขึ้นในช่วงเวลาเดียวกัน โดยช่างฝีมือในท้องถิ่น\r\n\r\nจากการศึกษาสันนิษฐานว่าราวพุทธศตวรรษที่ 18 ชุมชนบริเวณบ้านกู่กาสิงห์ในขณะนั้น ได้เปลี่ยนมานับถือพุทธศาสนาแบบมหายานแทนศาสนาฮินดู ตามแบบอย่างราชสำนักในเมืองพระนครช่วงรัชสมัยของพระเจ้าชัยวรมันที่ 7 ที่ทรงโปรดฯให้สร้างอโรคยาศาล ตามชุมชนในเขตการปกครองของพระองค์",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "กู่กาสิงห์",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5784449",
+        "Longitude": "103.6751944",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/43/2024-10-18_19-41-41_KK67-C-002.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/43/2024-10-18_19-41-44_KK67-C-002-1.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/43/2024-10-18_19-41-47_KK67-C-002-2.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/43/2024-10-18_19-41-51_KK67-C-002-3.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/43/2024-10-18_19-41-54_KK67-C-002-4.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/43/2024-10-18_19-41-57_KK67-C-002-5.jpg"
+        ]
+    },
+    {
+        "id_route": "12",
+        "title_route": "เส้นทางวรมัน (Historical Era Tourism)",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "42",
+                "title": "ปราสาทพระโกนา",
+                "description": " “กู่พระโกนา” โบราณสถานสำคัญอีกแห่งหนึ่งของจังหวัดร้อยเอ็ด ตั้งอยู่ภายในวัดกู่พระโกนา ตำบลสระคู อำเภอสุวรรณภูมิ จังหวัดร้อยเอ็ด เป็นปราสาทในวัฒนธรรมขอมโบราณประกอบด้วยปราสาท ๓ องค์ เรียงกันในแนวเหนือ – ใต้ หันหน้าไปทางทิศตะวันออก เฉพาะปราสาทประธานองค์กลางที่ปรากฏร่องรอยของมุขยื่นออกมาทางด้านหน้า มีบรรณาลัยหรือที่เก็บคัมภีร์สร้างด้วยศิลาแลงตั้งอยู่ทางทิศตะวันออกเฉียงใต้ของปราสาทประธาน ๑ หลัง ทั้งหมดล้อมรอบด้วยกำแพงแก้วสร้างด้วยศิลาแลง มีโคปุระหรือซุ้มประตูทางเข้าด้านทิศตะวันออกและทิศตะวันตก \r\n\r\n          กู่พระโกนามีภาพสลักประดับตามส่วนต่าง ๆ ของปราสาทงดงามน่าชม เช่น ลายบัวแปดกลีบที่อกเลาประตูหลอก ลายก้านขด / ลายก้านต่อดอกที่เสาซุ้มประตูปราสาท เป็นต้น ถึงแม้โบราณสถานแห่งนี้จะพังทลายตามกาลเวลาและมีการซ่อมแซมในสมัยหลัง แต่ยังมีภาพสลักเล่าเรื่องที่งดงามปรากฏอยู่ ได้แก่ “ภาพสลักนารายณ์บรรทมสินธุ์” หรือวิษณุอนัตศายินปัทมนาภะ ซึ่งเป็นเรื่องราวการบรรทมของพระวิษณุเหนือพญาอนันตนาคราชเพื่อสร้างโลก ณ เกษียรสมุทรหรือทะเลน้ำนมอันเป็นที่ประทับของพระองค์ โดยตามความเชื่อของฮินดูกล่าวว่า เมื่อโลกถึงกลียุคพระศิวะจะทำลายล้างโลก จากนั้นพระวิษณุ (พระนารายณ์) จะสร้างโลกใหม่โดยกระทำโยคะนิทราจนบังเกิดเป็นดอกบัวทองผุดจากพระนาภี (สะดือ) ภายในดอกบัวมีพระพรหมประทับอยู่และจะทำหน้าที่สร้างโลกต่อไป\r\n\r\n           ภาพสลักพระนารายณ์บรรทมสินธุ์ที่กู่พระโกนาพบบนทับหลังด้านทิศตะวันออกของปราสาทองค์เหนือ ซึ่งปัจจุบันปราสาทดังกล่าวมีการสร้างอาคารครอบไว้ ทับหลังของปราสาทองค์นี้มีความพิเศษพบได้น้อยมากในดินแดนไทย กล่าวคือ เป็นทับหลังซ้อนกัน ๒ ชิ้น สลักแยกกัน ชิ้นที่ ๑ อยู่ด้านล่างมีขนาดใหญ่ สลักภาพบุคคลที่กึ่งกลางทับหลังซึ่งลบเลือนไปแล้วแต่ยังปรากฏท่อนพวงมาลัย / พวงอุบะ และลายพรรณพฤกษา ชิ้นที่ ๒ อยู่ด้านบนมีขนาดเล็กกว่าสลักภาพนารายณ์บรรทมสินธุ์ โดยลักษณะทับหลังที่มี ๒ ชิ้น ซ้อนกันแบบนี้นิยมในพุทธศตวรรษที่ ๑๕ แต่พบว่าทับหลังปราสาทบางองค์ในพุทธศตวรรษที่ ๑๖ ก็ยังคงปรากฏอยู่ ดังเช่นปราสาทองค์เหนือที่กู่พระโกณาแห่งนี้ \r\n\r\n         ทับหลังชิ้นที่ ๒ ปราสาทองค์เหนือดังกล่าว สลักภาพพระวิษณุ (พระนารายณ์) ๒ กร พระกรซ้ายถือดอกบัว พระกรขวาหนุนพระเศียรขณะบรรทมตะแคงขวาเหนือพญาอนันตนาคราช ๕ เศียร (ช่างสลักให้เห็นเพียง ๓ เศียร อีก ๒ เศียรถูกบังไว้) ที่พระนาภี (สะดือ) มีก้านดอกบัวผุดออกมาและมีพระพรหมประทับอยู่บนนั้น แต่น่าเสียดายที่ภาพสลักส่วนนี้ชำรุด บริเวณปลายพระบาทของพระวิษณุมีพระลักษมีชายาของพระองค์ประทับอยู่ นอกจากนี้ที่ด้านปลายทั้ง ๒ ข้าง สลักรูปหงส์ข้างละ ๒ ตัวอีกด้วย จากลักษณะของนาคเศียรโล้นและรูปแบบการแต่งกายของพระวิษณุ รวมถึงรูปแบบของทับหลังชิ้นที่ ๑ กำหนดอายุประมาณพุทธศตวรรษที่ ๑๖ ศิลปะแบบบาปวน ร่วมสมัยกับปราสาทสระกำแพงใหญ่ จ.ศรีสะเกษ ปราสาทสด๊กก็อกธม จ.สระแก้ว ปราสาทบ้านพลวง จังหวัดสุรินทร์ และปราสาทเมืองต่ำ จังหวัดบุรีรัมย์\r\n\r\n          พระนารายณ์บรรทมสินธุ์ ณ ปราสาทกู่พระโกนานี้ นับเป็นทับหลังและภาพสลักที่มีอยู่เพียงไม่กี่แห่งในประเทศไทย อีกทั้งพบเพียงแห่งเดียวในจังหวัดร้อยเอ็ด มีความสมบูรณ์งดงามด้วยรูปแบบศิลปะ และยังคงอยู่ในตำแหน่งเดิมเมื่อครั้งแรกสร้าง มีคุณค่าทางประวัติศาสตร์และโบราณคดีอย่างยิ่ง ทั้งนี้กรมศิลปากรเล็งเห็นถึงความสำคัญ ได้ประกาศขึ้นทะเบียนโบราณสถานกู่พระโกนาในราชกิจจานุเบกษา เมื่อวันที่ ๘ มีนาคม ๒๔๗๘ และประกาศกำหนดเขตที่ดินโบราณสถานเมื่อวันที่ ๒๑ ตุลาคม ๒๕๒๕ เนื้อที่ประมาณ ๘ ไร่ ๒ งาน ๑๖ ตารางวา เพื่อเป็นแหล่งเรียนรู้ด้านศิลปวัฒนธรรมที่สำคัญของชาติสืบไป\r\n\r\n\r\n-------------------------------------------------------\r\n\r\nผู้เรียบเรียง: นายกฤษณพงศ์ พูนสวัสดิ์ นักโบราณคดีปฏิบัติการ สำนักศิลปากรที่ ๙ อุบลราชธานี",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "สระคู",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5560261",
+        "Longitude": "103.8178742",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/42/2024-10-18_19-37-19_2024-10-02_18-49-15_170F3611-28C3-4DA9-8B2E-941D372E9D0C.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/42/2024-10-18_19-37-24_2024-10-02_18-49-19_C5D6467A-2A6E-4DD6-B02A-A45918E925A2.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/42/2024-10-18_19-37-29_2024-10-02_18-49-07_E2B17F8F-8EE0-41FC-95F1-6A188F816942.jpg"
+        ]
+    },
+    {
+        "id_route": "12",
+        "title_route": "เส้นทางวรมัน (Historical Era Tourism)",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "44",
+                "title": "ปราสาทบ้านหนองคูณ หรือดอนขุมเงิน",
+                "description": "วัฒนธรรมเขมรในจังหวัดร้อยเอ็ด\r\n           อิทธิพลวัฒนธรรมแบบขอมหรือเขมรแพร่เข้าสู่พื้นที่จังหวัด ร้อยเอ็ดตั้งแต่ราวพุทธศตวรรษที่ 12-18 ชุมชนเหล่านี้ตั้งอยู่ทางตอนล่างของจังหวัดในบริเวณที่เรียกว่า \"ทุ่งกุลาร้องให้\" ก่อนบริเวณอื่น โดยพัฒนาขึ้นจากชุมชนดั้งเดิมที่อยู่อาศัยมาตั้งแต่สมัยก่อนประวัติศาสตร์ตอนปลาย หลักฐานสำคัญคือการค้นพบจารึกเอ่ยพระนาม \"พระเจ้าศรีมเหนทรวรมัน\" หรือเจ้าชาย จิตรเสน กษัตริย์องค์สำคัญของอาณาจักรเจนละ ที่ปราสาทหิน บ้านหนองคูณ (ดอนขุมเงิน) ตำบลเด่นราษฎร์ อำเภอหนองอีพระองค์ประกาศอำนาจเหนือดินแดนแห่งนี้ในราวพุทธศตวรรษที่ 12 และที่อำเภอสุวรรณภูมิได้พบทับหลังสลักลวดลายศิลปะเขมรแบบไพรกเมง อายุราวพุทธศตวรรษที่ 13 ซึ่งยังไม่ทราบว่าได้มาจากศาสนสถานหลังใด แต่ก็เป็นร่องรอยของการรับวัฒนธรรมเขมรในยุคแรก จากการศึกษาทางโบราณคดีเชื่อว่าการที่วัฒนธรรมเขมรแพร่เข้ามาในบริเวณทุ่งกุลาร้องให้ก่อนดินแดนอื่น เนื่องจากบริเวณ\r\n           นี้มีประชากรหนาแน่น เป็นแหล่งผลิตเกลือสินธุ์เธาว์ขนาดใหญ่และอาจเป็นศูนย์กลางการผลิตโลหะกรรมที่สำคัญอีกด้วย\r\nในราวพุทธศตวรรษที่ 15-16 วัฒนธรรมเขมรแพร่อิทธิพลเข้ามาลึกในแผ่นดินตามลำน้ำเสียวมากขึ้น มีการสร้างโบราณสถานหลายแห่งเกิดขึ้นในช่วงเวลานี้ เช่น พระธาตุพันขัน กู่เมืองบัว คู่กาสิงห์กู่โพนวิท กู่พระโกนา กู่กระโดน และลึกเขาไปถึงเขตอำเภอปทุมรัตต์ ซึ่งเป็นซากศาสนสถานที่ยังไม่ได้รับการขุดแต่ง ส่วนทางตอนกลางของจังหวัดเริ่มปรากฏการสร้างศาสนสถานใน วัฒนธรรมเขมรเช่นกัน เช่น ปรางค์กู่น้อย กู่บิงจิว อำเภอธวัชบุรีและปรากฏชุมชนโบราณที่มีผังเมืองรูปสี่เหลี่ยม หรือมีบาราย ซึ่งเมืองเหล่านี้สร้างครอบคลุมแม่น้ำหลายสาย ทั้งแม่น้ำซี แม่น้ำมูลและลำน้ำเสียว",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5559138",
+        "Longitude": "103.9382846",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/44/2024-10-18_19-54-37_DR67-C-001.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/44/2024-10-18_19-54-40_DR67-C-002.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/44/2024-10-18_19-54-43_DR67-C-003.jpg"
+        ]
+    },
+    {
+        "id_route": "12",
+        "title_route": "เส้นทางวรมัน (Historical Era Tourism)",
+        "order": "5",
+        "Data_th": [
+            {
+                "id_place": "40",
+                "title": "ปราสาทคันธนาม ",
+                "description": "ปราสาทคันธนาม (กู่บ้านด่าน) เป็นปราสาทที่สร้างในพุทธศตวรรษที่ 18 เพื่อเป็นอโรคยาศาลตามแบบวัฒนธรรมเขมรแห่งหนึ่งใน 102 แห่งในสมัยพระเจ้าชัยวรมันที่ 7 (พ.ศ.1724 - 1761) ตามจารึกปราสาทตาพรหม ประเทศกัมพูชา ชื่อกู่คันธนามเป็นชื่อที่เรียกขึ้นในภายหลังตามนิทานชาดกนอกนิบาตเรื่องคันธนโพธิสัตว์ชาดกที่นิยมเล่ากันในกลุ่มชนเชื้อสายลาวโดยผูกเรื่องพุทธประวัติเข้ากับสถานที่ในท้องถิ่นให้บริเวณกู่คันธนามและโดยรอบเป็นพื้นที่ซึ่งพระพุทธเจ้าเสด็จมาโปรดเวไนยสัตว์  บริเวณกู่คันธนามประกอบด้วยอาคาร 2 หลัง ในกำแพง ได้แก่ ปราสาทประธาน 1 หลังตอนกลาง และอาคารบรรณาลัยอีก 1 หลังทางทิศตะวันออกเฉียงใต้ของปราสาท ด้านนอกกำแพงด้านทิศตะวันออกเฉียงเหนือเป็นสระน้ำที่มีผังเช่นเดียวกับผังกู่โพนระฆัง\r\n\r\nลักษณะสถาปัตยกรรมกู่คันธนาม เป็นปราสาทแบบเขมรที่ใช้ศิลาแลงเป็นวัสดุหลักในการก่อสร้าง ตั้งบนฐานสูงในผังสี่เหลี่ยมย่อเก็จ สร้างหันหน้าไปทางทิศตะวันออก ด้านหน้าปราสาทก่อมุขยื่นออกมาเชื่อมกับลานหิน ส่วนบรรณาลัยเป็นอาคารก่อด้วยศิลาแลงในผังสี่เหลี่ยมผืนผ้า ด้านหน้าบรรณาลัยพบศิลาจารึกหินทราย จารึกอักษรเขมรโบราณภาษาสันสกฤต มีเนื้อหาเกี่ยวกับการสร้างอโรคยาศาลให้เป็นสถานพยาบาลสำหรับประชาชน (ปัจจุบันเก็บรักษาไว้ที่พิพิธภัณฑ์แห่งชาติร้อยเอ็ด) การแต่งตั้งผู้ทำหน้าที่ในอโรคยาศาล และการพระราชทานสิ่งของตามขนาดของโรงพยาบาลของพระเจ้าชัยวรมันที่ 7 ส่วนกำแพงก่อด้วยศิลาแลงมีผังรูปสี่เหลี่ยมผืนผ้า กึ่งกลางกำแพงด้านทิศตะวันออกเป็นซุ้มประตู (โคปุระ) รูปกากบาท ก่อด้วยศิลาแลง แต่ส่วนที่เป็นคานใช้หินทรายสีชมพู ภายในประดิษฐานพระโพธิสัตว์อวโลกิเตศวร 4 กร ทำจากหินทรายในลักษณะศิลปะเขมรแบบบายน นอกจากนี้ภายในปราสาทยังพบพระไภสัชยคุรุไวฑูรยประภาและพระวัชรธร กึ่งกลางกำแพงด้านทิศเหนือและใต้มีห้องเล็กๆ ที่สามารถเปิดสู่ภายในได้ ส่วนสระน้ำนอกกำแพงกรุด้วยศิลาแลงในผังรูปสี่เหลี่ยมผืนผ้า",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "35",
+                "title": "Bo Phan Khan (Nam Sarang Khrok)",
+                "description": "Bo Phan Khan (Nam Sarang Khrok) is a natural fresh-water spring where water continuously bubbles up from the ground. According to legend, the robe of the Venerable Maha Moggallana (one of the chief disciples of the Buddha) turned into a sandstone slab. Fearing that people in the future might lack fresh water to drink, he made a vow and pointed his index finger at the robe-turned-stone. At the spot he touched, a crack formed about the size of a small bowl, roughly 9 inches in diameter and about 8 inches deep, and water began to flow continuously from it.\r\n\r\nVillagers refer to it as \"Nam Sarang Khrok\", as the shape resembles an ancient rice mortar used for pounding rice. The entire surrounding area became known as Bo Phan Khan.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ยางคำ",
+        "District": "โพนทราย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.1949774",
+        "Longitude": "102.1696903",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-04_YK67-C-001.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-07_YK67-C-001-1.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-10_YK67-C-001-2.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-13_YK67-C-001-3.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-16_YK67-C-001-4.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-20_YK67-C-001-5.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-23_YK67-C-001-6.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-26_YK67-C-001-7.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-29_YK67-C-001-8.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/40/2024-10-18_19-25-32_YK67-C-001-9.jpg"
+        ]
+    },
+    {
+        "id_route": "13",
+        "title_route": "เส้นทางกิจกรรมพื้นที่บ่อพันขัน",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "50",
+                "title": "พื้นที่บ่อพันขัน",
+                "description": "พื้นที่บ่อพันขัน ตำบลบ่อพันขัน อำเภอสุวรรณภูมิ จังหวัดร้อยเอ็ด เป็นหนึ่งในพื้นที่ที่มีความสำคัญทั้งในด้านภูมิศาสตร์ วัฒนธรรม และวิถีชีวิตของชาวบ้านในท้องถิ่น โดยมีข้อมูลโดยสังเขป ดังนี้\r\n\r\nข้อมูลทั่วไปเกี่ยวกับพื้นที่\r\nตำบลบ่อพันขัน ตั้งอยู่ทางตอนใต้ของอำเภอสุวรรณภูมิ จังหวัดร้อยเอ็ด มีพื้นที่ส่วนใหญ่เป็นที่ราบลูกคลื่น ดินส่วนมากเป็นดินร่วนปนทราย มีการทำเกษตรกรรมเป็นอาชีพหลัก โดยเฉพาะการทำนา เลี้ยงสัตว์ และการปลูกพืชไร่ เช่น มันสำปะหลัง อ้อย ข้าวโพด เป็นต้น\r\n\r\nในอดีตคำว่า \"บ่อพันขัน\" มาจากแหล่งน้ำประจำพื้นที่ ที่ชาวบ้านเรียกว่า \"บ่อพันขัน\" ซึ่งถือเป็นแหล่งน้ำศักดิ์สิทธิ์และเป็นจุดศูนย์กลางของชุมชนที่ใช้ทำพิธีกรรมต่าง ๆ\r\n\r\nชุมชนและวิถีชีวิต\r\nชาวบ้านในตำบลบ่อพันขันส่วนใหญ่เป็นชาวอีสาน มีรากฐานวัฒนธรรมมาจากลาวและขอมโบราณ มีขนบธรรมเนียมประเพณีท้องถิ่นที่ยังคงรักษาไว้ เช่น บุญบั้งไฟ บุญข้าวประดับดิน บุญออกพรรษา และงานบุญสลากภัต\r\n\r\nผู้คนในชุมชนยังดำรงชีวิตตามแบบวิถีพอเพียง มีการรวมกลุ่มกันจัดกิจกรรม เช่น กลุ่มทอผ้าไหม กลุ่มเลี้ยงโค-กระบือ กลุ่มจักสาน รวมไปถึงกลุ่มเยาวชนและผู้สูงอายุของชุมชนที่ร่วมกันอนุรักษ์ศิลปะพื้นบ้าน เช่น หมอลำ ฟ้อนภูไท เป็นต้น\r\n\r\nความสำคัญของพื้นที่\r\nตำบลบ่อพันขัน มีความสำคัญเชิงประวัติศาสตร์และภูมิปัญญาท้องถิ่น โดยเฉพาะการเป็นแหล่งเรียนรู้รูปแบบของ “ชุมชนเศรษฐกิจพอเพียง” ซึ่งได้รับการส่งเสริมจากหน่วยงานภาครัฐและองค์กรพัฒนาเอกชน อีกทั้งยังเป็นพื้นที่ที่มีความอุดมสมบูรณ์ทางธรรมชาติและมีเครือข่ายชุมชนเข้มแข็ง\r\n\r\nนอกจากนี้ บ่อพันขันยังได้พัฒนาศักยภาพด้านการท่องเที่ยวเชิงอนุรักษ์และวัฒนธรรมในช่วงหลายปีที่ผ่านมา โดยการส่งเสริมกิจกรรมท่องเที่ยวเรียนรู้วิถีชุมชน\r\n\r\nสถานที่ท่องเที่ยวที่น่าสนใจในพื้นที่บ่อพันขัน\r\nบ่อพันขัน (แหล่งน้ำโบราณ): เป็นศูนย์รวมจิตใจของชุมชน เชื่อกันว่าเป็นบ่อน้ำศักดิ์สิทธิ์ที่ใช้ในพิธีกรรมและมีตำนานท้องถิ่นเกี่ยวข้องกับการตั้งถิ่นฐานของหมู่บ้าน\r\nวัดบ่อพันขัน: วัดขนาดใหญ่กลางหมู่บ้าน มีสถาปัตยกรรมไทยอีสาน และจัดงานบุญประเพณีสำคัญเป็นประจำ มีพระอุโบสถเก่าแก่และจิตรกรรมฝาผนังที่สะท้อนเรื่องราวพุทธประวัติและวิถีชีวิตชาวชนบท\r\nศูนย์เรียนรู้เศรษฐกิจพอเพียงบ้านบ่อพันขัน: เปิดให้นักท่องเที่ยวและผู้สนใจเข้ามาเรียนรู้วิถีเกษตรดั้งเดิม ปลูกผัก ทำปุ๋ย อินทรีย์ การทำนาแบบดั้งเดิม\r\nตลาดชุมชนและกลุ่มผลิตภัณฑ์ OTOP: มีการจำหน่ายผลิตภัณฑ์ชุมชน เช่น ผ้าไหม ผ้าฝ้าย เครื่องจักสาน ของฝากจากท้องถิ่น รวมถึงการแสดงศิลปวัฒนธรรมท้องถิ่นในงานเทศกาล",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "50",
+                "title": "Bo Pan Khan area",
+                "description": "Bo Phan Khan Subdistrict – Suwannaphum District, Roi Et Province, Thailand\r\n\r\nGeneral Overview\r\nBo Phan Khan is a subdistrict (tambon) located in the southern part of Suwannaphum District, Roi Et Province, in Northeastern Thailand (Isan region). The area consists mostly of undulating plains with sandy loam soil, making it suitable for agriculture. The primary occupation of the local people includes rice farming, livestock raising, and the cultivation of crops such as cassava, sugarcane, and corn.\r\n\r\nThe name \"Bo Phan Khan\" originates from a natural water resource in the area, known as \"Bo Phan Khan\" (meaning \"Well of a Thousand Tubs\"), which is considered sacred and central to the community's local legends and rituals.\r\n\r\nCommunity and Way of Life\r\nThe people of Bo Phan Khan are predominantly ethnic Isan, with cultural roots influenced by Lao and ancient Khmer heritage. The community still preserves traditional ceremonies and local festivals such as:\r\n\r\nBun Bang Fai (Rocket Festival)\r\nBun Khao Pradab Din (Festival to Honor Ancestors)\r\nBun Awk Phansa (End of Buddhist Lent)\r\nBun Sala Kat (Offering Festival)\r\nThe lifestyle reflects a self-sufficient and sustainable approach. Many villagers are members of community groups such as handwoven silk weaving groups, livestock cooperatives, bamboo craft groups, and youth and elderly cultural organizations. These groups help preserve traditional Isan folk arts such as mor lam (folk singing) and Phu Thai dance.\r\n\r\nCultural and Historical Significance\r\nBo Phan Khan is significant both historically and culturally. It has been recognized as a model community for sustainable rural development and sufficiency economy practices, promoted by the Thai government and NGOs.\r\n\r\nThe region is actively developing community-based tourism focused on cultural exchange, traditional crafts, and eco-friendly experiences. The strong sense of community and preservation of traditional knowledge make Bo Phan Khan a valuable area for learning and cultural immersion.\r\n\r\nLocal Attractions & Points of Interest\r\nBo Phan Khan Sacred Well (แหล่งน้ำศักดิ์สิทธิ์ “บ่อพันขัน”): The natural well after which the subdistrict is named. It is associated with local legends and used for various traditional rituals, considered the spiritual heart of the community.\r\nWat Bo Phan Khan (วัดบ่อพันขัน): A prominent local Buddhist temple that serves as a religious and cultural gathering place. Notable for its traditional Isan-style architecture, murals depicting Buddhist tales, and annual religious festivals.\r\nSufficiency Economy Learning Center: A local education center where visitors can learn about self-sufficient agricultural practices, such as organic farming, composting, and traditional rice planting methods.\r\nOTOP Village Market: Features a variety of locally made One Tambon One Product (OTOP) items such as handwoven silk, cotton fabrics, bamboo crafts, herbal products, and organic goods. Cultural performances and local foods are also available during festivals.\r\n\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5741733",
+        "Longitude": "103.9404697",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/50/2025-11-10_11-26-52_bor_1.jpg"
+        ]
+    },
+    {
+        "id_route": "13",
+        "title_route": "เส้นทางกิจกรรมพื้นที่บ่อพันขัน",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "51",
+                "title": "พื้นที่การทำนาบ่อพันขัน",
+                "description": "การทำนาที่ทุ่งกุลาร้องไห้เป็นการปลูกข้าวหอมมะลิบนาพื้นที่กว้างในภาคอีสานตอนกลาง โดยอาศัยน้ําฝนเป็นหลัก ดินค่อนข้างแห้งและมีเกลือปน ทำให้ข้าวที่ปลูกมีกลิ่นหอมและคุณภาพดี เป็นอาชีพสำคัญและเอกลักษณ์ของชาวนาในพื้นที่นี้",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "51",
+                "title": "Bo Phan Khan rice farming area",
+                "description": "Rice farming in the Thung Kula Ronghai area involves growing jasmine rice on vast fields in northeastern Thailand. The farmers rely mainly on rainfall, as the soil is dry and slightly saline. These conditions help produce rice with a unique aroma and high quality, making it a proud livelihood and identity of the local people.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5845275",
+        "Longitude": "103.9370706",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-18_09-35-47_farming2.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-23_05-59-32__1RL5828.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-23_05-59-42__1RL5878.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-23_05-59-50__1RL5882.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-23_06-01-32_566528517_3014229832118535_7576975962691337872_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-23_06-01-35_566450267_825117953802690_5021269091289066412_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-23_06-01-38_566476560_832059686437924_903212590478748361_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/51/2025-11-23_06-01-42_564909203_766198526414644_324279948975126299_n.jpg"
+        ]
+    },
+    {
+        "id_route": "13",
+        "title_route": "เส้นทางกิจกรรมพื้นที่บ่อพันขัน",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "52",
+                "title": "อาหารพื้นถิ่นของตำบลบ่อพันขัน ",
+                "description": "อาหารพื้นถิ่นของตำบลบ่อพันขัน จังหวัดร้อยเอ็ด\r\n\r\nอาหารพื้นบ้านของตำบลบ่อพันขันสะท้อนถึงวิถีชีวิตและความอุดมสมบูรณ์ตามธรรมชาติของท้องถิ่น อาหารส่วนใหญ่มักจะใช้วัตถุดิบที่หาได้ในพื้นที่ เช่น ปลาน้ำจืดจากแม่น้ำและหนองน้ำ ผักตามฤดูกาล เห็ดป่า และสมุนไพรจากป่าใกล้เคียง\r\n\r\nอาหารยอดนิยมมีดังนี้:\r\n\r\nแจ่วบอง: น้ำพริกเผ็ดทำจากปลาร้าหมัก ตะไคร้ พริก และสมุนไพรต่าง ๆ นำมาย่างไฟให้หอม เป็นเครื่องจิ้มที่นิยมกินกับข้าวเหนียวหรือผักสด\r\nต้มหน่อไม้กับปลาร้า: แกงพื้นบ้านที่ใช้หน่อไม้สด ปลาร้า ใบย่านาง และพริกสด มีรสกลมกล่อมหอมสมุนไพร\r\nลาบปลา: ลาบปลาน้ำจืด เช่น ปลาช่อนหรือปลานิล สับละเอียดคลุกกับข้าวคั่ว น้ำมะนาว พริกป่น และน้ำปลาหรือปลาร้า รสชาติจัดจ้านแบบอีสาน\r\nซุปเห็ด: แกงเห็ดป่ารสเผ็ดเปรี้ยว ใส่สมุนไพรอย่างตะไคร้ ใบแมงลัก และใบย่านาง เป็นเมนูที่หากินได้เฉพาะช่วงมีเห็ดป่าตามฤดูกาล\r\nอาหารพื้นถิ่นเหล่านี้ไม่เพียงแต่อร่อย แต่ยังสะท้อนถึงอัตลักษณ์ชุมชน ภูมิปัญญาท้องถิ่น และสายสัมพันธ์ลึกซึ้งระหว่างผู้คนกับธรรมชาติอีกด้วย",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "52",
+                "title": "Local Cuisine of Bo Phan Khan, Roi Et Province",
+                "description": "Local Cuisine of Bo Phan Khan, Roi Et Province\r\nThe local food of Bo Phan Khan reflects the way of life and natural abundance of the region. Most dishes are made from ingredients found locally—freshwater fish from rivers and ponds, seasonal vegetables, wild mushrooms, and herbs from nearby forests.\r\n\r\nPopular dishes include:\r\n\r\nJaew Bong: A spicy dip made from fermented fish (pla ra), lemongrass, chili, and herbs, roasted for aroma and flavor.\r\nBoiled Bamboo Shoot with Fermented Fish: A traditional soup using bamboo shoots, pla ra (fermented fish), yanang leaves, and fresh chili.\r\nLarb Pla: A spicy minced fish salad made from freshwater fish like snakehead or tilapia, mixed with roasted rice powder, lime juice, chili, and fish sauce.\r\nSpicy Mushroom Soup (Sup Hed): Made from wild mushrooms with herbs like lemongrass, sweet basil, and yanang leaves, giving a spicy and sour flavor.\r\n\r\nThese traditional dishes not only offer delicious flavors but also reflect the community's identity, wisdom, and their deep connection with nature.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5744851",
+        "Longitude": "103.9413123",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-10_14-14-07_cook.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-22_20-39-45_1014262.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-22_20-39-48_1014263.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-07-26__1RL6023.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-07-32__1RL6030.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-07-40__1RL6036.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-07-46__1RL6039.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-07-54__1RL6052.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-08-00__1RL6054.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-08-06__1RL6056.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-08-14__1RL6060.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/52/2025-11-23_05-08-20__1RL6061.jpg"
+        ]
+    },
+    {
+        "id_route": "13",
+        "title_route": "เส้นทางกิจกรรมพื้นที่บ่อพันขัน",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "54",
+                "title": "กิจกรรมทำเกลือ",
+                "description": "การทำเกลือสินเธาว์ (การต้มเกลือ) เป็นภูมิปัญญาท้องถิ่นในหลายพื้นที่ของประเทศไทย โดยเฉพาะภาคอีสาน ใช้น้ำเกลือธรรมชาติที่ได้จากบ่อสินเธาว์หรือน้ำแร่เค็ม ซึ่งอยู่ใต้ดิน นำน้ำนี้มาต้มในกระทะเหล็กขนาดใหญ่ให้เดือด จนกระทั่งน้ำระเหยหมดจะเหลือเฉพาะผลึกเกลือสีขาว จากนั้นนำเกลือไปผึ่งแดดให้แห้งก่อนนำไปบริโภคหรือจำหน่าย วิธีนี้ใช้แรงงานคนและใช้เวลาหลายชั่วโมงต่อรอบการต้ม\r\n\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "54",
+                "title": "Salt Boiling",
+                "description": "\"Sinthao Salt Making\" (Salt Boiling) is a traditional method practiced in various parts of Thailand, especially in the northeastern region. It involves extracting natural underground brine from salt wells. The brine is poured into large iron pans and boiled over a fire until the water evaporates, leaving behind white salt crystals. The collected salt is then sun-dried before being used or sold. This process is labor-intensive and takes several hours per boiling cycle, reflecting the wisdom and heritage of local communities.",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.57237971063981",
+        "Longitude": "103.9393679522166",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-10_13-53-28_salt.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-15-21__1RL6075.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-15-32__1RL6076.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-15-42__1RL6078.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-15-50__1RL6085.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-15-59__1RL6090.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-16-11__1RL6091.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-16-19__1RL6093.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-16-32__1RL6102.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-16-41__1RL6103.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-16-50__1RL6107.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-16-56__1RL6109.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-03__1RL6111.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-10__1RL6112.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-18__1RL6114.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-25__1RL6117.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-34__1RL6118.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-42__1RL6124.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-50__1RL6138.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-17-56__1RL6140.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-18-04__1RL6143.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/54/2025-11-23_05-18-11__1RL6160.jpg"
+        ]
+    },
+    {
+        "id_route": "13",
+        "title_route": "เส้นทางกิจกรรมพื้นที่บ่อพันขัน",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "53",
+                "title": "workshop การทำตุง",
+                "description": "การทำตุงใยแมงมุมเป็นงานหัตถกรรมพื้นบ้านของภาคอีสาน นิยมทำในงานบุญหรืองานประเพณี ใช้ไม้ไผ่ทำโครงเป็นรูปแปดเหลี่ยมหรือสี่เหลี่ยม แล้วนำด้ายหรือไหมพรมมาขึงเป็นลายคล้ายใยแมงมุม มีความเชื่อว่าเป็นเครื่องปัดเป่าสิ่งไม่ดีและนำสิริมงคลมาให้",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5741733",
+        "Longitude": "103.9404697",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/53/2025-11-10_13-30-45_tung.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/53/2025-11-23_05-01-09__1RL8315.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/53/2025-11-23_05-01-16__1RL8335.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/53/2025-11-23_05-01-22__1RL8336.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/53/2025-11-23_05-01-28__1RL8355.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/53/2025-11-23_05-01-34__1RL8360.jpg"
+        ]
+    },
+    {
+        "id_route": "16",
+        "title_route": "เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "71",
+                "title": "ศูนย์วัฒนธรรมบ้านป่าเม้า",
+                "description": "ศูนย์วัฒนธรรมบ้านป่าเม้า\r\nBan Pa Mao Cultural Center\r\n•\tศูนย์กลางการเรียนรู้วัฒนธรรม\r\n•\tWorkshop (ทอผ้า / โคมไฟ / หมอนมะละกอ)\r\n•\tสัมผัสวิถี “ป่าเม้าโฮแซว”\r\nนี่คือ หัวใจของเส้นทางยลวิถี และเป็นจุดที่สะท้อนตัวตนของชุมชนได้ชัดที่สุด เพราะถูกพัฒนาให้เป็นพื้นที่อนุรักษ์ ถ่ายทอด และต่อยอดภูมิปัญญาท้องถิ่นในรูปแบบร่วมสมัย ตั้งอยู่ที่ตำบลเมืองเปลือย อำเภอศรีสมเด็จ จังหวัดร้อยเอ็ด โดยมีทั้งงานทอผ้า ย้อมสีธรรมชาติ ผลิตภัณฑ์ชุมชน อาหารพื้นถิ่น และกิจกรรมท่องเที่ยวเชิงประสบการณ์ครบวงจร \r\nจุดเด่นของที่นี่คือการทำให้ “วัฒนธรรมมีชีวิต” ไม่ได้เป็นเพียงสถานที่จัดแสดง แต่เป็นพื้นที่ที่คนในชุมชนลงมือทำจริงร่วมกัน ทั้งการสืบสานการทอผ้าและย้อมสีธรรมชาติ การแปรรูปวัตถุดิบพื้นบ้านเป็นผลิตภัณฑ์อย่างหมอนมะละกอ โคมไฟโฮแซว และการพัฒนาอาหารพื้นถิ่นเป็นสำรับ “พาข้าว พาฮัก” \r\nในมุมการท่องเที่ยว ที่นี่เหมาะกับการเริ่มต้นเส้นทางมากที่สุด เพราะนักท่องเที่ยวจะได้ทั้ง “ฮู้–ฮัก–ฮอม” คือได้รู้จักชุมชน ได้สัมผัสความอบอุ่น และได้เห็นศักยภาพของชุมชนสร้างสรรค์ที่เติบโตจากรากของตัวเอง อีกทั้งชุมชนบ้านป่าเม้ายังได้รับคัดเลือกเป็น “ชุมชนยลวิถี” ประจำปี 2568 และผ่านเข้ารอบ 20 ชุมชนระดับประเทศด้วย\r\n\r\n\r\n\r\n\r\n เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองเปลือย",
+        "District": "ศรีสมเด็จ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.0023436",
+        "Longitude": "103.5487544",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/71/2026-03-30_08-01-14_LINE_ALBUM_2026_3_29_260330_65.jpg"
+        ]
+    },
+    {
+        "id_route": "16",
+        "title_route": "เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "72",
+                "title": "ประตูเมืองเปลือย",
+                "description": "ประตูเมืองเปลือย\r\nMueang Plueai City Gate\r\n•\tแลนด์มาร์กทางประวัติศาสตร์(จำลอง)\r\n•\tจุดเช็คอินและเล่าเรื่องเมืองเปลือย\r\n1 ใน 11 ประตูเมืองของจังหวัดร้อยเอ็ด ประตูเมืองเปลือยทำหน้าที่เป็น แลนด์มาร์กเชิงสัญลักษณ์ของพื้นที่ตำบลเมืองเปลือย และเป็นจุดเช็กอินที่ช่วยสร้างภาพจำของเส้นทางได้ดี จากข้อมูลของเทศบาลตำบลเมืองเปลือย สถานที่นี้อยู่บริเวณ “ลานตลาดนัดสีเขียวประตูเมืองเปลือย” หมู่ 7 ตำบลเมืองเปลือย อำเภอศรีสมเด็จ จังหวัดร้อยเอ็ด และถูกใช้เป็นพื้นที่จัดกิจกรรมชุมชนด้วย \r\nถ้ามองในเชิงการเล่าเรื่อง ประตูเมืองเปลือยเป็นจุดที่เหมาะจะใช้เปิดเรื่อง “เมืองเปลือย” ทั้งในมิติประวัติชื่อบ้านชื่อเมืองและความภาคภูมิใจของคนท้องถิ่น เพราะทันทีที่นักท่องเที่ยวมาถึง จะรับรู้ได้ว่ากำลังก้าวเข้าสู่พื้นที่ที่มีเรื่องราว มีอัตลักษณ์ และมีเครือข่ายชุมชนรอบข้างที่ยังเชื่อมโยงกันอยู่จริง\r\nจุดนี้เหมาะกับการเป็น จุดเริ่มถ่ายภาพ จุดรวมพล และจุดปฐมนิเทศเส้นทาง ก่อนเดินทางต่อไปยังศูนย์วัฒนธรรม วัด และแหล่งธรรมชาติอื่น ๆ\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองเปลือย",
+        "District": "ศรีสมเด็จ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.0078393",
+        "Longitude": "103.5295874",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/72/2026-03-30_08-02-56_LINE_ALBUM_2026_3_29_260330_60.jpg"
+        ]
+    },
+    {
+        "id_route": "16",
+        "title_route": "เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "73",
+                "title": "วัดบ้านเมืองเปลือย",
+                "description": "วัดบ้านเมืองเปลือย\r\nWat Ban Mueang Plueai\r\nวัดสำคัญของชุมชนเมืองเปลือย เป็นศูนย์รวมศรัทธาและกิจกรรมทางศาสนา บรรยากาศสงบ ร่มรื่น\r\nเหมาะสำหรับไหว้พระ ทำบุญ สัมผัสวิถี “ศรัทธาอีสาน”\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองเปลือย",
+        "District": "ศรีสมเด็จ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.0107301",
+        "Longitude": "103.5476398",
+        "Picture": []
+    },
+    {
+        "id_route": "16",
+        "title_route": "เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "74",
+                "title": "สวนอุ่นรัก – สวนอินทผลัม & หมากเม่า",
+                "description": "สวนอุ่นรัก – สวนอินทผลัม & หมากเม่า\r\nAun Rak Garden & Community Orchard\r\nแหล่งเรียนรู้เกษตรชุมชนและพื้นที่พักผ่อนท่ามกลางธรรมชาติ\r\nจุดเด่น\r\n•\tสวนอินทผลัม \r\n•\tแหล่งปลูก “หมากเม่า” พืชอัตลักษณ์ \r\n•\tการแปรรูป “น้ำหมักหมากเม่า” \r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองเปลือย",
+        "District": "ศรีสมเด็จ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.0039821",
+        "Longitude": "103.5490883",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/74/2026-03-30_11-11-43_สวนอุ่นรัก.jpg"
+        ]
+    },
+    {
+        "id_route": "16",
+        "title_route": "เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "75",
+                "title": "วัดบ้านป่าเม้า",
+                "description": "วัดบ้านป่าเม้า Wat Ban Pa Mao\r\nวัดประจำชุมชนบ้านป่าเม้า เป็นพื้นที่จัดงานบุญและกิจกรรมวัฒนธรรมสะท้อนความเรียบง่ายและความผูกพันระหว่างวัดกับชุมชน  วิถีชีวิต “บ้าน–วัด–ชุมชน” มีกิจกรรม ปลูกต้น “หมากเม่า”\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองเปลือย",
+        "District": "ศรีสมเด็จ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.9987259",
+        "Longitude": "103.5499761",
+        "Picture": []
+    },
+    {
+        "id_route": "16",
+        "title_route": "เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”",
+        "order": "5",
+        "Data_th": [
+            {
+                "id_place": "76",
+                "title": "วัดป่ากุง",
+                "description": "วัดป่ากุง Wat Pa Kung\r\nแหล่งท่องเที่ยวสำคัญระดับจังหวัด โดดเด่นด้วยเจดีย์หินทรายขนาดใหญ่\r\nภายในมีเรื่องราวพุทธประวัติและศิลปกรรมอันงดงาม จุดไฮไลต์สายธรรมะของเส้นทาง\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เมืองเปลือย",
+        "District": "ศรีสมเด็จ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.9907201",
+        "Longitude": "103.4963866",
+        "Picture": []
+    },
+    {
+        "id_route": "16",
+        "title_route": "เส้นทางท่องเที่ยวอำเภอศรีสมเด็จ “เลาะคันแท แลธรรมะ ถิ่นพระเมืองศรี ของดี ยลวิถีป่าเม้าโฮแซว”",
+        "order": "6",
+        "Data_th": [
+            {
+                "id_place": "77",
+                "title": "วัดบ้านเหล่ากุด ",
+                "description": "วัดบ้านเหล่ากุด Wat Ban Lao Kud\r\nวัดชุมชนที่มีบรรยากาศเงียบสงบเหมาะสำหรับการพักใจ\r\nสะท้อนศรัทธาและวิถีชีวิตของคนท้องถิ่นในรูปแบบเรียบง่ายและจริงแท้\r\n เสน่ห์ของ “วัดชุมชนอีสาน”\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "สวนจิก",
+        "District": "ศรีสมเด็จ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.0187621",
+        "Longitude": "103.4639945",
+        "Picture": []
+    },
+    {
+        "id_route": "17",
+        "title_route": "เส้นทางท่องเที่ยวมหัศจรรย์ร้อยเอ็ด 5 ตำนาน",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "5",
+                "title": "ปราสาทกู่กาสิงห์",
+                "description": " กู่กาสิงห์ ตั้งอยู่ใน วัดบูรพากู่กาสิงห์ ตำบลกู่กาสิงห์ อำเภอเกษตรวิสัย จังหวัดร้อยเอ็ด ถือว่าเป็นโบราณสถานสถาปัตยกรรมแบบเขมรอีกแห่งหนึ่งที่มีขนาดใหญ่และยังอยู่ในสภาพดีค่ะ ทางสำนักงานโบราณคดีและพิพิธภัณฑสถานแห่งชาติที่ 8 อุบลราชธานี สังกัดกรมศิลปากร ก็เลยได้ดำเนินการขุดแต่งและบูรณะกู่กาสิงห์ให้สวยงามยิ่งขึ้น เพื่อพัฒนาเป็นแหล่งท่องเที่ยวที่สำคัญอีกแห่งหนึ่งในภาคอีสาน\r\n\r\n โดย กู่กาสิงห์ จะประกอบไปด้วยปรางค์ 3 องค์ ตั้งอยู่บนฐานศิลาแลงเดียวกัน มีวิหารรูปสี่เหลี่ยมผืนผ้า ที่เรียกว่าบรรณาลัยอยู่ทางด้านหน้าทั้งสองข้างค่ะ ทั้งหมดจะถูกล้อมด้วยกำแพงที่มีซุ้มประตู 4 ทิศด้วยกัน โดยมีคูน้ำรูปเกือกม้าล้อมรอบอีกชั้นหนึ่ง ปรางค์ประธาน จะหันหน้าไปทางทิศตะวันออก ส่วนปรางค์องค์กลางจะมีขนาดใหญ่ที่สุด\r\n\r\nนอกจากนี้ก็ยังปรากฏลวดลายสลักต่างๆ เช่น ลายกลีบบัวและลายกนก เป็นต้นค่ะ ซึ่งแบบแผนผังและโบราณวัตถุที่พบนั้น บ่งบอกให้ทราบว่า กู่กาสิงห์ ได้รับอิทธิพลจากศิลปะเขมรที่เรียกว่า บาปวน อายุราวๆ ปี พ.ศ.1560-1630 ไว้เพื่อเป็นเทวสถานอุทิศถวายแด่พระอิศวรนั่นเอง",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "กู่กาสิงห์",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5765781",
+        "Longitude": "103.6734207",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-01-26_00-53-59_S__22085682_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-06-12_09-26-10_kukasing-01.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/5/2024-06-12_09-26-14_kukasing-02.jpg"
+        ]
+    },
+    {
+        "id_route": "17",
+        "title_route": "เส้นทางท่องเที่ยวมหัศจรรย์ร้อยเอ็ด 5 ตำนาน",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "39",
+                "title": "กู่คันธนาม",
+                "description": "ปราสาทคันธนาม (กู่บ้านด่าน) เป็นปราสาทที่สร้างในพุทธศตวรรษที่ 18 เพื่อเป็นอโรคยาศาลตามแบบวัฒนธรรมเขมรแห่งหนึ่งใน 102 แห่งในสมัยพระเจ้าชัยวรมันที่ 7 (พ.ศ.1724 - 1761) ตามจารึกปราสาทตาพรหม ประเทศกัมพูชา ชื่อกู่คันธนามเป็นชื่อที่เรียกขึ้นในภายหลังตามนิทานชาดกนอกนิบาตเรื่องคันธนโพธิสัตว์ชาดกที่นิยมเล่ากันในกลุ่มชนเชื้อสายลาวโดยผูกเรื่องพุทธประวัติเข้ากับสถานที่ในท้องถิ่นให้บริเวณกู่คันธนามและโดยรอบเป็นพื้นที่ซึ่งพระพุทธเจ้าเสด็จมาโปรดเวไนยสัตว์  บริเวณกู่คันธนามประกอบด้วยอาคาร 2 หลัง ในกำแพง ได้แก่ ปราสาทประธาน 1 หลังตอนกลาง และอาคารบรรณาลัยอีก 1 หลังทางทิศตะวันออกเฉียงใต้ของปราสาท ด้านนอกกำแพงด้านทิศตะวันออกเฉียงเหนือเป็นสระน้ำที่มีผังเช่นเดียวกับผังกู่โพนระฆัง\r\n\r\nลักษณะสถาปัตยกรรมกู่คันธนาม เป็นปราสาทแบบเขมรที่ใช้ศิลาแลงเป็นวัสดุหลักในการก่อสร้าง ตั้งบนฐานสูงในผังสี่เหลี่ยมย่อเก็จ สร้างหันหน้าไปทางทิศตะวันออก ด้านหน้าปราสาทก่อมุขยื่นออกมาเชื่อมกับลานหิน ส่วนบรรณาลัยเป็นอาคารก่อด้วยศิลาแลงในผังสี่เหลี่ยมผืนผ้า ด้านหน้าบรรณาลัยพบศิลาจารึกหินทราย จารึกอักษรเขมรโบราณภาษาสันสกฤต มีเนื้อหาเกี่ยวกับการสร้างอโรคยาศาลให้เป็นสถานพยาบาลสำหรับประชาชน (ปัจจุบันเก็บรักษาไว้ที่พิพิธภัณฑ์แห่งชาติร้อยเอ็ด) การแต่งตั้งผู้ทำหน้าที่ในอโรคยาศาล และการพระราชทานสิ่งของตามขนาดของโรงพยาบาลของพระเจ้าชัยวรมันที่ 7 ส่วนกำแพงก่อด้วยศิลาแลงมีผังรูปสี่เหลี่ยมผืนผ้า กึ่งกลางกำแพงด้านทิศตะวันออกเป็นซุ้มประตู (โคปุระ) รูปกากบาท ก่อด้วยศิลาแลง แต่ส่วนที่เป็นคานใช้หินทรายสีชมพู ภายในประดิษฐานพระโพธิสัตว์อวโลกิเตศวร 4 กร ทำจากหินทรายในลักษณะศิลปะเขมรแบบบายน นอกจากนี้ภายในปราสาทยังพบพระไภสัชยคุรุไวฑูรยประภาและพระวัชรธร กึ่งกลางกำแพงด้านทิศเหนือและใต้มีห้องเล็กๆ ที่สามารถเปิดสู่ภายในได้ ส่วนสระน้ำนอกกำแพงกรุด้วยศิลาแลงในผังรูปสี่เหลี่ยมผืนผ้า",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ยางคำ",
+        "District": "โพนทราย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.1949774",
+        "Longitude": "102.1696903",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/39/2026-04-20_12-11-56_09afb8a0-63ca-11f0-8173-0b6bf9c5be72_webp_original.jpg"
+        ]
+    },
+    {
+        "id_route": "17",
+        "title_route": "เส้นทางท่องเที่ยวมหัศจรรย์ร้อยเอ็ด 5 ตำนาน",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "78",
+                "title": "กู่พระโกนา",
+                "description": " “กู่พระโกนา” โบราณสถานสำคัญอีกแห่งหนึ่งของจังหวัดร้อยเอ็ด ตั้งอยู่ภายในวัดกู่พระโกนา ตำบลสระคู อำเภอสุวรรณภูมิ จังหวัดร้อยเอ็ด เป็นปราสาทในวัฒนธรรมขอมโบราณประกอบด้วยปราสาท ๓ องค์ เรียงกันในแนวเหนือ – ใต้ หันหน้าไปทางทิศตะวันออก เฉพาะปราสาทประธานองค์กลางที่ปรากฏร่องรอยของมุขยื่นออกมาทางด้านหน้า มีบรรณาลัยหรือที่เก็บคัมภีร์สร้างด้วยศิลาแลงตั้งอยู่ทางทิศตะวันออกเฉียงใต้ของปราสาทประธาน ๑ หลัง ทั้งหมดล้อมรอบด้วยกำแพงแก้วสร้างด้วยศิลาแลง มีโคปุระหรือซุ้มประตูทางเข้าด้านทิศตะวันออกและทิศตะวันตก \r\n          กู่พระโกนามีภาพสลักประดับตามส่วนต่าง ๆ ของปราสาทงดงามน่าชม เช่น ลายบัวแปดกลีบที่อกเลาประตูหลอก ลายก้านขด / ลายก้านต่อดอกที่เสาซุ้มประตูปราสาท เป็นต้น ถึงแม้โบราณสถานแห่งนี้จะพังทลายตามกาลเวลาและมีการซ่อมแซมในสมัยหลัง แต่ยังมีภาพสลักเล่าเรื่องที่งดงามปรากฏอยู่ ได้แก่ “ภาพสลักนารายณ์บรรทมสินธุ์” หรือวิษณุอนัตศายินปัทมนาภะ ซึ่งเป็นเรื่องราวการบรรทมของพระวิษณุเหนือพญาอนันตนาคราชเพื่อสร้างโลก ณ เกษียรสมุทรหรือทะเลน้ำนมอันเป็นที่ประทับของพระองค์ โดยตามความเชื่อของฮินดูกล่าวว่า เมื่อโลกถึงกลียุคพระศิวะจะทำลายล้างโลก จากนั้นพระวิษณุ (พระนารายณ์) จะสร้างโลกใหม่โดยกระทำโยคะนิทราจนบังเกิดเป็นดอกบัวทองผุดจากพระนาภี (สะดือ) ภายในดอกบัวมีพระพรหมประทับอยู่และจะทำหน้าที่สร้างโลกต่อไป\r\n           ภาพสลักพระนารายณ์บรรทมสินธุ์ที่กู่พระโกนาพบบนทับหลังด้านทิศตะวันออกของปราสาทองค์เหนือ ซึ่งปัจจุบันปราสาทดังกล่าวมีการสร้างอาคารครอบไว้ ทับหลังของปราสาทองค์นี้มีความพิเศษพบได้น้อยมากในดินแดนไทย กล่าวคือ เป็นทับหลังซ้อนกัน ๒ ชิ้น สลักแยกกัน ชิ้นที่ ๑ อยู่ด้านล่างมีขนาดใหญ่ สลักภาพบุคคลที่กึ่งกลางทับหลังซึ่งลบเลือนไปแล้วแต่ยังปรากฏท่อนพวงมาลัย / พวงอุบะ และลายพรรณพฤกษา ชิ้นที่ ๒ อยู่ด้านบนมีขนาดเล็กกว่าสลักภาพนารายณ์บรรทมสินธุ์ โดยลักษณะทับหลังที่มี ๒ ชิ้น ซ้อนกันแบบนี้นิยมในพุทธศตวรรษที่ ๑๕ แต่พบว่าทับหลังปราสาทบางองค์ในพุทธศตวรรษที่ ๑๖ ก็ยังคงปรากฏอยู่ ดังเช่นปราสาทองค์เหนือที่กู่พระโกณาแห่งนี้ \r\n         ทับหลังชิ้นที่ ๒ ปราสาทองค์เหนือดังกล่าว สลักภาพพระวิษณุ (พระนารายณ์) ๒ กร พระกรซ้ายถือดอกบัว พระกรขวาหนุนพระเศียรขณะบรรทมตะแคงขวาเหนือพญาอนันตนาคราช ๕ เศียร (ช่างสลักให้เห็นเพียง ๓ เศียร อีก ๒ เศียรถูกบังไว้) ที่พระนาภี (สะดือ) มีก้านดอกบัวผุดออกมาและมีพระพรหมประทับอยู่บนนั้น แต่น่าเสียดายที่ภาพสลักส่วนนี้ชำรุด บริเวณปลายพระบาทของพระวิษณุมีพระลักษมีชายาของพระองค์ประทับอยู่ นอกจากนี้ที่ด้านปลายทั้ง ๒ ข้าง สลักรูปหงส์ข้างละ ๒ ตัวอีกด้วย จากลักษณะของนาคเศียรโล้นและรูปแบบการแต่งกายของพระวิษณุ รวมถึงรูปแบบของทับหลังชิ้นที่ ๑ กำหนดอายุประมาณพุทธศตวรรษที่ ๑๖ ศิลปะแบบบาปวน ร่วมสมัยกับปราสาทสระกำแพงใหญ่ จ.ศรีสะเกษ ปราสาทสด๊กก็อกธม จ.สระแก้ว ปราสาทบ้านพลวง จังหวัดสุรินทร์ และปราสาทเมืองต่ำ จังหวัดบุรีรัมย์\r\n          พระนารายณ์บรรทมสินธุ์ ณ ปราสาทกู่พระโกนานี้ นับเป็นทับหลังและภาพสลักที่มีอยู่เพียงไม่กี่แห่งในประเทศไทย อีกทั้งพบเพียงแห่งเดียวในจังหวัดร้อยเอ็ด มีความสมบูรณ์งดงามด้วยรูปแบบศิลปะ และยังคงอยู่ในตำแหน่งเดิมเมื่อครั้งแรกสร้าง มีคุณค่าทางประวัติศาสตร์และโบราณคดีอย่างยิ่ง ทั้งนี้กรมศิลปากรเล็งเห็นถึงความสำคัญ ได้ประกาศขึ้นทะเบียนโบราณสถานกู่พระโกนาในราชกิจจานุเบกษา เมื่อวันที่ ๘ มีนาคม ๒๔๗๘ และประกาศกำหนดเขตที่ดินโบราณสถานเมื่อวันที่ ๒๑ ตุลาคม ๒๕๒๕ เนื้อที่ประมาณ ๘ ไร่ ๒ งาน ๑๖ ตารางวา เพื่อเป็นแหล่งเรียนรู้ด้านศิลปวัฒนธรรมที่สำคัญของชาติสืบไป",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "สระคู",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5560209",
+        "Longitude": "103.8204491",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/78/2026-04-20_10-55-21_unnamed.jpg"
+        ]
+    },
+    {
+        "id_route": "17",
+        "title_route": "เส้นทางท่องเที่ยวมหัศจรรย์ร้อยเอ็ด 5 ตำนาน",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "11",
+                "title": "น้ำสร่างครกคู่แฝด",
+                "description": "เป็นแผ่นหินทรายพื้นผิวเรียนที่มีบ่อรูปทรงกระบอกอยู่ตรงกลางทั้งสองแผ่น\r\nเส้นผ่านศูนย์กลางของครกประมาณ 1 ฟุต มีลักษณะคล้ายครกหินโบราณที่พบในหลายประเทศ พื้นผิวภายในครกหินมีลักษณะคล้ายการใช้เครื่องมือกระเทาะ เป็นฝีมือของมนุษย์ที่สร้างขึ้นสันนิษฐานว่าใช้สำหรับตำบดผลผลิตทางการเกษตร อาหาร พืชสมุนไพร หรือเพื่อวัตถุประสงค์อื่นๆ ซึ่งจำเป็นต้องศึกษาวิจัยเพิ่มเติม ทั้งนี้จะสังเกตเห็นน้ำสร่างครกคู่แฝดเฉพาะช่วงเวลาที่น้ำลดลงในกดูแล้งเท่านั้น\r\n",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5716",
+        "Longitude": "103.9421251",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/11/2024-11-13_09-07-59_bor2.jpg"
+        ]
+    },
+    {
+        "id_route": "18",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่นในเมืองร้อยเอ็ด",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "80",
+                "title": "พิพิธภัณฑสถานแห่งชาติร้อยเอ็ด ",
+                "description": "พิพิธภัณฑสถานแห่งชาติร้อยเอ็ด แหล่งเรียนรู้สำคัญที่รวบรวมมรดกทางประวัติศาสตร์ โบราณคดี ศิลปวัฒนธรรม และวิถีชีวิตของชาวร้อยเอ็ดและภาคอีสาน\r\n\r\nภายในจัดแสดงโบราณวัตถุล้ำค่า ตั้งแต่สมัยก่อนประวัติศาสตร์ สมัยทวารวดี จนถึงยุคล้านช้างและรัตนโกสินทร์ อาทิ พระพุทธรูปโบราณ ใบเสมา เครื่องปั้นดินเผา เครื่องมือเครื่องใช้ และศิลปวัตถุที่สะท้อนความรุ่งเรืองของอารยธรรมในลุ่มน้ำชี\r\n\r\nพิพิธภัณฑสถานแห่งชาติร้อยเอ็ดจึงเป็นแหล่งเรียนรู้ที่เชื่อมโยงเรื่องราวของอดีตกับปัจจุบัน ถ่ายทอดภูมิปัญญา ความเชื่อ และอัตลักษณ์ของชุมชนอีสาน ให้คงอยู่สืบไปแก่คนรุ่นหลัง",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ในเมือง",
+        "District": "เมืองร้อยเอ็ด",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.054220",
+        "Longitude": "103.657247",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/80/2026-06-26_17-02-35_501157870_9539534952839536_5431039999115083052_n.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/80/2026-06-26_17-02-38_503557559_9568690099924021_1407803256948001676_n.jpg"
+        ]
+    },
+    {
+        "id_route": "18",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่นในเมืองร้อยเอ็ด",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "81",
+                "title": "วัดบึงพลาญชัย (พระอารามหลวง)",
+                "description": "วัดบึงพลาญชัย (พระอารามหลวง) พระอารามหลวงชั้นตรี ชนิดสามัญ วัดสำคัญคู่บ้านคู่เมืองร้อยเอ็ดที่มีประวัติความเป็นมายาวนานกว่า 1,000 ปี ตั้งอยู่ริมบึงพลาญชัย สัญลักษณ์สำคัญของจังหวัดร้อยเอ็ด\r\n\r\nเดิมบริเวณแห่งนี้เป็นวัดโบราณมาตั้งแต่สมัยทวารวดี ต่อมาได้รับการบูรณะในสมัยกรุงธนบุรี โดยพระยาขัติยวงษา เจ้าเมืองร้อยเอ็ด และได้รับการพัฒนาอย่างต่อเนื่องจนกลายเป็นศูนย์กลางพระพุทธศาสนาของจังหวัดในปัจจุบัน\r\n\r\nภายในวัดประดิษฐาน พระพุทธรัตนมงคลมหามุนี หรือที่ชาวร้อยเอ็ดเรียกกันว่า หลวงพ่อใหญ่ พระพุทธรูปปางมารวิชัย ศิลปะล้านช้าง อันเป็นพระพุทธรูปศักดิ์สิทธิ์ที่ประชาชนให้ความเคารพศรัทธา และเดินทางมากราบไหว้เพื่อความเป็นสิริมงคลตลอดทั้งปี\r\n\r\nอีกหนึ่งสิ่งสำคัญที่สะท้อนถึงความเก่าแก่ของวัด คือ ใบเสมาหินทรายสมัยทวารวดี ที่ล้อมรอบพระอุโบสถ ซึ่งเป็นหลักฐานทางโบราณคดีอันทรงคุณค่า แสดงให้เห็นว่าพื้นที่แห่งนี้เคยเป็นศูนย์กลางของพระพุทธศาสนามาตั้งแต่โบราณ\r\n\r\nนอกจากความงดงามของศาสนสถานแล้ว วัดบึงพลาญชัยยังเป็นศูนย์กลางการศึกษา การเผยแผ่พระพุทธศาสนา และเป็นสถานที่ประกอบศาสนพิธีสำคัญของชาวจังหวัดร้อยเอ็ดมาอย่างต่อเนื่อง\r\n\r\nวัดบึงพลาญชัยจึงมิได้เป็นเพียงสถานที่ประกอบศาสนกิจ หากยังเป็นมรดกทางประวัติศาสตร์ ศิลปวัฒนธรรม และศูนย์รวมศรัทธาที่อยู่คู่เมืองร้อยเอ็ดมานานนับพันปี",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ในเมือง",
+        "District": "เมืองร้อยเอ็ด",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.056729",
+        "Longitude": "103.648865",
+        "Picture": []
+    },
+    {
+        "id_route": "18",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่นในเมืองร้อยเอ็ด",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "82",
+                "title": "วัดเหนือ",
+                "description": "วัดเหนือ วัดเก่าแก่ที่มีความสำคัญทางประวัติศาสตร์และพระพุทธศาสนาของจังหวัดร้อยเอ็ด สร้างขึ้นตั้งแต่สมัยก่อตั้งเมืองร้อยเอ็ด และเป็นศูนย์รวมศรัทธาของชาวเมืองมาอย่างยาวนาน\r\n\r\nภายในวัดประดิษฐานพระพุทธรูปสำคัญ พร้อมด้วยพระอุโบสถและสถาปัตยกรรมที่สะท้อนเอกลักษณ์ศิลปกรรมไทย–อีสานอันงดงาม อีกทั้งยังเป็นศูนย์กลางการศึกษาและการเผยแผ่พระพุทธศาสนา รวมถึงสถานที่ประกอบศาสนพิธีสำคัญของจังหวัด\r\n\r\nวัดเหนือจึงมิได้เป็นเพียงสถานที่ประกอบศาสนกิจ หากยังเป็นมรดกทางประวัติศาสตร์และวัฒนธรรม ที่สะท้อนถึงความเจริญรุ่งเรืองของเมืองร้อยเอ็ด และสืบทอดคุณค่าทางพระพุทธศาสนามาจนถึงปัจจุบัน",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เหนือเมือง",
+        "District": "เมืองร้อยเอ็ด",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.060909",
+        "Longitude": "103.645961",
+        "Picture": []
+    },
+    {
+        "id_route": "18",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่นในเมืองร้อยเอ็ด",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "83",
+                "title": "วัดคุ้มวราราม",
+                "description": "วัดคุ้มวราราม (อยู่ใกล้วัดเหนือ) เป็นอีกวัดที่มีความสำคัญทางประวัติศาสตร์และพระพุทธศาสนาของจังหวัดร้อยเอ็ด สร้างขึ้นในสมัยการตั้งเมืองร้อยเอ็ด และเป็นศูนย์รวมจิตใจของชุมชนมาอย่างยาวนาน\r\n\r\nภายในวัดประดิษฐานพระพุทธรูปสำคัญ พร้อมด้วยพระอุโบสถและสถาปัตยกรรมที่สะท้อนเอกลักษณ์ศิลปกรรมไทย–อีสานอันงดงาม อีกทั้งยังเป็นสถานที่ประกอบศาสนพิธี การศึกษา และการเผยแผ่พระพุทธศาสนาแก่ประชาชน\r\n\r\nวัดคุ้มวรารามจึงเป็นทั้งศูนย์กลางแห่งศรัทธาและแหล่งเรียนรู้ทางวัฒนธรรม ที่สะท้อนวิถีชีวิต ความเชื่อ และมรดกอันทรงคุณค่าของชาวร้อยเอ็ดสืบมาจนถึงปัจจุบัน",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ในเมือง",
+        "District": "เมืองร้อยเอ็ด",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.059814",
+        "Longitude": "103.647824",
+        "Picture": []
+    },
+    {
+        "id_route": "18",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่นในเมืองร้อยเอ็ด",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "84",
+                "title": "วัดกลางมิ่งเมือง",
+                "description": "วัดกลางมิ่งเมือง \r\n\r\nภายในวัดโดดเด่นด้วยพระอุโบสถและสถาปัตยกรรมที่งดงาม พร้อมประดิษฐานพระพุทธรูปสำคัญอันเป็นที่เคารพสักการะของพุทธศาสนิกชน อีกทั้งยังเป็นสถานที่ประกอบศาสนพิธี การศึกษา และการเผยแผ่พระพุทธศาสนาอย่างต่อเนื่อง\r\n\r\nวัดกลางมิ่งเมืองจึงเป็นทั้งศูนย์กลางแห่งศรัทธาและแหล่งเรียนรู้ทางประวัติศาสตร์ ศิลปวัฒนธรรม และวิถีชีวิตของชุมชน ที่สะท้อนความเจริญรุ่งเรืองของเมืองร้อยเอ็ดจากอดีตสู่ปัจจุบัน",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ในเมือง",
+        "District": "เมืองร้อยเอ็ด",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.061796",
+        "Longitude": "103.654480",
+        "Picture": []
+    },
+    {
+        "id_route": "19",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่น อ.หนองฮี / อ.สุวรรณภูมิ / อ.เกษตรวิสัย",
+        "order": "0",
+        "Data_th": [
+            {
+                "id_place": "85",
+                "title": "หอโหวด (Roi-Et Tower) ",
+                "description": "หอโหวด (Roi-Et Tower) \r\nเป็นแลนด์มาร์กสำคัญของจังหวัดร้อยเอ็ด มีความสูงประมาณ 101 เมตร (เทียบเท่าอาคารราว 33 ชั้น) ได้แรงบันดาลใจจาก “โหวด” เครื่องดนตรีพื้นบ้านอีสาน ซึ่งสะท้อนอัตลักษณ์วัฒนธรรมท้องถิ่นและชื่อจังหวัด “ร้อยเอ็ด”\r\n\r\nจุดเด่นของหอคอยคือเป็นจุดชมวิวที่สูงที่สุดในจังหวัด สามารถมองเห็นเมืองร้อยเอ็ด บึงพลาญชัย และทัศนียภาพรอบเมืองได้แบบ 360 องศา ภายในอาคารมีลิฟต์ขึ้นสู่ชั้นชมวิว รวมถึงพื้นที่จัดแสดงนิทรรศการเกี่ยวกับประวัติศาสตร์ วิถีชีวิต และวัฒนธรรมท้องถิ่น\r\n\r\nนอกจากนี้ยังมีโซนบริการนักท่องเที่ยว เช่น ร้านอาหาร ร้านกาแฟ ร้านจำหน่ายสินค้าพื้นเมือง และภัตตาคาร ทำให้ที่นี่เป็นทั้งแหล่งท่องเที่ยว จุดชมวิว และศูนย์วัฒนธรรมร่วมสมัยของจังหวัดร้อยเอ็ดอย่างครบถ้วนในแห่งเดียว",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "53",
+                "title": "Tung Yai Maeng Mum",
+                "description": "\"Tung Yai Maeng Mum\" (Spider Web Flags) is a traditional Northeastern Thai craft, often created for religious or cultural events. Bamboo sticks are used to form a square or octagonal frame, then yarn or cotton thread is woven into a pattern resembling a spider web. It is believed to ward off bad luck and bring good fortune.\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "ในเมือง",
+        "District": "เมืองร้อยเอ็ด",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "16.054568",
+        "Longitude": "103.652459",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/85/2026-06-26_10-52-59_IMG_2268.JPG",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/85/2026-06-26_10-53-03_IMG_2270.JPG"
+        ]
+    },
+    {
+        "id_route": "19",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่น อ.หนองฮี / อ.สุวรรณภูมิ / อ.เกษตรวิสัย",
+        "order": "1",
+        "Data_th": [
+            {
+                "id_place": "50",
+                "title": "พื้นที่บ่อพันขัน",
+                "description": "พื้นที่บ่อพันขัน ตำบลบ่อพันขัน อำเภอสุวรรณภูมิ จังหวัดร้อยเอ็ด เป็นหนึ่งในพื้นที่ที่มีความสำคัญทั้งในด้านภูมิศาสตร์ วัฒนธรรม และวิถีชีวิตของชาวบ้านในท้องถิ่น โดยมีข้อมูลโดยสังเขป ดังนี้\r\n\r\nข้อมูลทั่วไปเกี่ยวกับพื้นที่\r\nตำบลบ่อพันขัน ตั้งอยู่ทางตอนใต้ของอำเภอสุวรรณภูมิ จังหวัดร้อยเอ็ด มีพื้นที่ส่วนใหญ่เป็นที่ราบลูกคลื่น ดินส่วนมากเป็นดินร่วนปนทราย มีการทำเกษตรกรรมเป็นอาชีพหลัก โดยเฉพาะการทำนา เลี้ยงสัตว์ และการปลูกพืชไร่ เช่น มันสำปะหลัง อ้อย ข้าวโพด เป็นต้น\r\n\r\nในอดีตคำว่า \"บ่อพันขัน\" มาจากแหล่งน้ำประจำพื้นที่ ที่ชาวบ้านเรียกว่า \"บ่อพันขัน\" ซึ่งถือเป็นแหล่งน้ำศักดิ์สิทธิ์และเป็นจุดศูนย์กลางของชุมชนที่ใช้ทำพิธีกรรมต่าง ๆ\r\n\r\nชุมชนและวิถีชีวิต\r\nชาวบ้านในตำบลบ่อพันขันส่วนใหญ่เป็นชาวอีสาน มีรากฐานวัฒนธรรมมาจากลาวและขอมโบราณ มีขนบธรรมเนียมประเพณีท้องถิ่นที่ยังคงรักษาไว้ เช่น บุญบั้งไฟ บุญข้าวประดับดิน บุญออกพรรษา และงานบุญสลากภัต\r\n\r\nผู้คนในชุมชนยังดำรงชีวิตตามแบบวิถีพอเพียง มีการรวมกลุ่มกันจัดกิจกรรม เช่น กลุ่มทอผ้าไหม กลุ่มเลี้ยงโค-กระบือ กลุ่มจักสาน รวมไปถึงกลุ่มเยาวชนและผู้สูงอายุของชุมชนที่ร่วมกันอนุรักษ์ศิลปะพื้นบ้าน เช่น หมอลำ ฟ้อนภูไท เป็นต้น\r\n\r\nความสำคัญของพื้นที่\r\nตำบลบ่อพันขัน มีความสำคัญเชิงประวัติศาสตร์และภูมิปัญญาท้องถิ่น โดยเฉพาะการเป็นแหล่งเรียนรู้รูปแบบของ “ชุมชนเศรษฐกิจพอเพียง” ซึ่งได้รับการส่งเสริมจากหน่วยงานภาครัฐและองค์กรพัฒนาเอกชน อีกทั้งยังเป็นพื้นที่ที่มีความอุดมสมบูรณ์ทางธรรมชาติและมีเครือข่ายชุมชนเข้มแข็ง\r\n\r\nนอกจากนี้ บ่อพันขันยังได้พัฒนาศักยภาพด้านการท่องเที่ยวเชิงอนุรักษ์และวัฒนธรรมในช่วงหลายปีที่ผ่านมา โดยการส่งเสริมกิจกรรมท่องเที่ยวเรียนรู้วิถีชุมชน\r\n\r\nสถานที่ท่องเที่ยวที่น่าสนใจในพื้นที่บ่อพันขัน\r\nบ่อพันขัน (แหล่งน้ำโบราณ): เป็นศูนย์รวมจิตใจของชุมชน เชื่อกันว่าเป็นบ่อน้ำศักดิ์สิทธิ์ที่ใช้ในพิธีกรรมและมีตำนานท้องถิ่นเกี่ยวข้องกับการตั้งถิ่นฐานของหมู่บ้าน\r\nวัดบ่อพันขัน: วัดขนาดใหญ่กลางหมู่บ้าน มีสถาปัตยกรรมไทยอีสาน และจัดงานบุญประเพณีสำคัญเป็นประจำ มีพระอุโบสถเก่าแก่และจิตรกรรมฝาผนังที่สะท้อนเรื่องราวพุทธประวัติและวิถีชีวิตชาวชนบท\r\nศูนย์เรียนรู้เศรษฐกิจพอเพียงบ้านบ่อพันขัน: เปิดให้นักท่องเที่ยวและผู้สนใจเข้ามาเรียนรู้วิถีเกษตรดั้งเดิม ปลูกผัก ทำปุ๋ย อินทรีย์ การทำนาแบบดั้งเดิม\r\nตลาดชุมชนและกลุ่มผลิตภัณฑ์ OTOP: มีการจำหน่ายผลิตภัณฑ์ชุมชน เช่น ผ้าไหม ผ้าฝ้าย เครื่องจักสาน ของฝากจากท้องถิ่น รวมถึงการแสดงศิลปวัฒนธรรมท้องถิ่นในงานเทศกาล",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "50",
+                "title": "Bo Pan Khan area",
+                "description": "Bo Phan Khan Subdistrict – Suwannaphum District, Roi Et Province, Thailand\r\n\r\nGeneral Overview\r\nBo Phan Khan is a subdistrict (tambon) located in the southern part of Suwannaphum District, Roi Et Province, in Northeastern Thailand (Isan region). The area consists mostly of undulating plains with sandy loam soil, making it suitable for agriculture. The primary occupation of the local people includes rice farming, livestock raising, and the cultivation of crops such as cassava, sugarcane, and corn.\r\n\r\nThe name \"Bo Phan Khan\" originates from a natural water resource in the area, known as \"Bo Phan Khan\" (meaning \"Well of a Thousand Tubs\"), which is considered sacred and central to the community's local legends and rituals.\r\n\r\nCommunity and Way of Life\r\nThe people of Bo Phan Khan are predominantly ethnic Isan, with cultural roots influenced by Lao and ancient Khmer heritage. The community still preserves traditional ceremonies and local festivals such as:\r\n\r\nBun Bang Fai (Rocket Festival)\r\nBun Khao Pradab Din (Festival to Honor Ancestors)\r\nBun Awk Phansa (End of Buddhist Lent)\r\nBun Sala Kat (Offering Festival)\r\nThe lifestyle reflects a self-sufficient and sustainable approach. Many villagers are members of community groups such as handwoven silk weaving groups, livestock cooperatives, bamboo craft groups, and youth and elderly cultural organizations. These groups help preserve traditional Isan folk arts such as mor lam (folk singing) and Phu Thai dance.\r\n\r\nCultural and Historical Significance\r\nBo Phan Khan is significant both historically and culturally. It has been recognized as a model community for sustainable rural development and sufficiency economy practices, promoted by the Thai government and NGOs.\r\n\r\nThe region is actively developing community-based tourism focused on cultural exchange, traditional crafts, and eco-friendly experiences. The strong sense of community and preservation of traditional knowledge make Bo Phan Khan a valuable area for learning and cultural immersion.\r\n\r\nLocal Attractions & Points of Interest\r\nBo Phan Khan Sacred Well (แหล่งน้ำศักดิ์สิทธิ์ “บ่อพันขัน”): The natural well after which the subdistrict is named. It is associated with local legends and used for various traditional rituals, considered the spiritual heart of the community.\r\nWat Bo Phan Khan (วัดบ่อพันขัน): A prominent local Buddhist temple that serves as a religious and cultural gathering place. Notable for its traditional Isan-style architecture, murals depicting Buddhist tales, and annual religious festivals.\r\nSufficiency Economy Learning Center: A local education center where visitors can learn about self-sufficient agricultural practices, such as organic farming, composting, and traditional rice planting methods.\r\nOTOP Village Market: Features a variety of locally made One Tambon One Product (OTOP) items such as handwoven silk, cotton fabrics, bamboo crafts, herbal products, and organic goods. Cultural performances and local foods are also available during festivals.\r\n\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "บ่อพันขัน",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5741733",
+        "Longitude": "103.9404697",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/50/2025-11-10_11-26-52_bor_1.jpg"
+        ]
+    },
+    {
+        "id_route": "19",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่น อ.หนองฮี / อ.สุวรรณภูมิ / อ.เกษตรวิสัย",
+        "order": "2",
+        "Data_th": [
+            {
+                "id_place": "44",
+                "title": "ปราสาทบ้านหนองคูณ หรือดอนขุมเงิน",
+                "description": "วัฒนธรรมเขมรในจังหวัดร้อยเอ็ด\r\n           อิทธิพลวัฒนธรรมแบบขอมหรือเขมรแพร่เข้าสู่พื้นที่จังหวัด ร้อยเอ็ดตั้งแต่ราวพุทธศตวรรษที่ 12-18 ชุมชนเหล่านี้ตั้งอยู่ทางตอนล่างของจังหวัดในบริเวณที่เรียกว่า \"ทุ่งกุลาร้องให้\" ก่อนบริเวณอื่น โดยพัฒนาขึ้นจากชุมชนดั้งเดิมที่อยู่อาศัยมาตั้งแต่สมัยก่อนประวัติศาสตร์ตอนปลาย หลักฐานสำคัญคือการค้นพบจารึกเอ่ยพระนาม \"พระเจ้าศรีมเหนทรวรมัน\" หรือเจ้าชาย จิตรเสน กษัตริย์องค์สำคัญของอาณาจักรเจนละ ที่ปราสาทหิน บ้านหนองคูณ (ดอนขุมเงิน) ตำบลเด่นราษฎร์ อำเภอหนองอีพระองค์ประกาศอำนาจเหนือดินแดนแห่งนี้ในราวพุทธศตวรรษที่ 12 และที่อำเภอสุวรรณภูมิได้พบทับหลังสลักลวดลายศิลปะเขมรแบบไพรกเมง อายุราวพุทธศตวรรษที่ 13 ซึ่งยังไม่ทราบว่าได้มาจากศาสนสถานหลังใด แต่ก็เป็นร่องรอยของการรับวัฒนธรรมเขมรในยุคแรก จากการศึกษาทางโบราณคดีเชื่อว่าการที่วัฒนธรรมเขมรแพร่เข้ามาในบริเวณทุ่งกุลาร้องให้ก่อนดินแดนอื่น เนื่องจากบริเวณ\r\n           นี้มีประชากรหนาแน่น เป็นแหล่งผลิตเกลือสินธุ์เธาว์ขนาดใหญ่และอาจเป็นศูนย์กลางการผลิตโลหะกรรมที่สำคัญอีกด้วย\r\nในราวพุทธศตวรรษที่ 15-16 วัฒนธรรมเขมรแพร่อิทธิพลเข้ามาลึกในแผ่นดินตามลำน้ำเสียวมากขึ้น มีการสร้างโบราณสถานหลายแห่งเกิดขึ้นในช่วงเวลานี้ เช่น พระธาตุพันขัน กู่เมืองบัว คู่กาสิงห์กู่โพนวิท กู่พระโกนา กู่กระโดน และลึกเขาไปถึงเขตอำเภอปทุมรัตต์ ซึ่งเป็นซากศาสนสถานที่ยังไม่ได้รับการขุดแต่ง ส่วนทางตอนกลางของจังหวัดเริ่มปรากฏการสร้างศาสนสถานใน วัฒนธรรมเขมรเช่นกัน เช่น ปรางค์กู่น้อย กู่บิงจิว อำเภอธวัชบุรีและปรากฏชุมชนโบราณที่มีผังเมืองรูปสี่เหลี่ยม หรือมีบาราย ซึ่งเมืองเหล่านี้สร้างครอบคลุมแม่น้ำหลายสาย ทั้งแม่น้ำซี แม่น้ำมูลและลำน้ำเสียว",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "50",
+                "title": "Bo Pan Khan area",
+                "description": "Bo Phan Khan Subdistrict – Suwannaphum District, Roi Et Province, Thailand\r\n\r\nGeneral Overview\r\nBo Phan Khan is a subdistrict (tambon) located in the southern part of Suwannaphum District, Roi Et Province, in Northeastern Thailand (Isan region). The area consists mostly of undulating plains with sandy loam soil, making it suitable for agriculture. The primary occupation of the local people includes rice farming, livestock raising, and the cultivation of crops such as cassava, sugarcane, and corn.\r\n\r\nThe name \"Bo Phan Khan\" originates from a natural water resource in the area, known as \"Bo Phan Khan\" (meaning \"Well of a Thousand Tubs\"), which is considered sacred and central to the community's local legends and rituals.\r\n\r\nCommunity and Way of Life\r\nThe people of Bo Phan Khan are predominantly ethnic Isan, with cultural roots influenced by Lao and ancient Khmer heritage. The community still preserves traditional ceremonies and local festivals such as:\r\n\r\nBun Bang Fai (Rocket Festival)\r\nBun Khao Pradab Din (Festival to Honor Ancestors)\r\nBun Awk Phansa (End of Buddhist Lent)\r\nBun Sala Kat (Offering Festival)\r\nThe lifestyle reflects a self-sufficient and sustainable approach. Many villagers are members of community groups such as handwoven silk weaving groups, livestock cooperatives, bamboo craft groups, and youth and elderly cultural organizations. These groups help preserve traditional Isan folk arts such as mor lam (folk singing) and Phu Thai dance.\r\n\r\nCultural and Historical Significance\r\nBo Phan Khan is significant both historically and culturally. It has been recognized as a model community for sustainable rural development and sufficiency economy practices, promoted by the Thai government and NGOs.\r\n\r\nThe region is actively developing community-based tourism focused on cultural exchange, traditional crafts, and eco-friendly experiences. The strong sense of community and preservation of traditional knowledge make Bo Phan Khan a valuable area for learning and cultural immersion.\r\n\r\nLocal Attractions & Points of Interest\r\nBo Phan Khan Sacred Well (แหล่งน้ำศักดิ์สิทธิ์ “บ่อพันขัน”): The natural well after which the subdistrict is named. It is associated with local legends and used for various traditional rituals, considered the spiritual heart of the community.\r\nWat Bo Phan Khan (วัดบ่อพันขัน): A prominent local Buddhist temple that serves as a religious and cultural gathering place. Notable for its traditional Isan-style architecture, murals depicting Buddhist tales, and annual religious festivals.\r\nSufficiency Economy Learning Center: A local education center where visitors can learn about self-sufficient agricultural practices, such as organic farming, composting, and traditional rice planting methods.\r\nOTOP Village Market: Features a variety of locally made One Tambon One Product (OTOP) items such as handwoven silk, cotton fabrics, bamboo crafts, herbal products, and organic goods. Cultural performances and local foods are also available during festivals.\r\n\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "เด่นราษฎร์",
+        "District": "หนองฮี",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5559138",
+        "Longitude": "103.9382846",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/44/2024-10-18_19-54-37_DR67-C-001.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/44/2024-10-18_19-54-40_DR67-C-002.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/44/2024-10-18_19-54-43_DR67-C-003.jpg"
+        ]
+    },
+    {
+        "id_route": "19",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่น อ.หนองฮี / อ.สุวรรณภูมิ / อ.เกษตรวิสัย",
+        "order": "3",
+        "Data_th": [
+            {
+                "id_place": "91",
+                "title": "วัดกลาง",
+                "description": "วัดกลาง ตั้งขึ้นเมื่อปี พ.ศ. 2317 สังกัดคณะสงฆ์มหานิกาย ตั้งอยู่บนที่ดินเนื้อที่ 9 ไร่ 3 งาน 5 ตารางวา (ตามเอกสาร ส.ค.1 เลขที่ 883) ได้รับตราตั้งเป็นวัดในปีเดียวกัน และได้รับพระราชทานวิสุงคามสีมาในปี พ.ศ. 2319 สำหรับอุโบสถหลังเก่า (ซึ่งภายหลังได้รื้อถอนและสร้างขึ้นใหม่) โดยอุโบสถหลังใหม่ได้รับวิสุงคามสีมาอีกครั้งเมื่อวันที่ 9 กรกฎาคม พ.ศ. 2562\r\nประวัติพื้นที่และการก่อตั้ง\r\nบริเวณที่ตั้งวัดเดิมเป็นป่าทึบ มีต้นโพธิ์ขนาดใหญ่ 3 ต้น และมีพระวิหารพระธาตุที่เชื่อว่าเป็นของ พระอรหันต์โมคคัลลานะ ซึ่งเจ้าเมืองสุวรรณภูมิเป็นผู้สร้าง ต่อมาเมื่อพระธุดงค์เดินทางมาปฏิบัติธรรมในพื้นที่ จึงมีการปฏิสังขรณ์พระวิหารและพระธาตุ",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "50",
+                "title": "Bo Pan Khan area",
+                "description": "Bo Phan Khan Subdistrict – Suwannaphum District, Roi Et Province, Thailand\r\n\r\nGeneral Overview\r\nBo Phan Khan is a subdistrict (tambon) located in the southern part of Suwannaphum District, Roi Et Province, in Northeastern Thailand (Isan region). The area consists mostly of undulating plains with sandy loam soil, making it suitable for agriculture. The primary occupation of the local people includes rice farming, livestock raising, and the cultivation of crops such as cassava, sugarcane, and corn.\r\n\r\nThe name \"Bo Phan Khan\" originates from a natural water resource in the area, known as \"Bo Phan Khan\" (meaning \"Well of a Thousand Tubs\"), which is considered sacred and central to the community's local legends and rituals.\r\n\r\nCommunity and Way of Life\r\nThe people of Bo Phan Khan are predominantly ethnic Isan, with cultural roots influenced by Lao and ancient Khmer heritage. The community still preserves traditional ceremonies and local festivals such as:\r\n\r\nBun Bang Fai (Rocket Festival)\r\nBun Khao Pradab Din (Festival to Honor Ancestors)\r\nBun Awk Phansa (End of Buddhist Lent)\r\nBun Sala Kat (Offering Festival)\r\nThe lifestyle reflects a self-sufficient and sustainable approach. Many villagers are members of community groups such as handwoven silk weaving groups, livestock cooperatives, bamboo craft groups, and youth and elderly cultural organizations. These groups help preserve traditional Isan folk arts such as mor lam (folk singing) and Phu Thai dance.\r\n\r\nCultural and Historical Significance\r\nBo Phan Khan is significant both historically and culturally. It has been recognized as a model community for sustainable rural development and sufficiency economy practices, promoted by the Thai government and NGOs.\r\n\r\nThe region is actively developing community-based tourism focused on cultural exchange, traditional crafts, and eco-friendly experiences. The strong sense of community and preservation of traditional knowledge make Bo Phan Khan a valuable area for learning and cultural immersion.\r\n\r\nLocal Attractions & Points of Interest\r\nBo Phan Khan Sacred Well (แหล่งน้ำศักดิ์สิทธิ์ “บ่อพันขัน”): The natural well after which the subdistrict is named. It is associated with local legends and used for various traditional rituals, considered the spiritual heart of the community.\r\nWat Bo Phan Khan (วัดบ่อพันขัน): A prominent local Buddhist temple that serves as a religious and cultural gathering place. Notable for its traditional Isan-style architecture, murals depicting Buddhist tales, and annual religious festivals.\r\nSufficiency Economy Learning Center: A local education center where visitors can learn about self-sufficient agricultural practices, such as organic farming, composting, and traditional rice planting methods.\r\nOTOP Village Market: Features a variety of locally made One Tambon One Product (OTOP) items such as handwoven silk, cotton fabrics, bamboo crafts, herbal products, and organic goods. Cultural performances and local foods are also available during festivals.\r\n\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "สระคู",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5973743",
+        "Longitude": "103.80007",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/91/2026-07-06_09-48-08_2025-04-05_11-24-57_159524_0.jpg",
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/91/2026-07-06_09-48-11_2025-04-05_11-25-00_S__6783014_0.jpg"
+        ]
+    },
+    {
+        "id_route": "19",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่น อ.หนองฮี / อ.สุวรรณภูมิ / อ.เกษตรวิสัย",
+        "order": "4",
+        "Data_th": [
+            {
+                "id_place": "78",
+                "title": "กู่พระโกนา",
+                "description": " “กู่พระโกนา” โบราณสถานสำคัญอีกแห่งหนึ่งของจังหวัดร้อยเอ็ด ตั้งอยู่ภายในวัดกู่พระโกนา ตำบลสระคู อำเภอสุวรรณภูมิ จังหวัดร้อยเอ็ด เป็นปราสาทในวัฒนธรรมขอมโบราณประกอบด้วยปราสาท ๓ องค์ เรียงกันในแนวเหนือ – ใต้ หันหน้าไปทางทิศตะวันออก เฉพาะปราสาทประธานองค์กลางที่ปรากฏร่องรอยของมุขยื่นออกมาทางด้านหน้า มีบรรณาลัยหรือที่เก็บคัมภีร์สร้างด้วยศิลาแลงตั้งอยู่ทางทิศตะวันออกเฉียงใต้ของปราสาทประธาน ๑ หลัง ทั้งหมดล้อมรอบด้วยกำแพงแก้วสร้างด้วยศิลาแลง มีโคปุระหรือซุ้มประตูทางเข้าด้านทิศตะวันออกและทิศตะวันตก \r\n          กู่พระโกนามีภาพสลักประดับตามส่วนต่าง ๆ ของปราสาทงดงามน่าชม เช่น ลายบัวแปดกลีบที่อกเลาประตูหลอก ลายก้านขด / ลายก้านต่อดอกที่เสาซุ้มประตูปราสาท เป็นต้น ถึงแม้โบราณสถานแห่งนี้จะพังทลายตามกาลเวลาและมีการซ่อมแซมในสมัยหลัง แต่ยังมีภาพสลักเล่าเรื่องที่งดงามปรากฏอยู่ ได้แก่ “ภาพสลักนารายณ์บรรทมสินธุ์” หรือวิษณุอนัตศายินปัทมนาภะ ซึ่งเป็นเรื่องราวการบรรทมของพระวิษณุเหนือพญาอนันตนาคราชเพื่อสร้างโลก ณ เกษียรสมุทรหรือทะเลน้ำนมอันเป็นที่ประทับของพระองค์ โดยตามความเชื่อของฮินดูกล่าวว่า เมื่อโลกถึงกลียุคพระศิวะจะทำลายล้างโลก จากนั้นพระวิษณุ (พระนารายณ์) จะสร้างโลกใหม่โดยกระทำโยคะนิทราจนบังเกิดเป็นดอกบัวทองผุดจากพระนาภี (สะดือ) ภายในดอกบัวมีพระพรหมประทับอยู่และจะทำหน้าที่สร้างโลกต่อไป\r\n           ภาพสลักพระนารายณ์บรรทมสินธุ์ที่กู่พระโกนาพบบนทับหลังด้านทิศตะวันออกของปราสาทองค์เหนือ ซึ่งปัจจุบันปราสาทดังกล่าวมีการสร้างอาคารครอบไว้ ทับหลังของปราสาทองค์นี้มีความพิเศษพบได้น้อยมากในดินแดนไทย กล่าวคือ เป็นทับหลังซ้อนกัน ๒ ชิ้น สลักแยกกัน ชิ้นที่ ๑ อยู่ด้านล่างมีขนาดใหญ่ สลักภาพบุคคลที่กึ่งกลางทับหลังซึ่งลบเลือนไปแล้วแต่ยังปรากฏท่อนพวงมาลัย / พวงอุบะ และลายพรรณพฤกษา ชิ้นที่ ๒ อยู่ด้านบนมีขนาดเล็กกว่าสลักภาพนารายณ์บรรทมสินธุ์ โดยลักษณะทับหลังที่มี ๒ ชิ้น ซ้อนกันแบบนี้นิยมในพุทธศตวรรษที่ ๑๕ แต่พบว่าทับหลังปราสาทบางองค์ในพุทธศตวรรษที่ ๑๖ ก็ยังคงปรากฏอยู่ ดังเช่นปราสาทองค์เหนือที่กู่พระโกณาแห่งนี้ \r\n         ทับหลังชิ้นที่ ๒ ปราสาทองค์เหนือดังกล่าว สลักภาพพระวิษณุ (พระนารายณ์) ๒ กร พระกรซ้ายถือดอกบัว พระกรขวาหนุนพระเศียรขณะบรรทมตะแคงขวาเหนือพญาอนันตนาคราช ๕ เศียร (ช่างสลักให้เห็นเพียง ๓ เศียร อีก ๒ เศียรถูกบังไว้) ที่พระนาภี (สะดือ) มีก้านดอกบัวผุดออกมาและมีพระพรหมประทับอยู่บนนั้น แต่น่าเสียดายที่ภาพสลักส่วนนี้ชำรุด บริเวณปลายพระบาทของพระวิษณุมีพระลักษมีชายาของพระองค์ประทับอยู่ นอกจากนี้ที่ด้านปลายทั้ง ๒ ข้าง สลักรูปหงส์ข้างละ ๒ ตัวอีกด้วย จากลักษณะของนาคเศียรโล้นและรูปแบบการแต่งกายของพระวิษณุ รวมถึงรูปแบบของทับหลังชิ้นที่ ๑ กำหนดอายุประมาณพุทธศตวรรษที่ ๑๖ ศิลปะแบบบาปวน ร่วมสมัยกับปราสาทสระกำแพงใหญ่ จ.ศรีสะเกษ ปราสาทสด๊กก็อกธม จ.สระแก้ว ปราสาทบ้านพลวง จังหวัดสุรินทร์ และปราสาทเมืองต่ำ จังหวัดบุรีรัมย์\r\n          พระนารายณ์บรรทมสินธุ์ ณ ปราสาทกู่พระโกนานี้ นับเป็นทับหลังและภาพสลักที่มีอยู่เพียงไม่กี่แห่งในประเทศไทย อีกทั้งพบเพียงแห่งเดียวในจังหวัดร้อยเอ็ด มีความสมบูรณ์งดงามด้วยรูปแบบศิลปะ และยังคงอยู่ในตำแหน่งเดิมเมื่อครั้งแรกสร้าง มีคุณค่าทางประวัติศาสตร์และโบราณคดีอย่างยิ่ง ทั้งนี้กรมศิลปากรเล็งเห็นถึงความสำคัญ ได้ประกาศขึ้นทะเบียนโบราณสถานกู่พระโกนาในราชกิจจานุเบกษา เมื่อวันที่ ๘ มีนาคม ๒๔๗๘ และประกาศกำหนดเขตที่ดินโบราณสถานเมื่อวันที่ ๒๑ ตุลาคม ๒๕๒๕ เนื้อที่ประมาณ ๘ ไร่ ๒ งาน ๑๖ ตารางวา เพื่อเป็นแหล่งเรียนรู้ด้านศิลปวัฒนธรรมที่สำคัญของชาติสืบไป",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "50",
+                "title": "Bo Pan Khan area",
+                "description": "Bo Phan Khan Subdistrict – Suwannaphum District, Roi Et Province, Thailand\r\n\r\nGeneral Overview\r\nBo Phan Khan is a subdistrict (tambon) located in the southern part of Suwannaphum District, Roi Et Province, in Northeastern Thailand (Isan region). The area consists mostly of undulating plains with sandy loam soil, making it suitable for agriculture. The primary occupation of the local people includes rice farming, livestock raising, and the cultivation of crops such as cassava, sugarcane, and corn.\r\n\r\nThe name \"Bo Phan Khan\" originates from a natural water resource in the area, known as \"Bo Phan Khan\" (meaning \"Well of a Thousand Tubs\"), which is considered sacred and central to the community's local legends and rituals.\r\n\r\nCommunity and Way of Life\r\nThe people of Bo Phan Khan are predominantly ethnic Isan, with cultural roots influenced by Lao and ancient Khmer heritage. The community still preserves traditional ceremonies and local festivals such as:\r\n\r\nBun Bang Fai (Rocket Festival)\r\nBun Khao Pradab Din (Festival to Honor Ancestors)\r\nBun Awk Phansa (End of Buddhist Lent)\r\nBun Sala Kat (Offering Festival)\r\nThe lifestyle reflects a self-sufficient and sustainable approach. Many villagers are members of community groups such as handwoven silk weaving groups, livestock cooperatives, bamboo craft groups, and youth and elderly cultural organizations. These groups help preserve traditional Isan folk arts such as mor lam (folk singing) and Phu Thai dance.\r\n\r\nCultural and Historical Significance\r\nBo Phan Khan is significant both historically and culturally. It has been recognized as a model community for sustainable rural development and sufficiency economy practices, promoted by the Thai government and NGOs.\r\n\r\nThe region is actively developing community-based tourism focused on cultural exchange, traditional crafts, and eco-friendly experiences. The strong sense of community and preservation of traditional knowledge make Bo Phan Khan a valuable area for learning and cultural immersion.\r\n\r\nLocal Attractions & Points of Interest\r\nBo Phan Khan Sacred Well (แหล่งน้ำศักดิ์สิทธิ์ “บ่อพันขัน”): The natural well after which the subdistrict is named. It is associated with local legends and used for various traditional rituals, considered the spiritual heart of the community.\r\nWat Bo Phan Khan (วัดบ่อพันขัน): A prominent local Buddhist temple that serves as a religious and cultural gathering place. Notable for its traditional Isan-style architecture, murals depicting Buddhist tales, and annual religious festivals.\r\nSufficiency Economy Learning Center: A local education center where visitors can learn about self-sufficient agricultural practices, such as organic farming, composting, and traditional rice planting methods.\r\nOTOP Village Market: Features a variety of locally made One Tambon One Product (OTOP) items such as handwoven silk, cotton fabrics, bamboo crafts, herbal products, and organic goods. Cultural performances and local foods are also available during festivals.\r\n\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "สระคู",
+        "District": "สุวรรณภูมิ",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.5560209",
+        "Longitude": "103.8204491",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/78/2026-04-20_10-55-21_unnamed.jpg"
+        ]
+    },
+    {
+        "id_route": "19",
+        "title_route": "เส้นทางประวัติศาสตร์ท้องถิ่น อ.หนองฮี / อ.สุวรรณภูมิ / อ.เกษตรวิสัย",
+        "order": "5",
+        "Data_th": [
+            {
+                "id_place": "90",
+                "title": "กู่กาสิงห์ ",
+                "description": " กู่กาสิงห์ ตั้งอยู่ใน วัดบูรพากู่กาสิงห์ ตำบลกู่กาสิงห์ อำเภอเกษตรวิสัย จังหวัดร้อยเอ็ด ถือว่าเป็นโบราณสถานสถาปัตยกรรมแบบเขมรอีกแห่งหนึ่งที่มีขนาดใหญ่และยังอยู่ในสภาพดีค่ะ ทางสำนักงานโบราณคดีและพิพิธภัณฑสถานแห่งชาติที่ 8 อุบลราชธานี สังกัดกรมศิลปากร ก็เลยได้ดำเนินการขุดแต่งและบูรณะกู่กาสิงห์ให้สวยงามยิ่งขึ้น เพื่อพัฒนาเป็นแหล่งท่องเที่ยวที่สำคัญอีกแห่งหนึ่งในภาคอีสาน\r\n\r\n โดย กู่กาสิงห์ จะประกอบไปด้วยปรางค์ 3 องค์ ตั้งอยู่บนฐานศิลาแลงเดียวกัน มีวิหารรูปสี่เหลี่ยมผืนผ้า ที่เรียกว่าบรรณาลัยอยู่ทางด้านหน้าทั้งสองข้างค่ะ ทั้งหมดจะถูกล้อมด้วยกำแพงที่มีซุ้มประตู 4 ทิศด้วยกัน โดยมีคูน้ำรูปเกือกม้าล้อมรอบอีกชั้นหนึ่ง ปรางค์ประธาน จะหันหน้าไปทางทิศตะวันออก ส่วนปรางค์องค์กลางจะมีขนาดใหญ่ที่สุด\r\n\r\nนอกจากนี้ก็ยังปรากฏลวดลายสลักต่างๆ เช่น ลายกลีบบัวและลายกนก เป็นต้นค่ะ ซึ่งแบบแผนผังและโบราณวัตถุที่พบนั้น บ่งบอกให้ทราบว่า กู่กาสิงห์ ได้รับอิทธิพลจากศิลปะเขมรที่เรียกว่า บาปวน อายุราวๆ ปี พ.ศ.1560-1630 ไว้เพื่อเป็นเทวสถานอุทิศถวายแด่พระอิศวรนั่นเอง",
+                "Language": "th"
+            }
+        ],
+        "Data_en": [
+            {
+                "id_place": "50",
+                "title": "Bo Pan Khan area",
+                "description": "Bo Phan Khan Subdistrict – Suwannaphum District, Roi Et Province, Thailand\r\n\r\nGeneral Overview\r\nBo Phan Khan is a subdistrict (tambon) located in the southern part of Suwannaphum District, Roi Et Province, in Northeastern Thailand (Isan region). The area consists mostly of undulating plains with sandy loam soil, making it suitable for agriculture. The primary occupation of the local people includes rice farming, livestock raising, and the cultivation of crops such as cassava, sugarcane, and corn.\r\n\r\nThe name \"Bo Phan Khan\" originates from a natural water resource in the area, known as \"Bo Phan Khan\" (meaning \"Well of a Thousand Tubs\"), which is considered sacred and central to the community's local legends and rituals.\r\n\r\nCommunity and Way of Life\r\nThe people of Bo Phan Khan are predominantly ethnic Isan, with cultural roots influenced by Lao and ancient Khmer heritage. The community still preserves traditional ceremonies and local festivals such as:\r\n\r\nBun Bang Fai (Rocket Festival)\r\nBun Khao Pradab Din (Festival to Honor Ancestors)\r\nBun Awk Phansa (End of Buddhist Lent)\r\nBun Sala Kat (Offering Festival)\r\nThe lifestyle reflects a self-sufficient and sustainable approach. Many villagers are members of community groups such as handwoven silk weaving groups, livestock cooperatives, bamboo craft groups, and youth and elderly cultural organizations. These groups help preserve traditional Isan folk arts such as mor lam (folk singing) and Phu Thai dance.\r\n\r\nCultural and Historical Significance\r\nBo Phan Khan is significant both historically and culturally. It has been recognized as a model community for sustainable rural development and sufficiency economy practices, promoted by the Thai government and NGOs.\r\n\r\nThe region is actively developing community-based tourism focused on cultural exchange, traditional crafts, and eco-friendly experiences. The strong sense of community and preservation of traditional knowledge make Bo Phan Khan a valuable area for learning and cultural immersion.\r\n\r\nLocal Attractions & Points of Interest\r\nBo Phan Khan Sacred Well (แหล่งน้ำศักดิ์สิทธิ์ “บ่อพันขัน”): The natural well after which the subdistrict is named. It is associated with local legends and used for various traditional rituals, considered the spiritual heart of the community.\r\nWat Bo Phan Khan (วัดบ่อพันขัน): A prominent local Buddhist temple that serves as a religious and cultural gathering place. Notable for its traditional Isan-style architecture, murals depicting Buddhist tales, and annual religious festivals.\r\nSufficiency Economy Learning Center: A local education center where visitors can learn about self-sufficient agricultural practices, such as organic farming, composting, and traditional rice planting methods.\r\nOTOP Village Market: Features a variety of locally made One Tambon One Product (OTOP) items such as handwoven silk, cotton fabrics, bamboo crafts, herbal products, and organic goods. Cultural performances and local foods are also available during festivals.\r\n\r\n\r\n",
+                "Language": "en"
+            }
+        ],
+        "Data_ch": [],
+        "Subdistrict": "กู่กาสิงห์",
+        "District": "เกษตรวิสัย",
+        "Province": "ร้อยเอ็ด",
+        "Latitude": "15.576536",
+        "Longitude": "103.676042",
+        "Picture": [
+            "https://www.navanurak.in.th/SDGstravelroiet/route/pic/big/90/2026-06-26_10-09-36_2025-04-08_00-14-23_159842_0.jpg"
+        ]
+    }
+]

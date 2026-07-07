@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: #f5f7fb;
+}
+
+h1 {
+  color: #1f2937;
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+}
+
+p {
+  margin: 0.25rem 0;
+  color: #4b5563;
+}
