@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
 
 async function fetchPlaces(categoryId) {
-  const url = new URL(`${API_BASE_URL}/places`, window.location.origin);
+  const endpoint = API_BASE_URL ? `${API_BASE_URL}/api/places` : '/api/places';
+  const url = new URL(endpoint, window.location.origin);
   if (categoryId) {
     url.searchParams.set('category_id', categoryId);
   }
