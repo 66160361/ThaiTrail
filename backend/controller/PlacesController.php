@@ -9,7 +9,7 @@ class PlacesController
         $this->pdo = $pdo;
     }
 
-    public function index(array $params = []): array
+    public function index(array $params = [], array $body = []): array
     {
         $categoryId = $params['category_id'] ?? $params['group_by_category'] ?? null;
         $groupByCategory = ($params['mode'] ?? null) === 'group';
