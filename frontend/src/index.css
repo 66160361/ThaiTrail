@@ -1443,15 +1443,16 @@ a { text-decoration: none; color: inherit; }
 }
 
 .detail-hero-back-btn {
-  position: absolute;
-  top: 16px;
-  left: 20px;
+  position: fixed;
+  top: 24px;
+  left: 24px;
   width: 48px;
   height: 48px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1460,10 +1461,10 @@ a { text-decoration: none; color: inherit; }
   color: #001D02;
   font-size: 18px;
   transition: all 0.2s ease;
-  z-index: 10;
+  z-index: 99;
 }
 .detail-hero-back-btn:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   transform: scale(1.05);
 }
 
