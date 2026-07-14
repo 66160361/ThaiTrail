@@ -85,7 +85,7 @@ a { text-decoration: none; color: inherit; }
 /* ─── Layout ──────────────────────────────────────────────────────────────── */
 .page {
   min-height: 100vh;
-  padding: 88px 24px 48px;
+  padding: 40px 24px 48px;
 }
 .container {
   max-width: 1200px;

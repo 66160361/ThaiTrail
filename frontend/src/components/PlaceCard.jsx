@@ -35,15 +35,10 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
 
   const signal = async (e, type) => {
     e.stopPropagation();
-    if (!user) return; // no auth — ignore silently
+    if (type === 'like') setLiked((v) => !v);
+    if (!user) return; // Silent local state change for guest
     try {
       await api.signals.log({ place_id: place.id, signal_type: type });
-      if (type === 'like')    setLiked((v) => !v);
-      if (type === 'save')    setSaved((v) => !v);
-      if (type === 'dismiss') {
-        setDismissed(true);
-        onDismissed?.(place.id);
-      }
     } catch { /* silent */ }
   };
 
@@ -77,20 +72,6 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
             title={liked ? 'เลิกถูกใจ' : 'ถูกใจ'}
           >
             {liked ? '❤️' : '🤍'}
-          </button>
-          <button
-            className={`action-btn${saved ? ' saved' : ''}`}
-            onClick={(e) => signal(e, 'save')}
-            title={saved ? 'เลิกบันทึก' : 'บันทึก'}
-          >
-            {saved ? '🔖' : '📌'}
-          </button>
-          <button
-            className="action-btn"
-            onClick={(e) => signal(e, 'dismiss')}
-            title="ไม่สนใจ"
-          >
-            ✕
           </button>
         </div>
       </div>

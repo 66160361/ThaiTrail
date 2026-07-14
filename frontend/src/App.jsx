@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
 
 // Pages
 import LoginPage           from './pages/LoginPage';
@@ -10,7 +9,6 @@ import PlaceDetailPage     from './pages/PlaceDetailPage';
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         {/* ── Login (Google Sign-In) ── */}
         <Route path="/login" element={<LoginPage />} />
