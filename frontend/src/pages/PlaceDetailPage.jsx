@@ -300,16 +300,6 @@ function PlaceDetailPage() {
               <div className="detail-right-col">
                 <div className="detail-map-header">
                   <h3 className="detail-map-title">ตำแหน่ง</h3>
-                  {place.latitude && place.longitude && (
-                    <a
-                      href={`https://www.google.com/maps?q=${place.latitude},${place.longitude}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="detail-map-link"
-                    >
-                      ดูเส้นทาง
-                    </a>
-                  )}
                 </div>
 
                 {/* Map Preview Card */}
