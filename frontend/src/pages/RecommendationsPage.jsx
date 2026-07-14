@@ -1,20 +1,33 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import PlaceCard from '../components/PlaceCard';
 
 const PAGE_SIZE = 24;
 
-function RecommendationsPage() {
-  const navigate  = useNavigate();
+const TABS = [
+  { id: 'recommend', name: '✨ แนะนำสถานที่' },
+  { id: 'all', name: 'ทั้งหมด' },
+  { id: '1', name: 'ศาสนาและความเชื่อ' },
+  { id: '2', name: 'ธรรมชาติและผจญภัย' },
+  { id: '3', name: 'ทะเลและเกาะ' },
+  { id: '4', name: 'สวนสัตว์' },
+  { id: '5', name: 'ถ่ายภาพ' },
+  { id: '6', name: 'ประวัติศาสตร์และวัฒนธรรม' },
+  { id: '7', name: 'อาหารคาเฟ่และไลฟ์สไตล์' },
+  { id: '8', name: 'ประเพณีและเทศกาล' },
+];
 
-  const [allRecommended, setAllRecommended] = useState([]);
-  const [places,  setPlaces]  = useState([]);
+function RecommendationsPage() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const [allPlacesRaw, setAllPlacesRaw] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState('');
-  const [offset,  setOffset]  = useState(0);
-  const [hasMore, setHasMore] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
+  const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('recommend');
+  const [limit, setLimit] = useState(PAGE_SIZE);
 
   // Read guest interests from localStorage
   const guestInterests = useMemo(() => {
@@ -26,39 +39,20 @@ function RecommendationsPage() {
     }
   }, []);
 
+  // Fetch all places once
   const loadData = useCallback(async () => {
     try {
-      // Fetch all places (since we don't have a backend guest session)
       const res = await api.places.getAll();
       const allPlaces = Array.isArray(res) ? res : (res.data || []);
-      
-      // Filter places that match at least one of the user's selected categories
-      const recommended = allPlaces.filter(p => {
-        if (!p.category_ids) return false;
-        
-        // Backend returns category_ids as a comma-separated string (e.g. "1,2")
-        const catIds = typeof p.category_ids === 'string'
-          ? p.category_ids.split(',').map(Number)
-          : (Array.isArray(p.category_ids) ? p.category_ids.map(Number) : []);
-
-        // Check intersection between place categories and guest interests
-        return catIds.some(id => guestInterests.includes(id));
-      });
-
-      // Sort randomly or by ID to simulate recommendations
-      recommended.sort(() => Math.random() - 0.5);
-
-      setAllRecommended(recommended);
-      setPlaces(recommended.slice(0, PAGE_SIZE));
-      setHasMore(recommended.length > PAGE_SIZE);
+      setAllPlacesRaw(allPlaces);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'ไม่สามารถโหลดข้อมูลสถานที่ได้');
     }
-  }, [guestInterests]);
+  }, []);
 
   useEffect(() => {
+    // If no interests are set, redirect back to onboarding to select them
     if (guestInterests.length === 0) {
-      // If no interests are set, redirect back to onboarding to select them
       navigate('/onboarding', { replace: true });
       return;
     }
@@ -66,21 +60,50 @@ function RecommendationsPage() {
     loadData().finally(() => setLoading(false));
   }, [loadData, guestInterests.length, navigate]);
 
+  // Reset limit when changing tab
+  useEffect(() => {
+    setLimit(PAGE_SIZE);
+  }, [activeTab]);
+
+  // Filter & sort logic based on active tab
+  const displayedPlaces = useMemo(() => {
+    if (activeTab === 'recommend') {
+      // Filter by guest interests
+      const recommended = allPlacesRaw.filter((p) => {
+        if (!p.category_ids) return false;
+        const catIds = typeof p.category_ids === 'string'
+          ? p.category_ids.split(',').map(Number)
+          : (Array.isArray(p.category_ids) ? p.category_ids.map(Number) : []);
+        return catIds.some((id) => guestInterests.includes(id));
+      });
+      // Return recommendations
+      return recommended;
+    } else if (activeTab === 'all') {
+      return allPlacesRaw;
+    } else {
+      const targetCatId = Number(activeTab);
+      return allPlacesRaw.filter((p) => {
+        if (!p.category_ids) return false;
+        const catIds = typeof p.category_ids === 'string'
+          ? p.category_ids.split(',').map(Number)
+          : (Array.isArray(p.category_ids) ? p.category_ids.map(Number) : []);
+        return catIds.includes(targetCatId);
+      });
+    }
+  }, [activeTab, allPlacesRaw, guestInterests]);
+
+  const placesToShow = useMemo(() => {
+    return displayedPlaces.slice(0, limit);
+  }, [displayedPlaces, limit]);
+
+  const hasMore = displayedPlaces.length > limit;
+
   const loadMore = () => {
-    const nextOffset = offset + PAGE_SIZE;
-    setLoadingMore(true);
-    // Simulate network delay
-    setTimeout(() => {
-      const nextBatch = allRecommended.slice(nextOffset, nextOffset + PAGE_SIZE);
-      setPlaces(prev => [...prev, ...nextBatch]);
-      setOffset(nextOffset);
-      setHasMore(allRecommended.length > nextOffset + PAGE_SIZE);
-      setLoadingMore(false);
-    }, 400);
+    setLimit((prev) => prev + PAGE_SIZE);
   };
 
   const handleDismissed = (placeId) => {
-    setPlaces((prev) => prev.filter((p) => p.id !== placeId));
+    setAllPlacesRaw((prev) => prev.filter((p) => p.id !== placeId));
   };
 
   const handleEditInterests = () => navigate('/onboarding');
@@ -88,62 +111,77 @@ function RecommendationsPage() {
   return (
     <div className="page">
       <div className="container">
-
-        {/* Hero */}
+        {/* Hero Banner */}
         <div className="hero fade-in">
-          <p className="hero-eyebrow">✨ แนะนำสำหรับคุณ</p>
+          <p className="hero-eyebrow">✨ แนะนำและค้นหา</p>
           <h1 className="hero-title">
-            สวัสดี, <span className="gradient-text">ผู้เยี่ยมชม</span>
+            สวัสดี, <span className="gradient-text">{user?.name || 'ผู้เยี่ยมชม'}</span>
           </h1>
           <p className="hero-subtitle">
-            สถานที่เหล่านี้ถูกคัดเลือกมาจากความสนใจของคุณ
+            ค้นพบสถานที่ท่องเที่ยวและกิจกรรมที่เหมาะกับไลฟ์สไตล์ของคุณ
           </p>
         </div>
 
-        {/* Loading */}
+        {/* Tab Filters */}
+        <div className="filter-bar fade-in-2">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              className={`filter-chip${activeTab === tab.id ? ' active' : ''}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Loading State */}
         {loading && (
           <div style={{ padding: '60px 0', textAlign: 'center' }}>
             <div className="spinner" style={{ margin: '0 auto 16px' }} />
-            <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>กำลังโหลดคำแนะนำ...</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>กำลังโหลดข้อมูล...</p>
           </div>
         )}
 
-        {/* Error */}
+        {/* Error State */}
         {!loading && error && (
           <div className="alert-error" style={{ maxWidth: 400, margin: '40px auto' }}>
             {error}
           </div>
         )}
 
-        {/* Empty state */}
-        {!loading && !error && places.length === 0 && (
+        {/* Empty State */}
+        {!loading && !error && placesToShow.length === 0 && (
           <div className="empty-state">
             <span className="empty-icon">🗺️</span>
-            <h2 className="empty-title">ยังไม่มีคำแนะนำ</h2>
+            <h2 className="empty-title">ไม่พบสถานที่</h2>
             <p className="empty-sub">
-              ดูเหมือนว่าสถานที่ทั้งหมดในหมวดที่คุณสนใจถูกดูไปแล้ว
-              หรือลองเพิ่มความสนใจใหม่เพื่อรับคำแนะนำเพิ่มเติม
+              ลองเลือกหมวดหมู่อื่น หรือแก้ไขความสนใจของคุณเพื่อรับคำแนะนำใหม่ๆ
             </p>
-            <button className="btn btn-primary" onClick={handleEditInterests}>
-              แก้ไขความสนใจ
-            </button>
+            {activeTab === 'recommend' && (
+              <button className="btn btn-primary" onClick={handleEditInterests} style={{ marginTop: 12 }}>
+                ⚙️ แก้ไขความสนใจ
+              </button>
+            )}
           </div>
         )}
 
-        {/* Grid */}
-        {!loading && !error && places.length > 0 && (
+        {/* Places Grid */}
+        {!loading && !error && placesToShow.length > 0 && (
           <>
             <div className="section-header fade-in-2">
-              <h2 className="section-title">สถานที่แนะนำ</h2>
-              <span className="section-count">{places.length} แห่ง</span>
+              <h2 className="section-title">
+                {TABS.find((t) => t.id === activeTab)?.name}
+              </h2>
+              <span className="section-count">{displayedPlaces.length} แห่ง</span>
             </div>
 
             <div className="places-grid fade-in-2">
-              {places.map((place) => (
+              {placesToShow.map((place) => (
                 <PlaceCard
                   key={place.id}
                   place={place}
-                  showScore
+                  showScore={activeTab === 'recommend'}
                   onDismissed={handleDismissed}
                 />
               ))}
@@ -151,26 +189,19 @@ function RecommendationsPage() {
 
             {hasMore && (
               <div style={{ textAlign: 'center', marginTop: 36 }}>
-                <button
-                  className="btn btn-ghost"
-                  onClick={loadMore}
-                  disabled={loadingMore}
-                >
-                  {loadingMore
-                    ? <><span className="spinner spinner-sm" /> กำลังโหลด...</>
-                    : 'โหลดเพิ่มเติม'}
+                <button className="btn btn-ghost" onClick={loadMore}>
+                  โหลดเพิ่มเติม
                 </button>
               </div>
             )}
 
-            <div style={{ textAlign: 'center', marginTop: 20 }}>
-              <button
-                className="btn btn-ghost btn-sm"
-                onClick={handleEditInterests}
-              >
-                ✏️ แก้ไขความสนใจ
-              </button>
-            </div>
+            {activeTab === 'recommend' && (
+              <div style={{ textAlign: 'center', marginTop: 24 }}>
+                <button className="btn btn-ghost btn-sm" onClick={handleEditInterests}>
+                  ✏️ แก้ไขความสนใจ
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>

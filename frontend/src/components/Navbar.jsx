@@ -3,19 +3,18 @@ import { NavLink } from 'react-router-dom';
 function Navbar() {
   return (
     <nav className="navbar">
-      <NavLink to="/browse" className="navbar-logo" style={{ textDecoration: 'none' }}>
+      <NavLink to="/" className="navbar-logo" style={{ textDecoration: 'none' }}>
         🗺️ ThaiTrail
       </NavLink>
 
       <div className="navbar-links">
         <NavLink
-          to="/browse"
+          to="/"
           className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+          end
         >
-          🔍 เรียกดูสถานที่
+          ✨ แนะนำสถานที่
         </NavLink>
-
-        {/* TODO: เพิ่ม link อื่นๆ เมื่อระบบ auth พร้อม */}
       </div>
 
       <div className="navbar-right">

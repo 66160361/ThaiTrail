@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import LoginPage           from './pages/LoginPage';
 import OnboardingPage      from './pages/OnboardingPage';
 import RecommendationsPage from './pages/RecommendationsPage';
-import CategoryPage        from './pages/CategoryPage';
 import PlaceDetailPage     from './pages/PlaceDetailPage';
 
 function App() {
@@ -19,18 +18,14 @@ function App() {
         {/* ── TODO: เพิ่มระบบ auth ที่นี่ ── */}
         <Route path="/onboarding" element={<OnboardingPage />} />
 
-        {/* ── Recommendations (TODO: ต้องการ auth จริง) ── */}
+        {/* ── Home / Recommendations & Browsing ── */}
         <Route path="/" element={<RecommendationsPage />} />
-
-        {/* ── Browse — public ── */}
-        <Route path="/browse"             element={<CategoryPage />} />
-        <Route path="/browse/:categoryId" element={<CategoryPage />} />
 
         {/* ── Place detail — public ── */}
         <Route path="/places/:id" element={<PlaceDetailPage />} />
 
         {/* ── Fallback ── */}
-        <Route path="*" element={<Navigate to="/browse" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
