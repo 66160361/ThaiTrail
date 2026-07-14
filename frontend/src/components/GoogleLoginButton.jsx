@@ -32,7 +32,7 @@ function loadGoogleScript() {
   return scriptPromise;
 }
 
-function GoogleLoginButton({ clientId, onCredential, onError }) {
+function GoogleLoginButton({ clientId, onCredential, onError, width = 320 }) {
   const buttonContainerRef = useRef(null);
 
   useEffect(() => {
@@ -71,9 +71,9 @@ function GoogleLoginButton({ clientId, onCredential, onError }) {
           theme: 'filled_blue',
           size: 'large',
           shape: 'pill',
-          text: 'continue_with',
+          text: 'signin_with',
           logo_alignment: 'left',
-          width: 320,
+          width,
         });
       })
       .catch((error) => {
@@ -85,7 +85,7 @@ function GoogleLoginButton({ clientId, onCredential, onError }) {
     return () => {
       isCancelled = true;
     };
-  }, [clientId, onCredential, onError]);
+  }, [clientId, onCredential, onError, width]);
 
   return <div ref={buttonContainerRef} />;
 }
