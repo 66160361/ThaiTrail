@@ -60,9 +60,10 @@ function RecommendationsPage() {
     loadData().finally(() => setLoading(false));
   }, [loadData, guestInterests.length, navigate]);
 
-  // Reset limit when changing tab
+  // Reset limit and scroll to top when changing tab
   useEffect(() => {
     setLimit(PAGE_SIZE);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [activeTab]);
 
   // Filter & sort logic based on active tab
@@ -176,7 +177,7 @@ function RecommendationsPage() {
               <span className="section-count">{displayedPlaces.length} แห่ง</span>
             </div>
 
-            <div className="places-grid fade-in-2">
+            <div className="places-grid fade-in-2" key={activeTab}>
               {placesToShow.map((place) => (
                 <PlaceCard
                   key={place.id}
