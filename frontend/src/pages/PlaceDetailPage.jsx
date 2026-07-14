@@ -193,6 +193,82 @@ function PlaceDetailPage() {
                 </button>
               </div>
 
+              {/* Other Details Grid */}
+              {(() => {
+                const infoItems = [];
+
+                let openingHoursStr = '';
+                const op = place.opening_time;
+                const cl = place.closing_time;
+                
+                if (op || cl) {
+                  const opStr = Array.isArray(op) ? op[0] : op;
+                  const clStr = Array.isArray(cl) ? cl[0] : cl;
+                  if (opStr && clStr) {
+                    openingHoursStr = `${String(opStr).substring(0, 5)} - ${String(clStr).substring(0, 5)} น.`;
+                  } else if (opStr) {
+                    openingHoursStr = `เปิดตั้งแต่ ${String(opStr).substring(0, 5)} น.`;
+                  } else if (clStr) {
+                    openingHoursStr = `ปิดเวลา ${String(clStr).substring(0, 5)} น.`;
+                  }
+                } else if (place.opening_hours) {
+                  openingHoursStr = place.opening_hours;
+                }
+
+                if (openingHoursStr) {
+                  infoItems.push({
+                    label: 'เวลาทำการ',
+                    value: openingHoursStr,
+                    icon: '🕒'
+                  });
+                }
+
+                const fee = place.admission_fee || place.fee || place.price;
+                if (fee) {
+                  infoItems.push({
+                    label: 'ค่าเข้าชม',
+                    value: fee,
+                    icon: '🎟️'
+                  });
+                }
+
+                const dress = place.dress_code || place.dress;
+                if (dress) {
+                  infoItems.push({
+                    label: 'การแต่งกาย',
+                    value: dress,
+                    icon: '👔'
+                  });
+                }
+
+                const contact = place.phone || place.contact || place.telephone;
+                if (contact) {
+                  infoItems.push({
+                    label: 'เบอร์ติดต่อ',
+                    value: contact,
+                    icon: '📞'
+                  });
+                }
+
+                if (infoItems.length === 0) return null;
+
+                return (
+                  <div className="detail-info-grid" style={{ marginTop: 24, marginBottom: 32 }}>
+                    {infoItems.map((item, idx) => (
+                      <div key={idx} className="detail-info-card">
+                        <div className="detail-info-icon-circle">
+                          {item.icon}
+                        </div>
+                        <div className="detail-info-text">
+                          <span className="detail-info-label">{item.label}</span>
+                          <span className="detail-info-value">{item.value}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
+
               {/* Map link */}
               {place.latitude && place.longitude && (
                 <a
