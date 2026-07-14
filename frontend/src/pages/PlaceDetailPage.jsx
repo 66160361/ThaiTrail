@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -12,18 +12,18 @@ const FALLBACK_IMAGES = [
 ];
 
 function PlaceDetailPage() {
-  const { id }    = useParams();
-  const navigate  = useNavigate();
-  const { user }  = useAuth();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
-  const [place,   setPlace]   = useState(null);
+  const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState('');
-  const [liked,   setLiked]   = useState(false);
-  const [saved,   setSaved]   = useState(false);
-  const [imgSrc,  setImgSrc]  = useState('');
+  const [error, setError] = useState('');
+  const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [imgSrc, setImgSrc] = useState('');
 
-  // Fetch place by filtering from getAll — simple approach without a dedicated endpoint
+  // Fetch place details
   useEffect(() => {
     setLoading(true);
     api.places.getAll()
@@ -32,7 +32,7 @@ function PlaceDetailPage() {
         if (!found) throw new Error('ไม่พบข้อมูลสถานที่นี้');
         setPlace(found);
         setImgSrc(found.image_url || FALLBACK_IMAGES[found.id % FALLBACK_IMAGES.length]);
-        // Fire view signal
+        // Log view signal
         if (user) {
           api.signals.log({ place_id: found.id, signal_type: 'view' }).catch(() => {});
         }
@@ -57,19 +57,28 @@ function PlaceDetailPage() {
     if (!place) return;
     if (type === 'like') setLiked((v) => !v);
     if (type === 'save') setSaved((v) => !v);
-    if (!user) return; // Silent local state change for guests
+    if (!user) return; // Local toggle for guests
     try {
       await api.signals.log({ place_id: place.id, signal_type: type });
     } catch { /* silent */ }
   };
 
-  const categories = place
-    ? (Array.isArray(place.categories) ? place.categories : (place.categories || '').split(',').filter(Boolean))
-    : [];
+  const categories = useMemo(() => {
+    if (!place) return [];
+    return Array.isArray(place.categories)
+      ? place.categories
+      : (place.categories || '').split(',').filter(Boolean);
+  }, [place]);
+
+  const fullAddress = useMemo(() => {
+    if (!place) return '';
+    return [place.subdistrict, place.district, place.province]
+      .filter(Boolean)
+      .join(', ');
+  }, [place]);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
-
+    <div className="detail-page-wrapper">
       {/* Loading */}
       {loading && (
         <div className="loading-screen">
@@ -90,198 +99,250 @@ function PlaceDetailPage() {
         </div>
       )}
 
-      {/* Detail */}
+      {/* Detail Content */}
       {!loading && !error && place && (
         <>
-          {/* Hero image */}
-          <div style={{ position: 'relative', width: '100%', height: '55vh', minHeight: 320, overflow: 'hidden' }}>
+          {/* Section - 1. Hero Header */}
+          <div className="detail-hero-section">
             <img
               src={imgSrc}
               alt={place.place_name}
               onError={() => setImgSrc(FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length])}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              className="detail-hero-img"
             />
-            {/* Gradient overlays */}
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 60%, var(--bg) 100%)',
-            }} />
-            {/* Back button */}
+            <div className="detail-hero-gradient" />
+            
+            {/* Back Button */}
             <button
-              className="btn btn-ghost"
-              style={{ position: 'absolute', top: 80, left: 24, backdropFilter: 'blur(8px)', background: 'rgba(255, 255, 255, 0.85)', color: '#000', border: '1px solid rgba(0,0,0,0.1)' }}
+              className="detail-hero-back-btn"
               onClick={() => navigate(-1)}
+              title="ย้อนกลับ"
             >
-              ← ย้อนกลับ
+              ←
             </button>
+
+            {/* Location Tag */}
+            {place.province && (
+              <div className="detail-hero-loc-tag">
+                <span>📍</span>
+                <span>{place.province}</span>
+              </div>
+            )}
           </div>
 
-          {/* Content */}
-          <div className="container" style={{ padding: '0 24px 60px', marginTop: 24, position: 'relative' }}>
-            <div className="fade-in">
-
-              {/* Category pills */}
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 14 }}>
-                {categories.map((cat) => {
-                  const style = CATEGORY_STYLES[cat] || { color: '#94A3B8', bg: 'rgba(148,163,184,0.1)' };
-                  return (
-                    <span
-                      key={cat}
-                      className="category-pill"
-                      style={{ color: style.color, borderColor: style.color, background: style.bg, padding: '5px 14px', fontSize: 13 }}
-                    >
-                      {cat}
-                    </span>
-                  );
-                })}
+          {/* Section - 2. Content Body */}
+          <div className="detail-content-body">
+            
+            {/* 3. Title Section */}
+            <div className="detail-title-section">
+              <div className="detail-title-left">
+                <h1 className="detail-title-text">{place.place_name}</h1>
+                <div className="detail-title-categories">
+                  {categories.map((cat) => {
+                    const style = CATEGORY_STYLES[cat] || { color: '#727272', bg: '#F5F3F3' };
+                    return (
+                      <span
+                        key={cat}
+                        className="detail-category-pill"
+                        style={{
+                          color: style.color,
+                          backgroundColor: style.bg,
+                        }}
+                      >
+                        {cat}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
 
-              <h1 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>
-                {place.place_name}
-              </h1>
-
-              <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 24 }}>
-                📍 {[place.subdistrict, place.district, place.province].filter(Boolean).join(', ')}
-              </p>
-
-              {/* Description */}
-              {place.description && (
-                <div
-                  className="glass"
-                  style={{ padding: '20px 24px', marginBottom: 24, lineHeight: 1.8 }}
-                >
-                  <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 10, color: 'var(--text-muted)' }}>
-                    เกี่ยวกับสถานที่
-                  </h2>
-                  <p style={{ fontSize: 15, color: 'var(--text)' }}>{place.description}</p>
-                </div>
-              )}
-
-              {/* Action buttons */}
-              <div className="detail-actions-bar">
+              {/* 5. Action Grid */}
+              <div className="detail-action-grid">
                 <button
-                  className={`detail-action-btn like-btn${liked ? ' active' : ''}`}
+                  className={`detail-action-btn-circle like${liked ? ' active' : ''}`}
                   onClick={() => handleSignal('like')}
                   title="ถูกใจ"
                 >
-                  <div className="detail-action-icon-wrap">
+                  <div className="detail-action-btn-circle-bg">
                     {liked ? '❤️' : '🤍'}
                   </div>
-                  <span className="detail-action-label">ถูกใจ</span>
+                  <span className="detail-action-btn-circle-text">ถูกใจ</span>
                 </button>
 
                 <button
-                  className={`detail-action-btn save-btn${saved ? ' active' : ''}`}
+                  className={`detail-action-btn-circle save${saved ? ' active' : ''}`}
                   onClick={() => handleSignal('save')}
                   title="บันทึก"
                 >
-                  <div className="detail-action-icon-wrap">
+                  <div className="detail-action-btn-circle-bg">
                     {saved ? '🔖' : '📌'}
                   </div>
-                  <span className="detail-action-label">บันทึก</span>
+                  <span className="detail-action-btn-circle-text">บันทึก</span>
                 </button>
 
                 <button
-                  className="detail-action-btn"
+                  className="detail-action-btn-circle"
                   onClick={() => handleSignal('share')}
                   title="แชร์"
                 >
-                  <div className="detail-action-icon-wrap">
+                  <div className="detail-action-btn-circle-bg">
                     🔗
                   </div>
-                  <span className="detail-action-label">แชร์</span>
+                  <span className="detail-action-btn-circle-text">แชร์</span>
                 </button>
               </div>
-
-              {/* Other Details Grid */}
-              {(() => {
-                const infoItems = [];
-
-                let openingHoursStr = '';
-                const op = place.opening_time;
-                const cl = place.closing_time;
-                
-                if (op || cl) {
-                  const opStr = Array.isArray(op) ? op[0] : op;
-                  const clStr = Array.isArray(cl) ? cl[0] : cl;
-                  if (opStr && clStr) {
-                    openingHoursStr = `${String(opStr).substring(0, 5)} - ${String(clStr).substring(0, 5)} น.`;
-                  } else if (opStr) {
-                    openingHoursStr = `เปิดตั้งแต่ ${String(opStr).substring(0, 5)} น.`;
-                  } else if (clStr) {
-                    openingHoursStr = `ปิดเวลา ${String(clStr).substring(0, 5)} น.`;
-                  }
-                } else if (place.opening_hours) {
-                  openingHoursStr = place.opening_hours;
-                }
-
-                if (openingHoursStr) {
-                  infoItems.push({
-                    label: 'เวลาทำการ',
-                    value: openingHoursStr,
-                    icon: '🕒'
-                  });
-                }
-
-                const fee = place.admission_fee || place.fee || place.price;
-                if (fee) {
-                  infoItems.push({
-                    label: 'ค่าเข้าชม',
-                    value: fee,
-                    icon: '🎟️'
-                  });
-                }
-
-                const dress = place.dress_code || place.dress;
-                if (dress) {
-                  infoItems.push({
-                    label: 'การแต่งกาย',
-                    value: dress,
-                    icon: '👔'
-                  });
-                }
-
-                const contact = place.phone || place.contact || place.telephone;
-                if (contact) {
-                  infoItems.push({
-                    label: 'เบอร์ติดต่อ',
-                    value: contact,
-                    icon: '📞'
-                  });
-                }
-
-                if (infoItems.length === 0) return null;
-
-                return (
-                  <div className="detail-info-grid" style={{ marginTop: 24, marginBottom: 32 }}>
-                    {infoItems.map((item, idx) => (
-                      <div key={idx} className="detail-info-card">
-                        <div className="detail-info-icon-circle">
-                          {item.icon}
-                        </div>
-                        <div className="detail-info-text">
-                          <span className="detail-info-label">{item.label}</span>
-                          <span className="detail-info-value">{item.value}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                );
-              })()}
-
-              {/* Map link */}
-              {place.latitude && place.longitude && (
-                <a
-                  href={`https://www.google.com/maps?q=${place.latitude},${place.longitude}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost"
-                  style={{ display: 'inline-flex' }}
-                >
-                  🗺️ ดูบน Google Maps
-                </a>
-              )}
             </div>
+
+            {/* Separator */}
+            <div className="detail-separator" />
+
+            {/* Two Column Section */}
+            <div className="detail-two-columns">
+              
+              {/* Left Column: Description & Info Grid */}
+              <div className="detail-left-col">
+                {place.description && (
+                  <p className="detail-desc-text">{place.description}</p>
+                )}
+
+                {/* 7. Info Grid (Opening hours, admission fee, dress code, contact) */}
+                {(() => {
+                  const infoItems = [];
+
+                  let openingHoursStr = '';
+                  const op = place.opening_time;
+                  const cl = place.closing_time;
+
+                  if (op || cl) {
+                    const opStr = Array.isArray(op) ? op[0] : op;
+                    const clStr = Array.isArray(cl) ? cl[0] : cl;
+                    if (opStr && clStr) {
+                      openingHoursStr = `${String(opStr).substring(0, 5)} - ${String(clStr).substring(0, 5)} น.`;
+                    } else if (opStr) {
+                      openingHoursStr = `เปิดตั้งแต่ ${String(opStr).substring(0, 5)} น.`;
+                    } else if (clStr) {
+                      openingHoursStr = `ปิดเวลา ${String(clStr).substring(0, 5)} น.`;
+                    }
+                  } else if (place.opening_hours) {
+                    openingHoursStr = place.opening_hours;
+                  }
+
+                  if (openingHoursStr) {
+                    infoItems.push({
+                      label: 'เวลาทำการ',
+                      value: openingHoursStr,
+                      icon: '🕒'
+                    });
+                  }
+
+                  const fee = place.admission_fee || place.fee || place.price;
+                  if (fee) {
+                    infoItems.push({
+                      label: 'ค่าเข้าชม',
+                      value: fee,
+                      icon: '🎟️'
+                    });
+                  }
+
+                  const dress = place.dress_code || place.dress;
+                  if (dress) {
+                    infoItems.push({
+                      label: 'การแต่งกาย',
+                      value: dress,
+                      icon: '👔'
+                    });
+                  }
+
+                  const contact = place.phone || place.contact || place.telephone;
+                  if (contact) {
+                    infoItems.push({
+                      label: 'เบอร์ติดต่อ',
+                      value: contact,
+                      icon: '📞'
+                    });
+                  }
+
+                  if (infoItems.length === 0) return null;
+
+                  return (
+                    <div className="detail-info-grid">
+                      {infoItems.map((item, idx) => (
+                        <div key={idx} className="detail-info-card">
+                          <div className="detail-info-icon-circle">
+                            {item.icon}
+                          </div>
+                          <div className="detail-info-text">
+                            <span className="detail-info-label">{item.label}</span>
+                            <span className="detail-info-value">{item.value}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* Right Column: Map Section */}
+              <div className="detail-right-col">
+                <div className="detail-map-header">
+                  <h3 className="detail-map-title">ตำแหน่ง</h3>
+                  {place.latitude && place.longitude && (
+                    <a
+                      href={`https://www.google.com/maps?q=${place.latitude},${place.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="detail-map-link"
+                    >
+                      ดูเส้นทาง
+                    </a>
+                  )}
+                </div>
+
+                {/* Map Preview Card */}
+                <div className="detail-map-preview-card">
+                  {/* Clean SVG/CSS map background design */}
+                  <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} opacity="0.15">
+                    <defs>
+                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0D330E" strokeWidth="1" />
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                    <circle cx="100" cy="80" r="50" fill="#0D330E" filter="blur(20px)" opacity="0.3" />
+                    <circle cx="200" cy="180" r="60" fill="#0284C7" filter="blur(20px)" opacity="0.2" />
+                  </svg>
+                  <div className="detail-map-pin">📍</div>
+                </div>
+
+                {/* Address details */}
+                {fullAddress && (
+                  <p className="detail-address-text">{fullAddress}</p>
+                )}
+
+                {/* Navigate Button */}
+                {place.latitude && place.longitude ? (
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${place.latitude},${place.longitude}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="detail-navigate-btn"
+                  >
+                    นำทาง
+                  </a>
+                ) : (
+                  <a
+                    href={`https://www.google.com/maps?q=${encodeURIComponent(place.place_name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="detail-navigate-btn"
+                  >
+                    ค้นหาบนแผนที่
+                  </a>
+                )}
+              </div>
+
+            </div>
+
           </div>
         </>
       )}
