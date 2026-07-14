@@ -91,12 +91,12 @@ function PlaceDetailPage() {
             {/* Gradient overlays */}
             <div style={{
               position: 'absolute', inset: 0,
-              background: 'linear-gradient(to bottom, rgba(7,13,27,0.5) 0%, transparent 40%, rgba(7,13,27,0.97) 100%)',
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 60%, var(--bg) 100%)',
             }} />
             {/* Back button */}
             <button
               className="btn btn-ghost"
-              style={{ position: 'absolute', top: 80, left: 24, backdropFilter: 'blur(8px)' }}
+              style={{ position: 'absolute', top: 80, left: 24, backdropFilter: 'blur(8px)', background: 'rgba(255, 255, 255, 0.85)', color: '#000', border: '1px solid rgba(0,0,0,0.1)' }}
               onClick={() => navigate(-1)}
             >
               ← ย้อนกลับ
@@ -104,7 +104,7 @@ function PlaceDetailPage() {
           </div>
 
           {/* Content */}
-          <div className="container" style={{ padding: '0 24px 60px', marginTop: -80, position: 'relative' }}>
+          <div className="container" style={{ padding: '0 24px 60px', marginTop: 24, position: 'relative' }}>
             <div className="fade-in">
 
               {/* Category pills */}
