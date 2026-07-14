@@ -21,7 +21,7 @@ const TABS = [
 
 function RecommendationsPage() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const [allPlacesRaw, setAllPlacesRaw] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -109,11 +109,39 @@ function RecommendationsPage() {
 
   const handleEditInterests = () => navigate('/onboarding');
 
+  const handleLogout = async () => {
+    try {
+      if (logout) {
+        await logout();
+      }
+      localStorage.removeItem('guest_interests');
+      navigate('/login', { replace: true });
+    } catch {
+      navigate('/login', { replace: true });
+    }
+  };
+
   return (
     <div className="page">
       <div className="container">
         {/* Hero Banner */}
-        <div className="hero fade-in">
+        <div className="hero fade-in" style={{ position: 'relative' }}>
+          {/* Temporary Logout Button */}
+          <button
+            className="btn btn-ghost btn-sm"
+            onClick={handleLogout}
+            style={{
+              position: 'absolute',
+              top: '0px',
+              right: '0px',
+              borderColor: '#DC2626',
+              color: '#DC2626',
+              background: 'rgba(220, 38, 38, 0.05)',
+              zIndex: 10
+            }}
+          >
+            🚪 ออกจากระบบ
+          </button>
           <p className="hero-eyebrow">✨ แนะนำและค้นหา</p>
           <h1 className="hero-title">
             สวัสดี, <span className="gradient-text">{user?.name || 'ผู้เยี่ยมชม'}</span>
