@@ -72,9 +72,20 @@ function PlaceDetailPage() {
 
   const fullAddress = useMemo(() => {
     if (!place) return '';
-    return [place.subdistrict, place.district, place.province]
-      .filter(Boolean)
-      .join(', ');
+    const parts = [];
+    if (place.subdistrict) {
+      const prefix = place.province === 'กรุงเทพมหานคร' ? 'แขวง' : 'ต.';
+      parts.push(`${prefix}${place.subdistrict}`);
+    }
+    if (place.district) {
+      const prefix = place.province === 'กรุงเทพมหานคร' ? 'เขต' : 'อ.';
+      parts.push(`${prefix}${place.district}`);
+    }
+    if (place.province) {
+      const prefix = place.province === 'กรุงเทพมหานคร' ? '' : 'จ.';
+      parts.push(`${prefix}${place.province}`);
+    }
+    return parts.join(' ');
   }, [place]);
 
   return (
