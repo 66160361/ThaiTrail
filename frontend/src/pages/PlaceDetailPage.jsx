@@ -42,11 +42,24 @@ function PlaceDetailPage() {
   }, [id, user]);
 
   const handleSignal = async (type) => {
-    if (!user || !place) return;
+    if (type === 'share') {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('📋 คัดลอกลิงก์สถานที่ท่องเที่ยวไปยังคลิปบอร์ดแล้ว!');
+      } catch {
+        alert('ไม่สามารถคัดลอกลิงก์ได้');
+      }
+      if (user && place) {
+        api.signals.log({ place_id: place.id, signal_type: 'share' }).catch(() => {});
+      }
+      return;
+    }
+    if (!place) return;
+    if (type === 'like') setLiked((v) => !v);
+    if (type === 'save') setSaved((v) => !v);
+    if (!user) return; // Silent local state change for guests
     try {
       await api.signals.log({ place_id: place.id, signal_type: type });
-      if (type === 'like') setLiked((v) => !v);
-      if (type === 'save') setSaved((v) => !v);
     } catch { /* silent */ }
   };
 
@@ -132,28 +145,40 @@ function PlaceDetailPage() {
               </p>
 
               {/* Action buttons */}
-              {user && (
-                <div style={{ display: 'flex', gap: 12, marginBottom: 32, flexWrap: 'wrap' }}>
-                  <button
-                    className={`btn${liked ? ' btn-accent' : ' btn-ghost'}`}
-                    onClick={() => handleSignal('like')}
-                  >
-                    {liked ? '❤️ ถูกใจแล้ว' : '🤍 ถูกใจ'}
-                  </button>
-                  <button
-                    className={`btn${saved ? ' btn-primary' : ' btn-ghost'}`}
-                    onClick={() => handleSignal('save')}
-                  >
-                    {saved ? '🔖 บันทึกแล้ว' : '📌 บันทึก'}
-                  </button>
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => handleSignal('share')}
-                  >
-                    🔗 แชร์
-                  </button>
-                </div>
-              )}
+              <div className="detail-actions-bar">
+                <button
+                  className={`detail-action-btn like-btn${liked ? ' active' : ''}`}
+                  onClick={() => handleSignal('like')}
+                  title="ถูกใจ"
+                >
+                  <div className="detail-action-icon-wrap">
+                    {liked ? '❤️' : '🤍'}
+                  </div>
+                  <span className="detail-action-label">ถูกใจ</span>
+                </button>
+
+                <button
+                  className={`detail-action-btn save-btn${saved ? ' active' : ''}`}
+                  onClick={() => handleSignal('save')}
+                  title="บันทึก"
+                >
+                  <div className="detail-action-icon-wrap">
+                    {saved ? '🔖' : '📌'}
+                  </div>
+                  <span className="detail-action-label">บันทึก</span>
+                </button>
+
+                <button
+                  className="detail-action-btn"
+                  onClick={() => handleSignal('share')}
+                  title="แชร์"
+                >
+                  <div className="detail-action-icon-wrap">
+                    🔗
+                  </div>
+                  <span className="detail-action-label">แชร์</span>
+                </button>
+              </div>
 
               {/* Description */}
               {place.description && (
