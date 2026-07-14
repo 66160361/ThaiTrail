@@ -144,6 +144,19 @@ function PlaceDetailPage() {
                 📍 {[place.subdistrict, place.district, place.province].filter(Boolean).join(', ')}
               </p>
 
+              {/* Description */}
+              {place.description && (
+                <div
+                  className="glass"
+                  style={{ padding: '20px 24px', marginBottom: 24, lineHeight: 1.8 }}
+                >
+                  <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 10, color: 'var(--text-muted)' }}>
+                    เกี่ยวกับสถานที่
+                  </h2>
+                  <p style={{ fontSize: 15, color: 'var(--text)' }}>{place.description}</p>
+                </div>
+              )}
+
               {/* Action buttons */}
               <div className="detail-actions-bar">
                 <button
@@ -179,19 +192,6 @@ function PlaceDetailPage() {
                   <span className="detail-action-label">แชร์</span>
                 </button>
               </div>
-
-              {/* Description */}
-              {place.description && (
-                <div
-                  className="glass"
-                  style={{ padding: '20px 24px', marginBottom: 24, lineHeight: 1.8 }}
-                >
-                  <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 10, color: 'var(--text-muted)' }}>
-                    เกี่ยวกับสถานที่
-                  </h2>
-                  <p style={{ fontSize: 15, color: 'var(--text)' }}>{place.description}</p>
-                </div>
-              )}
 
               {/* Map link */}
               {place.latitude && place.longitude && (
