@@ -123,22 +123,22 @@ class AuthController
 
     /**
      * POST /api/auth/google
-     * Body: { id_token: string }
+     * Body: { credential: string } (from Google Identity Services)
      *
      * Verifies the Google ID token via Google's tokeninfo endpoint,
      * then finds or creates the user and starts a session.
      */
     public function google(array $params, array $body): array
     {
-        $idToken = trim($body['id_token'] ?? '');
+        $credential = trim($body['credential'] ?? $body['id_token'] ?? '');
 
-        if (!$idToken) {
+        if (!$credential) {
             http_response_code(400);
-            return ['success' => false, 'message' => 'Missing id_token'];
+            return ['success' => false, 'message' => 'Missing credential'];
         }
 
         // Verify token with Google
-        $payload = $this->verifyGoogleToken($idToken);
+        $payload = $this->verifyGoogleToken($credential);
 
         if (!$payload || isset($payload['error'])) {
             http_response_code(401);

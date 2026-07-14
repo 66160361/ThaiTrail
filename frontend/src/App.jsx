@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        {/* ── Login (stub — ระบบ login อยู่ระหว่างพัฒนา) ── */}
+        {/* ── Login (Google Sign-In) ── */}
         <Route path="/login" element={<LoginPage />} />
 
         {/* ── TODO: เพิ่มระบบ auth ที่นี่ ── */}

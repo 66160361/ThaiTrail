@@ -2,6 +2,45 @@
 
 require_once __DIR__ . '/../config/database.php';
 
+function toTimeArray($value): array
+{
+    if ($value === null || $value === '') {
+        return [];
+    }
+
+    if (is_array($value)) {
+        return array_values(array_filter($value, static fn($item) => $item !== null && $item !== ''));
+    }
+
+    if (!is_string($value)) {
+        return [$value];
+    }
+
+    $decoded = json_decode($value, true);
+    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+        return array_values(array_filter($decoded, static fn($item) => $item !== null && $item !== ''));
+    }
+
+    if (str_contains($value, ',')) {
+        return array_values(array_filter(array_map('trim', explode(',', $value)), static fn($item) => $item !== ''));
+    }
+
+    return [trim($value)];
+}
+
+function normalizePlaceTimes(array $place): array
+{
+    if (array_key_exists('opening_time', $place)) {
+        $place['opening_time'] = toTimeArray($place['opening_time']);
+    }
+
+    if (array_key_exists('closing_time', $place)) {
+        $place['closing_time'] = toTimeArray($place['closing_time']);
+    }
+
+    return $place;
+}
+
 // 1. ดักจับค่ากรองรายหมวดหมู่ (เช็กทั้งคู่ เผื่อฝั่ง React ส่งชื่อไหนมาก็รอด)
 $categoryId = $_GET['category_id'] ?? $_GET['group_by_category'] ?? null;
 
@@ -22,7 +61,7 @@ if ($groupByCategory) {
         );
 
         $stmt->execute(['category_id' => $category['id']]);
-        $category['places'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $category['places'] = array_map('normalizePlaceTimes', $stmt->fetchAll(PDO::FETCH_ASSOC));
     }
     unset($category);
     $response = $categories;
@@ -41,7 +80,7 @@ if ($groupByCategory) {
             ORDER BY p.place_name";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['category_id' => $categoryId]);
-    $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $response = array_map('normalizePlaceTimes', $stmt->fetchAll(PDO::FETCH_ASSOC));
 
 } else {
     // ถ้าไม่ส่งเลขหมวดหมู่มา จะเข้าเงื่อนไขนี้
@@ -56,7 +95,7 @@ if ($groupByCategory) {
          GROUP BY p.id
          ORDER BY p.place_name"
     );
-    $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $response = array_map('normalizePlaceTimes', $stmt->fetchAll(PDO::FETCH_ASSOC));
 }
 
 header('Content-Type: application/json; charset=utf-8');
