@@ -4,6 +4,7 @@ require __DIR__ . '/../config/database.php';
 require __DIR__ . '/../services/PlaceService.php';
 require __DIR__ . '/../services/ReviewService.php';
 require __DIR__ . '/../services/MappingService.php';
+require __DIR__ . '/../services/TextUtility.php';
 
 // ฟังก์ชัน savePlace ใช้บันทึกหรืออัปเดตข้อมูลสถานที่ในตาราง places
 // ถ้า place_code ซ้ำ จะไม่เพิ่ม row ใหม่ แต่จะอัปเดตข้อมูลเดิมแทน
@@ -65,9 +66,9 @@ foreach ($json as $wrapper) {
     }
 
     foreach ($placeEntries as $place) {
-        $placeName = $place['title'] ?? $place['obj_title'] ?? null;
+        $placeName = TextUtility::cleanText($place['title'] ?? $place['obj_title'] ?? null);
         $placeCode = $place['id_place'] ?? $place['obj_refcode'] ?? null;
-        $description = $place['description'] ?? $place['obj_physicals'] ?? null;
+        $description = TextUtility::cleanText($place['description'] ?? $place['obj_physicals'] ?? null);
 
         if (empty($placeName) || empty($placeCode)) {
             continue;

@@ -3,6 +3,7 @@ require __DIR__ . '/../config/database.php';
 require __DIR__ . '/../services/MappingService.php';
 require __DIR__ . '/../services/PlaceService.php';
 require __DIR__ . '/../services/ReviewService.php';
+require __DIR__ . '/../services/TextUtility.php';
 
 // ฟังก์ชัน savePlace ใช้บันทึกหรืออัปเดตข้อมูลสถานที่ในตาราง places
 // ถ้า place_code ซ้ำ จะไม่เพิ่ม row ใหม่ แต่จะอัปเดตข้อมูลเดิมแทน
@@ -57,7 +58,7 @@ foreach ($json as $wrapper) {
     }
 
     foreach ($placeEntries as $place) {
-        $placeName = $place['obj_title'] ?? null;
+        $placeName = TextUtility::cleanText($place['obj_title'] ?? null);
         $placeCode = $place['obj_refcode'] ?? null;
 
         if (empty($placeName) || empty($placeCode)) {
@@ -69,10 +70,12 @@ foreach ($json as $wrapper) {
         $lat = isset($place['Latitude']) && $place['Latitude'] !== '' ? (float) $place['Latitude'] : null;
         $lon = isset($place['Longitude']) && $place['Longitude'] !== '' ? (float) $place['Longitude'] : null;
 
+        $description = TextUtility::cleanText($place['obj_physicals'] ?? null);
+
         $placeId = savePlace($pdo, [
             'place_code' => $placeCode,
             'place_name' => $placeName,
-            'description' => $place['obj_physicals'] ?? null,
+            'description' => $description,
             'latitude' => $lat,
             'longitude' => $lon,
             'subdistrict' => $wrapper['Subdistrict'] ?? null,
@@ -105,7 +108,7 @@ foreach ($json as $wrapper) {
             saveReview($pdo, [
                 'place_code' => $placeCode,
                 'place_name' => $placeName,
-                'description' => $place['obj_physicals'] ?? null,
+                'description' => $description,
                 'raw_json_data' => json_encode($place, JSON_UNESCAPED_UNICODE),
             ]);
             echo "⚠ " . $placeName . "<br>";
