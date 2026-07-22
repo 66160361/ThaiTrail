@@ -26,7 +26,10 @@ function RecommendationsPage() {
   const [allPlacesRaw, setAllPlacesRaw] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState(() => sessionStorage.getItem('active_tab') || 'recommend');
+  const [activeTab, setActiveTab] = useState(() => {
+    const saved = sessionStorage.getItem('active_tab');
+    return TABS.some((t) => t.id === saved) ? saved : 'recommend';
+  });
   const [limit, setLimit] = useState(PAGE_SIZE);
 
   // Read guest interests from localStorage
@@ -51,14 +54,9 @@ function RecommendationsPage() {
   }, []);
 
   useEffect(() => {
-    // If no interests are set, redirect back to onboarding to select them
-    if (guestInterests.length === 0) {
-      navigate('/onboarding', { replace: true });
-      return;
-    }
     setLoading(true);
     loadData().finally(() => setLoading(false));
-  }, [loadData, guestInterests.length, navigate]);
+  }, [loadData]);
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
@@ -87,7 +85,9 @@ function RecommendationsPage() {
   // Filter & sort logic based on active tab
   const displayedPlaces = useMemo(() => {
     if (activeTab === 'recommend') {
-      // Filter by guest interests
+      if (!guestInterests || guestInterests.length === 0) {
+        return allPlacesRaw;
+      }
       const recommended = allPlacesRaw.filter((p) => {
         if (!p.category_ids) return false;
         const catIds = typeof p.category_ids === 'string'
@@ -95,8 +95,7 @@ function RecommendationsPage() {
           : (Array.isArray(p.category_ids) ? p.category_ids.map(Number) : []);
         return catIds.some((id) => guestInterests.includes(id));
       });
-      // Return recommendations
-      return recommended;
+      return recommended.length > 0 ? recommended : allPlacesRaw;
     } else if (activeTab === 'all') {
       return allPlacesRaw;
     } else {
