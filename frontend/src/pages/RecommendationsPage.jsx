@@ -33,10 +33,10 @@ function RecommendationsPage() {
   });
   const [limit, setLimit] = useState(PAGE_SIZE);
 
-  // Read guest interests from localStorage
+  // Read guest interests from sessionStorage
   const guestInterests = useMemo(() => {
     try {
-      const stored = localStorage.getItem('guest_interests');
+      const stored = sessionStorage.getItem('guest_interests');
       return stored ? JSON.parse(stored) : [];
     } catch {
       return [];
@@ -76,9 +76,9 @@ function RecommendationsPage() {
         return userRecommendedPlaces;
       }
 
-      // สำหรับ Guest: ดึงสถานที่ที่เคยเข้าดูโดยตรงเพิ่มเติม
+      // สำหรับ Guest: ดึงสถานที่ที่เคยเข้าดูโดยตรงเพิ่มเติมใน session ปัจจุบัน
       const guestViewedIds = (() => {
-        try { return JSON.parse(localStorage.getItem('guest_viewed_places') || '[]'); }
+        try { return JSON.parse(sessionStorage.getItem('guest_viewed_places') || '[]'); }
         catch { return []; }
       })();
 
@@ -156,9 +156,12 @@ function RecommendationsPage() {
       if (logout) {
         await logout();
       }
-      localStorage.removeItem('guest_interests');
+      sessionStorage.clear();
+      localStorage.clear();
       navigate('/login', { replace: true });
     } catch {
+      sessionStorage.clear();
+      localStorage.clear();
       navigate('/login', { replace: true });
     }
   };

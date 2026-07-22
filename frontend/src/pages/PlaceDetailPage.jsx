@@ -43,14 +43,14 @@ function PlaceDetailPage() {
         setPlace(found);
         setImgSrc(found.image_url || FALLBACK_IMAGES[found.id % FALLBACK_IMAGES.length]);
 
-        // บันทึกสถานที่ที่ดูลงใน localStorage สำหรับ Guest
+        // บันทึกสถานที่ที่ดูลงใน sessionStorage สำหรับ Guest (รีใหม่เมื่อจบ session)
         try {
-          const viewed = JSON.parse(localStorage.getItem('guest_viewed_places') || '[]');
+          const viewed = JSON.parse(sessionStorage.getItem('guest_viewed_places') || '[]');
           if (!viewed.includes(found.id)) {
             viewed.push(found.id);
-            localStorage.setItem('guest_viewed_places', JSON.stringify(viewed));
+            sessionStorage.setItem('guest_viewed_places', JSON.stringify(viewed));
           }
-          const existingInterests = JSON.parse(localStorage.getItem('guest_interests') || '[]');
+          const existingInterests = JSON.parse(sessionStorage.getItem('guest_interests') || '[]');
           const catIds = typeof found.category_ids === 'string'
             ? found.category_ids.split(',').map(Number)
             : (Array.isArray(found.category_ids) ? found.category_ids.map(Number) : []);
@@ -62,7 +62,7 @@ function PlaceDetailPage() {
             }
           });
           if (updated) {
-            localStorage.setItem('guest_interests', JSON.stringify(existingInterests));
+            sessionStorage.setItem('guest_interests', JSON.stringify(existingInterests));
           }
         } catch { /* silent */ }
 

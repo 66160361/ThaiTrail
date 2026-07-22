@@ -25,7 +25,10 @@ function OnboardingPage() {
 
   const handleNext = () => {
     if (selected.length === 0) return;
-    localStorage.setItem('guest_interests', JSON.stringify(selected));
+    sessionStorage.setItem('guest_interests', JSON.stringify(selected));
+    sessionStorage.removeItem('guest_viewed_places');
+    sessionStorage.removeItem('active_tab');
+    sessionStorage.removeItem('scroll_pos');
     navigate('/', { replace: true });
   };
 
