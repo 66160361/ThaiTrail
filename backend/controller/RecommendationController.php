@@ -48,10 +48,23 @@ class RecommendationController
         $topProvincesStmt->execute([':user_id' => $userId]);
         $topProvinces = $topProvincesStmt->fetchAll(PDO::FETCH_COLUMN);
 
-        // 2. คำนวณคะแนนสถานที่ (Base Score + Location Similarity Bonus)
+        // 2. ดึงรายการสถานที่ที่ผู้ใช้เคยเข้าดูโดยตรง (Viewed Places) เพื่อมอบคะแนนโบนัสสถานที่เดิม (+4.0) ให้มาขึ้นหน้าแนะนำด้วย
+        $viewedStmt = $this->pdo->prepare("
+            SELECT DISTINCT place_id
+            FROM user_signals
+            WHERE user_id = :user_id AND signal_type = 'view'
+        ");
+        $viewedStmt->execute([':user_id' => $userId]);
+        $viewedPlaceIds = $viewedStmt->fetchAll(PDO::FETCH_COLUMN);
+
+        // 3. คำนวณคะแนนสถานที่ (Base Score + Direct View Bonus + Location Similarity Bonus)
         $inProvinces = !empty($topProvinces)
             ? implode(',', array_fill(0, count($topProvinces), '?'))
             : "'__none__'";
+
+        $inViewed = !empty($viewedPlaceIds)
+            ? implode(',', array_fill(0, count($viewedPlaceIds), '?'))
+            : '0';
 
         $sql = "
             SELECT
@@ -66,6 +79,7 @@ class RecommendationController
                 p.longitude,
                 ROUND(
                     SUM(ui.weight) +
+                    (CASE WHEN p.id IN ($inViewed) THEN 4.0 ELSE 0 END) +
                     (CASE WHEN p.province IN ($inProvinces) THEN 2.5 ELSE 0 END),
                     2
                 ) AS score,
@@ -88,6 +102,7 @@ class RecommendationController
         ";
 
         $queryParams = array_merge(
+            !empty($viewedPlaceIds) ? $viewedPlaceIds : [],
             !empty($topProvinces) ? $topProvinces : [],
             [$userId, $userId]
         );

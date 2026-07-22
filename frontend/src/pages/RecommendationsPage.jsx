@@ -24,6 +24,7 @@ function RecommendationsPage() {
   const { user, logout } = useAuth();
 
   const [allPlacesRaw, setAllPlacesRaw] = useState([]);
+  const [userRecommendedPlaces, setUserRecommendedPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState(() => {
@@ -42,16 +43,25 @@ function RecommendationsPage() {
     }
   }, []);
 
-  // Fetch all places once
+  // Fetch all places & user-specific recommendations
   const loadData = useCallback(async () => {
     try {
+      if (user) {
+        api.recommendations.get()
+          .then((res) => {
+            if (res && Array.isArray(res.data)) {
+              setUserRecommendedPlaces(res.data);
+            }
+          })
+          .catch(() => {});
+      }
       const res = await api.places.getAll();
       const allPlaces = Array.isArray(res) ? res : (res.data || []);
       setAllPlacesRaw(allPlaces);
     } catch (err) {
       setError(err.message || 'ไม่สามารถโหลดข้อมูลสถานที่ได้');
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     setLoading(true);
@@ -61,10 +71,25 @@ function RecommendationsPage() {
   // Filter & sort logic based on active tab
   const displayedPlaces = useMemo(() => {
     if (activeTab === 'recommend') {
-      if (!guestInterests || guestInterests.length === 0) {
+      // ถ้าผู้ใช้ล็อกอินอยู่ และมีข้อมูลแนะนำจากระบบเฉพาะบุคคล
+      if (user && userRecommendedPlaces.length > 0) {
+        return userRecommendedPlaces;
+      }
+
+      // สำหรับ Guest: ดึงสถานที่ที่เคยเข้าดูโดยตรงเพิ่มเติม
+      const guestViewedIds = (() => {
+        try { return JSON.parse(localStorage.getItem('guest_viewed_places') || '[]'); }
+        catch { return []; }
+      })();
+
+      if ((!guestInterests || guestInterests.length === 0) && guestViewedIds.length === 0) {
         return allPlacesRaw;
       }
+
       const recommended = allPlacesRaw.filter((p) => {
+        // ให้สถานที่ที่เคยเปิดดูเข้ามารวมอยู่ในหน้าแนะนำด้วยเสมอ
+        if (guestViewedIds.includes(p.id)) return true;
+
         if (!p.category_ids) return false;
         const catIds = typeof p.category_ids === 'string'
           ? p.category_ids.split(',').map(Number)
@@ -84,7 +109,7 @@ function RecommendationsPage() {
         return catIds.includes(targetCatId);
       });
     }
-  }, [activeTab, allPlacesRaw, guestInterests]);
+  }, [activeTab, allPlacesRaw, userRecommendedPlaces, guestInterests, user]);
 
   const placesToShow = useMemo(() => {
     return displayedPlaces.slice(0, limit);

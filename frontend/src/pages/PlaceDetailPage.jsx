@@ -42,7 +42,31 @@ function PlaceDetailPage() {
         if (!found) throw new Error('ไม่พบข้อมูลสถานที่นี้');
         setPlace(found);
         setImgSrc(found.image_url || FALLBACK_IMAGES[found.id % FALLBACK_IMAGES.length]);
-        // Log view signal
+
+        // บันทึกสถานที่ที่ดูลงใน localStorage สำหรับ Guest
+        try {
+          const viewed = JSON.parse(localStorage.getItem('guest_viewed_places') || '[]');
+          if (!viewed.includes(found.id)) {
+            viewed.push(found.id);
+            localStorage.setItem('guest_viewed_places', JSON.stringify(viewed));
+          }
+          const existingInterests = JSON.parse(localStorage.getItem('guest_interests') || '[]');
+          const catIds = typeof found.category_ids === 'string'
+            ? found.category_ids.split(',').map(Number)
+            : (Array.isArray(found.category_ids) ? found.category_ids.map(Number) : []);
+          let updated = false;
+          catIds.forEach((cId) => {
+            if (cId && !existingInterests.includes(cId)) {
+              existingInterests.push(cId);
+              updated = true;
+            }
+          });
+          if (updated) {
+            localStorage.setItem('guest_interests', JSON.stringify(existingInterests));
+          }
+        } catch { /* silent */ }
+
+        // Log view signal สำหรับ User
         if (user) {
           api.signals.log({ place_id: found.id, signal_type: 'view' }).catch(() => { });
         }
