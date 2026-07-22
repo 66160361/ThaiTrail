@@ -48,8 +48,13 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
 
   if (dismissed) return null;
 
+  const handleCardClick = () => {
+    sessionStorage.setItem('scroll_pos', window.scrollY);
+    navigate(`/places/${place.id}`);
+  };
+
   return (
-    <article className="place-card fade-in" onClick={() => navigate(`/places/${place.id}`)}>
+    <article className="place-card fade-in" onClick={handleCardClick}>
       {/* Image */}
       <div className="place-card-image">
         <img

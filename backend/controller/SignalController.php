@@ -6,9 +6,10 @@ class SignalController
 
     // Weight added to matching category interests for each positive signal
     private const WEIGHT_BOOSTS = [
-        'like'  => 0.5,
-        'save'  => 1.0,
-        'share' => 0.3,
+        'view'  => 1.0,
+        'like'  => 2.0,
+        'save'  => 3.0,
+        'share' => 1.5,
     ];
 
     private const VALID_SIGNALS = ['view', 'like', 'save', 'share', 'dismiss'];

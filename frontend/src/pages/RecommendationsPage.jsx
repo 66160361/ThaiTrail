@@ -26,7 +26,7 @@ function RecommendationsPage() {
   const [allPlacesRaw, setAllPlacesRaw] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('recommend');
+  const [activeTab, setActiveTab] = useState(() => sessionStorage.getItem('active_tab') || 'recommend');
   const [limit, setLimit] = useState(PAGE_SIZE);
 
   // Read guest interests from localStorage
@@ -60,10 +60,28 @@ function RecommendationsPage() {
     loadData().finally(() => setLoading(false));
   }, [loadData, guestInterests.length, navigate]);
 
-  // Reset limit and scroll to top when changing tab
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    sessionStorage.setItem('active_tab', tabId);
+    sessionStorage.removeItem('scroll_pos');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  // Restore scroll position when returning from detail page
+  useEffect(() => {
+    if (!loading && placesToShow.length > 0) {
+      const savedScroll = sessionStorage.getItem('scroll_pos');
+      if (savedScroll) {
+        setTimeout(() => {
+          window.scrollTo({ top: parseInt(savedScroll, 10), behavior: 'instant' });
+        }, 50);
+      }
+    }
+  }, [loading, placesToShow.length]);
+
+  // Reset limit when changing tab
   useEffect(() => {
     setLimit(PAGE_SIZE);
-    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [activeTab]);
 
   // Filter & sort logic based on active tab
@@ -157,7 +175,7 @@ function RecommendationsPage() {
             <button
               key={tab.id}
               className={`filter-chip${activeTab === tab.id ? ' active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabChange(tab.id)}
             >
               {tab.name}
             </button>
