@@ -43,25 +43,45 @@ function PlaceDetailPage() {
         setPlace(found);
         setImgSrc(found.image_url || FALLBACK_IMAGES[found.id % FALLBACK_IMAGES.length]);
 
-        // บันทึกสถานที่ที่ดูลงใน sessionStorage สำหรับ Guest (รีใหม่เมื่อจบ session)
+        // บันทึกการนับจำนวนครั้งการดูสำหรับ Guest (นับสะสมเมื่อดูครบ 3 ครั้งขึ้นไปเท่านั้น)
         try {
-          const viewed = JSON.parse(sessionStorage.getItem('guest_viewed_places') || '[]');
-          if (!viewed.includes(found.id)) {
-            viewed.push(found.id);
-            sessionStorage.setItem('guest_viewed_places', JSON.stringify(viewed));
+          const placeCounts = JSON.parse(sessionStorage.getItem('guest_place_view_counts') || '{}');
+          const catCounts   = JSON.parse(sessionStorage.getItem('guest_cat_view_counts')   || '{}');
+
+          // เพิ่มจำนวนครั้งการดูสถานที่นี้
+          placeCounts[found.id] = (placeCounts[found.id] || 0) + 1;
+          sessionStorage.setItem('guest_place_view_counts', JSON.stringify(placeCounts));
+
+          // หากดูสถานที่นี้ครบ 3 ครั้งขึ้นไป -> บันทึกลง guest_viewed_places เพื่อนำมาเสนอในหน้าแนะนำ
+          if (placeCounts[found.id] >= 3) {
+            const viewed = JSON.parse(sessionStorage.getItem('guest_viewed_places') || '[]');
+            if (!viewed.includes(found.id)) {
+              viewed.push(found.id);
+              sessionStorage.setItem('guest_viewed_places', JSON.stringify(viewed));
+            }
           }
-          const existingInterests = JSON.parse(sessionStorage.getItem('guest_interests') || '[]');
+
+          // เพิ่มจำนวนครั้งการดูสำหรับทุกหมวดหมู่ของสถานที่นี้
           const catIds = typeof found.category_ids === 'string'
             ? found.category_ids.split(',').map(Number)
             : (Array.isArray(found.category_ids) ? found.category_ids.map(Number) : []);
-          let updated = false;
+
+          const existingInterests = JSON.parse(sessionStorage.getItem('guest_interests') || '[]');
+          let updatedInterests = false;
+
           catIds.forEach((cId) => {
-            if (cId && !existingInterests.includes(cId)) {
-              existingInterests.push(cId);
-              updated = true;
+            if (cId) {
+              catCounts[cId] = (catCounts[cId] || 0) + 1;
+              // หากดูสถานที่ในหมวดหมู่นี้รวมครบ 3 ครั้งขึ้นไป -> ปลดล็อกหมวดนี้ลง guest_interests
+              if (catCounts[cId] >= 3 && !existingInterests.includes(cId)) {
+                existingInterests.push(cId);
+                updatedInterests = true;
+              }
             }
           });
-          if (updated) {
+
+          sessionStorage.setItem('guest_cat_view_counts', JSON.stringify(catCounts));
+          if (updatedInterests) {
             sessionStorage.setItem('guest_interests', JSON.stringify(existingInterests));
           }
         } catch { /* silent */ }

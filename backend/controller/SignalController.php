@@ -66,27 +66,13 @@ class SignalController
             $catStmt->execute([$placeId]);
             $categoryIds = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 
-            // 3. ปรับปรุง/เพิ่มน้ำหนักใน user_interests สำหรับทุกหมวดหมู่ของสถานที่นี้
+            // 3. ปรับปรุง/เพิ่มน้ำหนักใน user_interests สำหรับหมวดหมู่ของสถานที่นี้
             if (isset(self::WEIGHT_BOOSTS[$signalType]) && !empty($categoryIds)) {
                 $boost = self::WEIGHT_BOOSTS[$signalType];
 
-                $upsertStmt = $this->pdo->prepare("
-                    INSERT INTO user_interests (user_id, category_id, weight)
-                    VALUES (:user_id, :category_id, :boost)
-                    ON DUPLICATE KEY UPDATE
-                        weight     = weight + :boost_update,
-                        updated_at = NOW()
-                ");
-
                 foreach ($categoryIds as $catId) {
-                    $upsertStmt->bindValue(':user_id',       $userId,  PDO::PARAM_INT);
-                    $upsertStmt->bindValue(':category_id',   $catId,   PDO::PARAM_INT);
-                    $upsertStmt->bindValue(':boost',         $boost,   PDO::PARAM_STR);
-                    $upsertStmt->bindValue(':boost_update',  $boost,   PDO::PARAM_STR);
-                    $upsertStmt->execute();
-
-                    // 4. ถ้าเป็น signal ประเภท 'view' -> ตรวจสอบว่าดูหมวดหมู่นี้ครบเกณฑ์ (Threshold) หรือยัง
                     if ($signalType === 'view') {
+                        // 4. หากเป็น Signal 'view' -> นับจำนวนครั้งที่กดเข้าดูสถานที่ในหมวดหมู่นี้
                         $countStmt = $this->pdo->prepare("
                             SELECT COUNT(DISTINCT us.id)
                             FROM user_signals us
@@ -101,21 +87,37 @@ class SignalController
                         ]);
                         $viewCount = (int) $countStmt->fetchColumn();
 
-                        // เมื่อดูครบตามเกณฑ์ (เช่น 3 ครั้ง หรือทวีคูณของ 3 ครั้ง) ให้โบนัสพิเศษเพิ่มเติม
-                        if ($viewCount > 0 && ($viewCount % self::VIEW_THRESHOLD) === 0) {
-                            $milestoneStmt = $this->pdo->prepare("
-                                UPDATE user_interests
-                                SET weight     = weight + :threshold_boost,
+                        // ⚠️ ทำงานเมื่อกดดูถึงเกณฑ์ ( Threshold >= 3 ครั้ง ) เท่านั้น! (ไม่ให้เข้าดูครั้งเดียวแล้วขึ้นเลย)
+                        if ($viewCount >= self::VIEW_THRESHOLD && ($viewCount % self::VIEW_THRESHOLD) === 0) {
+                            $upsertStmt = $this->pdo->prepare("
+                                INSERT INTO user_interests (user_id, category_id, weight)
+                                VALUES (:user_id, :category_id, :threshold_boost)
+                                ON DUPLICATE KEY UPDATE
+                                    weight     = weight + :threshold_boost_update,
                                     updated_at = NOW()
-                                WHERE user_id     = :user_id
-                                  AND category_id = :category_id
                             ");
-                            $milestoneStmt->execute([
-                                ':threshold_boost' => self::THRESHOLD_BOOST,
-                                ':user_id'         => $userId,
-                                ':category_id'     => $catId,
+                            $upsertStmt->execute([
+                                ':user_id'                => $userId,
+                                ':category_id'            => $catId,
+                                ':threshold_boost'        => self::THRESHOLD_BOOST,
+                                ':threshold_boost_update' => self::THRESHOLD_BOOST,
                             ]);
                         }
+                    } else {
+                        // สำหรับ Signal ที่เป็นการกระทำโดยตรง (like, save, share) -> เพิ่มค่าน้ำหนักทันที
+                        $upsertStmt = $this->pdo->prepare("
+                            INSERT INTO user_interests (user_id, category_id, weight)
+                            VALUES (:user_id, :category_id, :boost)
+                            ON DUPLICATE KEY UPDATE
+                                weight     = weight + :boost_update,
+                                updated_at = NOW()
+                        ");
+                        $upsertStmt->execute([
+                            ':user_id'       => $userId,
+                            ':category_id'   => $catId,
+                            ':boost'         => $boost,
+                            ':boost_update'  => $boost,
+                        ]);
                     }
                 }
             }

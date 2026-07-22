@@ -35,24 +35,27 @@ class RecommendationController
         $limit  = min((int) ($params['limit']  ?? 24), 50);
         $offset = max((int) ($params['offset'] ?? 0),  0);
 
-        // 1. ดึงจังหวัด 3 อันดับแรกที่ผู้ใช้เพิ่งเข้าดู/โต้ตอบบ่อยที่สุดล่าสุด
+        // 1. ดึงจังหวัดที่ผู้ใช้เข้าดูซ้ำจนถึงเกณฑ์ (อย่างน้อย 3 ครั้ง)
         $topProvincesStmt = $this->pdo->prepare("
             SELECT p.province, COUNT(*) as view_cnt
             FROM user_signals us
             JOIN places p ON p.id = us.place_id
             WHERE us.user_id = :user_id AND p.province IS NOT NULL AND p.province != ''
             GROUP BY p.province
+            HAVING view_cnt >= 3
             ORDER BY view_cnt DESC
             LIMIT 3
         ");
         $topProvincesStmt->execute([':user_id' => $userId]);
         $topProvinces = $topProvincesStmt->fetchAll(PDO::FETCH_COLUMN);
 
-        // 2. ดึงรายการสถานที่ที่ผู้ใช้เคยเข้าดูโดยตรง (Viewed Places) เพื่อมอบคะแนนโบนัสสถานที่เดิม (+4.0) ให้มาขึ้นหน้าแนะนำด้วย
+        // 2. ดึงรายการสถานที่ที่ผู้ใช้เข้าดูซ้ำจนถึงเกณฑ์ (อย่างน้อย 3 ครั้ง) เท่านั้น! (ไม่ใช่ดูครั้งเดียวแล้วขึ้นเลย)
         $viewedStmt = $this->pdo->prepare("
-            SELECT DISTINCT place_id
+            SELECT place_id, COUNT(*) as cnt
             FROM user_signals
             WHERE user_id = :user_id AND signal_type = 'view'
+            GROUP BY place_id
+            HAVING cnt >= 3
         ");
         $viewedStmt->execute([':user_id' => $userId]);
         $viewedPlaceIds = $viewedStmt->fetchAll(PDO::FETCH_COLUMN);
