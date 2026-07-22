@@ -58,30 +58,6 @@ function RecommendationsPage() {
     loadData().finally(() => setLoading(false));
   }, [loadData]);
 
-  const handleTabChange = (tabId) => {
-    setActiveTab(tabId);
-    sessionStorage.setItem('active_tab', tabId);
-    sessionStorage.removeItem('scroll_pos');
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  };
-
-  // Restore scroll position when returning from detail page
-  useEffect(() => {
-    if (!loading && placesToShow.length > 0) {
-      const savedScroll = sessionStorage.getItem('scroll_pos');
-      if (savedScroll) {
-        setTimeout(() => {
-          window.scrollTo({ top: parseInt(savedScroll, 10), behavior: 'instant' });
-        }, 50);
-      }
-    }
-  }, [loading, placesToShow.length]);
-
-  // Reset limit when changing tab
-  useEffect(() => {
-    setLimit(PAGE_SIZE);
-  }, [activeTab]);
-
   // Filter & sort logic based on active tab
   const displayedPlaces = useMemo(() => {
     if (activeTab === 'recommend') {
@@ -113,6 +89,30 @@ function RecommendationsPage() {
   const placesToShow = useMemo(() => {
     return displayedPlaces.slice(0, limit);
   }, [displayedPlaces, limit]);
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    sessionStorage.setItem('active_tab', tabId);
+    sessionStorage.removeItem('scroll_pos');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  // Restore scroll position when returning from detail page
+  useEffect(() => {
+    if (!loading && placesToShow.length > 0) {
+      const savedScroll = sessionStorage.getItem('scroll_pos');
+      if (savedScroll) {
+        setTimeout(() => {
+          window.scrollTo({ top: parseInt(savedScroll, 10), behavior: 'instant' });
+        }, 50);
+      }
+    }
+  }, [loading, placesToShow.length]);
+
+  // Reset limit when changing tab
+  useEffect(() => {
+    setLimit(PAGE_SIZE);
+  }, [activeTab]);
 
   const hasMore = displayedPlaces.length > limit;
 
