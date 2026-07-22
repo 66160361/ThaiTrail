@@ -34,14 +34,14 @@ async function request(method, path, data = null) {
 
 export const api = {
   auth: {
-    register:      (data)    => request('POST', '/auth/register', data),
-    login:         (data)    => request('POST', '/auth/login',    data),
-    logout:        ()        => request('POST', '/auth/logout'),
-    me:            ()        => request('GET',  '/auth/me'),
-    google:        (idToken) => request('POST', '/auth/google',   { id_token: idToken }),
+    register: (data) => request('POST', '/auth/register', data),
+    login: (data) => request('POST', '/auth/login', data),
+    logout: () => request('POST', '/auth/logout'),
+    me: () => request('GET', '/auth/me'),
+    google: (idToken) => request('POST', '/auth/google', { id_token: idToken }),
   },
   user: {
-    getInterests: ()     => request('GET',  '/user/interests'),
+    getInterests: () => request('GET', '/user/interests'),
     setInterests: (data) => request('POST', '/user/interests', data),
   },
   recommendations: {
@@ -49,6 +49,7 @@ export const api = {
   },
   places: {
     getAll: (params = {}) => request('GET', '/places', params),
+    getImages: (id) => request('GET', '/places', { images_for: id }),
   },
   signals: {
     log: (data) => request('POST', '/signals', data),

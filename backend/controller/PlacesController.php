@@ -11,8 +11,21 @@ class PlacesController
 
     public function index(array $params = [], array $body = []): array
     {
+        // ─── GET /api/places?images_for=<place_id> ────────────────────────────
+        if (isset($params['images_for']) && $params['images_for'] !== '') {
+            $placeId = (int) $params['images_for'];
+            $stmt = $this->pdo->prepare(
+                'SELECT image_url FROM place_images
+                  WHERE place_id = :place_id
+                  ORDER BY sort_order ASC'
+            );
+            $stmt->execute(['place_id' => $placeId]);
+            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }
+
         $categoryId = $params['category_id'] ?? $params['group_by_category'] ?? null;
         $groupByCategory = ($params['mode'] ?? null) === 'group';
+
 
         if ($groupByCategory) {
             $categories = $this->pdo->query('SELECT id, category_name FROM categories ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
