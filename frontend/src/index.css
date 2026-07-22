@@ -2,7 +2,7 @@
 
 /* ─── Design Tokens (Light Theme) ─────────────────────────────────────────── */
 :root {
-  --bg: radial-gradient(circle at left top, #e6f7ff 0%, #eefaf2 40%, #ffffff 80%);
+  --bg: linear-gradient(135deg, #e6f7ff 0%, #eefaf2 35%, #eaf6fc 70%, #f0f7f4 100%);
   --bg-2: #FFFFFF;
   --surface: #FFFFFF;
   --surface-2: #F5F3F4;
@@ -53,7 +53,7 @@ html {
 
 body {
   font-family: 'Prompt', 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at left top, #e6f7ff 0%, #eefaf2 40%, #ffffff 80%);
+  background: linear-gradient(135deg, #e6f7ff 0%, #eefaf2 35%, #eaf6fc 70%, #f0f7f4 100%);
   background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
@@ -1694,7 +1694,7 @@ a {
 
 /* ─── New Detail Page Layout ────────────────────────────────────────────── */
 .detail-page-wrapper {
-  background: radial-gradient(circle at left top, #e6f7ff 0%, #eefaf2 40%, #ffffff 80%);
+  background: linear-gradient(135deg, #e6f7ff 0%, #eefaf2 35%, #eaf6fc 70%, #f0f7f4 100%);
   background-attachment: fixed;
   min-height: 100vh;
 }
