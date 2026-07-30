@@ -26,6 +26,7 @@ function OnboardingPage() {
   const handleNext = () => {
     if (selected.length === 0) return;
     sessionStorage.setItem('guest_interests', JSON.stringify(selected));
+    localStorage.setItem('thaitrail_user_interests', JSON.stringify(selected));
     sessionStorage.removeItem('guest_viewed_places');
     sessionStorage.removeItem('active_tab');
     sessionStorage.removeItem('scroll_pos');

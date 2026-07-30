@@ -103,13 +103,54 @@ function ProfilePage() {
   const localAvatar = localStorage.getItem('thaitrail_user_avatar');
   const baseUser = profileData?.user || user;
 
-  const rawInterests = baseUser?.interests;
-  let parsedInterests = ['ธรรมชาติและผจญภัย', 'ถ่ายภาพ', 'อาหารคาเฟ่และไลฟ์สไตล์'];
-  if (Array.isArray(rawInterests) && rawInterests.length > 0) {
-    parsedInterests = rawInterests;
-  } else if (typeof rawInterests === 'string' && rawInterests.trim()) {
-    parsedInterests = rawInterests.split(',').map((s) => s.trim()).filter(Boolean);
-  }
+  // Dynamic user interests parser
+  const CATEGORY_MAP = useMemo(() => ({
+    '1': 'ศาสนาและความเชื่อ',
+    '2': 'ธรรมชาติและผจญภัย',
+    '3': 'ทะเลและเกาะ',
+    '4': 'สวนสัตว์',
+    '5': 'ถ่ายภาพ',
+    '6': 'ประวัติศาสตร์และวัฒนธรรม',
+    '7': 'อาหารคาเฟ่และไลฟ์สไตล์',
+    '8': 'ประเพณีและเทศกาล',
+  }), []);
+
+  const parsedInterests = useMemo(() => {
+    let raw = baseUser?.interests;
+
+    if (!raw || (Array.isArray(raw) && raw.length === 0)) {
+      try {
+        const stored = localStorage.getItem('thaitrail_user_interests') ||
+                       localStorage.getItem('guest_interests') ||
+                       sessionStorage.getItem('guest_interests');
+        if (stored) {
+          raw = JSON.parse(stored);
+        }
+      } catch {
+        raw = null;
+      }
+    }
+
+    if (!raw) return [];
+
+    let list = [];
+    if (Array.isArray(raw)) {
+      list = raw;
+    } else if (typeof raw === 'string' && raw.trim()) {
+      try {
+        list = JSON.parse(raw);
+      } catch {
+        list = raw.split(',').map((s) => s.trim()).filter(Boolean);
+      }
+    }
+
+    const mapped = list.map((item) => {
+      const val = typeof item === 'object' ? String(item.name || item.id || item.category_name) : String(item);
+      return CATEGORY_MAP[val] || val;
+    }).filter(Boolean);
+
+    return Array.from(new Set(mapped));
+  }, [baseUser?.interests, CATEGORY_MAP]);
 
   const userName = localName || baseUser?.name || 'อลิสา นักเดินทาง';
   const avatarUrl = localAvatar || baseUser?.avatar_url || baseUser?.picture || null;
