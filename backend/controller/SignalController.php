@@ -3,6 +3,7 @@
 class SignalController
 {
     private PDO $pdo;
+    private ScoreService $scoreService;
 
     // Weight added to matching category interests for each positive signal
     private const WEIGHT_BOOSTS = [
@@ -20,7 +21,8 @@ class SignalController
 
     public function __construct(PDO $pdo)
     {
-        $this->pdo = $pdo;
+        $this->pdo          = $pdo;
+        $this->scoreService = new ScoreService($pdo);
     }
 
     private function requireAuth(): int
@@ -91,6 +93,10 @@ class SignalController
                     }
 
                     $this->pdo->commit();
+
+                    // Recalculate stored score for this place after unlike/unsave
+                    $this->scoreService->recalcPlace($userId, $placeId);
+
                     return ['success' => true, 'action' => 'removed'];
                 }
             }
@@ -175,6 +181,11 @@ class SignalController
             $this->pdo->rollBack();
             http_response_code(500);
             return ['success' => false, 'message' => 'เกิดข้อผิดพลาด กรุณาลองใหม่'];
+        }
+
+        // Recalculate stored score for this place after any positive signal
+        if ($signalType !== 'dismiss') {
+            $this->scoreService->recalcPlace($userId, $placeId);
         }
 
         return ['success' => true, 'action' => 'added'];

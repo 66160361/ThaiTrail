@@ -3,10 +3,12 @@
 class UserInterestController
 {
     private PDO $pdo;
+    private ScoreService $scoreService;
 
     public function __construct(PDO $pdo)
     {
-        $this->pdo = $pdo;
+        $this->pdo          = $pdo;
+        $this->scoreService = new ScoreService($pdo);
     }
 
     private function requireAuth(): int
@@ -80,6 +82,9 @@ class UserInterestController
             http_response_code(500);
             return ['success' => false, 'message' => 'เกิดข้อผิดพลาด กรุณาลองใหม่'];
         }
+
+        // Recompute and persist scores for all matching places now that interests changed
+        $this->scoreService->recalcAll($userId);
 
         return ['success' => true, 'message' => 'บันทึกความสนใจเรียบร้อยแล้ว'];
     }

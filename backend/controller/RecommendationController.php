@@ -81,20 +81,19 @@ class RecommendationController
                 p.latitude,
                 p.longitude,
                 ROUND(
-                    SUM(ui.weight) +
-                    (CASE WHEN p.id IN ($inViewed) THEN 4.0 ELSE 0 END) +
+                    ups.score +
                     (CASE WHEN p.province IN ($inProvinces) THEN 2.5 ELSE 0 END),
                     2
                 ) AS score,
                 GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.id SEPARATOR ',') AS categories,
                 GROUP_CONCAT(DISTINCT c.id            ORDER BY c.id SEPARATOR ',') AS category_ids
 
-            FROM places p
-            INNER JOIN tourism_types  tt ON tt.place_id   = p.id
-            INNER JOIN categories      c ON c.id          = tt.category_id
-            INNER JOIN user_interests ui ON ui.category_id = tt.category_id
-                                        AND ui.user_id     = ?
-            WHERE p.id NOT IN (
+            FROM user_place_scores ups
+            INNER JOIN places p ON p.id = ups.place_id
+            INNER JOIN tourism_types tt ON tt.place_id = p.id
+            INNER JOIN categories c ON c.id = tt.category_id
+            WHERE ups.user_id = ?
+              AND p.id NOT IN (
                 SELECT place_id
                 FROM user_dismissed
                 WHERE user_id = ?
@@ -105,7 +104,6 @@ class RecommendationController
         ";
 
         $queryParams = array_merge(
-            !empty($viewedPlaceIds) ? $viewedPlaceIds : [],
             !empty($topProvinces) ? $topProvinces : [],
             [$userId, $userId]
         );

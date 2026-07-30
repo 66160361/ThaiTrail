@@ -13,6 +13,7 @@ session_start();
 
 require_once __DIR__ . '/../config/env.php';
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../services/ScoreService.php';
 require_once __DIR__ . '/../controller/PlacesController.php';
 require_once __DIR__ . '/../controller/AuthController.php';
 require_once __DIR__ . '/../controller/UserInterestController.php';
