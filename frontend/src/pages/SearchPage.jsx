@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import Navbar from '../components/Navbar';
+import { interactionStorage } from '../services/interactionStorage';
 
 const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200',
@@ -101,6 +102,14 @@ function SearchPage() {
   const [openNowOnly, setOpenNowOnly] = useState(false);
   const [page, setPage] = useState(1);
   const [userLocation, setUserLocation] = useState(null);
+  const [, setLikedTick] = useState(0);
+
+  const handleToggleLike = (e, place) => {
+    e.stopPropagation();
+    e.preventDefault();
+    interactionStorage.toggleLike(place);
+    setLikedTick((t) => t + 1);
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -443,11 +452,12 @@ function SearchPage() {
                         ? `${openingTime} - ${closingTime}`
                         : '-';
 
+                    const isLiked = interactionStorage.isLiked(place.id);
+
                     return (
                       <article key={place.id} className="modern-place-card">
                         <div className="modern-card-image">
                           <img src={image} alt={place.place_name} loading="lazy" />
-                          <button className="favorite-btn">♡</button>
                         </div>
 
                         <div className="modern-card-content">
@@ -478,6 +488,19 @@ function SearchPage() {
                             </button>
                           </div>
                         </div>
+
+                        {/* Favorite Button on Top-Right of White Card */}
+                        <button
+                          type="button"
+                          className="favorite-btn"
+                          onClick={(e) => handleToggleLike(e, place)}
+                          title={isLiked ? 'เลิกถูกใจ' : 'ถูกใจ'}
+                          style={{
+                            color: isLiked ? '#E11D48' : '#64748B',
+                          }}
+                        >
+                          {isLiked ? '❤️' : '♡'}
+                        </button>
                       </article>
                     );
                   })}
