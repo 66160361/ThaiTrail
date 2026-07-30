@@ -209,7 +209,7 @@ function RecommendationsPage() {
                 <PlaceCard
                   key={place.id}
                   place={place}
-                  showScore={activeTab === 'recommend'}
+                  showScore={false}
                   onDismissed={handleDismissed}
                 />
               ))}
