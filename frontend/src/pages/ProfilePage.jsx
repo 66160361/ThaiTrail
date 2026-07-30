@@ -162,14 +162,17 @@ function ProfilePage() {
 
       <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '40px 20px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
 
-        {/* ── 1. Profile Header ── */}
+        {/* ── 1. Profile Header Box (White background card) ── */}
         <div style={{
+          background: '#FFFFFF',
+          borderRadius: '24px',
+          padding: '36px 40px',
+          boxShadow: '0 8px 30px rgba(13, 51, 14, 0.05)',
+          border: '1px solid #E8E2DE',
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'flex-start',
-          gap: '48px',
-          paddingBottom: '48px',
-          borderBottom: '1px solid #C2C9BC',
+          alignItems: 'center',
+          gap: '40px',
           flexWrap: 'wrap',
         }}>
           {/* Avatar */}
