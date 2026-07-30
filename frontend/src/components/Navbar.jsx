@@ -57,36 +57,27 @@ function Navbar() {
       </div>
 
       <div className="navbar-right">
-        {user ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <NavLink to="/profile" className="user-chip" style={{ textDecoration: 'none', cursor: 'pointer' }}>
-              {(localStorage.getItem('thaitrail_user_avatar') || user.avatar_url || user.picture) ? (
-                <img
-                  src={localStorage.getItem('thaitrail_user_avatar') || user.avatar_url || user.picture}
-                  alt={localStorage.getItem('thaitrail_user_name') || user.name}
-                  style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }}
-                />
-              ) : (
-                <div className="user-avatar" style={{
-                  background: 'linear-gradient(135deg, #E0F2FE, #BAE6FD)',
-                  color: '#0369A1',
-                  fontWeight: '700',
-                  fontSize: '12px',
-                }}>
-                  {(localStorage.getItem('thaitrail_user_name') || user.name) ? (localStorage.getItem('thaitrail_user_name') || user.name).charAt(0).toUpperCase() : 'U'}
-                </div>
-              )}
-              <span className="user-name-text" style={{ maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {localStorage.getItem('thaitrail_user_name') || user.name}
-              </span>
-            </NavLink>
-            <button onClick={handleLogout} className="btn btn-ghost btn-sm" style={{ padding: '6px 12px', fontSize: '13px', borderRadius: '999px' }}>
-              ออกจากระบบ
-            </button>
-          </div>
-        ) : (
-          <NavLink to="/login" className="btn btn-primary btn-sm" style={{ borderRadius: '999px', padding: '8px 18px' }}>
-            เข้าสู่ระบบ
+        {user && (
+          <NavLink to="/profile" className="user-chip" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+            {(localStorage.getItem('thaitrail_user_avatar') || user.avatar_url || user.picture) ? (
+              <img
+                src={localStorage.getItem('thaitrail_user_avatar') || user.avatar_url || user.picture}
+                alt={localStorage.getItem('thaitrail_user_name') || user.name}
+                style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }}
+              />
+            ) : (
+              <div className="user-avatar" style={{
+                background: 'linear-gradient(135deg, #E0F2FE, #BAE6FD)',
+                color: '#0369A1',
+                fontWeight: '700',
+                fontSize: '12px',
+              }}>
+                {(localStorage.getItem('thaitrail_user_name') || user.name) ? (localStorage.getItem('thaitrail_user_name') || user.name).charAt(0).toUpperCase() : 'U'}
+              </div>
+            )}
+            <span className="user-name-text" style={{ maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {localStorage.getItem('thaitrail_user_name') || user.name}
+            </span>
           </NavLink>
         )}
       </div>
