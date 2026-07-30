@@ -9,7 +9,7 @@ const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { loginWithGoogle, user } = useAuth();
+  const { loginWithGoogle } = useAuth();
   const [authError, setAuthError] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [buttonWidth, setButtonWidth] = useState(() => {
@@ -20,16 +20,6 @@ function LoginPage() {
     return Math.max(210, Math.min(300, window.innerWidth - 116));
   });
 
-  // If already logged in (session restored), redirect immediately
-  useEffect(() => {
-    if (!user) return;
-    const isOnboarded = user.onboarded === 1 || user.onboarded === '1';
-    if (isOnboarded) {
-      navigate('/', { replace: true });
-    } else {
-      navigate('/onboarding', { replace: true });
-    }
-  }, [user, navigate]);
 
   useEffect(() => {
     const updateButtonWidth = () => {
