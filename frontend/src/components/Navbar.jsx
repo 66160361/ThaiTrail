@@ -42,24 +42,17 @@ function Navbar() {
         >
           หน้าแรก
         </NavLink>
-        <a
-          href="#search"
-          onClick={handleSearchClick}
-          className="nav-link"
+        <NavLink
+          to="/search"
+          className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
         >
           ค้นหา
-        </a>
+        </NavLink>
         <NavLink
           to="/profile"
           className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
         >
           โปรไฟล์
-        </NavLink>
-        <NavLink
-          to="/search"
-          className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-        >
-          🔎 ค้นหาสถานที่
         </NavLink>
       </div>
 

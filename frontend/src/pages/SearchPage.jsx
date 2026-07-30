@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import Navbar from '../components/Navbar';
 
 const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200',
@@ -299,7 +300,8 @@ if (selectedDistance?.max) {
   };
 
   return (
-    <div className="search-v2-page">
+    <div className="search-v2-page" style={{ paddingTop: '72px' }}>
+      <Navbar />
       <div className="search-v2-container">
         <section className="search-v2-topbar fade-in">
           <span className="search-v2-icon">⌕</span>
