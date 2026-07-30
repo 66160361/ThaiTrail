@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../services/api';
 import categoryHero from '../../images/category_hero.png';
 
 const CATEGORIES = [
@@ -47,13 +48,20 @@ function OnboardingPage() {
     );
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (selected.length === 0) return;
     sessionStorage.setItem('guest_interests', JSON.stringify(selected));
     localStorage.setItem('thaitrail_user_interests', JSON.stringify(selected));
     sessionStorage.removeItem('guest_viewed_places');
     sessionStorage.removeItem('active_tab');
     sessionStorage.removeItem('scroll_pos');
+
+    try {
+      await api.user.setInterests({ category_ids: selected });
+    } catch (err) {
+      console.log('Backend interest sync note:', err);
+    }
+
     navigate('/', { replace: true });
   };
 

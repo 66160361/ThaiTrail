@@ -1,4 +1,4 @@
-// Client-side storage and sync manager for liked & saved places
+import { api } from './api';
 
 const LIKED_KEY = 'thaitrail_liked_places';
 const SAVED_KEY = 'thaitrail_saved_places';
@@ -47,6 +47,17 @@ export const interactionStorage = {
     }
 
     localStorage.setItem(LIKED_KEY, JSON.stringify(list));
+
+    // Send signal to MySQL backend to update user_interests
+    try {
+      api.signals.log({
+        place_id: Number(place.id),
+        signal_type: isLikedNow ? 'like' : 'unlike',
+      }).catch(() => {});
+    } catch (e) {
+      console.log('Signal log note:', e);
+    }
+
     return isLikedNow;
   },
 
@@ -65,6 +76,17 @@ export const interactionStorage = {
     }
 
     localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+
+    // Send signal to MySQL backend to update user_interests
+    try {
+      api.signals.log({
+        place_id: Number(place.id),
+        signal_type: isSavedNow ? 'save' : 'unsave',
+      }).catch(() => {});
+    } catch (e) {
+      console.log('Signal log note:', e);
+    }
+
     return isSavedNow;
   },
 
