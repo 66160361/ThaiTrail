@@ -443,12 +443,11 @@ function SearchPage() {
                         ? `${openingTime} - ${closingTime}`
                         : '-';
 
-                    const isLiked = likedIds.includes(String(place.id));
-
                     return (
                       <article key={place.id} className="modern-place-card">
                         <div className="modern-card-image">
                           <img src={image} alt={place.place_name} loading="lazy" />
+                          <button className="favorite-btn">♡</button>
                         </div>
 
                         <div className="modern-card-content">
@@ -479,19 +478,6 @@ function SearchPage() {
                             </button>
                           </div>
                         </div>
-
-                        {/* Favorite Heart Button on Top-Right of White Container */}
-                        <button
-                          type="button"
-                          className="favorite-btn"
-                          onClick={(e) => handleToggleLike(e, place)}
-                          title={isLiked ? 'เลิกถูกใจ' : 'ถูกใจ'}
-                          style={{
-                            color: isLiked ? '#E11D48' : '#64748B',
-                          }}
-                        >
-                          {isLiked ? '❤️' : '♡'}
-                        </button>
                       </article>
                     );
                   })}
