@@ -43,6 +43,9 @@ export const api = {
   user: {
     getInterests: () => request('GET', '/user/interests'),
     setInterests: (data) => request('POST', '/user/interests', data),
+    getProfile: () => request('GET', '/user/profile'),
+    updateProfile: (data) => request('POST', '/user/profile', data),
+    getInteractions: () => request('GET', '/user/interactions'),
   },
   recommendations: {
     get: (params = {}) => request('GET', '/recommendations', params),

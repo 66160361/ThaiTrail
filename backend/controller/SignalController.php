@@ -55,6 +55,46 @@ class SignalController
 
         $this->pdo->beginTransaction();
         try {
+            // 0. Check if like or save exists and toggle delete if it does
+            if (in_array($signalType, ['like', 'save'], true)) {
+                $checkStmt = $this->pdo->prepare(
+                    'SELECT id FROM user_signals WHERE user_id = ? AND place_id = ? AND signal_type = ? LIMIT 1'
+                );
+                $checkStmt->execute([$userId, $placeId, $signalType]);
+                $existingSignal = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($existingSignal) {
+                    // Delete the signal
+                    $delStmt = $this->pdo->prepare('DELETE FROM user_signals WHERE id = ?');
+                    $delStmt->execute([$existingSignal['id']]);
+
+                    // Decrement weight in user_interests for each category of this place
+                    $catStmt = $this->pdo->prepare('SELECT category_id FROM tourism_types WHERE place_id = ?');
+                    $catStmt->execute([$placeId]);
+                    $categoryIds = $catStmt->fetchAll(PDO::FETCH_COLUMN);
+
+                    if (isset(self::WEIGHT_BOOSTS[$signalType]) && !empty($categoryIds)) {
+                        $boost = self::WEIGHT_BOOSTS[$signalType];
+                        foreach ($categoryIds as $catId) {
+                            $decStmt = $this->pdo->prepare("
+                                UPDATE user_interests 
+                                SET weight = GREATEST(1.00, weight - :boost),
+                                    updated_at = NOW()
+                                WHERE user_id = :user_id AND category_id = :category_id
+                            ");
+                            $decStmt->execute([
+                                ':user_id'     => $userId,
+                                ':category_id' => $catId,
+                                ':boost'       => $boost,
+                            ]);
+                        }
+                    }
+
+                    $this->pdo->commit();
+                    return ['success' => true, 'action' => 'removed'];
+                }
+            }
+
             // 1. บันทึก Signal ลงใน user_signals
             $ins = $this->pdo->prepare(
                 'INSERT INTO user_signals (user_id, place_id, signal_type) VALUES (?, ?, ?)'
@@ -137,6 +177,6 @@ class SignalController
             return ['success' => false, 'message' => 'เกิดข้อผิดพลาด กรุณาลองใหม่'];
         }
 
-        return ['success' => true];
+        return ['success' => true, 'action' => 'added'];
     }
 }

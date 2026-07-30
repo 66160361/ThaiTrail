@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { CATEGORY_STYLES } from '../components/PlaceCard';
 import PlaceCard from '../components/PlaceCard';
 import PlaceMap from '../components/PlaceMap';
+import Navbar from '../components/Navbar';
+import { interactionStorage } from '../services/interactionStorage';
 
 
 const FALLBACK_IMAGES = [
@@ -111,6 +113,28 @@ function PlaceDetailPage() {
       });
   }, [place]);
 
+  // Fetch current user liked/saved interactions on load (local + backend)
+  useEffect(() => {
+    if (!id) return;
+
+    // Check local storage state first so it displays instantly
+    setLiked(interactionStorage.isLiked(id));
+    setSaved(interactionStorage.isSaved(id));
+
+    if (user) {
+      api.user.getInteractions()
+        .then((res) => {
+          if (res.success) {
+            const isLikedBackend = Array.isArray(res.liked) && res.liked.includes(Number(id));
+            const isSavedBackend = Array.isArray(res.saved) && res.saved.includes(Number(id));
+            setLiked(isLikedBackend || interactionStorage.isLiked(id));
+            setSaved(isSavedBackend || interactionStorage.isSaved(id));
+          }
+        })
+        .catch(() => {});
+    }
+  }, [id, user]);
+
 
   useEffect(() => {
     if (!place) return;
@@ -148,12 +172,19 @@ function PlaceDetailPage() {
       return;
     }
     if (!place) return;
-    if (type === 'like') setLiked((v) => !v);
-    if (type === 'save') setSaved((v) => !v);
-    if (!user) return; // Local toggle for guests
-    try {
-      await api.signals.log({ place_id: place.id, signal_type: type });
-    } catch { /* silent */ }
+    if (type === 'like') {
+      const nextLiked = interactionStorage.toggleLike(place);
+      setLiked(nextLiked);
+    }
+    if (type === 'save') {
+      const nextSaved = interactionStorage.toggleSave(place);
+      setSaved(nextSaved);
+    }
+    if (user) {
+      try {
+        await api.signals.log({ place_id: place.id, signal_type: type });
+      } catch { /* silent */ }
+    }
   };
 
   const categories = useMemo(() => {
@@ -183,6 +214,7 @@ function PlaceDetailPage() {
 
   return (
     <div className="detail-page-wrapper">
+      <Navbar />
       {/* Loading */}
       {loading && (
         <div className="loading-screen">

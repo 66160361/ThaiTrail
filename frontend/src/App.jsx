@@ -1,31 +1,42 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 
 // Pages
 import LoginPage           from './pages/LoginPage';
 import OnboardingPage      from './pages/OnboardingPage';
 import RecommendationsPage from './pages/RecommendationsPage';
 import PlaceDetailPage     from './pages/PlaceDetailPage';
+import ProfilePage         from './pages/ProfilePage';
+import SettingsPage        from './pages/SettingsPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* ── Login (Google Sign-In) ── */}
-        <Route path="/login" element={<LoginPage />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* ── Login (Google Sign-In) ── */}
+          <Route path="/login" element={<LoginPage />} />
 
-        {/* ── TODO: เพิ่มระบบ auth ที่นี่ ── */}
-        <Route path="/onboarding" element={<OnboardingPage />} />
+          {/* Onboarding */}
+          <Route path="/onboarding" element={<OnboardingPage />} />
 
-        {/* ── Home / Recommendations & Browsing ── */}
-        <Route path="/" element={<RecommendationsPage />} />
+          {/* ── Home / Recommendations & Browsing ── */}
+          <Route path="/" element={<RecommendationsPage />} />
 
-        {/* ── Place detail — public ── */}
-        <Route path="/places/:id" element={<PlaceDetailPage />} />
+          {/* Profile page (Instagram styled) */}
+          <Route path="/profile" element={<ProfilePage />} />
 
-        {/* ── Fallback ── */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Settings page */}
+          <Route path="/settings" element={<SettingsPage />} />
+
+          {/* ── Place detail ── */}
+          <Route path="/places/:id" element={<PlaceDetailPage />} />
+
+          {/* ── Fallback ── */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -22,12 +22,14 @@ const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=800',
 ];
 
+import { interactionStorage } from '../services/interactionStorage';
+
 function PlaceCard({ place, showScore = false, onDismissed }) {
   const { user } = useAuth();
   const navigate  = useNavigate();
 
-  const [liked,     setLiked]     = useState(false);
-  const [saved,     setSaved]     = useState(false);
+  const [liked,     setLiked]     = useState(() => interactionStorage.isLiked(place.id));
+  const [saved,     setSaved]     = useState(() => interactionStorage.isSaved(place.id));
   const [dismissed, setDismissed] = useState(false);
   const [imgSrc,    setImgSrc]    = useState(
     place.image_url || FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length]
@@ -35,11 +37,19 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
 
   const signal = async (e, type) => {
     e.stopPropagation();
-    if (type === 'like') setLiked((v) => !v);
-    if (!user) return; // Silent local state change for guest
-    try {
-      await api.signals.log({ place_id: place.id, signal_type: type });
-    } catch { /* silent */ }
+    if (type === 'like') {
+      const nextLiked = interactionStorage.toggleLike(place);
+      setLiked(nextLiked);
+    }
+    if (type === 'save') {
+      const nextSaved = interactionStorage.toggleSave(place);
+      setSaved(nextSaved);
+    }
+    if (user) {
+      try {
+        await api.signals.log({ place_id: place.id, signal_type: type });
+      } catch { /* silent */ }
+    }
   };
 
   const categories = Array.isArray(place.categories)

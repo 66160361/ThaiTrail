@@ -36,11 +36,14 @@ $routes = [
     'POST /api/auth/logout'    => [AuthController::class,           'logout'],
     'GET /api/auth/me'         => [AuthController::class,           'me'],
     'POST /api/auth/google'    => [AuthController::class,           'google'],
-    'GET /api/user/interests'  => [UserInterestController::class,   'index'],
-    'POST /api/user/interests' => [UserInterestController::class,   'store'],
-    'GET /api/recommendations' => [RecommendationController::class, 'index'],
-    'POST /api/signals'        => [SignalController::class,         'store'],
-    'GET /api/places'          => [PlacesController::class,         'index'],
+    'GET /api/user/interests'    => [UserInterestController::class,   'index'],
+    'POST /api/user/interests'   => [UserInterestController::class,   'store'],
+    'GET /api/user/profile'      => [AuthController::class,           'profile'],
+    'POST /api/user/profile'     => [AuthController::class,           'updateProfile'],
+    'GET /api/user/interactions' => [AuthController::class,           'interactions'],
+    'GET /api/recommendations'   => [RecommendationController::class, 'index'],
+    'POST /api/signals'          => [SignalController::class,         'store'],
+    'GET /api/places'            => [PlacesController::class,         'index'],
 ];
 
 $routeKey = "$method $requestUri";

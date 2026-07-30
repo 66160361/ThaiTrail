@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import PlaceCard from '../components/PlaceCard';
+import Navbar from '../components/Navbar';
 
 const PAGE_SIZE = 24;
 
@@ -168,25 +169,10 @@ function RecommendationsPage() {
 
   return (
     <div className="page">
+      <Navbar />
       <div className="container">
         {/* Hero Banner */}
-        <div className="hero fade-in" style={{ position: 'relative' }}>
-          {/* Temporary Logout Button */}
-          <button
-            className="btn btn-ghost btn-sm"
-            onClick={handleLogout}
-            style={{
-              position: 'absolute',
-              top: '0px',
-              right: '0px',
-              borderColor: '#DC2626',
-              color: '#DC2626',
-              background: 'rgba(220, 38, 38, 0.05)',
-              zIndex: 10
-            }}
-          >
-            🚪 ออกจากระบบ
-          </button>
+        <div className="hero fade-in">
           <p className="hero-eyebrow">✨ แนะนำและค้นหา</p>
           <h1 className="hero-title">
             สวัสดี, <span className="gradient-text">{user?.name || 'ผู้เยี่ยมชม'}</span>
