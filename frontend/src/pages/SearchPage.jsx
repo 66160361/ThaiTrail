@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import Navbar from '../components/Navbar';
-import { interactionStorage } from '../services/interactionStorage';
 
 const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200',
@@ -33,12 +32,9 @@ const DISTANCE_OPTIONS = [
 const PAGE_SIZE = 5;
 
 function toCategoryArray(place) {
-  if (!place) return [];
-  if (Array.isArray(place.categories)) return place.categories;
-  if (typeof place.categories === 'string' && place.categories.trim()) {
-    return place.categories.split(',').map((item) => item.trim()).filter(Boolean);
-  }
-  return [];
+  return Array.isArray(place.categories)
+    ? place.categories
+    : (place.categories || '').split(',').map((item) => item.trim()).filter(Boolean);
 }
 
 function toTimeMinutes(value) {
@@ -62,22 +58,31 @@ function getFirstTime(rawValue) {
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
+
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLon = ((lon2 - lon1) * Math.PI) / 180;
+
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLon / 2) *
+    Math.sin(dLon / 2);
+
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
   return R * c;
 }
 
 function formatTime(value) {
   if (!value || value === 'null' || value === 'NULL') return null;
+
   const time = getFirstTime(value);
-  if (!time || time === 'null' || time === 'NULL') return null;
+
+  if (!time || time === 'null' || time === 'NULL') {
+    return null;
+  }
+
   return time;
 }
 
@@ -96,19 +101,10 @@ function SearchPage() {
   const [openNowOnly, setOpenNowOnly] = useState(false);
   const [page, setPage] = useState(1);
   const [userLocation, setUserLocation] = useState(null);
-  const [likedIds, setLikedIds] = useState(() => interactionStorage.getLikedIds());
 
-  // Toggle like handler
-  const handleToggleLike = (e, place) => {
-    e.stopPropagation();
-    e.preventDefault();
-    const updated = interactionStorage.toggleLiked(place);
-    setLikedIds(updated);
-  };
-
-  // Fetch places on mount
   useEffect(() => {
     let isMounted = true;
+
     setLoading(true);
     api.places.getAll()
       .then((res) => {
@@ -129,9 +125,9 @@ function SearchPage() {
     };
   }, []);
 
-  // Request user location for distance filter
   useEffect(() => {
     if (!navigator.geolocation) return;
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setUserLocation({
@@ -139,20 +135,18 @@ function SearchPage() {
           lng: position.coords.longitude,
         });
       },
-      (err) => {
-        console.log('Geolocation note:', err);
+      (error) => {
+        console.log("Geolocation error:", error);
       }
     );
   }, []);
 
-  // Filtered Province Options
   const provinceOptions = useMemo(() => {
     return Array.from(new Set(places.map((place) => (place.province || '').trim()).filter(Boolean))).sort();
   }, [places]);
 
   const normalizedQuery = query.trim().toLowerCase();
 
-  // Filtered Places List
   const filteredPlaces = useMemo(() => {
     const now = new Date();
     const nowMinutes = now.getHours() * 60 + now.getMinutes();
@@ -161,17 +155,17 @@ function SearchPage() {
     return places.filter((place) => {
       const categories = toCategoryArray(place);
 
-      // 1. Category Filter
+      // 1. กรองตามหมวดหมู่
       if (selectedCategory && !categories.includes(selectedCategory)) {
         return false;
       }
 
-      // 2. Province Filter
+      // 2. กรองตามจังหวัด
       if (selectedProvince && place.province !== selectedProvince) {
         return false;
       }
 
-      // 3. Search Query Filter
+      // 3. กรองตามคำค้นหา (Query)
       if (normalizedQuery) {
         const searchable = [
           place.place_name,
@@ -190,7 +184,7 @@ function SearchPage() {
         }
       }
 
-      // 4. Open Now Filter
+      // 4. กรองตามสถานะเปิด/ปิด
       if (openNowOnly) {
         const opening = toTimeMinutes(getFirstTime(place.opening_time));
         const closing = toTimeMinutes(getFirstTime(place.closing_time));
@@ -211,19 +205,24 @@ function SearchPage() {
         }
       }
 
-      // 5. Distance Filter
+      // 5. กรองตามระยะทาง (Distance Filter)
       if (selectedDistance?.max) {
+        // ถ้าระบบดึงตำแหน่งผู้ใช้ไม่ได้ ให้ตัดออกไปก่อน
         if (!userLocation) return false;
 
+        // ดึงพิกัดสถานที่
         const rawLat = place.latitude ?? place.lat;
         const rawLng = place.longitude ?? place.lng;
+
         const lat = Number(rawLat);
         const lng = Number(rawLng);
 
+        // ถ้าสถานที่ไหนไม่มีพิกัด ให้คัดออก
         if (!rawLat || !rawLng || isNaN(lat) || isNaN(lng)) {
           return false;
         }
 
+        // คำนวณระยะทาง
         const distance = calculateDistance(
           userLocation.lat,
           userLocation.lng,
@@ -231,10 +230,17 @@ function SearchPage() {
           lng
         );
 
+        // 💡 แยกเงื่อนไขกรณี 50 กม.+ กับระยะอื่นๆ
         if (selectedDistance.id === '50') {
-          if (distance <= 50) return false;
+          // 50 กม.+ หมายถึง ต้องมีระยะทาง >= 50 กม. ขึ้นไป
+          if (distance <= 50) {
+            return false; // ตัวที่น้อยกว่า 50 กม. ให้คัดออก
+          }
         } else {
-          if (distance > selectedDistance.max) return false;
+          // กรณี 5, 10, 25 กม. หมายถึง ระยะทางต้องไม่เกินค่า max
+          if (distance > selectedDistance.max) {
+            return false; // ตัวที่เกินระยะ max ให้คัดออก
+          }
         }
       }
 
@@ -296,11 +302,9 @@ function SearchPage() {
   return (
     <div className="search-v2-page" style={{ paddingTop: '72px' }}>
       <Navbar />
-
       <div className="search-v2-container">
-        {/* Top Search Input */}
         <section className="search-v2-topbar fade-in">
-          <span className="search-v2-icon">🔍</span>
+          <span className="search-v2-icon">⌕</span>
           <input
             className="search-v2-top-input"
             type="search"
@@ -314,7 +318,6 @@ function SearchPage() {
         </section>
 
         <div className="search-v2-layout fade-in-2">
-          {/* Sidebar Filters */}
           <aside className="search-v2-sidebar">
             <div className="search-v2-filter-head">
               <h3>ตัวกรอง</h3>
@@ -323,9 +326,8 @@ function SearchPage() {
               </button>
             </div>
 
-            {/* Province Select */}
             <div className="search-v2-filter-block">
-              <p className="search-v2-label">📍 จังหวัด</p>
+              <p className="search-v2-label">◉ จังหวัด</p>
               <div className="search-v2-select-wrap">
                 <select
                   className="search-v2-select"
@@ -335,7 +337,7 @@ function SearchPage() {
                     setPage(1);
                   }}
                 >
-                  <option value="">เลือกจังหวัดทั้งหมด</option>
+                  <option value="">เลือกจังหวัด</option>
                   {provinceOptions.map((province) => (
                     <option key={province} value={province}>{province}</option>
                   ))}
@@ -344,9 +346,8 @@ function SearchPage() {
               </div>
             </div>
 
-            {/* Distance Chips */}
             <div className="search-v2-filter-block">
-              <p className="search-v2-label">🚗 ระยะทางจากตำแหน่งปัจจุบัน</p>
+              <p className="search-v2-label">◎ ระยะทางจากตำแหน่งปัจจุบัน</p>
               <div className="search-v2-chip-wrap">
                 {DISTANCE_OPTIONS.map((distance) => (
                   <button
@@ -354,7 +355,7 @@ function SearchPage() {
                     className={`search-v2-chip${distanceId === distance.id ? ' active' : ''}`}
                     onClick={() => {
                       setDistanceId(distance.id);
-                      setPage(1);
+                      setPage(1); // Reset หน้ารายการกลับไปที่หน้า 1 เสมอเมื่อเปลี่ยนระยะทาง
                     }}
                     title={distance.max === null ? 'แสดงทุกระยะ' : `สูงสุด ${distance.max} กม.`}
                   >
@@ -364,9 +365,8 @@ function SearchPage() {
               </div>
             </div>
 
-            {/* Open Now Toggle */}
             <div className="search-v2-filter-block">
-              <p className="search-v2-label">🕒 เปิดให้บริการ</p>
+              <p className="search-v2-label">◉ เปิดให้บริการ</p>
               <label className="search-v2-switch-row">
                 <span>เปิดอยู่ตอนนี้</span>
                 <button
@@ -388,9 +388,7 @@ function SearchPage() {
             </button>
           </aside>
 
-          {/* Main Content Area */}
           <main className="search-v2-content" ref={resultsRef}>
-            {/* Category Tiles */}
             <section>
               <h2 className="search-v2-section-title">ค้นหาตามหมวดหมู่</h2>
               <div className="search-v2-category-grid">
@@ -407,7 +405,6 @@ function SearchPage() {
               </div>
             </section>
 
-            {/* Place Results */}
             <section className="search-v2-result-section">
               <h2 className="search-v2-result-title">ผลลัพธ์ ({filteredPlaces.length})</h2>
 
@@ -422,14 +419,10 @@ function SearchPage() {
               )}
 
               {!loading && !error && pagedPlaces.length === 0 && (
-                <div className="empty-state" style={{ background: '#fff', borderRadius: 20, padding: '40px 20px', textAlign: 'center', border: '1px solid #E8E2DE' }}>
-                  <span className="empty-icon" style={{ fontSize: '48px', display: 'block', marginBottom: '12px' }}>🔍</span>
-                  <h3 style={{ fontFamily: 'Prompt, sans-serif', fontSize: '20px', fontWeight: '700', color: '#1B1C1C', marginBottom: '8px' }}>
-                    ไม่พบสถานที่
-                  </h3>
-                  <p style={{ fontFamily: 'Prompt, sans-serif', fontSize: '14px', color: '#42493F' }}>
-                    ลองเปลี่ยนคำค้นหาหรือปรับตัวกรองใหม่
-                  </p>
+                <div className="empty-state" style={{ background: '#fff', borderRadius: 20, border: '1px solid var(--border)' }}>
+                  <span className="empty-icon">🔍</span>
+                  <h2 className="empty-title">ไม่พบสถานที่</h2>
+                  <p className="empty-sub">ลองเปลี่ยนคำค้นหาหรือปรับตัวกรองใหม่</p>
                 </div>
               )}
 
@@ -437,43 +430,40 @@ function SearchPage() {
                 <div className="search-v2-result-list">
                   {pagedPlaces.map((place) => {
                     const categories = toCategoryArray(place);
-                    const placeIdNum = Math.abs(Number(place.id) || 0);
-                    const image = place.image_url || FALLBACK_IMAGES[placeIdNum % FALLBACK_IMAGES.length];
+
+                    const image =
+                      place.image_url ||
+                      FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length];
 
                     const openingTime = formatTime(place.opening_time);
                     const closingTime = formatTime(place.closing_time);
-                    const timeText = openingTime && closingTime ? `${openingTime} - ${closingTime}` : '-';
+
+                    const timeText =
+                      openingTime && closingTime
+                        ? `${openingTime} - ${closingTime}`
+                        : '-';
+
                     const isLiked = likedIds.includes(String(place.id));
 
                     return (
                       <article key={place.id} className="modern-place-card">
-                        <div className="modern-card-image" style={{ position: 'relative' }}>
+                        <div className="modern-card-image">
                           <img src={image} alt={place.place_name} loading="lazy" />
-                          <button
-                            type="button"
-                            className="favorite-btn"
-                            onClick={(e) => handleToggleLike(e, place)}
-                            title={isLiked ? 'เลิกถูกใจ' : 'ถูกใจ'}
-                            style={{
-                              color: isLiked ? '#E11D48' : '#64748B',
-                            }}
-                          >
-                            {isLiked ? '❤️' : '♡'}
-                          </button>
                         </div>
 
                         <div className="modern-card-content">
+                          <h3 className="modern-title">{place.place_name}</h3>
                           <div className="modern-card-top">
                             <span className="category-pill">
                               {categories[0] || 'ท่องเที่ยว'}
                             </span>
                           </div>
 
-                          <h3 className="modern-title">{place.place_name}</h3>
                           <div className="modern-location">📍 {place.province || '-'}</div>
 
                           <p className="modern-description">
-                            {place.description || 'สถานที่ท่องเที่ยวที่น่าสนใจ เหมาะสำหรับการพักผ่อน ถ่ายรูป และท่องเที่ยว'}
+                            {place.description ||
+                              'สถานที่ท่องเที่ยวที่น่าสนใจ เหมาะสำหรับการพักผ่อน ถ่ายรูป และท่องเที่ยว'}
                           </p>
 
                           <div className="modern-bottom">
@@ -489,13 +479,25 @@ function SearchPage() {
                             </button>
                           </div>
                         </div>
+
+                        {/* Favorite Heart Button on Top-Right of White Container */}
+                        <button
+                          type="button"
+                          className="favorite-btn"
+                          onClick={(e) => handleToggleLike(e, place)}
+                          title={isLiked ? 'เลิกถูกใจ' : 'ถูกใจ'}
+                          style={{
+                            color: isLiked ? '#E11D48' : '#64748B',
+                          }}
+                        >
+                          {isLiked ? '❤️' : '♡'}
+                        </button>
                       </article>
                     );
                   })}
                 </div>
               )}
 
-              {/* Pagination */}
               {!loading && !error && totalPages > 1 && (
                 <div className="search-v2-pagination">
                   <button
