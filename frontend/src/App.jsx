@@ -5,6 +5,7 @@ import LoginPage           from './pages/LoginPage';
 import OnboardingPage      from './pages/OnboardingPage';
 import RecommendationsPage from './pages/RecommendationsPage';
 import PlaceDetailPage     from './pages/PlaceDetailPage';
+import SearchPage          from './pages/SearchPage';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
 
         {/* ── Home / Recommendations & Browsing ── */}
         <Route path="/" element={<RecommendationsPage />} />
+
+        {/* ── Search page ── */}
+        <Route path="/search" element={<SearchPage />} />
 
         {/* ── Place detail — public ── */}
         <Route path="/places/:id" element={<PlaceDetailPage />} />
