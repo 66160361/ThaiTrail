@@ -47,8 +47,18 @@ function LoginPage() {
         throw new Error(data?.message || 'Google login failed');
       }
 
-      // After successful login, navigate to onboarding
-      navigate('/onboarding');
+      const user = data.user;
+      const hasSavedInterests = (user?.onboarded === 1 || user?.onboarded === '1') ||
+        (Array.isArray(user?.interests) && user.interests.length > 0) ||
+        Boolean(localStorage.getItem(`thaitrail_user_interests_${user?.id}`));
+
+      // If user has already chosen interests previously -> Go directly to Home page (/)
+      if (hasSavedInterests) {
+        navigate('/', { replace: true });
+      } else {
+        // New user with no saved interests -> Go to /onboarding
+        navigate('/onboarding', { replace: true });
+      }
     } catch (error) {
       setAuthError(error.message || 'ไม่สามารถเข้าสู่ระบบได้');
     } finally {
@@ -61,6 +71,16 @@ function LoginPage() {
   }, []);
 
   const handleGuestLogin = () => {
+    const guestInterests = sessionStorage.getItem('guest_interests');
+    if (guestInterests) {
+      try {
+        const parsed = JSON.parse(guestInterests);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          navigate('/', { replace: true });
+          return;
+        }
+      } catch {}
+    }
     navigate('/onboarding');
   };
 
