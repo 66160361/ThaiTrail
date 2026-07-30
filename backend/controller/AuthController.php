@@ -184,11 +184,11 @@ class AuthController
                 );
                 $link->execute([$googleId, $avatarUrl, $existing['id']]);
             } else {
-                // Brand-new user — set name = email so user can edit later
+                // Brand-new user — default name is 'anonymous', user can change it later
                 $ins = $this->pdo->prepare(
                     'INSERT INTO users (google_id, name, email, avatar_url) VALUES (?, ?, ?, ?)'
                 );
-                $ins->execute([$googleId, $email, $email, $avatarUrl]);
+                $ins->execute([$googleId, 'anonymous', $email, $avatarUrl]);
             }
 
             // Reload full row

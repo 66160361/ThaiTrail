@@ -38,11 +38,12 @@ function SettingsPage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showEditModal, setShowEditModal] = useState(false);
+  const userKey = user?.email || user?.id;
   const [nameInput, setNameInput] = useState(
-    () => user?.name || localStorage.getItem('thaitrail_user_name') || 'อลิสา นักเดินทาง'
+    () => user?.name || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null) || 'anonymous'
   );
   const [avatarInput, setAvatarInput] = useState(
-    () => user?.avatar_url || user?.picture || localStorage.getItem('thaitrail_user_avatar') || ''
+    () => user?.avatar_url || user?.picture || (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null) || ''
   );
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState('');
@@ -52,12 +53,10 @@ function SettingsPage() {
       try {
         if (logout) await logout();
         sessionStorage.clear();
-        localStorage.clear();
         navigate('/login', { replace: true });
       } catch (err) {
         console.error('Logout error:', err);
         sessionStorage.clear();
-        localStorage.clear();
         navigate('/login', { replace: true });
       }
     }
@@ -93,18 +92,22 @@ function SettingsPage() {
           avatar_url: avatarInput,
         });
       }
-      localStorage.setItem('thaitrail_user_name', nameInput.trim());
-      if (avatarInput) {
-        localStorage.setItem('thaitrail_user_avatar', avatarInput);
+      if (userKey) {
+        localStorage.setItem(`thaitrail_user_name_${userKey}`, nameInput.trim());
+        if (avatarInput) {
+          localStorage.setItem(`thaitrail_user_avatar_${userKey}`, avatarInput);
+        }
       }
       setSaveSuccess('บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว!');
       setTimeout(() => {
         setShowEditModal(false);
       }, 800);
     } catch {
-      localStorage.setItem('thaitrail_user_name', nameInput.trim());
-      if (avatarInput) {
-        localStorage.setItem('thaitrail_user_avatar', avatarInput);
+      if (userKey) {
+        localStorage.setItem(`thaitrail_user_name_${userKey}`, nameInput.trim());
+        if (avatarInput) {
+          localStorage.setItem(`thaitrail_user_avatar_${userKey}`, avatarInput);
+        }
       }
       setSaveSuccess('บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว!');
       setTimeout(() => {
