@@ -121,8 +121,8 @@ function ProfilePage() {
     if (!raw || (Array.isArray(raw) && raw.length === 0)) {
       try {
         const stored = localStorage.getItem('thaitrail_user_interests') ||
-                       localStorage.getItem('guest_interests') ||
-                       sessionStorage.getItem('guest_interests');
+          localStorage.getItem('guest_interests') ||
+          sessionStorage.getItem('guest_interests');
         if (stored) {
           raw = JSON.parse(stored);
         }
@@ -160,19 +160,27 @@ function ProfilePage() {
     <div style={{ minHeight: '100vh', background: 'var(--bg)', backgroundAttachment: 'fixed', paddingTop: '72px' }}>
       <Navbar />
 
-      <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '40px 20px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-
-        {/* ── 1. Profile Header Box (White background card) ── */}
+      <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '40px 20px' }}>
+        {/* ── Unified White Card Container covering Profile Info & Tabs/Grid ── */}
         <div style={{
           background: '#FFFFFF',
           borderRadius: '24px',
-          padding: '36px 40px',
-          boxShadow: '0 8px 30px rgba(13, 51, 14, 0.05)',
+          padding: '40px 44px',
+          boxShadow: '0 8px 32px rgba(13, 51, 14, 0.06)',
           border: '1px solid #E8E2DE',
           display: 'flex',
+          flexDirection: 'column',
+          gap: '36px',
+        }}>
+
+        {/* ── 1. Profile Header ── */}
+        <div style={{
+          display: 'flex',
           flexDirection: 'row',
-          alignItems: 'center',
-          gap: '40px',
+          alignItems: 'flex-start',
+          gap: '48px',
+          paddingBottom: '48px',
+          borderBottom: '1px solid #C2C9BC',
           flexWrap: 'wrap',
         }}>
           {/* Avatar */}
@@ -453,6 +461,7 @@ function ProfilePage() {
             </Link>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
