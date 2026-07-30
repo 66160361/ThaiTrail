@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import Navbar from '../components/Navbar';
+import { interactionStorage } from '../services/interactionStorage';
 
 const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200',
@@ -65,9 +66,9 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLon / 2) *
+    Math.sin(dLon / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -101,6 +102,13 @@ function SearchPage() {
   const [openNowOnly, setOpenNowOnly] = useState(false);
   const [page, setPage] = useState(1);
   const [userLocation, setUserLocation] = useState(null);
+  const [likedIds, setLikedIds] = useState(() => interactionStorage.getLikedIds());
+
+  const handleToggleLike = (e, place) => {
+    e.stopPropagation();
+    const updated = interactionStorage.toggleLiked(place);
+    setLikedIds(updated);
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -205,44 +213,44 @@ function SearchPage() {
         }
       }
 
-// 5. กรองตามระยะทาง (Distance Filter)
-if (selectedDistance?.max) {
-  // ถ้าระบบดึงตำแหน่งผู้ใช้ไม่ได้ ให้ตัดออกไปก่อน
-  if (!userLocation) return false;
+      // 5. กรองตามระยะทาง (Distance Filter)
+      if (selectedDistance?.max) {
+        // ถ้าระบบดึงตำแหน่งผู้ใช้ไม่ได้ ให้ตัดออกไปก่อน
+        if (!userLocation) return false;
 
-  // ดึงพิกัดสถานที่
-  const rawLat = place.latitude ?? place.lat;
-  const rawLng = place.longitude ?? place.lng;
+        // ดึงพิกัดสถานที่
+        const rawLat = place.latitude ?? place.lat;
+        const rawLng = place.longitude ?? place.lng;
 
-  const lat = Number(rawLat);
-  const lng = Number(rawLng);
+        const lat = Number(rawLat);
+        const lng = Number(rawLng);
 
-  // ถ้าสถานที่ไหนไม่มีพิกัด ให้คัดออก
-  if (!rawLat || !rawLng || isNaN(lat) || isNaN(lng)) {
-    return false;
-  }
+        // ถ้าสถานที่ไหนไม่มีพิกัด ให้คัดออก
+        if (!rawLat || !rawLng || isNaN(lat) || isNaN(lng)) {
+          return false;
+        }
 
-  // คำนวณระยะทาง
-  const distance = calculateDistance(
-    userLocation.lat,
-    userLocation.lng,
-    lat,
-    lng
-  );
+        // คำนวณระยะทาง
+        const distance = calculateDistance(
+          userLocation.lat,
+          userLocation.lng,
+          lat,
+          lng
+        );
 
-  // 💡 แยกเงื่อนไขกรณี 50 กม.+ กับระยะอื่นๆ
-  if (selectedDistance.id === '50') {
-    // 50 กม.+ หมายถึง ต้องมีระยะทาง >= 50 กม. ขึ้นไป
-    if (distance <= 50) {
-      return false; // ตัวที่น้อยกว่า 50 กม. ให้คัดออก
-    }
-  } else {
-    // กรณี 5, 10, 25 กม. หมายถึง ระยะทางต้องไม่เกินค่า max
-    if (distance > selectedDistance.max) {
-      return false; // ตัวที่เกินระยะ max ให้คัดออก
-    }
-  }
-}
+        // 💡 แยกเงื่อนไขกรณี 50 กม.+ กับระยะอื่นๆ
+        if (selectedDistance.id === '50') {
+          // 50 กม.+ หมายถึง ต้องมีระยะทาง >= 50 กม. ขึ้นไป
+          if (distance <= 50) {
+            return false; // ตัวที่น้อยกว่า 50 กม. ให้คัดออก
+          }
+        } else {
+          // กรณี 5, 10, 25 กม. หมายถึง ระยะทางต้องไม่เกินค่า max
+          if (distance > selectedDistance.max) {
+            return false; // ตัวที่เกินระยะ max ให้คัดออก
+          }
+        }
+      }
 
       return true;
     });
@@ -447,7 +455,21 @@ if (selectedDistance?.max) {
                       <article key={place.id} className="modern-place-card">
                         <div className="modern-card-image">
                           <img src={image} alt={place.place_name} loading="lazy" />
-                          <button className="favorite-btn">♡</button>
+                          <button
+                            type="button"
+                            className="favorite-btn"
+                            onClick={(e) => handleToggleLike(e, place)}
+                            title={likedIds.includes(String(place.id)) ? 'เลิกถูกใจ' : 'ถูกใจ'}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: likedIds.includes(String(place.id)) ? '#E11D48' : '#64748B',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                            }}
+                          >
+                            {likedIds.includes(String(place.id)) ? '❤️' : '♡'}
+                          </button>
                         </div>
 
                         <div className="modern-card-content">

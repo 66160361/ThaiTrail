@@ -2924,6 +2924,7 @@ a {
 }
 
 .modern-card-image{
+    position: relative;
     width:210px;
     min-width:210px;
     height:170px;
