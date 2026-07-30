@@ -153,7 +153,7 @@ function ProfilePage() {
     return Array.from(new Set(mapped));
   }, [baseUser?.interests, CATEGORY_MAP]);
 
-  const userName = localName || baseUser?.name || 'อลิสา นักเดินทาง';
+  const userName = localName || baseUser?.name || user?.name || user?.email || 'นักเดินทาง';
   const avatarUrl = localAvatar || baseUser?.avatar_url || baseUser?.picture || null;
   const currentPlaces = activeTab === 'liked' ? likedPlaces : savedPlaces;
 

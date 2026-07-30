@@ -147,7 +147,6 @@ class AuthController
 
         $googleId  = $payload['sub']     ?? '';
         $email     = $payload['email']   ?? '';
-        $name      = $payload['name']    ?? ($payload['given_name'] ?? 'ผู้ใช้งาน');
         $avatarUrl = $payload['picture'] ?? '';
 
         if (!$googleId || !$email) {
@@ -161,30 +160,32 @@ class AuthController
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            // Update name / avatar in case they changed
-            $upd = $this->pdo->prepare(
-                'UPDATE users SET name = ?, avatar_url = ? WHERE id = ?'
-            );
-            $upd->execute([$name, $avatarUrl, $user['id']]);
+            // Existing user: preserve their existing name (or set to email if empty)
+            if (empty($user['name'])) {
+                $upd = $this->pdo->prepare('UPDATE users SET name = ? WHERE id = ?');
+                $upd->execute([$email, $user['id']]);
+                $user['name'] = $email;
+            }
         } else {
             // New user — check if email already registered another way
-            $byEmail = $this->pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
+            $byEmail = $this->pdo->prepare('SELECT * FROM users WHERE email = ? LIMIT 1');
             $byEmail->execute([$email]);
             $existing = $byEmail->fetch(PDO::FETCH_ASSOC);
 
             if ($existing) {
                 // Link Google ID to existing account
+                $userName = !empty($existing['name']) ? $existing['name'] : $email;
                 $link = $this->pdo->prepare(
-                    'UPDATE users SET google_id = ?, avatar_url = ? WHERE id = ?'
+                    'UPDATE users SET google_id = ?, avatar_url = ?, name = ? WHERE id = ?'
                 );
-                $link->execute([$googleId, $avatarUrl, $existing['id']]);
+                $link->execute([$googleId, $avatarUrl, $userName, $existing['id']]);
                 $user = ['id' => $existing['id']];
             } else {
-                // Brand-new user
+                // Brand-new user — set initial display name to user email
                 $ins = $this->pdo->prepare(
                     'INSERT INTO users (google_id, name, email, avatar_url) VALUES (?, ?, ?, ?)'
                 );
-                $ins->execute([$googleId, $name, $email, $avatarUrl]);
+                $ins->execute([$googleId, $email, $email, $avatarUrl]);
                 $user = ['id' => (int) $this->pdo->lastInsertId()];
             }
 
