@@ -60,14 +60,23 @@ function OnboardingPage() {
   const handleNext = async () => {
     if (selected.length === 0) return;
 
-    if (user && user.id) {
+    // Always save to localStorage first
+    if (user?.id) {
       localStorage.setItem(`thaitrail_user_interests_${user.id}`, JSON.stringify(selected));
-      try {
-        await api.user.setInterests({ category_ids: selected });
-        if (markOnboarded) markOnboarded();
-      } catch (err) {
-        console.log('Backend interest sync note:', err);
+    }
+
+    // Always try to save to backend (session must be active)
+    try {
+      await api.user.setInterests({ category_ids: selected });
+      if (markOnboarded) markOnboarded();
+    } catch (err) {
+      // If 401, session is lost — alert user to try again
+      if (err?.status === 401) {
+        alert('เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง');
+        navigate('/login', { replace: true });
+        return;
       }
+      console.warn('Backend interest sync failed:', err);
     }
 
     sessionStorage.removeItem('active_tab');
