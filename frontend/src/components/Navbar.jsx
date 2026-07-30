@@ -57,29 +57,35 @@ function Navbar() {
       </div>
 
       <div className="navbar-right">
-        {user && (
-          <NavLink to="/profile" className="user-chip" style={{ textDecoration: 'none', cursor: 'pointer' }}>
-            {(localStorage.getItem('thaitrail_user_avatar') || user.avatar_url || user.picture) ? (
-              <img
-                src={localStorage.getItem('thaitrail_user_avatar') || user.avatar_url || user.picture}
-                alt={localStorage.getItem('thaitrail_user_name') || user.name}
-                style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }}
-              />
-            ) : (
-              <div className="user-avatar" style={{
-                background: 'linear-gradient(135deg, #E0F2FE, #BAE6FD)',
-                color: '#0369A1',
-                fontWeight: '700',
-                fontSize: '12px',
-              }}>
-                {(localStorage.getItem('thaitrail_user_name') || user.name) ? (localStorage.getItem('thaitrail_user_name') || user.name).charAt(0).toUpperCase() : 'U'}
-              </div>
-            )}
-            <span className="user-name-text" style={{ maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {localStorage.getItem('thaitrail_user_name') || user.name}
-            </span>
-          </NavLink>
-        )}
+        {user && (() => {
+          const userKey = user?.email || user?.id;
+          const currentName = (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null) || user.name || user.email;
+          const currentAvatar = (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null) || user.avatar_url || user.picture;
+
+          return (
+            <NavLink to="/profile" className="user-chip" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+              {currentAvatar ? (
+                <img
+                  src={currentAvatar}
+                  alt={currentName}
+                  style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }}
+                />
+              ) : (
+                <div className="user-avatar" style={{
+                  background: 'linear-gradient(135deg, #E0F2FE, #BAE6FD)',
+                  color: '#0369A1',
+                  fontWeight: '700',
+                  fontSize: '12px',
+                }}>
+                  {currentName ? currentName.charAt(0).toUpperCase() : 'U'}
+                </div>
+              )}
+              <span className="user-name-text" style={{ maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {currentName}
+              </span>
+            </NavLink>
+          );
+        })()}
       </div>
     </nav>
   );

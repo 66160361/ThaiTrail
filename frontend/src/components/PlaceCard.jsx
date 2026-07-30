@@ -28,8 +28,9 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
   const { user } = useAuth();
   const navigate  = useNavigate();
 
-  const [liked,     setLiked]     = useState(() => interactionStorage.isLiked(place.id));
-  const [saved,     setSaved]     = useState(() => interactionStorage.isSaved(place.id));
+  const userKey   = user?.email || user?.id;
+  const [liked,     setLiked]     = useState(() => interactionStorage.isLiked(place.id, userKey));
+  const [saved,     setSaved]     = useState(() => interactionStorage.isSaved(place.id, userKey));
   const [dismissed, setDismissed] = useState(false);
   const [imgSrc,    setImgSrc]    = useState(
     place.image_url || FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length]
@@ -38,11 +39,11 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
   const signal = async (e, type) => {
     e.stopPropagation();
     if (type === 'like') {
-      const nextLiked = interactionStorage.toggleLike(place);
+      const nextLiked = interactionStorage.toggleLike(place, userKey);
       setLiked(nextLiked);
     }
     if (type === 'save') {
-      const nextSaved = interactionStorage.toggleSave(place);
+      const nextSaved = interactionStorage.toggleSave(place, userKey);
       setSaved(nextSaved);
     }
     if (user) {

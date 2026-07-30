@@ -73,9 +73,11 @@ function PlaceDetailPage() {
   useEffect(() => {
     if (!id) return;
 
+    const userKey = user?.email || user?.id;
+
     // Check local storage state first so it displays instantly
-    setLiked(interactionStorage.isLiked(id));
-    setSaved(interactionStorage.isSaved(id));
+    setLiked(interactionStorage.isLiked(id, userKey));
+    setSaved(interactionStorage.isSaved(id, userKey));
 
     if (user) {
       api.user.getInteractions()
@@ -83,8 +85,8 @@ function PlaceDetailPage() {
           if (res.success) {
             const isLikedBackend = Array.isArray(res.liked) && res.liked.includes(Number(id));
             const isSavedBackend = Array.isArray(res.saved) && res.saved.includes(Number(id));
-            setLiked(isLikedBackend || interactionStorage.isLiked(id));
-            setSaved(isSavedBackend || interactionStorage.isSaved(id));
+            setLiked(isLikedBackend || interactionStorage.isLiked(id, userKey));
+            setSaved(isSavedBackend || interactionStorage.isSaved(id, userKey));
           }
         })
         .catch(() => {});
@@ -115,6 +117,7 @@ function PlaceDetailPage() {
   }, [place]);
 
   const handleSignal = async (type) => {
+    const userKey = user?.email || user?.id;
     if (type === 'share') {
       try {
         await navigator.clipboard.writeText(window.location.href);
@@ -129,11 +132,11 @@ function PlaceDetailPage() {
     }
     if (!place) return;
     if (type === 'like') {
-      const nextLiked = interactionStorage.toggleLike(place);
+      const nextLiked = interactionStorage.toggleLike(place, userKey);
       setLiked(nextLiked);
     }
     if (type === 'save') {
-      const nextSaved = interactionStorage.toggleSave(place);
+      const nextSaved = interactionStorage.toggleSave(place, userKey);
       setSaved(nextSaved);
     }
     if (user) {

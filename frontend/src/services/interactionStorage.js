@@ -1,40 +1,46 @@
 import { api } from './api';
 
-const LIKED_KEY = 'thaitrail_liked_places';
-const SAVED_KEY = 'thaitrail_saved_places';
+const getStorageKey = (prefix, userIdentifier) => {
+  if (userIdentifier) {
+    return `${prefix}_${userIdentifier}`;
+  }
+  return `${prefix}_guest`;
+};
 
 export const interactionStorage = {
-  getLikedPlaces() {
+  getLikedPlaces(userIdentifier) {
     try {
-      return JSON.parse(localStorage.getItem(LIKED_KEY) || '[]');
+      const key = getStorageKey('thaitrail_liked_places', userIdentifier);
+      return JSON.parse(localStorage.getItem(key) || '[]');
     } catch {
       return [];
     }
   },
 
-  getSavedPlaces() {
+  getSavedPlaces(userIdentifier) {
     try {
-      return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]');
+      const key = getStorageKey('thaitrail_saved_places', userIdentifier);
+      return JSON.parse(localStorage.getItem(key) || '[]');
     } catch {
       return [];
     }
   },
 
-  isLiked(placeId) {
+  isLiked(placeId, userIdentifier) {
     if (!placeId) return false;
-    const list = this.getLikedPlaces();
+    const list = this.getLikedPlaces(userIdentifier);
     return list.some((p) => String(p.id) === String(placeId));
   },
 
-  isSaved(placeId) {
+  isSaved(placeId, userIdentifier) {
     if (!placeId) return false;
-    const list = this.getSavedPlaces();
+    const list = this.getSavedPlaces(userIdentifier);
     return list.some((p) => String(p.id) === String(placeId));
   },
 
-  toggleLike(place) {
+  toggleLike(place, userIdentifier) {
     if (!place || !place.id) return false;
-    const list = this.getLikedPlaces();
+    const list = this.getLikedPlaces(userIdentifier);
     const index = list.findIndex((p) => String(p.id) === String(place.id));
     let isLikedNow = false;
 
@@ -46,7 +52,8 @@ export const interactionStorage = {
       isLikedNow = true;
     }
 
-    localStorage.setItem(LIKED_KEY, JSON.stringify(list));
+    const key = getStorageKey('thaitrail_liked_places', userIdentifier);
+    localStorage.setItem(key, JSON.stringify(list));
 
     // Send signal to MySQL backend to update user_interests
     try {
@@ -61,9 +68,9 @@ export const interactionStorage = {
     return isLikedNow;
   },
 
-  toggleSave(place) {
+  toggleSave(place, userIdentifier) {
     if (!place || !place.id) return false;
-    const list = this.getSavedPlaces();
+    const list = this.getSavedPlaces(userIdentifier);
     const index = list.findIndex((p) => String(p.id) === String(place.id));
     let isSavedNow = false;
 
@@ -75,7 +82,8 @@ export const interactionStorage = {
       isSavedNow = true;
     }
 
-    localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+    const key = getStorageKey('thaitrail_saved_places', userIdentifier);
+    localStorage.setItem(key, JSON.stringify(list));
 
     // Send signal to MySQL backend to update user_interests
     try {
@@ -90,25 +98,17 @@ export const interactionStorage = {
     return isSavedNow;
   },
 
-  syncBackend(likedPlacesBackend = [], savedPlacesBackend = []) {
+  syncBackend(likedPlacesBackend = [], savedPlacesBackend = [], userIdentifier) {
+    if (!userIdentifier) return;
+
     if (Array.isArray(likedPlacesBackend)) {
-      const current = this.getLikedPlaces();
-      const map = new Map();
-      likedPlacesBackend.forEach((p) => map.set(String(p.id), p));
-      current.forEach((p) => {
-        if (!map.has(String(p.id))) map.set(String(p.id), p);
-      });
-      localStorage.setItem(LIKED_KEY, JSON.stringify(Array.from(map.values())));
+      const likedKey = getStorageKey('thaitrail_liked_places', userIdentifier);
+      localStorage.setItem(likedKey, JSON.stringify(likedPlacesBackend));
     }
 
     if (Array.isArray(savedPlacesBackend)) {
-      const current = this.getSavedPlaces();
-      const map = new Map();
-      savedPlacesBackend.forEach((p) => map.set(String(p.id), p));
-      current.forEach((p) => {
-        if (!map.has(String(p.id))) map.set(String(p.id), p);
-      });
-      localStorage.setItem(SAVED_KEY, JSON.stringify(Array.from(map.values())));
+      const savedKey = getStorageKey('thaitrail_saved_places', userIdentifier);
+      localStorage.setItem(savedKey, JSON.stringify(savedPlacesBackend));
     }
   }
 };

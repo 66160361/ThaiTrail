@@ -50,6 +50,8 @@ function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('liked'); // 'liked' or 'saved'
 
+  const userKey = user?.email || user?.id;
+
   // Fetch backend profile data when user is present
   useEffect(() => {
     if (!user) return;
@@ -58,7 +60,7 @@ function ProfilePage() {
       .then((res) => {
         if (res && res.success) {
           setProfileData(res);
-          interactionStorage.syncBackend(res.liked_places, res.saved_places);
+          interactionStorage.syncBackend(res.liked_places, res.saved_places, userKey);
         }
       })
       .catch((err) => {
@@ -67,13 +69,13 @@ function ProfilePage() {
       .finally(() => {
         setLoading(false);
       });
-  }, [user]);
+  }, [user, userKey]);
 
   // Compute merged places for Liked and Saved tabs (Local + Backend)
   const likedPlaces = useMemo(() => {
     const map = new Map();
     const backendList = profileData?.liked_places;
-    const localList = interactionStorage.getLikedPlaces();
+    const localList = interactionStorage.getLikedPlaces(userKey);
 
     if (Array.isArray(backendList)) {
       backendList.forEach((p) => { if (p && p.id != null) map.set(String(p.id), p); });
@@ -82,12 +84,12 @@ function ProfilePage() {
       localList.forEach((p) => { if (p && p.id != null && !map.has(String(p.id))) map.set(String(p.id), p); });
     }
     return Array.from(map.values());
-  }, [profileData]);
+  }, [profileData, userKey]);
 
   const savedPlaces = useMemo(() => {
     const map = new Map();
     const backendList = profileData?.saved_places;
-    const localList = interactionStorage.getSavedPlaces();
+    const localList = interactionStorage.getSavedPlaces(userKey);
 
     if (Array.isArray(backendList)) {
       backendList.forEach((p) => { if (p && p.id != null) map.set(String(p.id), p); });
@@ -96,11 +98,11 @@ function ProfilePage() {
       localList.forEach((p) => { if (p && p.id != null && !map.has(String(p.id))) map.set(String(p.id), p); });
     }
     return Array.from(map.values());
-  }, [profileData]);
+  }, [profileData, userKey]);
 
   // User details
-  const localName = localStorage.getItem('thaitrail_user_name');
-  const localAvatar = localStorage.getItem('thaitrail_user_avatar');
+  const localName = userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null;
+  const localAvatar = userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null;
   const baseUser = profileData?.user || user;
 
   // Dynamic user interests parser
