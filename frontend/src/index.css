@@ -2833,7 +2833,7 @@ a {
 
 .modern-card-image img{
     width:100%;
-    height:100%;
+    height:170px;
     object-fit:cover;
 }
 
@@ -2902,17 +2902,16 @@ a {
     display:flex;
     gap:18px;
     font-size:13px;
-    color:#666;
 }
 
 .detail-button{
     padding:10px 22px;
     font-size:14px;
     border-radius:10px;
-    background:#2F8F5B;
+    background:#0D330E;
+    color: var(--surface-2);
 }
 
 .detail-button:hover{
-    background:#2F8F5B;
     color:#fff;
 }

@@ -164,21 +164,11 @@ function SearchPage() {
         return false;
       }
 
-      // 3. กรองตามคำค้นหา (Query)
+// 3. กรองตามคำค้นหา (Query) - ค้นหาเฉพาะชื่อสถานที่
       if (normalizedQuery) {
-        const searchable = [
-          place.place_name,
-          place.province,
-          place.district,
-          place.subdistrict,
-          place.description,
-          categories.join(' '),
-        ]
-          .filter(Boolean)
-          .join(' ')
-          .toLowerCase();
+        const placeName = (place.place_name || '').toLowerCase();
 
-        if (!searchable.includes(normalizedQuery)) {
+        if (!placeName.includes(normalizedQuery)) {
           return false;
         }
       }
@@ -229,7 +219,7 @@ if (selectedDistance?.max) {
     lng
   );
 
-  // 💡 แยกเงื่อนไขกรณี 50 กม.+ กับระยะอื่นๆ
+  //  แยกเงื่อนไขกรณี 50 กม.+ กับระยะอื่นๆ
   if (selectedDistance.id === '50') {
     // 50 กม.+ หมายถึง ต้องมีระยะทาง >= 50 กม. ขึ้นไป
     if (distance <= 50) {
@@ -445,7 +435,6 @@ if (selectedDistance?.max) {
                       <article key={place.id} className="modern-place-card">
                         <div className="modern-card-image">
                           <img src={image} alt={place.place_name} loading="lazy" />
-                          <button className="favorite-btn">♡</button>
                         </div>
 
                         <div className="modern-card-content">
