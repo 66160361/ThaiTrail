@@ -161,11 +161,16 @@ class AuthController
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            // Update name / avatar in case they changed
+            // Update only avatar_url in case it changed — preserve user-edited name
             $upd = $this->pdo->prepare(
-                'UPDATE users SET name = ?, avatar_url = ? WHERE id = ?'
+                'UPDATE users SET avatar_url = ? WHERE id = ?'
             );
-            $upd->execute([$name, $avatarUrl, $user['id']]);
+            $upd->execute([$avatarUrl, $user['id']]);
+
+            // Reload fresh row after update
+            $reload = $this->pdo->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
+            $reload->execute([$user['id']]);
+            $user = $reload->fetch(PDO::FETCH_ASSOC);
         } else {
             // New user — check if email already registered another way
             $byEmail = $this->pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
@@ -173,19 +178,17 @@ class AuthController
             $existing = $byEmail->fetch(PDO::FETCH_ASSOC);
 
             if ($existing) {
-                // Link Google ID to existing account
+                // Link Google ID to existing account (preserve their name)
                 $link = $this->pdo->prepare(
                     'UPDATE users SET google_id = ?, avatar_url = ? WHERE id = ?'
                 );
                 $link->execute([$googleId, $avatarUrl, $existing['id']]);
-                $user = ['id' => $existing['id']];
             } else {
-                // Brand-new user
+                // Brand-new user — set name = email so user can edit later
                 $ins = $this->pdo->prepare(
                     'INSERT INTO users (google_id, name, email, avatar_url) VALUES (?, ?, ?, ?)'
                 );
-                $ins->execute([$googleId, $name, $email, $avatarUrl]);
-                $user = ['id' => (int) $this->pdo->lastInsertId()];
+                $ins->execute([$googleId, $email, $email, $avatarUrl]);
             }
 
             // Reload full row
@@ -194,6 +197,21 @@ class AuthController
         }
 
         $_SESSION['user_id'] = (int) $user['id'];
+
+        // Auto-sync: if user has interests in user_interests table, mark as onboarded
+        if (!(int)($user['onboarded'] ?? 0)) {
+            $chk = $this->pdo->prepare(
+                'SELECT COUNT(*) FROM user_interests WHERE user_id = ?'
+            );
+            $chk->execute([$user['id']]);
+            $interestCount = (int) $chk->fetchColumn();
+
+            if ($interestCount > 0) {
+                $this->pdo->prepare('UPDATE users SET onboarded = 1 WHERE id = ?')
+                    ->execute([$user['id']]);
+                $user['onboarded'] = 1;
+            }
+        }
 
         return [
             'success' => true,

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import Navbar from '../components/Navbar';
-import { useAuth } from '../context/AuthContext';
 import { interactionStorage } from '../services/interactionStorage';
 
 const FALLBACK_IMAGES = [
@@ -103,13 +102,12 @@ function SearchPage() {
   const [openNowOnly, setOpenNowOnly] = useState(false);
   const [page, setPage] = useState(1);
   const [userLocation, setUserLocation] = useState(null);
-  const { user } = useAuth();
-  const userKey = user?.email || user?.id;
+  const [, setLikedTick] = useState(0);
 
   const handleToggleLike = (e, place) => {
     e.stopPropagation();
     e.preventDefault();
-    interactionStorage.toggleLike(place, userKey);
+    interactionStorage.toggleLike(place);
     setLikedTick((t) => t + 1);
   };
 
@@ -444,7 +442,7 @@ function SearchPage() {
                         ? `${openingTime} - ${closingTime}`
                         : '-';
 
-                    const isLiked = interactionStorage.isLiked(place.id, userKey);
+                    const isLiked = interactionStorage.isLiked(place.id);
 
                     return (
                       <article key={place.id} className="modern-place-card">

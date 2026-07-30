@@ -5,14 +5,14 @@ import { useAuth } from '../context/AuthContext';
 
 // Category colors (consistent with the 8 Thai categories)
 const CATEGORY_STYLES = {
-  'ศาสนาและความเชื่อ':     { color: '#B8860B', bg: 'rgba(252,211,77,0.18)' },
-  'ธรรมชาติและผจญภัย':    { color: '#0D7A3F', bg: 'rgba(52,211,153,0.15)' },
-  'ทะเลและเกาะ':           { color: '#0369A1', bg: 'rgba(56,189,248,0.15)' },
-  'สวนสัตว์':              { color: '#6D28D9', bg: 'rgba(167,139,250,0.15)' },
-  'ถ่ายภาพ':               { color: '#BE185D', bg: 'rgba(244,114,182,0.15)' },
+  'ศาสนาและความเชื่อ': { color: '#B8860B', bg: 'rgba(252,211,77,0.18)' },
+  'ธรรมชาติและผจญภัย': { color: '#0D7A3F', bg: 'rgba(52,211,153,0.15)' },
+  'ทะเลและเกาะ': { color: '#0369A1', bg: 'rgba(56,189,248,0.15)' },
+  'สวนสัตว์': { color: '#6D28D9', bg: 'rgba(167,139,250,0.15)' },
+  'ถ่ายภาพ': { color: '#BE185D', bg: 'rgba(244,114,182,0.15)' },
   'ประวัติศาสตร์และวัฒนธรรม': { color: '#C2410C', bg: 'rgba(251,146,60,0.15)' },
   'อาหารคาเฟ่และไลฟ์สไตล์': { color: '#B91C1C', bg: 'rgba(248,113,113,0.15)' },
-  'ประเพณีและเทศกาล':      { color: '#7C3AED', bg: 'rgba(192,132,252,0.15)' },
+  'ประเพณีและเทศกาล': { color: '#7C3AED', bg: 'rgba(192,132,252,0.15)' },
 };
 
 const FALLBACK_IMAGES = [
@@ -26,24 +26,23 @@ import { interactionStorage } from '../services/interactionStorage';
 
 function PlaceCard({ place, showScore = false, onDismissed }) {
   const { user } = useAuth();
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
-  const userKey   = user?.email || user?.id;
-  const [liked,     setLiked]     = useState(() => interactionStorage.isLiked(place.id, userKey));
-  const [saved,     setSaved]     = useState(() => interactionStorage.isSaved(place.id, userKey));
+  const [liked, setLiked] = useState(() => interactionStorage.isLiked(place.id));
+  const [saved, setSaved] = useState(() => interactionStorage.isSaved(place.id));
   const [dismissed, setDismissed] = useState(false);
-  const [imgSrc,    setImgSrc]    = useState(
+  const [imgSrc, setImgSrc] = useState(
     place.image_url || FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length]
   );
 
   const signal = async (e, type) => {
     e.stopPropagation();
     if (type === 'like') {
-      const nextLiked = interactionStorage.toggleLike(place, userKey);
+      const nextLiked = interactionStorage.toggleLike(place);
       setLiked(nextLiked);
     }
     if (type === 'save') {
-      const nextSaved = interactionStorage.toggleSave(place, userKey);
+      const nextSaved = interactionStorage.toggleSave(place);
       setSaved(nextSaved);
     }
     if (user) {

@@ -50,8 +50,6 @@ function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('liked'); // 'liked' or 'saved'
 
-  const userKey = user?.email || user?.id;
-
   // Fetch backend profile data when user is present
   useEffect(() => {
     if (!user) return;
@@ -60,7 +58,7 @@ function ProfilePage() {
       .then((res) => {
         if (res && res.success) {
           setProfileData(res);
-          interactionStorage.syncBackend(res.liked_places, res.saved_places, userKey);
+          interactionStorage.syncBackend(res.liked_places, res.saved_places);
         }
       })
       .catch((err) => {
@@ -69,13 +67,13 @@ function ProfilePage() {
       .finally(() => {
         setLoading(false);
       });
-  }, [user, userKey]);
+  }, [user]);
 
   // Compute merged places for Liked and Saved tabs (Local + Backend)
   const likedPlaces = useMemo(() => {
     const map = new Map();
     const backendList = profileData?.liked_places;
-    const localList = interactionStorage.getLikedPlaces(userKey);
+    const localList = interactionStorage.getLikedPlaces();
 
     if (Array.isArray(backendList)) {
       backendList.forEach((p) => { if (p && p.id != null) map.set(String(p.id), p); });
@@ -84,12 +82,12 @@ function ProfilePage() {
       localList.forEach((p) => { if (p && p.id != null && !map.has(String(p.id))) map.set(String(p.id), p); });
     }
     return Array.from(map.values());
-  }, [profileData, userKey]);
+  }, [profileData]);
 
   const savedPlaces = useMemo(() => {
     const map = new Map();
     const backendList = profileData?.saved_places;
-    const localList = interactionStorage.getSavedPlaces(userKey);
+    const localList = interactionStorage.getSavedPlaces();
 
     if (Array.isArray(backendList)) {
       backendList.forEach((p) => { if (p && p.id != null) map.set(String(p.id), p); });
@@ -98,11 +96,11 @@ function ProfilePage() {
       localList.forEach((p) => { if (p && p.id != null && !map.has(String(p.id))) map.set(String(p.id), p); });
     }
     return Array.from(map.values());
-  }, [profileData, userKey]);
+  }, [profileData]);
 
   // User details
-  const localName = userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null;
-  const localAvatar = userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null;
+  const localName = localStorage.getItem('thaitrail_user_name');
+  const localAvatar = localStorage.getItem('thaitrail_user_avatar');
   const baseUser = profileData?.user || user;
 
   // Dynamic user interests parser
@@ -176,294 +174,294 @@ function ProfilePage() {
           gap: '36px',
         }}>
 
-        {/* ── 1. Profile Header ── */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'flex-start',
-          gap: '48px',
-          paddingBottom: '48px',
-          borderBottom: '1px solid #C2C9BC',
-          flexWrap: 'wrap',
-        }}>
-          {/* Avatar */}
+          {/* ── 1. Profile Header ── */}
           <div style={{
-            flexShrink: 0,
-            width: '180px',
-            height: '180px',
-            borderRadius: '9999px',
-            border: '4px solid #FFFFFF',
-            boxShadow: '0px 4px 20px rgba(13, 51, 14, 0.08)',
-            overflow: 'hidden',
-            background: '#EFEDED',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            gap: '48px',
+            paddingBottom: '48px',
+            borderBottom: '1px solid #C2C9BC',
+            flexWrap: 'wrap',
           }}>
-            {avatarUrl ? (
-              <img
-                src={avatarUrl}
-                alt={userName}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            ) : (
-              <div style={{
-                width: '100%', height: '100%',
-                background: getPastelStyle(userName).bg,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '64px', fontWeight: '700', color: getPastelStyle(userName).color,
-                fontFamily: 'Prompt, sans-serif',
-              }}>
-                {userName.charAt(0).toUpperCase()}
-              </div>
-            )}
-          </div>
-
-          {/* User Info & Actions */}
-          <div style={{ flex: 1, minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '20px', paddingTop: '8px' }}>
-
-            {/* Name + Settings Button */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <h1 style={{
-                fontFamily: 'Prompt, sans-serif',
-                fontWeight: '700',
-                fontSize: '30px',
-                lineHeight: '38px',
-                color: '#1B1C1C',
-                margin: 0,
-              }}>
-                {userName}
-              </h1>
-              <button
-                onClick={() => navigate('/settings')}
-                style={{
-                  padding: '8px 18px',
-                  borderRadius: '12px',
-                  border: '1px solid #C2C9BC',
-                  background: '#FFFFFF',
-                  color: '#1B1C1C',
-                  fontSize: '14px',
+            {/* Avatar */}
+            <div style={{
+              flexShrink: 0,
+              width: '180px',
+              height: '180px',
+              borderRadius: '9999px',
+              border: '4px solid #FFFFFF',
+              boxShadow: '0px 4px 20px rgba(13, 51, 14, 0.08)',
+              overflow: 'hidden',
+              background: '#EFEDED',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              {avatarUrl ? (
+                <img
+                  src={avatarUrl}
+                  alt={userName}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <div style={{
+                  width: '100%', height: '100%',
+                  background: getPastelStyle(userName).bg,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '64px', fontWeight: '700', color: getPastelStyle(userName).color,
                   fontFamily: 'Prompt, sans-serif',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.04)',
-                  transition: 'all 0.18s ease',
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1C2B6E'; e.currentTarget.style.background = '#FAF6F4'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#C2C9BC'; e.currentTarget.style.background = '#FFFFFF'; }}
-              >
-                <span>⚙️</span>
-                <span>ตั้งค่า</span>
-              </button>
+                }}>
+                  {userName.charAt(0).toUpperCase()}
+                </div>
+              )}
             </div>
 
-            {/* Stats Row */}
-            <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '700', fontSize: '18px', color: '#1B1C1C' }}>
-                  {likedPlaces.length}
-                </span>
-                <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '400', fontSize: '14px', color: '#42493F' }}>
-                  ถูกใจ
-                </span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '700', fontSize: '18px', color: '#1B1C1C' }}>
-                  {savedPlaces.length}
-                </span>
-                <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '400', fontSize: '14px', color: '#42493F' }}>
-                  บันทึก
-                </span>
-              </div>
-            </div>
+            {/* User Info & Actions */}
+            <div style={{ flex: 1, minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '20px', paddingTop: '8px' }}>
 
-            {/* Interest Tags */}
-            {parsedInterests.length > 0 && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
-                {parsedInterests.map((interest, idx) => (
-                  <span key={idx} style={{
-                    padding: '5px 14px',
-                    borderRadius: '999px',
+              {/* Name + Settings Button */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                <h1 style={{
+                  fontFamily: 'Prompt, sans-serif',
+                  fontWeight: '700',
+                  fontSize: '30px',
+                  lineHeight: '38px',
+                  color: '#1B1C1C',
+                  margin: 0,
+                }}>
+                  {userName}
+                </h1>
+                <button
+                  onClick={() => navigate('/settings')}
+                  style={{
+                    padding: '8px 18px',
+                    borderRadius: '12px',
                     border: '1px solid #C2C9BC',
-                    fontSize: '13px',
-                    fontFamily: 'Prompt, sans-serif',
-                    color: '#42493F',
                     background: '#FFFFFF',
-                  }}>
-                    {interest}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* ── 2. Tabs Navigation ── */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          borderBottom: '1px solid #C2C9BC',
-          gap: '0',
-        }}>
-          {/* Tab 1: ถูกใจ */}
-          <button
-            onClick={() => setActiveTab('liked')}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '8px',
-              padding: '16px 28px',
-              border: 'none',
-              borderBottom: activeTab === 'liked' ? '2.5px solid #001D02' : '2.5px solid transparent',
-              background: 'none',
-              cursor: 'pointer',
-              color: activeTab === 'liked' ? '#001D02' : '#42493F',
-              fontFamily: 'Prompt, sans-serif',
-              fontWeight: activeTab === 'liked' ? '700' : '400',
-              fontSize: '15px',
-              transition: 'all 0.18s ease',
-              marginBottom: '-1px',
-            }}
-          >
-            <HeartIcon filled={activeTab === 'liked'} color={activeTab === 'liked' ? '#001D02' : '#42493F'} />
-            <span>ถูกใจ</span>
-          </button>
-
-          {/* Tab 2: บันทึก */}
-          <button
-            onClick={() => setActiveTab('saved')}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '8px',
-              padding: '16px 28px',
-              border: 'none',
-              borderBottom: activeTab === 'saved' ? '2.5px solid #001D02' : '2.5px solid transparent',
-              background: 'none',
-              cursor: 'pointer',
-              color: activeTab === 'saved' ? '#001D02' : '#42493F',
-              fontFamily: 'Prompt, sans-serif',
-              fontWeight: activeTab === 'saved' ? '700' : '400',
-              fontSize: '15px',
-              transition: 'all 0.18s ease',
-              marginBottom: '-1px',
-            }}
-          >
-            <BookmarkIcon filled={activeTab === 'saved'} color={activeTab === 'saved' ? '#001D02' : '#42493F'} />
-            <span>บันทึก</span>
-          </button>
-        </div>
-
-        {/* ── 3. Content Area / Photo Grid ── */}
-        {loading ? (
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '60px 0' }}>
-            <div className="spinner" />
-          </div>
-        ) : currentPlaces.length > 0 ? (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-            gap: '16px',
-          }}>
-            {currentPlaces.map((place) => {
-              const placeIdNum = Math.abs(Number(place.id) || 0);
-              const image = place.image_url || FALLBACK_IMAGES[placeIdNum % FALLBACK_IMAGES.length];
-              return (
-                <Link
-                  key={place.id}
-                  to={`/places/${place.id}`}
-                  style={{ textDecoration: 'none', display: 'block' }}
-                  className="profile-grid-item-link"
+                    color: '#1B1C1C',
+                    fontSize: '14px',
+                    fontFamily: 'Prompt, sans-serif',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.04)',
+                    transition: 'all 0.18s ease',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#1C2B6E'; e.currentTarget.style.background = '#FAF6F4'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#C2C9BC'; e.currentTarget.style.background = '#FFFFFF'; }}
                 >
-                  <div
-                    className="profile-grid-item"
-                    style={{
-                      position: 'relative',
-                      aspectRatio: '1 / 1',
-                      borderRadius: '12px',
-                      overflow: 'hidden',
-                      background: '#EFEDED',
-                      isolation: 'isolate',
-                    }}
+                  <span>⚙️</span>
+                  <span>ตั้งค่า</span>
+                </button>
+              </div>
+
+              {/* Stats Row */}
+              <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '700', fontSize: '18px', color: '#1B1C1C' }}>
+                    {likedPlaces.length}
+                  </span>
+                  <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '400', fontSize: '14px', color: '#42493F' }}>
+                    ถูกใจ
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '700', fontSize: '18px', color: '#1B1C1C' }}>
+                    {savedPlaces.length}
+                  </span>
+                  <span style={{ fontFamily: 'Prompt, sans-serif', fontWeight: '400', fontSize: '14px', color: '#42493F' }}>
+                    บันทึก
+                  </span>
+                </div>
+              </div>
+
+              {/* Interest Tags */}
+              {parsedInterests.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
+                  {parsedInterests.map((interest, idx) => (
+                    <span key={idx} style={{
+                      padding: '5px 14px',
+                      borderRadius: '999px',
+                      border: '1px solid #C2C9BC',
+                      fontSize: '13px',
+                      fontFamily: 'Prompt, sans-serif',
+                      color: '#42493F',
+                      background: '#FFFFFF',
+                    }}>
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* ── 2. Tabs Navigation ── */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            borderBottom: '1px solid #C2C9BC',
+            gap: '0',
+          }}>
+            {/* Tab 1: ถูกใจ */}
+            <button
+              onClick={() => setActiveTab('liked')}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '8px',
+                padding: '16px 28px',
+                border: 'none',
+                borderBottom: activeTab === 'liked' ? '2.5px solid #001D02' : '2.5px solid transparent',
+                background: 'none',
+                cursor: 'pointer',
+                color: activeTab === 'liked' ? '#001D02' : '#42493F',
+                fontFamily: 'Prompt, sans-serif',
+                fontWeight: activeTab === 'liked' ? '700' : '400',
+                fontSize: '15px',
+                transition: 'all 0.18s ease',
+                marginBottom: '-1px',
+              }}
+            >
+              <HeartIcon filled={activeTab === 'liked'} color={activeTab === 'liked' ? '#001D02' : '#42493F'} />
+              <span>ถูกใจ</span>
+            </button>
+
+            {/* Tab 2: บันทึก */}
+            <button
+              onClick={() => setActiveTab('saved')}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '8px',
+                padding: '16px 28px',
+                border: 'none',
+                borderBottom: activeTab === 'saved' ? '2.5px solid #001D02' : '2.5px solid transparent',
+                background: 'none',
+                cursor: 'pointer',
+                color: activeTab === 'saved' ? '#001D02' : '#42493F',
+                fontFamily: 'Prompt, sans-serif',
+                fontWeight: activeTab === 'saved' ? '700' : '400',
+                fontSize: '15px',
+                transition: 'all 0.18s ease',
+                marginBottom: '-1px',
+              }}
+            >
+              <BookmarkIcon filled={activeTab === 'saved'} color={activeTab === 'saved' ? '#001D02' : '#42493F'} />
+              <span>บันทึก</span>
+            </button>
+          </div>
+
+          {/* ── 3. Content Area / Photo Grid ── */}
+          {loading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '60px 0' }}>
+              <div className="spinner" />
+            </div>
+          ) : currentPlaces.length > 0 ? (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+              gap: '16px',
+            }}>
+              {currentPlaces.map((place) => {
+                const placeIdNum = Math.abs(Number(place.id) || 0);
+                const image = place.image_url || FALLBACK_IMAGES[placeIdNum % FALLBACK_IMAGES.length];
+                return (
+                  <Link
+                    key={place.id}
+                    to={`/places/${place.id}`}
+                    style={{ textDecoration: 'none', display: 'block' }}
+                    className="profile-grid-item-link"
                   >
-                    <img
-                      src={image}
-                      alt={place.place_name || 'สถานที่'}
-                      className="grid-item-img"
-                      style={{
-                        width: '100%', height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                        transition: 'transform 0.35s ease',
-                      }}
-                    />
                     <div
-                      className="grid-item-overlay"
+                      className="profile-grid-item"
                       style={{
-                        position: 'absolute', inset: 0,
-                        background: 'rgba(0, 0, 0, 0.4)',
-                        display: 'flex', flexDirection: 'column',
-                        justifyContent: 'flex-end',
-                        alignItems: 'flex-start',
-                        padding: '12px',
-                        opacity: 0,
-                        transition: 'opacity 0.2s ease',
-                        zIndex: 1,
+                        position: 'relative',
+                        aspectRatio: '1 / 1',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        background: '#EFEDED',
+                        isolation: 'isolate',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <span style={{ fontSize: '14px' }}>{activeTab === 'liked' ? '❤️' : '🔖'}</span>
-                      </div>
-                      <span style={{
-                        fontFamily: 'Prompt, sans-serif',
-                        fontSize: '13px',
-                        fontWeight: '600',
-                        color: '#FFFFFF',
-                        marginTop: '4px',
-                        lineHeight: '1.3',
-                      }}>
-                        {place.place_name}
-                      </span>
-                      {place.province && (
-                        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.85)', marginTop: '2px', fontFamily: 'Prompt, sans-serif' }}>
-                          📍 {place.province}
+                      <img
+                        src={image}
+                        alt={place.place_name || 'สถานที่'}
+                        className="grid-item-img"
+                        style={{
+                          width: '100%', height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                          transition: 'transform 0.35s ease',
+                        }}
+                      />
+                      <div
+                        className="grid-item-overlay"
+                        style={{
+                          position: 'absolute', inset: 0,
+                          background: 'rgba(0, 0, 0, 0.4)',
+                          display: 'flex', flexDirection: 'column',
+                          justifyContent: 'flex-end',
+                          alignItems: 'flex-start',
+                          padding: '12px',
+                          opacity: 0,
+                          transition: 'opacity 0.2s ease',
+                          zIndex: 1,
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <span style={{ fontSize: '14px' }}>{activeTab === 'liked' ? '❤️' : '🔖'}</span>
+                        </div>
+                        <span style={{
+                          fontFamily: 'Prompt, sans-serif',
+                          fontSize: '13px',
+                          fontWeight: '600',
+                          color: '#FFFFFF',
+                          marginTop: '4px',
+                          lineHeight: '1.3',
+                        }}>
+                          {place.place_name}
                         </span>
-                      )}
+                        {place.province && (
+                          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.85)', marginTop: '2px', fontFamily: 'Prompt, sans-serif' }}>
+                            📍 {place.province}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        ) : (
-          /* Empty State */
-          <div style={{ textAlign: 'center', padding: '64px 20px' }}>
-            <div style={{ fontSize: '56px', marginBottom: '16px' }}>
-              {activeTab === 'liked' ? '❤️' : '🔖'}
+                  </Link>
+                );
+              })}
             </div>
-            <h3 style={{ fontFamily: 'Prompt, sans-serif', fontSize: '20px', fontWeight: '700', color: '#1B1C1C', marginBottom: '8px' }}>
-              {activeTab === 'liked' ? 'ยังไม่มีสถานที่ที่ถูกใจ' : 'ยังไม่มีสถานที่ที่บันทึกไว้'}
-            </h3>
-            <p style={{ fontFamily: 'Prompt, sans-serif', fontSize: '14px', color: '#42493F', marginBottom: '24px' }}>
-              {activeTab === 'liked'
-                ? 'เมื่อคุณกดถูกใจสถานที่ท่องเที่ยว รายการเหล่านั้นจะมาแสดงที่นี่'
-                : 'เมื่อคุณกดบันทึกสถานที่ท่องเที่ยว รายการเหล่านั้นจะมาแสดงที่นี่'}
-            </p>
-            <Link to="/" style={{
-              display: 'inline-block',
-              padding: '10px 24px',
-              borderRadius: '10px',
-              background: '#1C2B6E',
-              color: '#fff',
-              fontFamily: 'Prompt, sans-serif',
-              fontSize: '14px',
-              fontWeight: '600',
-              textDecoration: 'none',
-              transition: 'background 0.18s ease',
-            }}>
-              สำรวจสถานที่ท่องเที่ยว
-            </Link>
-          </div>
-        )}
+          ) : (
+            /* Empty State */
+            <div style={{ textAlign: 'center', padding: '64px 20px' }}>
+              <div style={{ fontSize: '56px', marginBottom: '16px' }}>
+                {activeTab === 'liked' ? '❤️' : '🔖'}
+              </div>
+              <h3 style={{ fontFamily: 'Prompt, sans-serif', fontSize: '20px', fontWeight: '700', color: '#1B1C1C', marginBottom: '8px' }}>
+                {activeTab === 'liked' ? 'ยังไม่มีสถานที่ที่ถูกใจ' : 'ยังไม่มีสถานที่ที่บันทึกไว้'}
+              </h3>
+              <p style={{ fontFamily: 'Prompt, sans-serif', fontSize: '14px', color: '#42493F', marginBottom: '24px' }}>
+                {activeTab === 'liked'
+                  ? 'เมื่อคุณกดถูกใจสถานที่ท่องเที่ยว รายการเหล่านั้นจะมาแสดงที่นี่'
+                  : 'เมื่อคุณกดบันทึกสถานที่ท่องเที่ยว รายการเหล่านั้นจะมาแสดงที่นี่'}
+              </p>
+              <Link to="/" style={{
+                display: 'inline-block',
+                padding: '10px 24px',
+                borderRadius: '10px',
+                background: '#1C2B6E',
+                color: '#fff',
+                fontFamily: 'Prompt, sans-serif',
+                fontSize: '14px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                transition: 'background 0.18s ease',
+              }}>
+                สำรวจสถานที่ท่องเที่ยว
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

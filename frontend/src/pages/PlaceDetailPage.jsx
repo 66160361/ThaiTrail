@@ -73,11 +73,9 @@ function PlaceDetailPage() {
   useEffect(() => {
     if (!id) return;
 
-    const userKey = user?.email || user?.id;
-
     // Check local storage state first so it displays instantly
-    setLiked(interactionStorage.isLiked(id, userKey));
-    setSaved(interactionStorage.isSaved(id, userKey));
+    setLiked(interactionStorage.isLiked(id));
+    setSaved(interactionStorage.isSaved(id));
 
     if (user) {
       api.user.getInteractions()
@@ -85,11 +83,11 @@ function PlaceDetailPage() {
           if (res.success) {
             const isLikedBackend = Array.isArray(res.liked) && res.liked.includes(Number(id));
             const isSavedBackend = Array.isArray(res.saved) && res.saved.includes(Number(id));
-            setLiked(isLikedBackend || interactionStorage.isLiked(id, userKey));
-            setSaved(isSavedBackend || interactionStorage.isSaved(id, userKey));
+            setLiked(isLikedBackend || interactionStorage.isLiked(id));
+            setSaved(isSavedBackend || interactionStorage.isSaved(id));
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, [id, user]);
 
@@ -113,11 +111,10 @@ function PlaceDetailPage() {
           .slice(0, 8);
         setRelatedPlaces(filtered);
       })
-      .catch(() => {});
+      .catch(() => { });
   }, [place]);
 
   const handleSignal = async (type) => {
-    const userKey = user?.email || user?.id;
     if (type === 'share') {
       try {
         await navigator.clipboard.writeText(window.location.href);
@@ -132,11 +129,11 @@ function PlaceDetailPage() {
     }
     if (!place) return;
     if (type === 'like') {
-      const nextLiked = interactionStorage.toggleLike(place, userKey);
+      const nextLiked = interactionStorage.toggleLike(place);
       setLiked(nextLiked);
     }
     if (type === 'save') {
-      const nextSaved = interactionStorage.toggleSave(place, userKey);
+      const nextSaved = interactionStorage.toggleSave(place);
       setSaved(nextSaved);
     }
     if (user) {
@@ -485,7 +482,7 @@ function PlaceDetailPage() {
                             loading="lazy"
                           />
                           <div className="detail-gallery-item-overlay">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
                           </div>
                         </button>
                       </div>

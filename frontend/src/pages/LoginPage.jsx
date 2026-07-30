@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import GoogleLoginButton from '../components/GoogleLoginButton';
 import thaiTrailLogo from '../../images/thai_trail.png';
 import thaiTrailPicture from '../../images/picture.png';
+import { useAuth } from '../context/AuthContext';
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { loginWithGoogle, user } = useAuth();
   const [authError, setAuthError] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [buttonWidth, setButtonWidth] = useState(() => {
@@ -18,6 +19,17 @@ function LoginPage() {
 
     return Math.max(210, Math.min(300, window.innerWidth - 116));
   });
+
+  // If already logged in (session restored), redirect immediately
+  useEffect(() => {
+    if (!user) return;
+    const isOnboarded = user.onboarded === 1 || user.onboarded === '1';
+    if (isOnboarded) {
+      navigate('/', { replace: true });
+    } else {
+      navigate('/onboarding', { replace: true });
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const updateButtonWidth = () => {
@@ -34,29 +46,16 @@ function LoginPage() {
     setIsAuthenticating(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/google`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ credential }),
-      });
+      // Use AuthContext.loginWithGoogle so it goes through Vite proxy → same session cookie domain
+      const userData = await loginWithGoogle(credential);
 
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data?.success || !data?.user) {
-        throw new Error(data?.message || 'Google login failed');
-      }
+      const isOnboarded =
+        (userData?.onboarded === 1 || userData?.onboarded === '1') ||
+        (Array.isArray(userData?.interests) && userData.interests.length > 0);
 
-      const user = data.user;
-      const hasSavedInterests = (user?.onboarded === 1 || user?.onboarded === '1') ||
-        (Array.isArray(user?.interests) && user.interests.length > 0) ||
-        Boolean(localStorage.getItem(`thaitrail_user_interests_${user?.id}`));
-
-      // If user has already chosen interests previously -> Go directly to Home page (/)
-      if (hasSavedInterests) {
+      if (isOnboarded) {
         navigate('/', { replace: true });
       } else {
-        // New user with no saved interests -> Go to /onboarding
         navigate('/onboarding', { replace: true });
       }
     } catch (error) {
@@ -64,7 +63,7 @@ function LoginPage() {
     } finally {
       setIsAuthenticating(false);
     }
-  }, [navigate]);
+  }, [navigate, loginWithGoogle]);
 
   const handleLoginError = useCallback((message) => {
     setAuthError(message || 'ไม่สามารถเริ่ม Google Sign-In ได้');
