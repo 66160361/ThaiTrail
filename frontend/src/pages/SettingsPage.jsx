@@ -122,7 +122,8 @@ function SettingsPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(0deg, #FCF8F9, #FCF8F9), #FFFFFF',
+      background: 'var(--bg)',
+      backgroundAttachment: 'fixed',
       paddingTop: '72px',
       position: 'relative',
       overflowX: 'hidden',
