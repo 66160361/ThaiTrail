@@ -1,5 +1,14 @@
 <?php
 
+// Set session cookie params before session_start so the cookie works through the Vite proxy
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path'     => '/',
+    'domain'   => 'localhost',
+    'secure'   => false,
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
 session_start();
 
 require_once __DIR__ . '/../config/env.php';
