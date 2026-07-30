@@ -15,7 +15,31 @@ const CATEGORIES = [
 
 function OnboardingPage() {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState([]);
+
+  const [selected, setSelected] = useState(() => {
+    try {
+      const stored = localStorage.getItem('thaitrail_user_interests') ||
+                     sessionStorage.getItem('guest_interests');
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed)) return [];
+
+      return parsed.map((item) => {
+        if (typeof item === 'number') return item;
+        const num = Number(item);
+        if (!isNaN(num) && num > 0) return num;
+
+        const normItem = String(item).replace(/\s+/g, '').toLowerCase();
+        const found = CATEGORIES.find((cat) => {
+          const normCat = cat.name.replace(/\s+/g, '').toLowerCase();
+          return normCat.includes(normItem) || normItem.includes(normCat);
+        });
+        return found ? found.id : null;
+      }).filter(Boolean);
+    } catch {
+      return [];
+    }
+  });
 
   const toggleCategory = (id) => {
     setSelected((prev) =>
