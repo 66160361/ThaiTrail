@@ -12,14 +12,14 @@ const FALLBACK_IMAGES = [
 ];
 
 const CATEGORY_TILES = [
-  { id: 'ศาสนาและความเชื่อ', label: 'ศาสนา', icon: '🛕' },
-  { id: 'ธรรมชาติและผจญภัย', label: 'ธรรมชาติ', icon: '🌄' },
-  { id: 'ทะเลและเกาะ', label: 'ทะเล', icon: '🌊' },
-  { id: 'สวนสัตว์', label: 'สัตว์ป่า', icon: '🐘' },
-  { id: 'ประวัติศาสตร์และวัฒนธรรม', label: 'ประวัติศาสตร์', icon: '🏛️' },
-  { id: 'อาหารคาเฟ่และไลฟ์สไตล์', label: 'อาหาร', icon: '🍜' },
-  { id: 'ประเพณีและเทศกาล', label: 'เทศกาล', icon: '🎉' },
-  { id: 'ถ่ายภาพ', label: 'ถ่ายภาพ', icon: '📷' },
+  { id: 'ศาสนาและความเชื่อ', label: 'ศาสนาและความเชื่อ', icon: '⛩️' },
+  { id: 'ธรรมชาติและผจญภัย', label: 'ธรรมชาติและผจญภัย', icon: '🌿' },
+  { id: 'ทะเลและเกาะ', label: 'ทะเลและเกาะ', icon: '🌊' },
+  { id: 'สวนสัตว์', label: 'สวนสัตว์', icon: '🐘' },
+  { id: 'ประวัติศาสตร์และวัฒนธรรม', label: 'ประวัติศาสตร์และวัฒนธรรม', icon: '🏛️' },
+  { id: 'อาหารคาเฟ่และไลฟ์สไตล์', label: 'อาหารคาเฟ่และไลฟ์สไตล์', icon: '🍜' },
+  { id: 'ประเพณีและเทศกาล', label: 'ประเพณีและเทศกาล', icon: '🎉' },
+  { id: 'ถ่ายภาพ', label: 'ถ่ายภาพ', icon: '📸' },
 ];
 
 const DISTANCE_OPTIONS = [
@@ -174,21 +174,11 @@ function SearchPage() {
         return false;
       }
 
-      // 3. กรองตามคำค้นหา (Query)
+      // 3. กรองตามคำค้นหา (Query) - ค้นหาเฉพาะชื่อสถานที่
       if (normalizedQuery) {
-        const searchable = [
-          place.place_name,
-          place.province,
-          place.district,
-          place.subdistrict,
-          place.description,
-          categories.join(' '),
-        ]
-          .filter(Boolean)
-          .join(' ')
-          .toLowerCase();
+        const placeName = (place.place_name || '').toLowerCase();
 
-        if (!searchable.includes(normalizedQuery)) {
+        if (!placeName.includes(normalizedQuery)) {
           return false;
         }
       }
@@ -317,7 +307,7 @@ function SearchPage() {
           <input
             className="search-v2-top-input"
             type="search"
-            placeholder="ค้นหาสถานที่ท่องเที่ยว กิจกรรม หรือจังหวัด..."
+            placeholder="ค้นหาสถานที่ท่องเที่ยว"
             value={query}
             onChange={(e) => {
               setQuery(e.target.value);
