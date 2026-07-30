@@ -8,6 +8,7 @@ import RecommendationsPage from './pages/RecommendationsPage';
 import PlaceDetailPage     from './pages/PlaceDetailPage';
 import ProfilePage         from './pages/ProfilePage';
 import SettingsPage        from './pages/SettingsPage';
+import SearchPage          from './pages/SearchPage';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
 
           {/* ── Home / Recommendations & Browsing ── */}
           <Route path="/" element={<RecommendationsPage />} />
+
+          {/* ── Search page ── */}
+          <Route path="/search" element={<SearchPage />} />
 
           {/* Profile page (Instagram styled) */}
           <Route path="/profile" element={<ProfilePage />} />

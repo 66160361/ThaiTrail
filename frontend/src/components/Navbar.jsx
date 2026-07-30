@@ -55,6 +55,12 @@ function Navbar() {
         >
           โปรไฟล์
         </NavLink>
+        <NavLink
+          to="/search"
+          className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+        >
+          🔎 ค้นหาสถานที่
+        </NavLink>
       </div>
 
       <div className="navbar-right">
