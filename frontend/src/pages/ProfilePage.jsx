@@ -123,8 +123,6 @@ function ProfilePage() {
         let stored = null;
         if (user && user.id) {
           stored = localStorage.getItem(`thaitrail_user_interests_${user.id}`);
-        } else {
-          stored = sessionStorage.getItem('guest_interests');
         }
         if (stored) {
           raw = JSON.parse(stored);

@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
 // TODO: ใส่ AuthProvider กลับใน App.jsx เมื่อต้องการระบบ login จริง
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
-  // ถ้าไม่มี AuthProvider (ระบบ auth ถูกปิดชั่วคราว) ให้ return guest
+  // ถ้าไม่มี AuthProvider ให้ return fallback
   if (!ctx) return { user: null, loading: false, login: null, loginWithGoogle: null, register: null, logout: null, markOnboarded: null };
   return ctx;
 };

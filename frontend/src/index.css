@@ -1733,36 +1733,6 @@ a {
   margin-top: 36px;
 }
 
-/* Guest button */
-.lp-guest-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 13px 32px;
-  background: #0077FF;
-  border: none;
-  border-radius: 32px;
-  cursor: pointer;
-  font-family: 'Prompt', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  margin-top: 28px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow: 0 4px 20px rgba(0, 119, 255, 0.28);
-  white-space: nowrap;
-}
-
-.lp-guest-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 119, 255, 0.42);
-}
-
-.lp-guest-btn:active {
-  transform: translateY(0);
-}
-
 .lp-mobile-card {
   position: relative;
   z-index: 2;

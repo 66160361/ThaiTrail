@@ -70,20 +70,6 @@ function LoginPage() {
     setAuthError(message || 'ไม่สามารถเริ่ม Google Sign-In ได้');
   }, []);
 
-  const handleGuestLogin = () => {
-    const guestInterests = sessionStorage.getItem('guest_interests');
-    if (guestInterests) {
-      try {
-        const parsed = JSON.parse(guestInterests);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          navigate('/', { replace: true });
-          return;
-        }
-      } catch {}
-    }
-    navigate('/onboarding');
-  };
-
   return (
     <main className="landing-bg">
       <section className="landing-panel">
@@ -103,10 +89,6 @@ function LoginPage() {
             onError={handleLoginError}
             width={buttonWidth}
           />
-
-          <button className="lp-guest-btn" onClick={handleGuestLogin}>
-            🚶 เข้าใช้งานในฐานะผู้เยี่ยมชม
-          </button>
 
           {isAuthenticating ? <p className="auth-hint">กำลังตรวจสอบบัญชี Google...</p> : null}
           {authError ? <p className="auth-error">{authError}</p> : null}

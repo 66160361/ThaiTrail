@@ -28,8 +28,6 @@ function OnboardingPage() {
         } else {
           stored = localStorage.getItem(`thaitrail_user_interests_${user.id}`);
         }
-      } else {
-        stored = sessionStorage.getItem('guest_interests');
       }
 
       if (!stored) return [];
@@ -63,7 +61,6 @@ function OnboardingPage() {
     if (selected.length === 0) return;
 
     if (user && user.id) {
-      // Logged-in user: scoped storage key + MySQL DB sync
       localStorage.setItem(`thaitrail_user_interests_${user.id}`, JSON.stringify(selected));
       try {
         await api.user.setInterests({ category_ids: selected });
@@ -71,10 +68,6 @@ function OnboardingPage() {
       } catch (err) {
         console.log('Backend interest sync note:', err);
       }
-    } else {
-      // Guest user: scoped to sessionStorage
-      sessionStorage.setItem('guest_interests', JSON.stringify(selected));
-      sessionStorage.removeItem('guest_viewed_places');
     }
 
     sessionStorage.removeItem('active_tab');

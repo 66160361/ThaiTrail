@@ -34,16 +34,6 @@ function RecommendationsPage() {
   });
   const [limit, setLimit] = useState(PAGE_SIZE);
 
-  // Read guest interests from sessionStorage
-  const guestInterests = useMemo(() => {
-    try {
-      const stored = sessionStorage.getItem('guest_interests');
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  }, []);
-
   // Fetch all places & user-specific recommendations
   const loadData = useCallback(async () => {
     try {
@@ -72,32 +62,10 @@ function RecommendationsPage() {
   // Filter & sort logic based on active tab
   const displayedPlaces = useMemo(() => {
     if (activeTab === 'recommend') {
-      // ถ้าผู้ใช้ล็อกอินอยู่ และมีข้อมูลแนะนำจากระบบเฉพาะบุคคล
-      if (user && userRecommendedPlaces.length > 0) {
+      if (userRecommendedPlaces.length > 0) {
         return userRecommendedPlaces;
       }
-
-      // สำหรับ Guest: ดึงสถานที่ที่เคยเข้าดูโดยตรงเพิ่มเติมใน session ปัจจุบัน
-      const guestViewedIds = (() => {
-        try { return JSON.parse(sessionStorage.getItem('guest_viewed_places') || '[]'); }
-        catch { return []; }
-      })();
-
-      if ((!guestInterests || guestInterests.length === 0) && guestViewedIds.length === 0) {
-        return allPlacesRaw;
-      }
-
-      const recommended = allPlacesRaw.filter((p) => {
-        // ให้สถานที่ที่เคยเปิดดูเข้ามารวมอยู่ในหน้าแนะนำด้วยเสมอ
-        if (guestViewedIds.includes(p.id)) return true;
-
-        if (!p.category_ids) return false;
-        const catIds = typeof p.category_ids === 'string'
-          ? p.category_ids.split(',').map(Number)
-          : (Array.isArray(p.category_ids) ? p.category_ids.map(Number) : []);
-        return catIds.some((id) => guestInterests.includes(id));
-      });
-      return recommended.length > 0 ? recommended : allPlacesRaw;
+      return allPlacesRaw;
     } else if (activeTab === 'all') {
       return allPlacesRaw;
     } else {
@@ -110,7 +78,7 @@ function RecommendationsPage() {
         return catIds.includes(targetCatId);
       });
     }
-  }, [activeTab, allPlacesRaw, userRecommendedPlaces, guestInterests, user]);
+  }, [activeTab, allPlacesRaw, userRecommendedPlaces]);
 
   const placesToShow = useMemo(() => {
     return displayedPlaces.slice(0, limit);

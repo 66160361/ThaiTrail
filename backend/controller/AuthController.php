@@ -193,18 +193,6 @@ class AuthController
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        // Auto-check and sync onboarded status from user_interests table
-        $checkInterests = $this->pdo->prepare('SELECT COUNT(*) FROM user_interests WHERE user_id = ?');
-        $checkInterests->execute([$user['id']]);
-        $interestCount = (int) $checkInterests->fetchColumn();
-
-        $isOnboarded = (int) ($user['onboarded'] ?? 0);
-        if ($interestCount > 0 && $isOnboarded === 0) {
-            $updOnboard = $this->pdo->prepare('UPDATE users SET onboarded = 1 WHERE id = ?');
-            $updOnboard->execute([$user['id']]);
-            $isOnboarded = 1;
-        }
-
         $_SESSION['user_id'] = (int) $user['id'];
 
         return [
@@ -214,7 +202,7 @@ class AuthController
                 'name'       => $user['name'],
                 'email'      => $user['email'],
                 'avatar_url' => $user['avatar_url'] ?? '',
-                'onboarded'  => $isOnboarded,
+                'onboarded'  => (int) ($user['onboarded'] ?? 0),
             ],
         ];
     }
@@ -325,20 +313,13 @@ class AuthController
         $savedStmt->execute([$userId]);
         $savedPlaces = array_map($normalizePlace, $savedStmt->fetchAll(PDO::FETCH_ASSOC));
 
-        $isOnboarded = (int) ($user['onboarded'] ?? 0);
-        if ($isOnboarded === 0 && !empty($interests)) {
-            $updOnboard = $this->pdo->prepare('UPDATE users SET onboarded = 1 WHERE id = ?');
-            $updOnboard->execute([$userId]);
-            $isOnboarded = 1;
-        }
-
         return [
             'success' => true,
             'user' => [
                 'id' => (int) $user['id'],
                 'name' => $user['name'] ?? 'ผู้ใช้งาน',
                 'email' => $user['email'] ?? '',
-                'onboarded' => $isOnboarded,
+                'onboarded' => (int) ($user['onboarded'] ?? 0),
                 'avatar_url' => $user['avatar_url'] ?? $user['picture'] ?? '',
                 'interests' => $interests
             ],
