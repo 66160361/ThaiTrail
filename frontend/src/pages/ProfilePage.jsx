@@ -120,9 +120,12 @@ function ProfilePage() {
 
     if (!raw || (Array.isArray(raw) && raw.length === 0)) {
       try {
-        const stored = localStorage.getItem('thaitrail_user_interests') ||
-          localStorage.getItem('guest_interests') ||
-          sessionStorage.getItem('guest_interests');
+        let stored = null;
+        if (user && user.id) {
+          stored = localStorage.getItem(`thaitrail_user_interests_${user.id}`);
+        } else {
+          stored = sessionStorage.getItem('guest_interests');
+        }
         if (stored) {
           raw = JSON.parse(stored);
         }

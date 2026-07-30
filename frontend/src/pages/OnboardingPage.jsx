@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import categoryHero from '../../images/category_hero.png';
 
 const CATEGORIES = [
@@ -16,11 +17,21 @@ const CATEGORIES = [
 
 function OnboardingPage() {
   const navigate = useNavigate();
+  const { user, markOnboarded } = useAuth();
 
   const [selected, setSelected] = useState(() => {
     try {
-      const stored = localStorage.getItem('thaitrail_user_interests') ||
-                     sessionStorage.getItem('guest_interests');
+      let stored = null;
+      if (user && user.id) {
+        if (Array.isArray(user.interests) && user.interests.length > 0) {
+          stored = JSON.stringify(user.interests);
+        } else {
+          stored = localStorage.getItem(`thaitrail_user_interests_${user.id}`);
+        }
+      } else {
+        stored = sessionStorage.getItem('guest_interests');
+      }
+
       if (!stored) return [];
       const parsed = JSON.parse(stored);
       if (!Array.isArray(parsed)) return [];
@@ -50,18 +61,24 @@ function OnboardingPage() {
 
   const handleNext = async () => {
     if (selected.length === 0) return;
-    sessionStorage.setItem('guest_interests', JSON.stringify(selected));
-    localStorage.setItem('thaitrail_user_interests', JSON.stringify(selected));
-    sessionStorage.removeItem('guest_viewed_places');
-    sessionStorage.removeItem('active_tab');
-    sessionStorage.removeItem('scroll_pos');
 
-    try {
-      await api.user.setInterests({ category_ids: selected });
-    } catch (err) {
-      console.log('Backend interest sync note:', err);
+    if (user && user.id) {
+      // Logged-in user: scoped storage key + MySQL DB sync
+      localStorage.setItem(`thaitrail_user_interests_${user.id}`, JSON.stringify(selected));
+      try {
+        await api.user.setInterests({ category_ids: selected });
+        if (markOnboarded) markOnboarded();
+      } catch (err) {
+        console.log('Backend interest sync note:', err);
+      }
+    } else {
+      // Guest user: scoped to sessionStorage
+      sessionStorage.setItem('guest_interests', JSON.stringify(selected));
+      sessionStorage.removeItem('guest_viewed_places');
     }
 
+    sessionStorage.removeItem('active_tab');
+    sessionStorage.removeItem('scroll_pos');
     navigate('/', { replace: true });
   };
 
