@@ -1021,16 +1021,16 @@ a {
 /* ─── Category filter bar ────────────────────────────────────────────────── */
 .filter-bar {
   display: flex;
-  gap: 8px;
+  gap: 12px; /* Increased from 8px */
   flex-wrap: wrap;
   margin-bottom: 28px;
 }
 
 .filter-chip {
-  padding: 8px 18px;
+  padding: 12px 24px; /* Increased from 8px 18px */
   border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 16px; /* Increased from 13px */
+  font-weight: 600; /* Increased from 500 */
   cursor: pointer;
   border: 1px solid var(--border);
   background: var(--surface);
