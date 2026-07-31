@@ -149,7 +149,7 @@ function SettingsPage() {
       minHeight: '100vh',
       background: 'var(--bg)',
       backgroundAttachment: 'fixed',
-      paddingTop: '72px',
+      paddingTop: '96px',
       position: 'relative',
       overflowX: 'hidden',
     }}>

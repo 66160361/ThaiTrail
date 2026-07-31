@@ -30,34 +30,31 @@ function Navbar() {
           <img
             src={thaiTrailLogo}
             alt="ThaiTrail"
-            style={{ height: '52px', width: 'auto', objectFit: 'contain', display: 'block' }}
+            style={{ height: '68px', width: 'auto', objectFit: 'contain', display: 'block' }}
           />
         </NavLink>
       </div>
 
-      <div className="navbar-links" style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+      {/* Spacer to push everything to the right */}
+      <div style={{ flex: 1 }} />
+
+      <div className="navbar-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <NavLink
           to="/"
           className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
           end
+          style={{ textDecoration: 'none' }}
         >
           หน้าแรก
         </NavLink>
         <NavLink
           to="/search"
           className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+          style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
         >
-          ค้นหา
+          <span>🔍</span> ค้นหา
         </NavLink>
-        <NavLink
-          to="/profile"
-          className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-        >
-          โปรไฟล์
-        </NavLink>
-      </div>
 
-      <div className="navbar-right">
         {user ? (() => {
           const userKey = user?.email || user?.id;
           // localStorage (รูปที่ user อัปโหลดเอง) มีความสำคัญกว่า user.avatar_url จาก backend
@@ -78,19 +75,19 @@ function Navbar() {
                 <img
                   src={currentAvatar}
                   alt={currentName}
-                  style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }}
+                  style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }}
                 />
               ) : (
                 <div className="user-avatar" style={{
                   background: pastel.bg,
                   color: pastel.color,
                   fontWeight: '700',
-                  fontSize: '12px',
+                  fontSize: '16px',
                 }}>
                   {currentName.charAt(0).toUpperCase()}
                 </div>
               )}
-              <span className="user-name-text" style={{ maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span className="user-name-text" style={{ maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {currentName}
               </span>
             </NavLink>
@@ -100,11 +97,11 @@ function Navbar() {
             to="/login"
             style={{
               textDecoration: 'none',
-              padding: '8px 18px',
+              padding: '12px 24px',
               borderRadius: '999px',
               background: 'linear-gradient(135deg, #1C2B6E, #2A3F9D)',
               color: '#FFFFFF',
-              fontSize: '13px',
+              fontSize: '16px',
               fontWeight: '600',
               fontFamily: 'Prompt, sans-serif',
               boxShadow: '0 4px 14px rgba(28, 43, 110, 0.25)',

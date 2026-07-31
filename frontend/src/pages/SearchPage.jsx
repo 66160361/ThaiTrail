@@ -299,7 +299,7 @@ function SearchPage() {
   };
 
   return (
-    <div className="search-v2-page" style={{ paddingTop: '104px' }}>
+    <div className="search-v2-page" style={{ paddingTop: '128px' }}>
       <Navbar />
       <div className="search-v2-container">
         <section className="search-v2-topbar fade-in">

@@ -150,8 +150,8 @@ a {
 /* ─── Layout ──────────────────────────────────────────────────────────────── */
 .page {
   min-height: 100vh;
-  padding: 112px 24px 48px;
-  /* 72px navbar + 40px original top padding */
+  padding: 136px 24px 48px;
+  /* 96px navbar + 40px original top padding */
 }
 
 .container {
@@ -907,19 +907,19 @@ a {
   left: 0;
   right: 0;
   z-index: 100;
-  height: 72px;
+  height: 96px; /* Increased from 72px for better readability */
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 32px;
   gap: 32px;
 }
 
 .navbar-logo {
-  font-size: 20px;
+  font-size: 24px; /* Increased from 20px */
   font-weight: 700;
   color: #1C2B6E;
   white-space: nowrap;
@@ -928,15 +928,15 @@ a {
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   flex: 1;
 }
 
 .nav-link {
-  padding: 7px 14px;
+  padding: 10px 20px; /* Increased from 7px 14px */
   border-radius: var(--radius-sm);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 18px; /* Increased from 14px */
+  font-weight: 600;
   color: var(--text-muted);
   transition: var(--transition);
   border: none;
@@ -953,32 +953,32 @@ a {
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   margin-left: auto;
 }
 
 .user-chip {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
+  gap: 12px;
+  padding: 8px 16px; /* Increased from 6px 12px */
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 16px; /* Increased from 13px */
+  font-weight: 600;
   color: var(--text-muted);
 }
 
 .user-avatar {
-  width: 28px;
-  height: 28px;
+  width: 36px; /* Increased from 28px */
+  height: 36px; /* Increased from 28px */
   background: linear-gradient(135deg, var(--primary), var(--accent));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 16px; /* Increased from 12px */
   font-weight: 700;
   color: #fff;
 }

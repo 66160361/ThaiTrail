@@ -161,7 +161,7 @@ function ProfilePage() {
   const currentPlaces = activeTab === 'liked' ? likedPlaces : savedPlaces;
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)', backgroundAttachment: 'fixed', paddingTop: '72px' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', backgroundAttachment: 'fixed', paddingTop: '96px' }}>
       <Navbar />
 
       <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '40px 20px' }}>
