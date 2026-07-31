@@ -1,13 +1,17 @@
 <?php
 
-// Set session cookie params before session_start so the cookie works through the Vite proxy
+// Set session lifetime — ทั้ง cookie และ server-side session data
+$sessionLifetime = 86400 * 7; // 7 วัน
+ini_set('session.gc_maxlifetime', $sessionLifetime);
+ini_set('session.cookie_lifetime', $sessionLifetime);
+
 session_set_cookie_params([
-    'lifetime' => 0,
+    'lifetime' => $sessionLifetime,
     'path'     => '/',
-    'domain'   => 'localhost',
     'secure'   => false,
     'httponly' => true,
     'samesite' => 'Lax',
+    // ไม่ set 'domain' ปล่อยให้ PHP ตั้งค่า default เอง (ป้องกัน cookie block บน localhost)
 ]);
 session_start();
 

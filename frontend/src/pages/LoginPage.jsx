@@ -9,7 +9,7 @@ const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { loginWithGoogle } = useAuth();
+  const { loginWithGoogle, user, loading } = useAuth();
   const [authError, setAuthError] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [buttonWidth, setButtonWidth] = useState(() => {
@@ -19,6 +19,14 @@ function LoginPage() {
 
     return Math.max(210, Math.min(300, window.innerWidth - 116));
   });
+
+  // ถ้า login อยู่แล้ว → ไปหน้าหลักเลย ไม่ต้องแสดงหน้า login
+  useEffect(() => {
+    if (!loading && user) {
+      const isOnboarded = user.onboarded === 1 || user.onboarded === '1';
+      navigate(isOnboarded ? '/' : '/onboarding', { replace: true });
+    }
+  }, [user, loading, navigate]);
 
 
   useEffect(() => {

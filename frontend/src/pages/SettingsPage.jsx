@@ -35,15 +35,15 @@ const LogoutIcon = () => (
 
 
 function SettingsPage() {
-  const { user, logout } = useAuth();
+  const { user, logout, updateUser } = useAuth();
   const navigate = useNavigate();
   const [showEditModal, setShowEditModal] = useState(false);
   const userKey = user?.email || user?.id;
   const [nameInput, setNameInput] = useState(
-    () => user?.name || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null) || 'anonymous'
+    () => user?.name || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null) || localStorage.getItem('thaitrail_user_name') || 'นักเดินทาง'
   );
   const [avatarInput, setAvatarInput] = useState(
-    () => user?.avatar_url || user?.picture || (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null) || ''
+    () => (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null) || localStorage.getItem('thaitrail_user_avatar') || user?.avatar_url || user?.picture || ''
   );
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState('');
@@ -71,49 +71,71 @@ function SettingsPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (!file.type.startsWith('image/')) {
+      alert('กรุณาเลือกไฟล์รูปภาพเท่านั้น');
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (evt) => {
-      if (evt.target?.result) {
-        setAvatarInput(evt.target.result);
-      }
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_SIZE = 400;
+        let width = img.width;
+        let height = img.height;
+        if (width > height) {
+          if (width > MAX_SIZE) { height = Math.round((height * MAX_SIZE) / width); width = MAX_SIZE; }
+        } else {
+          if (height > MAX_SIZE) { width = Math.round((width * MAX_SIZE) / height); height = MAX_SIZE; }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        setAvatarInput(canvas.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = evt.target.result;
     };
     reader.readAsDataURL(file);
   };
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
-    if (!nameInput.trim()) return;
+    const newName = nameInput.trim();
+    if (!newName) return;
 
     setSaving(true);
+    const newAvatar = avatarInput;
+
+    // 1. บันทึกลง localStorage ทั้ง 2 รูปแบบทันที
+    localStorage.setItem('thaitrail_user_name', newName);
+    if (newAvatar) {
+      localStorage.setItem('thaitrail_user_avatar', newAvatar);
+    } else {
+      localStorage.removeItem('thaitrail_user_avatar');
+    }
+    if (userKey) {
+      localStorage.setItem(`thaitrail_user_name_${userKey}`, newName);
+      if (newAvatar) {
+        localStorage.setItem(`thaitrail_user_avatar_${userKey}`, newAvatar);
+      } else {
+        localStorage.removeItem(`thaitrail_user_avatar_${userKey}`);
+      }
+    }
+
+    // 2. อัปเดต AuthContext ทันที → Navbar / ProfilePage เปลี่ยนโดยไม่ต้อง reload
+    if (updateUser) updateUser({ name: newName, avatar_url: newAvatar });
+
     try {
       if (user) {
-        await api.user.updateProfile({
-          name: nameInput.trim(),
-          avatar_url: avatarInput,
-        });
+        await api.user.updateProfile({ name: newName, avatar_url: newAvatar });
       }
-      if (userKey) {
-        localStorage.setItem(`thaitrail_user_name_${userKey}`, nameInput.trim());
-        if (avatarInput) {
-          localStorage.setItem(`thaitrail_user_avatar_${userKey}`, avatarInput);
-        }
-      }
-      setSaveSuccess('บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว!');
-      setTimeout(() => {
-        setShowEditModal(false);
-      }, 800);
-    } catch {
-      if (userKey) {
-        localStorage.setItem(`thaitrail_user_name_${userKey}`, nameInput.trim());
-        if (avatarInput) {
-          localStorage.setItem(`thaitrail_user_avatar_${userKey}`, avatarInput);
-        }
-      }
-      setSaveSuccess('บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว!');
-      setTimeout(() => {
-        setShowEditModal(false);
-      }, 800);
+    } catch (err) {
+      console.warn('Backend updateProfile failed (local saved):', err);
     } finally {
+      setSaveSuccess('บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว!');
+      setTimeout(() => setShowEditModal(false), 800);
       setSaving(false);
     }
   };

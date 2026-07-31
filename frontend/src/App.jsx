@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 // Pages
 import LoginPage           from './pages/LoginPage';
@@ -15,26 +16,26 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* ── Login (Google Sign-In) ── */}
+          {/* ── Public routes (ไม่ต้อง login) ── */}
           <Route path="/login" element={<LoginPage />} />
-
-          {/* Onboarding */}
           <Route path="/onboarding" element={<OnboardingPage />} />
 
-          {/* ── Home / Recommendations & Browsing ── */}
-          <Route path="/" element={<RecommendationsPage />} />
-
-          {/* ── Search page ── */}
-          <Route path="/search" element={<SearchPage />} />
-
-          {/* Profile page (Instagram styled) */}
-          <Route path="/profile" element={<ProfilePage />} />
-
-          {/* Settings page */}
-          <Route path="/settings" element={<SettingsPage />} />
-
-          {/* ── Place detail ── */}
-          <Route path="/places/:id" element={<PlaceDetailPage />} />
+          {/* ── Protected routes (ต้อง login) ── */}
+          <Route path="/" element={
+            <ProtectedRoute><RecommendationsPage /></ProtectedRoute>
+          } />
+          <Route path="/search" element={
+            <ProtectedRoute><SearchPage /></ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute><ProfilePage /></ProtectedRoute>
+          } />
+          <Route path="/settings" element={
+            <ProtectedRoute><SettingsPage /></ProtectedRoute>
+          } />
+          <Route path="/places/:id" element={
+            <ProtectedRoute><PlaceDetailPage /></ProtectedRoute>
+          } />
 
           {/* ── Fallback ── */}
           <Route path="*" element={<Navigate to="/" replace />} />
@@ -45,3 +46,4 @@ function App() {
 }
 
 export default App;
+

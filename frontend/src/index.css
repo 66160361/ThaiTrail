@@ -250,7 +250,7 @@ a {
 /* ─── Search Page V2 ─────────────────────────────────────────────────── */
 .search-v2-page {
   min-height: 100vh;
-  padding: 24px 24px 48px;
+  padding: 104px 24px 48px;
   background: var(--bg);
   background-attachment: fixed;
   font-family: 'Prompt', sans-serif;

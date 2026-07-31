@@ -98,9 +98,12 @@ function ProfilePage() {
     return Array.from(map.values());
   }, [profileData]);
 
-  // User details
-  const localName = localStorage.getItem('thaitrail_user_name');
-  const localAvatar = localStorage.getItem('thaitrail_user_avatar');
+  // User details — same priority as Navbar: localStorage (user-uploaded) > user from AuthContext
+  const userKey = user?.email || user?.id;
+  const localName = (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null)
+    || localStorage.getItem('thaitrail_user_name');
+  const localAvatar = (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null)
+    || localStorage.getItem('thaitrail_user_avatar');
   const baseUser = profileData?.user || user;
 
   // Dynamic user interests parser

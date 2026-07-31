@@ -6,14 +6,24 @@ export default defineConfig({
   server: {
     host: 'localhost',
     port: 5173,
-    strictPort: true,
+    strictPort: false,
     proxy: {
       '/api': {
         target: 'http://localhost:8000',
-        changeOrigin: false,
+        changeOrigin: true,
         secure: false,
-        cookieDomainRewrite: { 'localhost:8000': 'localhost' },
-        rewrite: (path) => path.replace(/^\/api/, '/api')
+        // ส่ง Set-Cookie header จาก backend ผ่านมาถึง browser โดยตรง
+        configure: (proxy) => {
+          proxy.on('proxyRes', (proxyRes) => {
+            const sc = proxyRes.headers['set-cookie'];
+            if (sc) {
+              // ลบ Domain= attribute ออกเพื่อให้ browser accept cookie บน localhost
+              proxyRes.headers['set-cookie'] = sc.map((c) =>
+                c.replace(/;\s*Domain=[^;]*/i, '')
+              );
+            }
+          });
+        },
       }
     }
   }

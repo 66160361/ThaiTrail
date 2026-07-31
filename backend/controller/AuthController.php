@@ -49,10 +49,11 @@ class AuthController
         return [
             'success' => true,
             'user'    => [
-                'id'        => $userId,
-                'name'      => $name,
-                'email'     => $email,
-                'onboarded' => 0,
+                'id'         => $userId,
+                'name'       => $name,
+                'email'      => $email,
+                'avatar_url' => '',
+                'onboarded'  => 0,
             ],
         ];
     }
@@ -81,10 +82,11 @@ class AuthController
         return [
             'success' => true,
             'user'    => [
-                'id'        => (int) $user['id'],
-                'name'      => $user['name'],
-                'email'     => $user['email'],
-                'onboarded' => (int) $user['onboarded'],
+                'id'         => (int) $user['id'],
+                'name'       => $user['name'],
+                'email'      => $user['email'],
+                'avatar_url' => $user['avatar_url'] ?? '',
+                'onboarded'  => (int) $user['onboarded'],
             ],
         ];
     }
@@ -104,7 +106,7 @@ class AuthController
         }
 
         $stmt = $this->pdo->prepare(
-            'SELECT id, name, email, onboarded FROM users WHERE id = ?'
+            'SELECT id, name, email, avatar_url, onboarded FROM users WHERE id = ?'
         );
         $stmt->execute([$_SESSION['user_id']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -115,8 +117,9 @@ class AuthController
             return ['success' => false, 'message' => 'User not found'];
         }
 
-        $user['id']        = (int) $user['id'];
-        $user['onboarded'] = (int) $user['onboarded'];
+        $user['id']         = (int) $user['id'];
+        $user['onboarded']  = (int) $user['onboarded'];
+        $user['avatar_url'] = $user['avatar_url'] ?? '';
 
         return ['success' => true, 'user' => $user];
     }
