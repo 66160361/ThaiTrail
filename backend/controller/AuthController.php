@@ -164,16 +164,18 @@ class AuthController
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            // Update only avatar_url in case it changed — preserve user-edited name
-            $upd = $this->pdo->prepare(
-                'UPDATE users SET avatar_url = ? WHERE id = ?'
-            );
-            $upd->execute([$avatarUrl, $user['id']]);
+            // Update avatar_url only if empty — preserve user-uploaded avatar and edited name
+            if (empty($user['avatar_url']) && !empty($avatarUrl)) {
+                $upd = $this->pdo->prepare(
+                    'UPDATE users SET avatar_url = ? WHERE id = ?'
+                );
+                $upd->execute([$avatarUrl, $user['id']]);
 
-            // Reload fresh row after update
-            $reload = $this->pdo->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
-            $reload->execute([$user['id']]);
-            $user = $reload->fetch(PDO::FETCH_ASSOC);
+                // Reload fresh row after update
+                $reload = $this->pdo->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
+                $reload->execute([$user['id']]);
+                $user = $reload->fetch(PDO::FETCH_ASSOC);
+            }
         } else {
             // New user — check if email already registered another way
             $byEmail = $this->pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');

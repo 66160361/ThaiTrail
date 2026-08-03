@@ -40,13 +40,14 @@ function SettingsPage() {
   const [showEditModal, setShowEditModal] = useState(false);
   const userKey = user?.email || user?.id;
   const [nameInput, setNameInput] = useState(
-    () => user?.name || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null) || localStorage.getItem('thaitrail_user_name') || 'นักเดินทาง'
+    () => user?.name || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null) || 'นักเดินทาง'
   );
   const [avatarInput, setAvatarInput] = useState(
-    () => (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null) || localStorage.getItem('thaitrail_user_avatar') || user?.avatar_url || user?.picture || ''
+    () => user?.avatar_url || user?.picture || (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null) || ''
   );
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState('');
+  const [saveError, setSaveError] = useState('');
 
   const handleLogout = async () => {
     if (window.confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
@@ -63,7 +64,10 @@ function SettingsPage() {
   };
 
   const handleEditProfileClick = () => {
+    setNameInput(user?.name || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null) || 'นักเดินทาง');
+    setAvatarInput(user?.avatar_url || user?.picture || (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null) || '');
     setSaveSuccess('');
+    setSaveError('');
     setShowEditModal(true);
   };
 
@@ -106,36 +110,35 @@ function SettingsPage() {
     if (!newName) return;
 
     setSaving(true);
+    setSaveSuccess('');
+    setSaveError('');
     const newAvatar = avatarInput;
 
-    // 1. บันทึกลง localStorage ทั้ง 2 รูปแบบทันที
-    localStorage.setItem('thaitrail_user_name', newName);
-    if (newAvatar) {
-      localStorage.setItem('thaitrail_user_avatar', newAvatar);
-    } else {
-      localStorage.removeItem('thaitrail_user_avatar');
-    }
-    if (userKey) {
-      localStorage.setItem(`thaitrail_user_name_${userKey}`, newName);
-      if (newAvatar) {
-        localStorage.setItem(`thaitrail_user_avatar_${userKey}`, newAvatar);
-      } else {
-        localStorage.removeItem(`thaitrail_user_avatar_${userKey}`);
-      }
-    }
-
-    // 2. อัปเดต AuthContext ทันที → Navbar / ProfilePage เปลี่ยนโดยไม่ต้อง reload
-    if (updateUser) updateUser({ name: newName, avatar_url: newAvatar });
-
     try {
+      // 1. ยิง API บันทึกฝั่ง Backend ก่อนเสมอ
       if (user) {
         await api.user.updateProfile({ name: newName, avatar_url: newAvatar });
       }
-    } catch (err) {
-      console.warn('Backend updateProfile failed (local saved):', err);
-    } finally {
+
+      // 2. Backend สำเร็จ → บันทึกลง localStorage เฉพาะ key ของบัญชีนี้เท่านั้น (ไม่ใช้ global key)
+      if (userKey) {
+        localStorage.setItem(`thaitrail_user_name_${userKey}`, newName);
+        if (newAvatar) {
+          localStorage.setItem(`thaitrail_user_avatar_${userKey}`, newAvatar);
+        } else {
+          localStorage.removeItem(`thaitrail_user_avatar_${userKey}`);
+        }
+      }
+
+      // 3. อัปเดต AuthContext → Navbar / ProfilePage เปลี่ยนทันทีโดยไม่ต้อง reload
+      if (updateUser) updateUser({ name: newName, avatar_url: newAvatar });
+
       setSaveSuccess('บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว!');
       setTimeout(() => setShowEditModal(false), 800);
+    } catch (err) {
+      console.error('Backend updateProfile failed:', err);
+      setSaveError(err.message || 'ไม่สามารถบันทึกข้อมูลไปยังฐานข้อมูลหลังบ้านได้ กรุณาลองใหม่อีกครั้ง');
+    } finally {
       setSaving(false);
     }
   };
@@ -534,6 +537,18 @@ function SettingsPage() {
                   textAlign: 'center',
                 }}>
                   ✅ {saveSuccess}
+                </div>
+              )}
+
+              {saveError && (
+                <div style={{
+                  color: '#B91C1C',
+                  fontFamily: 'Prompt, sans-serif',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  textAlign: 'center',
+                }}>
+                  ❌ {saveError}
                 </div>
               )}
 

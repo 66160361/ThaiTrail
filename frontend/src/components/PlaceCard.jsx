@@ -45,7 +45,7 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
       const nextSaved = interactionStorage.toggleSave(place);
       setSaved(nextSaved);
     }
-    if (user) {
+    if (user && type !== 'like' && type !== 'save') {
       try {
         await api.signals.log({ place_id: place.id, signal_type: type });
       } catch { /* silent */ }

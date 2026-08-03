@@ -64,9 +64,15 @@ $routeKey = "$method $requestUri";
 $body     = json_decode(file_get_contents('php://input'), true) ?? [];
 
 if (isset($routes[$routeKey])) {
-    [$class, $action] = $routes[$routeKey];
-    $controller       = new $class($pdo);
-    echo json_encode($controller->$action($_GET, $body), JSON_UNESCAPED_UNICODE);
+    try {
+        [$class, $action] = $routes[$routeKey];
+        $controller       = new $class($pdo);
+        $result           = $controller->$action($_GET, $body);
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    } catch (Throwable $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+    }
     exit;
 }
 

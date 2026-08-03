@@ -21,9 +21,18 @@ async function request(method, path, data = null) {
   }
 
   const res = await fetch(url, options);
-  const json = await res.json().catch(() => ({ success: false, message: 'Invalid JSON response' }));
+  const text = await res.text();
+  let json;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    const cleanText = text.replace(/<[^>]*>/g, '').trim().slice(0, 150);
+    const err = new Error(cleanText || `เกิดข้อผิดพลาดจากเซิร์ฟเวอร์ (HTTP ${res.status})`);
+    err.status = res.status;
+    throw err;
+  }
 
-  if (!res.ok) {
+  if (!res.ok || json.success === false) {
     const err = new Error(json.message || `HTTP ${res.status}`);
     err.status = res.status;
     throw err;

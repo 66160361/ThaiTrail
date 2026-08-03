@@ -1,12 +1,34 @@
 import { api } from './api';
 
-const LIKED_KEY = 'thaitrail_liked_places';
-const SAVED_KEY = 'thaitrail_saved_places';
+const USER_CACHE_KEY = 'thaitrail_auth_user';
+
+function getUserId() {
+  try {
+    const raw = localStorage.getItem(USER_CACHE_KEY);
+    if (raw) {
+      const user = JSON.parse(raw);
+      return user?.id || null;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function getLikedKey() {
+  const userId = getUserId();
+  return userId ? `thaitrail_liked_places_${userId}` : 'thaitrail_liked_places_guest';
+}
+
+function getSavedKey() {
+  const userId = getUserId();
+  return userId ? `thaitrail_saved_places_${userId}` : 'thaitrail_saved_places_guest';
+}
 
 export const interactionStorage = {
   getLikedPlaces() {
     try {
-      return JSON.parse(localStorage.getItem(LIKED_KEY) || '[]');
+      return JSON.parse(localStorage.getItem(getLikedKey()) || '[]');
     } catch {
       return [];
     }
@@ -14,7 +36,7 @@ export const interactionStorage = {
 
   getSavedPlaces() {
     try {
-      return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]');
+      return JSON.parse(localStorage.getItem(getSavedKey()) || '[]');
     } catch {
       return [];
     }
@@ -46,16 +68,18 @@ export const interactionStorage = {
       isLikedNow = true;
     }
 
-    localStorage.setItem(LIKED_KEY, JSON.stringify(list));
+    localStorage.setItem(getLikedKey(), JSON.stringify(list));
 
-    // Send signal to MySQL backend to update user_interests
-    try {
-      api.signals.log({
-        place_id: Number(place.id),
-        signal_type: isLikedNow ? 'like' : 'unlike',
-      }).catch(() => { });
-    } catch (e) {
-      console.log('Signal log note:', e);
+    // Send signal to MySQL backend if user is logged in
+    if (getUserId()) {
+      try {
+        api.signals.log({
+          place_id: Number(place.id),
+          signal_type: 'like',
+        }).catch(() => { });
+      } catch (e) {
+        console.log('Signal log note:', e);
+      }
     }
 
     return isLikedNow;
@@ -75,16 +99,18 @@ export const interactionStorage = {
       isSavedNow = true;
     }
 
-    localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+    localStorage.setItem(getSavedKey(), JSON.stringify(list));
 
-    // Send signal to MySQL backend to update user_interests
-    try {
-      api.signals.log({
-        place_id: Number(place.id),
-        signal_type: isSavedNow ? 'save' : 'unsave',
-      }).catch(() => { });
-    } catch (e) {
-      console.log('Signal log note:', e);
+    // Send signal to MySQL backend if user is logged in
+    if (getUserId()) {
+      try {
+        api.signals.log({
+          place_id: Number(place.id),
+          signal_type: 'save',
+        }).catch(() => { });
+      } catch (e) {
+        console.log('Signal log note:', e);
+      }
     }
 
     return isSavedNow;
@@ -98,7 +124,7 @@ export const interactionStorage = {
       current.forEach((p) => {
         if (!map.has(String(p.id))) map.set(String(p.id), p);
       });
-      localStorage.setItem(LIKED_KEY, JSON.stringify(Array.from(map.values())));
+      localStorage.setItem(getLikedKey(), JSON.stringify(Array.from(map.values())));
     }
 
     if (Array.isArray(savedPlacesBackend)) {
@@ -108,7 +134,7 @@ export const interactionStorage = {
       current.forEach((p) => {
         if (!map.has(String(p.id))) map.set(String(p.id), p);
       });
-      localStorage.setItem(SAVED_KEY, JSON.stringify(Array.from(map.values())));
+      localStorage.setItem(getSavedKey(), JSON.stringify(Array.from(map.values())));
     }
   }
 };
