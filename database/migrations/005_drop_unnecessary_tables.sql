@@ -14,7 +14,6 @@ WHERE EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = DATAB
 DROP TABLE IF EXISTS interactions;
 DROP TABLE IF EXISTS user_interactions;
 DROP TABLE IF EXISTS user_preferences;
-DROP TABLE IF EXISTS place_images;
 DROP TABLE IF EXISTS provinces;
 DROP TABLE IF EXISTS user_dismissed;
 
