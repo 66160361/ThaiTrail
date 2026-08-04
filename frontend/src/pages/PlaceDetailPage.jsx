@@ -133,12 +133,32 @@ function PlaceDetailPage() {
 
   const handleSignal = async (type) => {
     if (type === 'share') {
+      const shareData = {
+        title: place?.place_name ? `${place.place_name} - ThaiTrail` : 'ThaiTrail',
+        text: place?.description
+          ? (place.description.length > 100 ? place.description.slice(0, 100) + '...' : place.description)
+          : `ดูรายละเอียดสถานที่ท่องเที่ยว ${place?.place_name || ''} บน ThaiTrail`,
+        url: window.location.href,
+      };
+
       try {
-        await navigator.clipboard.writeText(window.location.href);
-        alert('📋 คัดลอกลิงก์สถานที่ท่องเที่ยวไปยังคลิปบอร์ดแล้ว!');
-      } catch {
-        alert('ไม่สามารถคัดลอกลิงก์ได้');
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await navigator.clipboard.writeText(window.location.href);
+          alert('📋 คัดลอกลิงก์สถานที่ท่องเที่ยวไปยังคลิปบอร์ดแล้ว!');
+        }
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            alert('📋 คัดลอกลิงก์สถานที่ท่องเที่ยวไปยังคลิปบอร์ดแล้ว!');
+          } catch {
+            alert('ไม่สามารถแชร์หรือคัดลอกลิงก์ได้');
+          }
+        }
       }
+
       if (user && place) {
         api.signals.log({ place_id: place.id, signal_type: 'share' }).catch(() => { });
       }
