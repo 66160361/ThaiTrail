@@ -102,6 +102,22 @@ foreach ($json as $wrapper) {
                 ]);
             }
 
+            // Insert images into place_images table
+            $deleteOldImages = $pdo->prepare("DELETE FROM place_images WHERE place_id = :place_id");
+            $deleteOldImages->execute(['place_id' => $placeId]);
+
+            if (isset($wrapper['Picture']) && is_array($wrapper['Picture'])) {
+                $insertImage = $pdo->prepare("INSERT INTO place_images (place_id, image_url) VALUES (:place_id, :image_url)");
+                foreach ($wrapper['Picture'] as $picUrl) {
+                    if (!empty($picUrl)) {
+                        $insertImage->execute([
+                            'place_id' => $placeId,
+                            'image_url' => $picUrl
+                        ]);
+                    }
+                }
+            }
+
             removeReview($pdo, $placeCode);
             echo "✔ " . $placeName . "<br>";
         } else {
