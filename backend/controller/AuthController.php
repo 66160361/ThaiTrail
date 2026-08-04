@@ -307,6 +307,7 @@ class AuthController
         // 3. Fetch Liked Places
         $likedStmt = $this->pdo->prepare("
             SELECT p.*, 
+                   MAX(us.created_at) AS last_signal_at,
                    GROUP_CONCAT(DISTINCT c.category_name SEPARATOR ',') AS categories, 
                    GROUP_CONCAT(DISTINCT c.id SEPARATOR ',') AS category_ids
             FROM user_signals us
@@ -315,7 +316,7 @@ class AuthController
             LEFT JOIN categories c ON tt.category_id = c.id
             WHERE us.user_id = ? AND us.signal_type = 'like'
             GROUP BY p.id
-            ORDER BY us.created_at DESC
+            ORDER BY last_signal_at DESC
         ");
         $likedStmt->execute([$userId]);
         $likedPlaces = array_map($normalizePlace, $likedStmt->fetchAll(PDO::FETCH_ASSOC));
@@ -323,6 +324,7 @@ class AuthController
         // 4. Fetch Saved Places
         $savedStmt = $this->pdo->prepare("
             SELECT p.*, 
+                   MAX(us.created_at) AS last_signal_at,
                    GROUP_CONCAT(DISTINCT c.category_name SEPARATOR ',') AS categories, 
                    GROUP_CONCAT(DISTINCT c.id SEPARATOR ',') AS category_ids
             FROM user_signals us
@@ -331,7 +333,7 @@ class AuthController
             LEFT JOIN categories c ON tt.category_id = c.id
             WHERE us.user_id = ? AND us.signal_type = 'save'
             GROUP BY p.id
-            ORDER BY us.created_at DESC
+            ORDER BY last_signal_at DESC
         ");
         $savedStmt->execute([$userId]);
         $savedPlaces = array_map($normalizePlace, $savedStmt->fetchAll(PDO::FETCH_ASSOC));
@@ -390,7 +392,7 @@ class AuthController
             return ['success' => false, 'message' => 'กรุณากรอกชื่อที่ต้องการแก้ไข'];
         }
 
-        if ($avatarUrl !== '') {
+        if (array_key_exists('avatar_url', $body) || array_key_exists('avatar', $body)) {
             $stmt = $this->pdo->prepare('UPDATE users SET name = ?, avatar_url = ? WHERE id = ?');
             $stmt->execute([$name, $avatarUrl, $userId]);
         } else {
@@ -398,11 +400,23 @@ class AuthController
             $stmt->execute([$name, $userId]);
         }
 
+        // Fetch updated user info
+        $stmt = $this->pdo->prepare('SELECT id, name, email, avatar_url, onboarded FROM users WHERE id = ?');
+        $stmt->execute([$userId]);
+        $updatedUser = $stmt->fetch(PDO::FETCH_ASSOC);
+
         return [
             'success'    => true,
             'message'    => 'อัปเดตโปรไฟล์เรียบร้อยแล้ว',
-            'name'       => $name,
-            'avatar_url' => $avatarUrl
+            'user'       => [
+                'id'         => (int) $updatedUser['id'],
+                'name'       => $updatedUser['name'],
+                'email'      => $updatedUser['email'],
+                'avatar_url' => $updatedUser['avatar_url'] ?? '',
+                'onboarded'  => (int) ($updatedUser['onboarded'] ?? 0),
+            ],
+            'name'       => $updatedUser['name'],
+            'avatar_url' => $updatedUser['avatar_url'] ?? ''
         ];
     }
 }

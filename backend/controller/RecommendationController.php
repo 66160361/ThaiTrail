@@ -95,8 +95,8 @@ class RecommendationController
             WHERE ups.user_id = ?
               AND p.id NOT IN (
                 SELECT place_id
-                FROM user_dismissed
-                WHERE user_id = ?
+                FROM user_signals
+                WHERE user_id = ? AND signal_type = 'dismiss'
             )
             GROUP BY p.id
             ORDER BY score DESC, p.place_name ASC

@@ -15,12 +15,11 @@ class PlacesController
         if (isset($params['images_for']) && $params['images_for'] !== '') {
             $placeId = (int) $params['images_for'];
             $stmt = $this->pdo->prepare(
-                'SELECT image_url FROM place_images
-                  WHERE place_id = :place_id
-                  ORDER BY sort_order ASC'
+                'SELECT image_url FROM places WHERE id = :place_id AND image_url IS NOT NULL AND image_url != ""'
             );
             $stmt->execute(['place_id' => $placeId]);
-            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $url = $stmt->fetchColumn();
+            return $url ? [$url] : [];
         }
 
         $categoryId = $params['category_id'] ?? $params['group_by_category'] ?? null;

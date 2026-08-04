@@ -42,13 +42,13 @@ class SignalController
      * - Logs the event in user_signals
      * - Upserts & boosts user_interests.weight for matching categories
      * - Checks VIEW_THRESHOLD (e.g. 3 views in category) -> applies THRESHOLD_BOOST (+5.0)
-     * - Inserts into user_dismissed for 'dismiss'
      */
     public function store(array $params, array $body): array
     {
-        $userId     = $this->requireAuth();
-        $placeId    = (int) ($body['place_id']    ?? 0);
-        $signalType = trim($body['signal_type']   ?? '');
+        $userId          = $this->requireAuth();
+        $placeId         = (int) ($body['place_id']          ?? 0);
+        $signalType      = trim($body['signal_type']         ?? '');
+        $durationSeconds = isset($body['duration_seconds']) ? (int) $body['duration_seconds'] : null;
 
         if (!$placeId || !in_array($signalType, self::VALID_SIGNALS, true)) {
             http_response_code(400);
@@ -101,11 +101,11 @@ class SignalController
                 }
             }
 
-            // 1. บันทึก Signal ลงใน user_signals
+            // 1. บันทึก Signal ลงใน user_signals (รวม duration_seconds)
             $ins = $this->pdo->prepare(
-                'INSERT INTO user_signals (user_id, place_id, signal_type) VALUES (?, ?, ?)'
+                'INSERT INTO user_signals (user_id, place_id, signal_type, duration_seconds) VALUES (?, ?, ?, ?)'
             );
-            $ins->execute([$userId, $placeId, $signalType]);
+            $ins->execute([$userId, $placeId, $signalType, $durationSeconds]);
 
             // 2. ดึงหมวดหมู่ทั้งหมดของสถานที่นี้
             $catStmt = $this->pdo->prepare('SELECT category_id FROM tourism_types WHERE place_id = ?');
@@ -166,14 +166,6 @@ class SignalController
                         ]);
                     }
                 }
-            }
-
-            // 5. หากเป็น signalประเภท 'dismiss' -> บันทึกลง user_dismissed
-            if ($signalType === 'dismiss') {
-                $dis = $this->pdo->prepare(
-                    'INSERT IGNORE INTO user_dismissed (user_id, place_id) VALUES (?, ?)'
-                );
-                $dis->execute([$userId, $placeId]);
             }
 
             $this->pdo->commit();

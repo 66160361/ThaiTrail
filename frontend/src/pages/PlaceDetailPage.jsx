@@ -53,6 +53,23 @@ function PlaceDetailPage() {
       .finally(() => setLoading(false));
   }, [id, user]);
 
+  // Track Dwell Time (duration_seconds) when leaving the place detail page
+  useEffect(() => {
+    if (!place?.id || !user) return;
+    const startTime = Date.now();
+
+    return () => {
+      const durationSeconds = Math.round((Date.now() - startTime) / 1000);
+      if (durationSeconds >= 1) {
+        api.signals.log({
+          place_id: place.id,
+          signal_type: 'view',
+          duration_seconds: durationSeconds
+        }).catch(() => { });
+      }
+    };
+  }, [place?.id, user]);
+
   // ดึงรูปภาพทั้งหมดจาก place_images
   useEffect(() => {
     if (!place) return;
