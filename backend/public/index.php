@@ -7,8 +7,8 @@ ini_set('session.cookie_lifetime', $sessionLifetime);
 
 session_set_cookie_params([
     'lifetime' => $sessionLifetime,
-    'path'     => '/',
-    'secure'   => false,
+    'path' => '/',
+    'secure' => false,
     'httponly' => true,
     'samesite' => 'Lax',
     // ไม่ set 'domain' ปล่อยให้ PHP ตั้งค่า default เอง (ป้องกัน cookie block บน localhost)
@@ -26,8 +26,12 @@ require_once __DIR__ . '/../controller/SignalController.php';
 
 loadAppEnv();
 
-$method     = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'];
 $requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$requestUri = rtrim($requestUri, '/');
+if ($requestUri === '') {
+    $requestUri = '/';
+}
 
 // ─── CORS ──────────────────────────────────────────────────────────────────
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
@@ -45,29 +49,29 @@ header('Content-Type: application/json; charset=utf-8');
 
 // ─── Route table ───────────────────────────────────────────────────────────
 $routes = [
-    'POST /api/auth/register'  => [AuthController::class,           'register'],
-    'POST /api/auth/login'     => [AuthController::class,           'login'],
-    'POST /api/auth/logout'    => [AuthController::class,           'logout'],
-    'GET /api/auth/me'         => [AuthController::class,           'me'],
-    'POST /api/auth/google'    => [AuthController::class,           'google'],
-    'GET /api/user/interests'    => [UserInterestController::class,   'index'],
-    'POST /api/user/interests'   => [UserInterestController::class,   'store'],
-    'GET /api/user/profile'      => [AuthController::class,           'profile'],
-    'POST /api/user/profile'     => [AuthController::class,           'updateProfile'],
-    'GET /api/user/interactions' => [AuthController::class,           'interactions'],
-    'GET /api/recommendations'   => [RecommendationController::class, 'index'],
-    'POST /api/signals'          => [SignalController::class,         'store'],
-    'GET /api/places'            => [PlacesController::class,         'index'],
+    'POST /api/auth/register' => [AuthController::class, 'register'],
+    'POST /api/auth/login' => [AuthController::class, 'login'],
+    'POST /api/auth/logout' => [AuthController::class, 'logout'],
+    'GET /api/auth/me' => [AuthController::class, 'me'],
+    'POST /api/auth/google' => [AuthController::class, 'google'],
+    'GET /api/user/interests' => [UserInterestController::class, 'index'],
+    'POST /api/user/interests' => [UserInterestController::class, 'store'],
+    'GET /api/user/profile' => [AuthController::class, 'profile'],
+    'POST /api/user/profile' => [AuthController::class, 'updateProfile'],
+    'GET /api/user/interactions' => [AuthController::class, 'interactions'],
+    'GET /api/recommendations' => [RecommendationController::class, 'index'],
+    'POST /api/signals' => [SignalController::class, 'store'],
+    'GET /api/places' => [PlacesController::class, 'index'],
 ];
 
 $routeKey = "$method $requestUri";
-$body     = json_decode(file_get_contents('php://input'), true) ?? [];
+$body = json_decode(file_get_contents('php://input'), true) ?? [];
 
 if (isset($routes[$routeKey])) {
     try {
         [$class, $action] = $routes[$routeKey];
-        $controller       = new $class($pdo);
-        $result           = $controller->$action($_GET, $body);
+        $controller = new $class($pdo);
+        $result = $controller->$action($_GET, $body);
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
     } catch (Throwable $e) {
         http_response_code(500);

@@ -11,9 +11,9 @@ class AuthController
 
     public function register(array $params, array $body): array
     {
-        $name     = trim($body['name']     ?? '');
-        $email    = trim($body['email']    ?? '');
-        $password = $body['password']      ?? '';
+        $name = trim($body['name'] ?? '');
+        $email = trim($body['email'] ?? '');
+        $password = $body['password'] ?? '';
 
         if (!$name || !$email || !$password) {
             http_response_code(400);
@@ -48,20 +48,20 @@ class AuthController
 
         return [
             'success' => true,
-            'user'    => [
-                'id'         => $userId,
-                'name'       => $name,
-                'email'      => $email,
+            'user' => [
+                'id' => $userId,
+                'name' => $name,
+                'email' => $email,
                 'avatar_url' => '',
-                'onboarded'  => 0,
+                'onboarded' => 0,
             ],
         ];
     }
 
     public function login(array $params, array $body): array
     {
-        $email    = trim($body['email']    ?? '');
-        $password = $body['password']      ?? '';
+        $email = trim($body['email'] ?? '');
+        $password = $body['password'] ?? '';
 
         if (!$email || !$password) {
             http_response_code(400);
@@ -81,12 +81,12 @@ class AuthController
 
         return [
             'success' => true,
-            'user'    => [
-                'id'         => (int) $user['id'],
-                'name'       => $user['name'],
-                'email'      => $user['email'],
+            'user' => [
+                'id' => (int) $user['id'],
+                'name' => $user['name'],
+                'email' => $user['email'],
                 'avatar_url' => $user['avatar_url'] ?? '',
-                'onboarded'  => (int) $user['onboarded'],
+                'onboarded' => (int) $user['onboarded'],
             ],
         ];
     }
@@ -117,8 +117,8 @@ class AuthController
             return ['success' => false, 'message' => 'User not found'];
         }
 
-        $user['id']         = (int) $user['id'];
-        $user['onboarded']  = (int) $user['onboarded'];
+        $user['id'] = (int) $user['id'];
+        $user['onboarded'] = (int) $user['onboarded'];
         $user['avatar_url'] = $user['avatar_url'] ?? '';
 
         return ['success' => true, 'user' => $user];
@@ -148,9 +148,9 @@ class AuthController
             return ['success' => false, 'message' => 'Google token ไม่ถูกต้อง'];
         }
 
-        $googleId  = $payload['sub']     ?? '';
-        $email     = $payload['email']   ?? '';
-        $name      = $payload['name']    ?? ($payload['given_name'] ?? 'ผู้ใช้งาน');
+        $googleId = $payload['sub'] ?? '';
+        $email = $payload['email'] ?? '';
+        $name = $payload['name'] ?? ($payload['given_name'] ?? 'ผู้ใช้งาน');
         $avatarUrl = $payload['picture'] ?? '';
 
         if (!$googleId || !$email) {
@@ -204,7 +204,7 @@ class AuthController
         $_SESSION['user_id'] = (int) $user['id'];
 
         // Auto-sync: if user has interests in user_interests table, mark as onboarded
-        if (!(int)($user['onboarded'] ?? 0)) {
+        if (!(int) ($user['onboarded'] ?? 0)) {
             $chk = $this->pdo->prepare(
                 'SELECT COUNT(*) FROM user_interests WHERE user_id = ?'
             );
@@ -220,12 +220,12 @@ class AuthController
 
         return [
             'success' => true,
-            'user'    => [
-                'id'         => (int) $user['id'],
-                'name'       => $user['name'],
-                'email'      => $user['email'],
+            'user' => [
+                'id' => (int) $user['id'],
+                'name' => $user['name'],
+                'email' => $user['email'],
                 'avatar_url' => $user['avatar_url'] ?? '',
-                'onboarded'  => (int) ($user['onboarded'] ?? 0),
+                'onboarded' => (int) ($user['onboarded'] ?? 0),
             ],
         ];
     }
@@ -234,7 +234,7 @@ class AuthController
     {
         if (!function_exists('curl_init')) {
             // Fallback: decode without verification (development only)
-            $parts   = explode('.', $idToken);
+            $parts = explode('.', $idToken);
             $payload = json_decode(base64_decode(strtr($parts[1] ?? '', '-_', '+/')), true);
             return $payload ?: null;
         }
@@ -281,8 +281,9 @@ class AuthController
         $interests = $interestStmt->fetchAll(PDO::FETCH_COLUMN);
 
         // Helper to parse time strings/arrays
-        $toTimeArray = function($value) {
-            if ($value === null || $value === '') return [];
+        $toTimeArray = function ($value) {
+            if ($value === null || $value === '')
+                return [];
             $decoded = json_decode($value, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
                 return array_values(array_filter($decoded, static fn($item) => $item !== null && $item !== ''));
@@ -293,7 +294,7 @@ class AuthController
             return [trim($value)];
         };
 
-        $normalizePlace = function(array $place) use ($toTimeArray) {
+        $normalizePlace = function (array $place) use ($toTimeArray) {
             if (array_key_exists('opening_time', $place)) {
                 $place['opening_time'] = $toTimeArray($place['opening_time']);
             }
@@ -354,23 +355,77 @@ class AuthController
     public function interactions(array $params, array $body): array
     {
         if (empty($_SESSION['user_id'])) {
-            return ['success' => true, 'liked' => [], 'saved' => []];
+            return [
+                'success' => true,
+                'liked' => [],
+                'saved' => [],
+                'viewed' => [],
+                'shared' => [],
+                'view_durations' => [],
+                'events' => [],
+            ];
         }
 
         $userId = (int) $_SESSION['user_id'];
 
-        $likedStmt = $this->pdo->prepare("SELECT place_id FROM user_signals WHERE user_id = ? AND signal_type = 'like'");
-        $likedStmt->execute([$userId]);
-        $liked = array_map('intval', $likedStmt->fetchAll(PDO::FETCH_COLUMN));
+        $fetchPlaceIds = function (string $type) use ($userId): array {
+            $stmt = $this->pdo->prepare(
+                'SELECT DISTINCT place_id
+                 FROM user_signals
+                 WHERE user_id = ? AND signal_type = ?
+                 ORDER BY place_id ASC'
+            );
+            $stmt->execute([$userId, $type]);
+            return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+        };
 
-        $savedStmt = $this->pdo->prepare("SELECT place_id FROM user_signals WHERE user_id = ? AND signal_type = 'save'");
-        $savedStmt->execute([$userId]);
-        $saved = array_map('intval', $savedStmt->fetchAll(PDO::FETCH_COLUMN));
+        $liked = $fetchPlaceIds('like');
+        $saved = $fetchPlaceIds('save');
+        $viewed = $fetchPlaceIds('view');
+        $shared = $fetchPlaceIds('share');
+
+        $durationStmt = $this->pdo->prepare(
+            'SELECT place_id, MAX(COALESCE(duration_seconds, 0)) AS duration_seconds
+             FROM user_signals
+             WHERE user_id = ? AND signal_type = ?
+             GROUP BY place_id'
+        );
+        $durationStmt->execute([$userId, 'view']);
+        $durationRows = $durationStmt->fetchAll(PDO::FETCH_ASSOC);
+        $viewDurations = [];
+        foreach ($durationRows as $row) {
+            $viewDurations[] = [
+                'place_id' => (int) $row['place_id'],
+                'duration_seconds' => (int) $row['duration_seconds'],
+            ];
+        }
+
+        $eventsStmt = $this->pdo->prepare(
+            'SELECT place_id, signal_type, platform, duration_seconds, created_at
+             FROM user_signals
+             WHERE user_id = ?
+             ORDER BY created_at DESC, id DESC
+             LIMIT 200'
+        );
+        $eventsStmt->execute([$userId]);
+        $events = array_map(static function (array $row): array {
+            return [
+                'place_id' => (int) $row['place_id'],
+                'signal_type' => $row['signal_type'],
+                'platform' => $row['platform'],
+                'duration_seconds' => $row['duration_seconds'] !== null ? (int) $row['duration_seconds'] : null,
+                'created_at' => $row['created_at'],
+            ];
+        }, $eventsStmt->fetchAll(PDO::FETCH_ASSOC));
 
         return [
             'success' => true,
             'liked' => $liked,
-            'saved' => $saved
+            'saved' => $saved,
+            'viewed' => $viewed,
+            'shared' => $shared,
+            'view_durations' => $viewDurations,
+            'events' => $events,
         ];
     }
 
@@ -381,8 +436,8 @@ class AuthController
             return ['success' => false, 'message' => 'Unauthorized'];
         }
 
-        $userId    = (int) $_SESSION['user_id'];
-        $name      = trim($body['name'] ?? '');
+        $userId = (int) $_SESSION['user_id'];
+        $name = trim($body['name'] ?? '');
         $avatarUrl = trim($body['avatar_url'] ?? $body['avatar'] ?? '');
 
         if (!$name) {
@@ -399,9 +454,9 @@ class AuthController
         }
 
         return [
-            'success'    => true,
-            'message'    => 'อัปเดตโปรไฟล์เรียบร้อยแล้ว',
-            'name'       => $name,
+            'success' => true,
+            'message' => 'อัปเดตโปรไฟล์เรียบร้อยแล้ว',
+            'name' => $name,
             'avatar_url' => $avatarUrl
         ];
     }

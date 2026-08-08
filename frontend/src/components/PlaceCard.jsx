@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { resolvePlaceImage } from '../services/placeImageResolver';
 
 // Category colors (consistent with the 8 Thai categories)
 const CATEGORY_STYLES = {
@@ -31,9 +32,7 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
   const [liked, setLiked] = useState(() => interactionStorage.isLiked(place.id));
   const [saved, setSaved] = useState(() => interactionStorage.isSaved(place.id));
   const [dismissed, setDismissed] = useState(false);
-  const [imgSrc, setImgSrc] = useState(
-    place.image_url || FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length]
-  );
+  const [imgSrc, setImgSrc] = useState(() => resolvePlaceImage(place, FALLBACK_IMAGES));
 
   const signal = async (e, type) => {
     e.stopPropagation();
@@ -70,7 +69,7 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
         <img
           src={imgSrc}
           alt={place.place_name}
-          onError={() => setImgSrc(FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length])}
+          onError={() => setImgSrc(FALLBACK_IMAGES[Math.abs(Number(place.id) || 0) % FALLBACK_IMAGES.length])}
           loading="lazy"
         />
         <div className="place-card-gradient" />

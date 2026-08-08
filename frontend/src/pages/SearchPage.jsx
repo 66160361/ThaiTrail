@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import Navbar from '../components/Navbar';
 import { interactionStorage } from '../services/interactionStorage';
+import { resolvePlaceImage } from '../services/placeImageResolver';
 
 const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200',
@@ -326,6 +327,22 @@ function SearchPage() {
             </div>
 
             <div className="search-v2-filter-block">
+              <p className="search-v2-label">◉ หมวดหมู่ท่องเที่ยว</p>
+              <div className="search-v2-category-grid">
+                {CATEGORY_TILES.map((tile) => (
+                  <button
+                    key={tile.id}
+                    className={`search-v2-category-tile${selectedCategory === tile.id ? ' active' : ''}`}
+                    onClick={() => onCategoryClick(tile.id)}
+                  >
+                    <span className="search-v2-category-icon">{tile.icon}</span>
+                    <span className="search-v2-category-label">{tile.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="search-v2-filter-block">
               <p className="search-v2-label">◉ จังหวัด</p>
               <div className="search-v2-select-wrap">
                 <select
@@ -388,22 +405,6 @@ function SearchPage() {
           </aside>
 
           <main className="search-v2-content" ref={resultsRef}>
-            <section>
-              <h2 className="search-v2-section-title">ค้นหาตามหมวดหมู่</h2>
-              <div className="search-v2-category-grid">
-                {CATEGORY_TILES.map((tile) => (
-                  <button
-                    key={tile.id}
-                    className={`search-v2-category-tile${selectedCategory === tile.id ? ' active' : ''}`}
-                    onClick={() => onCategoryClick(tile.id)}
-                  >
-                    <span className="search-v2-category-icon">{tile.icon}</span>
-                    <span className="search-v2-category-label">{tile.label}</span>
-                  </button>
-                ))}
-              </div>
-            </section>
-
             <section className="search-v2-result-section">
               <h2 className="search-v2-result-title">ผลลัพธ์ ({filteredPlaces.length})</h2>
 
@@ -430,9 +431,7 @@ function SearchPage() {
                   {pagedPlaces.map((place) => {
                     const categories = toCategoryArray(place);
 
-                    const image =
-                      place.image_url ||
-                      FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length];
+                    const image = resolvePlaceImage(place, FALLBACK_IMAGES);
 
                     const openingTime = formatTime(place.opening_time);
                     const closingTime = formatTime(place.closing_time);

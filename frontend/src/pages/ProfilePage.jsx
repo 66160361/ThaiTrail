@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import Navbar from '../components/Navbar';
 import { interactionStorage } from '../services/interactionStorage';
+import { resolvePlaceImage } from '../services/placeImageResolver';
 
 const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800',
@@ -367,7 +368,7 @@ function ProfilePage() {
             }}>
               {currentPlaces.map((place) => {
                 const placeIdNum = Math.abs(Number(place.id) || 0);
-                const image = place.image_url || FALLBACK_IMAGES[placeIdNum % FALLBACK_IMAGES.length];
+                const image = resolvePlaceImage(place, FALLBACK_IMAGES);
                 return (
                   <Link
                     key={place.id}
