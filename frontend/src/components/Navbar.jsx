@@ -61,13 +61,13 @@ function Navbar() {
 
         {user ? (() => {
           const userKey = user?.email || user?.id;
-          const currentAvatar = (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null)
-            || localStorage.getItem('thaitrail_user_avatar')
-            || user?.avatar_url
-            || user?.picture;
-          const currentName = (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null)
+          const currentAvatar = user?.avatar_url
+            || user?.picture
+            || (userKey ? localStorage.getItem(`thaitrail_user_avatar_${userKey}`) : null)
+            || localStorage.getItem('thaitrail_user_avatar');
+          const currentName = user?.name
+            || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null)
             || localStorage.getItem('thaitrail_user_name')
-            || user?.name
             || 'นักเดินทาง';
 
           const pastel = getPastelStyle(currentName);

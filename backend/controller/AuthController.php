@@ -164,12 +164,32 @@ class AuthController
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            // Update avatar_url only if empty — preserve user-uploaded avatar and edited name
+            // Update name if it is currently 'anonymous', empty, or NULL
+            $needsUpdate = false;
+            $updateSql = 'UPDATE users SET ';
+            $updateParams = [];
+
+            if ((empty($user['name']) || $user['name'] === 'anonymous') && !empty($name)) {
+                $updateSql .= 'name = ?';
+                $updateParams[] = $name;
+                $needsUpdate = true;
+            }
+
             if (empty($user['avatar_url']) && !empty($avatarUrl)) {
-                $upd = $this->pdo->prepare(
-                    'UPDATE users SET avatar_url = ? WHERE id = ?'
-                );
-                $upd->execute([$avatarUrl, $user['id']]);
+                if ($needsUpdate) {
+                    $updateSql .= ', ';
+                }
+                $updateSql .= 'avatar_url = ?';
+                $updateParams[] = $avatarUrl;
+                $needsUpdate = true;
+            }
+
+            if ($needsUpdate) {
+                $updateSql .= ' WHERE id = ?';
+                $updateParams[] = $user['id'];
+
+                $upd = $this->pdo->prepare($updateSql);
+                $upd->execute($updateParams);
 
                 // Reload fresh row after update
                 $reload = $this->pdo->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
@@ -178,22 +198,33 @@ class AuthController
             }
         } else {
             // New user — check if email already registered another way
-            $byEmail = $this->pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
+            $byEmail = $this->pdo->prepare('SELECT id, name, avatar_url FROM users WHERE email = ? LIMIT 1');
             $byEmail->execute([$email]);
             $existing = $byEmail->fetch(PDO::FETCH_ASSOC);
 
             if ($existing) {
-                // Link Google ID to existing account (preserve their name)
-                $link = $this->pdo->prepare(
-                    'UPDATE users SET google_id = ?, avatar_url = ? WHERE id = ?'
-                );
-                $link->execute([$googleId, $avatarUrl, $existing['id']]);
+                // Link Google ID to existing account
+                $linkSql = 'UPDATE users SET google_id = ?, avatar_url = ?';
+                $linkParams = [$googleId, $avatarUrl];
+
+                // If existing account name is 'anonymous' or empty, update it to Google name
+                $existingName = $existing['name'] ?? '';
+                if ((empty($existingName) || $existingName === 'anonymous') && !empty($name)) {
+                    $linkSql .= ', name = ?';
+                    $linkParams[] = $name;
+                }
+
+                $linkSql .= ' WHERE id = ?';
+                $linkParams[] = $existing['id'];
+
+                $link = $this->pdo->prepare($linkSql);
+                $link->execute($linkParams);
             } else {
-                // Brand-new user — default name is 'anonymous', user can change it later
+                // Brand-new user — use Google profile name instead of hardcoded 'anonymous'
                 $ins = $this->pdo->prepare(
                     'INSERT INTO users (google_id, name, email, avatar_url) VALUES (?, ?, ?, ?)'
                 );
-                $ins->execute([$googleId, 'anonymous', $email, $avatarUrl]);
+                $ins->execute([$googleId, $name, $email, $avatarUrl]);
             }
 
             // Reload full row
