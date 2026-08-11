@@ -1,4 +1,18 @@
 <?php
+
+/**
+ * backfill_place_metrics.php
+ *
+ * ไฟล์นี้ใช้สำหรับคำนวณและอัปเดต metric ของสถานที่ท่องเที่ยวในตาราง places แบบย้อนหลัง (backfill)
+ * โดยจะอ่านข้อมูลแต่ละสถานที่แล้วคำนวณ:
+ * - word_count: จำนวนคำจาก description
+ * - photo_count: จำนวนรูปจาก images_json (หรือ fallback จาก image_url)
+ * - expected_read_time: เวลาอ่าน/ดูคาดการณ์จากสูตร
+ *   expected_read_time = (word_count / 3.5) + (photo_count * 2.5)
+ *
+ * จากนั้นเขียนค่าที่คำนวณได้กลับลงคอลัมน์ word_count, photo_count และ expected_read_time
+ * เหมาะสำหรับรันหลัง migration หรือเมื่อมีการเปลี่ยนสูตรคำนวณ metric
+ */
 require_once __DIR__ . '/config/env.php';
 require_once __DIR__ . '/config/database.php';
 
@@ -64,13 +78,19 @@ function columnExists(PDO $pdo, string $table, string $column): bool
     return ((int) $stmt->fetchColumn()) > 0;
 }
 
-function computeExpectedReadTime(int $wordCount): int
+function computeExpectedReadTime(int $wordCount, int $photoCount): int
 {
-    if ($wordCount <= 0) {
+    // สูตร Expected_Time:
+    // expected_read_time = (word_count / 3.5) + (photo_count * 2.5)
+    // ปัดขึ้นเป็นจำนวนเต็ม เพื่อใช้เก็บลงคอลัมน์ INT
+    if ($wordCount <= 0 && $photoCount <= 0) {
         return 0;
     }
 
-    return (int) max(1, (int) ceil($wordCount / 200));
+    $readFromWords = $wordCount / 3.5;
+    $readFromPhotos = $photoCount * 2.5;
+
+    return (int) max(1, (int) ceil($readFromWords + $readFromPhotos));
 }
 
 try {
@@ -95,14 +115,18 @@ try {
     );
 
     foreach ($rows as $row) {
+        // 1) นับจำนวนคำจาก description
         $wordCount = countWords($row['description'] ?? null);
+        // 2) นับจำนวนรูปจาก images_json (ถ้ามี) หรือ fallback ไป image_url
         if ($hasImagesJson) {
             $photoCount = countPhotosFromImagesJson($row['images_json'] ?? null);
         } else {
             $photoCount = countPhotos($row['image_url'] ?? null);
         }
-        $expectedReadTime = computeExpectedReadTime($wordCount);
+        // 3) คำนวณ expected_read_time จากสูตรใน computeExpectedReadTime()
+        $expectedReadTime = computeExpectedReadTime($wordCount, $photoCount);
 
+        // 4) เขียนค่า metric ที่คำนวณแล้วกลับลงตาราง places
         $updateStmt->execute([
             ':word_count' => $wordCount,
             ':photo_count' => $photoCount,
