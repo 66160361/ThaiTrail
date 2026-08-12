@@ -77,8 +77,8 @@ class RecommendationController
         // 3. คำนวณสล็อตของฟีดแบบ 70/20/10 โดยอิงตามจำนวนที่ต้องสร้างทั้งหมด (limit + offset)
         $totalToGenerate = $limit + $offset;
         $numTop          = (int) round($totalToGenerate * 0.70);
-        $numViewed       = (int) round($totalToGenerate * 0.20);
-        $numUnseen       = $totalToGenerate - $numTop - $numViewed;
+        $numSecond       = (int) round($totalToGenerate * 0.20);
+        $numUnseen       = $totalToGenerate - $numTop - $numSecond;
 
         $usedIds = [];
 
@@ -99,15 +99,13 @@ class RecommendationController
                 SELECT p.id
                 FROM places p
                 INNER JOIN tourism_types tt ON p.id = tt.place_id
-                LEFT JOIN user_place_scores ups ON p.id = ups.place_id AND ups.user_id = :user_id
                 WHERE tt.category_id = :category_id
                   AND p.id NOT IN (
                       SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
                   )
-                ORDER BY $scoreSql DESC, p.place_name ASC
+                ORDER BY RAND()
                 LIMIT :limit
             ");
-            $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
             $stmt->bindValue(':category_id', $topCategoryId, PDO::PARAM_INT);
             $stmt->bindValue(':user_id2', $userId, PDO::PARAM_INT);
             $stmt->bindValue(':limit', $totalToGenerate * 2, PDO::PARAM_INT);
@@ -115,27 +113,48 @@ class RecommendationController
             $topCategoryPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
 
-        // ─── GROUP 2 (20%): Viewed but not Liked/Saved/Shared ───────
-        $viewedPlaceIds = [];
-        $stmt = $this->pdo->prepare("
-            SELECT ui.place_id
-            FROM user_interactions ui
-            WHERE ui.user_id = :user_id
-              AND (ui.click_count > 0 OR ui.total_dwell_time > 0)
-              AND COALESCE(ui.has_liked, 0) = 0
-              AND COALESCE(ui.has_saved, 0) = 0
-              AND COALESCE(ui.has_shared, 0) = 0
-              AND ui.place_id NOT IN (
-                  SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
-              )
-            ORDER BY ui.last_action_at DESC
-            LIMIT :limit
+        // ─── GROUP 2 (20%): Second Category ──────────────────────────
+        // ดึงหมวดหมู่ที่มีคะแนนความสนใจเป็นอันดับถัดมา (อันดับที่ 2) จาก user_preferences
+        $secondCatStmt = $this->pdo->prepare("
+            SELECT category_id FROM user_preferences
+            WHERE user_id = :user_id AND preference_score > 0
+            ORDER BY preference_score DESC
+            LIMIT 1 OFFSET 1
         ");
-        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->bindValue(':user_id2', $userId, PDO::PARAM_INT);
-        $stmt->bindValue(':limit', $totalToGenerate * 2, PDO::PARAM_INT);
-        $stmt->execute();
-        $viewedPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $secondCatStmt->execute([':user_id' => $userId]);
+        $secondCategoryId = $secondCatStmt->fetchColumn();
+
+        if (!$secondCategoryId) {
+            // หากไม่มีอันดับสอง ให้เลือกหมวดหมู่อื่นที่ไม่ใช่หมวดหมู่แรกมาหนึ่งหมวดหมู่ (ถ้ามี)
+            $otherCatStmt = $this->pdo->prepare("
+                SELECT id FROM categories
+                WHERE id != :top_id
+                ORDER BY id ASC
+                LIMIT 1
+            ");
+            $otherCatStmt->execute([':top_id' => $topCategoryId ?: 0]);
+            $secondCategoryId = $otherCatStmt->fetchColumn();
+        }
+
+        $secondCategoryPlaceIds = [];
+        if ($secondCategoryId) {
+            $stmt = $this->pdo->prepare("
+                SELECT p.id
+                FROM places p
+                INNER JOIN tourism_types tt ON p.id = tt.place_id
+                WHERE tt.category_id = :category_id
+                  AND p.id NOT IN (
+                      SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
+                  )
+                ORDER BY RAND()
+                LIMIT :limit
+            ");
+            $stmt->bindValue(':category_id', $secondCategoryId, PDO::PARAM_INT);
+            $stmt->bindValue(':user_id2', $userId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $totalToGenerate * 2, PDO::PARAM_INT);
+            $stmt->execute();
+            $secondCategoryPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }
 
         // ─── GROUP 3 (10%): Discovery (Unseen Categories) ───────────
         $unseenCatsStmt = $this->pdo->prepare("
@@ -219,13 +238,13 @@ class RecommendationController
             }
         }
 
-        // 2) เคยดูแต่ไม่ถูกใจ/บันทึก (20%)
-        $viewedList = [];
-        foreach ($viewedPlaceIds as $pid) {
+        // 2) หมวดหมู่รองอันดับสอง (20%)
+        $secondList = [];
+        foreach ($secondCategoryPlaceIds as $pid) {
             $pid = (int) $pid;
-            if (count($viewedList) >= $numViewed) break;
+            if (count($secondList) >= $numSecond) break;
             if (!in_array($pid, $usedIds, true)) {
-                $viewedList[] = $pid;
+                $secondList[] = $pid;
                 $usedIds[]    = $pid;
             }
         }
@@ -252,10 +271,10 @@ class RecommendationController
             }
         }
         
-        while (count($viewedList) < $numViewed && $fallbackIndex < count($fallbackPlaceIds)) {
+        while (count($secondList) < $numSecond && $fallbackIndex < count($fallbackPlaceIds)) {
             $pid = (int) $fallbackPlaceIds[$fallbackIndex++];
             if (!in_array($pid, $usedIds, true)) {
-                $viewedList[] = $pid;
+                $secondList[] = $pid;
                 $usedIds[]    = $pid;
             }
         }
@@ -270,11 +289,17 @@ class RecommendationController
 
         // ─── FETCH DETAILS & SORT ────────────────────────────────────
         $topDetails    = $this->fetchPlaceDetails($topList, $userId, $topProvinces, $scoreSql);
-        $viewedDetails = $this->fetchPlaceDetails($viewedList, $userId, $topProvinces, $scoreSql);
+        $secondDetails = $this->fetchPlaceDetails($secondList, $userId, $topProvinces, $scoreSql);
         $unseenDetails = $this->fetchPlaceDetails($unseenList, $userId, $topProvinces, $scoreSql);
 
-        usort($topDetails,    static fn($a, $b) => $b['score'] <=> $a['score']);
-        usort($viewedDetails, static fn($a, $b) => $b['score'] <=> $a['score']);
+        // เรียงตามลำดับของ $topList ซึ่งได้มาแบบสุ่ม (RAND()) แทนการเรียงตามคะแนนความนิยม
+        $topListOrder = array_flip($topList);
+        usort($topDetails,    static fn($a, $b) => ($topListOrder[$a['id']] ?? 0) <=> ($topListOrder[$b['id']] ?? 0));
+
+        // เรียงตามลำดับของ $secondList ซึ่งได้มาแบบสุ่ม (RAND()) แทนการเรียงตามคะแนนความนิยม
+        $secondListOrder = array_flip($secondList);
+        usort($secondDetails, static fn($a, $b) => ($secondListOrder[$a['id']] ?? 0) <=> ($secondListOrder[$b['id']] ?? 0));
+
         usort($unseenDetails, static fn($a, $b) => $b['score'] <=> $a['score']);
 
         // ─── INTERLEAVE 7:2:1 RATIO ──────────────────────────────────
@@ -283,7 +308,7 @@ class RecommendationController
         
         while (
             $i < count($topDetails) || 
-            $j < count($viewedDetails) || 
+            $j < count($secondDetails) || 
             $k < count($unseenDetails)
         ) {
             // ดึง Top Category (7)
@@ -292,10 +317,10 @@ class RecommendationController
                     $finalPlaces[] = $topDetails[$i++];
                 }
             }
-            // ดึง Viewed but not liked/saved (2)
+            // ดึง Second Category (2)
             for ($x = 0; $x < 2; $x++) {
-                if (isset($viewedDetails[$j])) {
-                    $finalPlaces[] = $viewedDetails[$j++];
+                if (isset($secondDetails[$j])) {
+                    $finalPlaces[] = $secondDetails[$j++];
                 }
             }
             // ดึง Discovery (1)

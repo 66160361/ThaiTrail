@@ -223,13 +223,7 @@ function RecommendationsPage() {
               </div>
             )}
 
-            {activeTab === 'recommend' && (
-              <div style={{ textAlign: 'center', marginTop: 24 }}>
-                <button className="btn btn-ghost btn-sm" onClick={handleEditInterests}>
-                  ✏️ แก้ไขความสนใจ
-                </button>
-              </div>
-            )}
+
           </>
         )}
       </div>
