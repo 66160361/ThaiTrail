@@ -26,6 +26,10 @@ class RecommendationController
      * - 70% from user's Top Category (highest preference_score).
      * - 20% from places the user viewed but didn't like/save/share.
      * - 10% random discovery from unseen categories (interacted_count = 0).
+     *
+     * Onboarding prioritization:
+     * - If the user is a new user (no interaction history), they are recommended places from their onboarding categories.
+     * - If they have started interacting, recommendations shift to score-based recommendations.
      */
     public function index(array $params, array $body): array
     {
@@ -47,7 +51,30 @@ class RecommendationController
         $topProvincesStmt->execute([':user_id' => $userId]);
         $topProvinces = $topProvincesStmt->fetchAll(PDO::FETCH_COLUMN);
 
-        // 2. คำนวณสล็อตของฟีดแบบ 70/20/10 โดยอิงตามจำนวนที่ต้องสร้างทั้งหมด (limit + offset)
+        // 2. ตรวจสอบว่าผู้ใช้มีประวัติการปฏิสัมพันธ์จริงแล้วหรือยัง (เช่น เคยกด Like, Save, Share หรือมี Dwell Time > 0)
+        $hasInteractionStmt = $this->pdo->prepare("
+            SELECT COUNT(*) FROM user_interactions
+            WHERE user_id = :user_id
+              AND (has_liked = 1 OR has_saved = 1 OR has_shared = 1 OR click_count > 0 OR total_dwell_time > 0)
+        ");
+        $hasInteractionStmt->execute([':user_id' => $userId]);
+        $hasInteracted = (int) $hasInteractionStmt->fetchColumn() > 0;
+
+        if ($hasInteracted) {
+            // เมื่อผู้ใช้เริ่มมีพฤติกรรมแล้ว ให้เรียงตามคะแนนที่ระบบคำนวณจากปฏิสัมพันธ์จริง (Like, Save, Dwell, Click)
+            $scoreSql = "COALESCE(ups.score, 0)";
+        } else {
+            // เมื่อผู้ใช้เข้าสู่ระบบครั้งแรก (ยังไม่มีประวัติ) ให้เรียงตามคะแนนน้ำหนักความสนใจหมวดหมู่ที่ระบุตอน Onboarding
+            $scoreSql = "COALESCE(
+                (SELECT SUM(ui_interest.weight) 
+                 FROM tourism_types tt_interest
+                 INNER JOIN user_interests ui_interest ON tt_interest.category_id = ui_interest.category_id
+                 WHERE tt_interest.place_id = p.id AND ui_interest.user_id = " . (int)$userId . "),
+                0
+            )";
+        }
+
+        // 3. คำนวณสล็อตของฟีดแบบ 70/20/10 โดยอิงตามจำนวนที่ต้องสร้างทั้งหมด (limit + offset)
         $totalToGenerate = $limit + $offset;
         $numTop          = (int) round($totalToGenerate * 0.70);
         $numViewed       = (int) round($totalToGenerate * 0.20);
@@ -77,7 +104,7 @@ class RecommendationController
                   AND p.id NOT IN (
                       SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
                   )
-                ORDER BY COALESCE(ups.score, 0) DESC, p.place_name ASC
+                ORDER BY $scoreSql DESC, p.place_name ASC
                 LIMIT :limit
             ");
             $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
@@ -160,7 +187,7 @@ class RecommendationController
             WHERE p.id NOT IN (
                 SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
             )
-            ORDER BY COALESCE(ups.score, 0) DESC, p.place_name ASC
+            ORDER BY $scoreSql DESC, p.place_name ASC
             LIMIT :limit
         ");
         $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
@@ -231,9 +258,9 @@ class RecommendationController
         }
 
         // ─── FETCH DETAILS & SORT ────────────────────────────────────
-        $topDetails    = $this->fetchPlaceDetails($topList, $userId, $topProvinces);
-        $viewedDetails = $this->fetchPlaceDetails($viewedList, $userId, $topProvinces);
-        $unseenDetails = $this->fetchPlaceDetails($unseenList, $userId, $topProvinces);
+        $topDetails    = $this->fetchPlaceDetails($topList, $userId, $topProvinces, $scoreSql);
+        $viewedDetails = $this->fetchPlaceDetails($viewedList, $userId, $topProvinces, $scoreSql);
+        $unseenDetails = $this->fetchPlaceDetails($unseenList, $userId, $topProvinces, $scoreSql);
 
         usort($topDetails,    static fn($a, $b) => $b['score'] <=> $a['score']);
         usort($viewedDetails, static fn($a, $b) => $b['score'] <=> $a['score']);
@@ -278,7 +305,7 @@ class RecommendationController
         ];
     }
 
-    private function fetchPlaceDetails(array $placeIds, int $userId, array $topProvinces): array
+    private function fetchPlaceDetails(array $placeIds, int $userId, array $topProvinces, string $scoreSql): array
     {
         if (empty($placeIds)) {
             return [];
@@ -302,7 +329,7 @@ class RecommendationController
                 p.latitude,
                 p.longitude,
                 ROUND(
-                    COALESCE(ups.score, 0) +
+                    $scoreSql +
                     (CASE WHEN p.province IN ($inProvinces) THEN 2.5 ELSE 0 END),
                     2
                 ) AS score,
