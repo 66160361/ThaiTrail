@@ -151,7 +151,7 @@ class ScoreService
             SELECT
                 ups.user_id,
                 tt.category_id,
-                (
+                ROUND(
                     SUM(
                         ups.score * EXP(
                             -:decay_rate * GREATEST(
@@ -159,19 +159,8 @@ class ScoreService
                                 0
                             )
                         )
-                    )
-                    / GREATEST(
-                        COUNT(DISTINCT CASE
-                            WHEN ui.has_shared = 1
-                              OR ui.has_saved = 1
-                              OR ui.has_liked = 1
-                              OR COALESCE(ui.total_dwell_time, 0) > 0
-                              OR COALESCE(ui.click_count, 0) > 0
-                            THEN ups.place_id
-                            ELSE NULL
-                        END),
-                        1
-                    )
+                    ),
+                    4
                 ) AS preference_score,
                                 COUNT(DISTINCT CASE
                                         WHEN ui.has_shared = 1
