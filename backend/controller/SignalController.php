@@ -17,7 +17,7 @@ class SignalController
     private const VIEW_THRESHOLD = 3;     // เมื่อดูสถานที่ในหมวดเดิมครบ 3 ครั้ง
     private const THRESHOLD_BOOST = 5.0;   // เพิ่มน้ำหนักพิเศษ +5.0 ดันขึ้นหน้าแนะนำทันที
 
-    private const VALID_SIGNALS = ['view', 'like', 'save', 'share', 'dismiss'];
+    private const VALID_SIGNALS = ['view', 'like', 'save', 'share', 'dismiss', 'unlike', 'unsave'];
 
     public function __construct(PDO $pdo)
     {
@@ -55,16 +55,33 @@ class SignalController
             return ['success' => false, 'message' => 'ข้อมูล signal ไม่ถูกต้อง'];
         }
 
+        // Determine if this is an explicit removal signal
+        $targetSignalType = $signalType;
+        $isExplicitRemoval = false;
+        if ($signalType === 'unlike') {
+            $targetSignalType = 'like';
+            $isExplicitRemoval = true;
+        } elseif ($signalType === 'unsave') {
+            $targetSignalType = 'save';
+            $isExplicitRemoval = true;
+        }
+
         $this->pdo->beginTransaction();
         try {
-            // 0. Check if like or save exists and toggle delete if it does
-            if (in_array($signalType, ['like', 'save'], true)) {
+            // Check if corresponding like or save signal exists
+            $existingSignal = null;
+            if (in_array($targetSignalType, ['like', 'save'], true)) {
                 $checkStmt = $this->pdo->prepare(
                     'SELECT id FROM user_signals WHERE user_id = ? AND place_id = ? AND signal_type = ? LIMIT 1'
                 );
-                $checkStmt->execute([$userId, $placeId, $signalType]);
+                $checkStmt->execute([$userId, $placeId, $targetSignalType]);
                 $existingSignal = $checkStmt->fetch(PDO::FETCH_ASSOC);
+            }
 
+            // Handle deletion if explicitly requested to remove or toggled to remove
+            $shouldDelete = $isExplicitRemoval || (!$isExplicitRemoval && $existingSignal && in_array($signalType, ['like', 'save'], true));
+
+            if ($shouldDelete) {
                 if ($existingSignal) {
                     // Delete the signal
                     $delStmt = $this->pdo->prepare('DELETE FROM user_signals WHERE id = ?');
@@ -75,8 +92,8 @@ class SignalController
                     $catStmt->execute([$placeId]);
                     $categoryIds = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 
-                    if (isset(self::WEIGHT_BOOSTS[$signalType]) && !empty($categoryIds)) {
-                        $boost = self::WEIGHT_BOOSTS[$signalType];
+                    if (isset(self::WEIGHT_BOOSTS[$targetSignalType]) && !empty($categoryIds)) {
+                        $boost = self::WEIGHT_BOOSTS[$targetSignalType];
                         foreach ($categoryIds as $catId) {
                             $decStmt = $this->pdo->prepare("
                                 UPDATE user_interests 
@@ -91,21 +108,27 @@ class SignalController
                             ]);
                         }
                     }
-
-                    $this->pdo->commit();
-
-                    // Recalculate stored score for this place after unlike/unsave
-                    $this->scoreService->recalcPlace($userId, $placeId);
-
-                    return ['success' => true, 'action' => 'removed'];
                 }
+
+                $this->pdo->commit();
+
+                // Recalculate stored score for this place after unlike/unsave
+                $this->scoreService->recalcPlace($userId, $placeId);
+
+                return ['success' => true, 'action' => 'removed'];
+            }
+
+            // If we want to add like/save, but it already exists in DB (avoid double inserting)
+            if ($existingSignal && in_array($signalType, ['like', 'save'], true)) {
+                $this->pdo->commit();
+                return ['success' => true, 'action' => 'none'];
             }
 
             // 1. บันทึก Signal ลงใน user_signals (รวม duration_seconds)
             $ins = $this->pdo->prepare(
                 'INSERT INTO user_signals (user_id, place_id, signal_type, duration_seconds) VALUES (?, ?, ?, ?)'
             );
-            $ins->execute([$userId, $placeId, $signalType, $durationSeconds]);
+            $ins->execute([$userId, $placeId, $targetSignalType, $durationSeconds]);
 
             // 2. ดึงหมวดหมู่ทั้งหมดของสถานที่นี้
             $catStmt = $this->pdo->prepare('SELECT category_id FROM tourism_types WHERE place_id = ?');

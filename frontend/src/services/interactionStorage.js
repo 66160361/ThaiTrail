@@ -75,7 +75,7 @@ export const interactionStorage = {
       try {
         api.signals.log({
           place_id: Number(place.id),
-          signal_type: 'like',
+          signal_type: isLikedNow ? 'like' : 'unlike',
         }).catch(() => { });
       } catch (e) {
         console.log('Signal log note:', e);
@@ -106,7 +106,7 @@ export const interactionStorage = {
       try {
         api.signals.log({
           place_id: Number(place.id),
-          signal_type: 'save',
+          signal_type: isSavedNow ? 'save' : 'unsave',
         }).catch(() => { });
       } catch (e) {
         console.log('Signal log note:', e);

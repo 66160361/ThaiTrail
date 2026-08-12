@@ -31,6 +31,10 @@ UPDATE user_place_scores u
 JOIN temp_id_mapping m ON u.place_id = m.old_id
 SET u.place_id = m.new_id;
 
+UPDATE user_interactions ui
+JOIN temp_id_mapping m ON ui.place_id = m.old_id
+SET ui.place_id = m.new_id;
+
 -- 4. Update the places table itself
 UPDATE places p
 JOIN temp_id_mapping m ON p.id = m.old_id
