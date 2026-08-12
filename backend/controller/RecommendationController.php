@@ -162,7 +162,18 @@ class RecommendationController
 
         $unseenCategoryPlaceIds = [];
         if (!empty($unseenCategoryIds)) {
-            $catPlaceholders = implode(',', array_fill(0, count($unseenCategoryIds), '?'));
+            // สุ่มเลือกหมวดหมู่ที่ยังไม่เคยดูมา 2 หมวดหมู่ก่อน เพื่อไม่ให้หมวดที่มีจำนวนสถานที่เยอะ (เช่น ธรรมชาติ) กินพื้นที่ทั้งหมด
+            $selectedCats = [];
+            if (count($unseenCategoryIds) <= 2) {
+                $selectedCats = $unseenCategoryIds;
+            } else {
+                $randKeys = array_rand($unseenCategoryIds, 2);
+                foreach ((array)$randKeys as $k) {
+                    $selectedCats[] = $unseenCategoryIds[$k];
+                }
+            }
+
+            $catPlaceholders = implode(',', array_fill(0, count($selectedCats), '?'));
             $stmt = $this->pdo->prepare("
                 SELECT DISTINCT p.id
                 FROM places p
@@ -174,7 +185,7 @@ class RecommendationController
                 ORDER BY RAND()
                 LIMIT " . (int)($totalToGenerate * 2) . "
             ");
-            $queryParams = array_merge($unseenCategoryIds, [$userId]);
+            $queryParams = array_merge($selectedCats, [$userId]);
             $stmt->execute($queryParams);
             $unseenCategoryPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
