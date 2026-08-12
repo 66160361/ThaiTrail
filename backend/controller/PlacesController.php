@@ -15,23 +15,59 @@ class PlacesController
         if (isset($params['images_for']) && $params['images_for'] !== '') {
             $placeId = (int) $params['images_for'];
             $stmt = $this->pdo->prepare(
-                'SELECT image_url FROM place_images WHERE place_id = :place_id'
+                'SELECT images_json, image_url
+                 FROM places
+                 WHERE id = :place_id
+                 LIMIT 1'
             );
             $stmt->execute(['place_id' => $placeId]);
-            $urls = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $placeRow = $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
 
-            if (empty($urls)) {
-                $stmt = $this->pdo->prepare(
-                    'SELECT image_url FROM places WHERE id = :place_id AND image_url IS NOT NULL AND image_url != ""'
-                );
-                $stmt->execute(['place_id' => $placeId]);
-                $mainUrl = $stmt->fetchColumn();
-                if ($mainUrl) {
-                    $urls = [$mainUrl];
+            $images = [];
+            if ($placeRow && !empty($placeRow['images_json'])) {
+                $decoded = json_decode((string) $placeRow['images_json'], true);
+                if (is_array($decoded)) {
+                    foreach ($decoded as $item) {
+                        if (is_string($item)) {
+                            $url = trim($item);
+                            if ($url !== '') {
+                                $images[] = $url;
+                            }
+                            continue;
+                        }
+
+                        if (is_array($item)) {
+                            $url = trim((string) ($item['url'] ?? $item['src'] ?? $item['image_url'] ?? $item['path'] ?? ''));
+                            if ($url !== '') {
+                                $images[] = $url;
+                            }
+                        }
+                    }
                 }
             }
 
-            return $urls;
+            if (count($images) === 0 && $placeRow && !empty($placeRow['image_url'])) {
+                $url = trim((string) $placeRow['image_url']);
+                if ($url !== '') {
+                    $images[] = $url;
+                }
+            }
+
+            if (count($images) > 0) {
+                return array_values(array_unique($images));
+            }
+
+            $legacyStmt = $this->pdo->prepare(
+                'SELECT image_url FROM place_images
+                  WHERE place_id = :place_id
+                  ORDER BY sort_order ASC'
+            );
+            $legacyStmt->execute(['place_id' => $placeId]);
+            $legacyImages = array_filter(
+                array_map('trim', $legacyStmt->fetchAll(PDO::FETCH_COLUMN)),
+                static fn($url) => $url !== ''
+            );
+            return array_values(array_unique($legacyImages));
         }
 
         $categoryId = $params['category_id'] ?? $params['group_by_category'] ?? null;

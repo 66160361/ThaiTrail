@@ -7,8 +7,27 @@ class UserInterestController
 
     public function __construct(PDO $pdo)
     {
-        $this->pdo          = $pdo;
+        $this->pdo = $pdo;
         $this->scoreService = new ScoreService($pdo);
+    }
+
+    private function syncUserPreferences(int $userId, array $categoryIds): void
+    {
+        $deleteStmt = $this->pdo->prepare('DELETE FROM user_preferences WHERE user_id = ?');
+        $deleteStmt->execute([$userId]);
+
+        if (count($categoryIds) === 0) {
+            return;
+        }
+
+        $insertStmt = $this->pdo->prepare(
+            'INSERT INTO user_preferences (user_id, category_id, preference_score, interacted_count, updated_at)
+             VALUES (?, ?, 1.00, 0, NOW())'
+        );
+
+        foreach ($categoryIds as $categoryId) {
+            $insertStmt->execute([$userId, $categoryId]);
+        }
     }
 
     private function requireAuth(): int
@@ -37,8 +56,8 @@ class UserInterestController
 
         $interests = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($interests as &$row) {
-            $row['category_id'] = (int)   $row['category_id'];
-            $row['weight']      = (float) $row['weight'];
+            $row['category_id'] = (int) $row['category_id'];
+            $row['weight'] = (float) $row['weight'];
         }
 
         return ['success' => true, 'interests' => $interests];
@@ -47,7 +66,7 @@ class UserInterestController
     /** POST /api/user/interests — save selected interests, mark onboarded=1 */
     public function store(array $params, array $body): array
     {
-        $userId      = $this->requireAuth();
+        $userId = $this->requireAuth();
         $categoryIds = $body['category_ids'] ?? [];
 
         if (empty($categoryIds) || !is_array($categoryIds)) {
@@ -55,8 +74,29 @@ class UserInterestController
             return ['success' => false, 'message' => 'กรุณาเลือกอย่างน้อย 1 ความสนใจ'];
         }
 
-        // Validate that all IDs are integers
-        $categoryIds = array_filter(array_map('intval', $categoryIds));
+        // Validate that all IDs are positive integers and remove duplicates
+        $categoryIds = array_values(array_unique(array_filter(array_map('intval', $categoryIds), static fn($id) => $id > 0)));
+
+        if (count($categoryIds) === 0) {
+            http_response_code(400);
+            return ['success' => false, 'message' => 'หมวดหมู่ที่เลือกไม่ถูกต้อง'];
+        }
+
+        // Ensure selected category IDs exist in categories table
+        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+        $validateStmt = $this->pdo->prepare("SELECT id FROM categories WHERE id IN ($placeholders)");
+        $validateStmt->execute($categoryIds);
+        $validIds = array_map('intval', $validateStmt->fetchAll(PDO::FETCH_COLUMN));
+
+        if (count($validIds) !== count($categoryIds)) {
+            $invalidIds = array_values(array_diff($categoryIds, $validIds));
+            http_response_code(400);
+            return [
+                'success' => false,
+                'message' => 'ไม่พบหมวดหมู่บางรายการในระบบ',
+                'invalid_category_ids' => $invalidIds,
+            ];
+        }
 
         $this->pdo->beginTransaction();
         try {
@@ -68,9 +108,11 @@ class UserInterestController
             $ins = $this->pdo->prepare(
                 'INSERT INTO user_interests (user_id, category_id, weight) VALUES (?, ?, 1.00)'
             );
-            foreach ($categoryIds as $catId) {
+            foreach ($validIds as $catId) {
                 $ins->execute([$userId, $catId]);
             }
+
+            $this->syncUserPreferences($userId, $validIds);
 
             // Mark user as onboarded
             $upd = $this->pdo->prepare('UPDATE users SET onboarded = 1 WHERE id = ?');
@@ -86,6 +128,10 @@ class UserInterestController
         // Recompute and persist scores for all matching places now that interests changed
         $this->scoreService->recalcAll($userId);
 
-        return ['success' => true, 'message' => 'บันทึกความสนใจเรียบร้อยแล้ว'];
+        return [
+            'success' => true,
+            'message' => 'บันทึกความสนใจเรียบร้อยแล้ว',
+            'saved_category_ids' => $validIds,
+        ];
     }
 }

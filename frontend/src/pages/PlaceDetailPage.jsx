@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -7,6 +7,7 @@ import PlaceCard from '../components/PlaceCard';
 import PlaceMap from '../components/PlaceMap';
 import Navbar from '../components/Navbar';
 import { interactionStorage } from '../services/interactionStorage';
+import { resolvePlaceImage, resolvePlaceImages } from '../services/placeImageResolver';
 
 
 const FALLBACK_IMAGES = [
@@ -32,6 +33,7 @@ function PlaceDetailPage() {
   const [galleryErrors, setGalleryErrors] = useState({});
   const [lightboxIdx, setLightboxIdx] = useState(null); // null = ปิด
   const [gallerySlideIdx, setGallerySlideIdx] = useState(0);
+  const enterAtRef = useRef(null);
 
 
 
@@ -43,7 +45,7 @@ function PlaceDetailPage() {
         const found = Array.isArray(data) ? data.find((p) => String(p.id) === String(id)) : null;
         if (!found) throw new Error('ไม่พบข้อมูลสถานที่นี้');
         setPlace(found);
-        setImgSrc(found.image_url || FALLBACK_IMAGES[found.id % FALLBACK_IMAGES.length]);
+        setImgSrc(resolvePlaceImage(found, FALLBACK_IMAGES));
 
         if (user) {
           api.signals.log({ place_id: found.id, signal_type: 'view' }).catch(() => { });
@@ -53,36 +55,72 @@ function PlaceDetailPage() {
       .finally(() => setLoading(false));
   }, [id, user]);
 
-  // Track Dwell Time (duration_seconds) when leaving the place detail page
+  // Track dwell time on place detail and send once when leaving the page.
   useEffect(() => {
-    if (!place?.id || !user) return;
-    const startTime = Date.now();
+    if (!user || !place?.id) return;
+
+    enterAtRef.current = Date.now();
+    let sent = false;
+
+    const sendDuration = () => {
+      if (sent || !enterAtRef.current) return;
+
+      const elapsedMs = Date.now() - enterAtRef.current;
+      const durationSeconds = Math.max(1, Math.round(elapsedMs / 1000));
+
+      const payload = {
+        place_id: Number(place.id),
+        signal_type: 'view',
+        duration_only: true,
+        duration_seconds: durationSeconds,
+        platform: 'web',
+      };
+
+      sent = true;
+
+      try {
+        if (navigator.sendBeacon) {
+          const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+          navigator.sendBeacon('/api/signals', blob);
+          return;
+        }
+      } catch {
+        // Fall back to keepalive fetch below.
+      }
+
+      fetch('/api/signals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        keepalive: true,
+        body: JSON.stringify(payload),
+      }).catch(() => { });
+    };
+
+    const onPageHide = () => sendDuration();
+
+    window.addEventListener('pagehide', onPageHide);
 
     return () => {
-      const durationSeconds = Math.round((Date.now() - startTime) / 1000);
-      if (durationSeconds >= 1) {
-        api.signals.log({
-          place_id: place.id,
-          signal_type: 'view',
-          duration_seconds: durationSeconds
-        }).catch(() => { });
-      }
+      sendDuration();
+      window.removeEventListener('pagehide', onPageHide);
     };
-  }, [place?.id, user]);
+  }, [user, place?.id]);
 
-  // ดึงรูปภาพทั้งหมดจาก place_images
+  // ดึงรูปภาพทั้งหมดจาก backend โดยให้ images_json มี priority
   useEffect(() => {
     if (!place) return;
     api.places.getImages(place.id)
-      .then((urls) => {
-        if (Array.isArray(urls) && urls.length > 0) {
+      .then((res) => {
+        const urls = Array.isArray(res) ? res : (Array.isArray(res?.data) ? res.data : []);
+        if (urls.length > 0) {
           setGalleryImages(urls);
-        } else if (place.image_url) {
-          setGalleryImages([place.image_url]);
+        } else {
+          setGalleryImages(resolvePlaceImages(place, FALLBACK_IMAGES));
         }
       })
       .catch(() => {
-        if (place.image_url) setGalleryImages([place.image_url]);
+        setGalleryImages(resolvePlaceImages(place, FALLBACK_IMAGES));
       });
   }, [place]);
 
@@ -236,7 +274,7 @@ function PlaceDetailPage() {
             <img
               src={imgSrc}
               alt={place.place_name}
-              onError={() => setImgSrc(FALLBACK_IMAGES[place.id % FALLBACK_IMAGES.length])}
+              onError={() => setImgSrc(FALLBACK_IMAGES[Math.abs(Number(place.id) || 0) % FALLBACK_IMAGES.length])}
               className="detail-hero-img"
             />
             <div className="detail-hero-gradient" />
@@ -250,6 +288,17 @@ function PlaceDetailPage() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </button>
+
+            <button
+              className={`detail-hero-fav-btn${liked ? ' active' : ''}`}
+              onClick={() => handleSignal('like')}
+              title={liked ? 'เลิกถูกใจ' : 'ถูกใจ'}
+              aria-label={liked ? 'เลิกถูกใจ' : 'ถูกใจ'}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill={liked ? '#0D330E' : 'none'} stroke="#0D330E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
             </button>
 

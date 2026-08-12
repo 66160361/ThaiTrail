@@ -50,6 +50,8 @@ function OnboardingPage() {
       return [];
     }
   });
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   const toggleCategory = (id) => {
     setSelected((prev) =>
@@ -58,7 +60,9 @@ function OnboardingPage() {
   };
 
   const handleNext = async () => {
-    if (selected.length === 0) return;
+    if (selected.length === 0 || saving) return;
+    setSaveError('');
+    setSaving(true);
 
     // Always save to localStorage first
     if (user?.id) {
@@ -76,7 +80,10 @@ function OnboardingPage() {
         navigate('/login', { replace: true });
         return;
       }
-      console.warn('Backend interest sync failed:', err);
+      setSaveError(err?.message || 'บันทึกความสนใจไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+      return;
+    } finally {
+      setSaving(false);
     }
 
     sessionStorage.removeItem('active_tab');
@@ -126,15 +133,20 @@ function OnboardingPage() {
         <div className="cat-actions">
           <button
             className="cat-next-btn"
-            disabled={selected.length === 0}
+            disabled={selected.length === 0 || saving}
             onClick={handleNext}
           >
-            <span>ถัดไป</span>
+            <span>{saving ? 'กำลังบันทึก...' : 'ถัดไป'}</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
           <p className="cat-note">เลือกได้สูงสุด {CATEGORIES.length} หมวด</p>
+          {saveError && (
+            <p className="cat-note" style={{ color: '#BA1A1A', marginTop: 8 }}>
+              {saveError}
+            </p>
+          )}
         </div>
       </div>
     </div>

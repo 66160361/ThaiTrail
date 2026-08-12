@@ -2,6 +2,7 @@ import { api } from './api';
 
 const USER_CACHE_KEY = 'thaitrail_auth_user';
 
+// ดึง user id ของผู้ใช้ที่ล็อกอินอยู่จาก local cache
 function getUserId() {
   try {
     const raw = localStorage.getItem(USER_CACHE_KEY);
@@ -15,17 +16,20 @@ function getUserId() {
   return null;
 }
 
+// แยก key ของรายการถูกใจตามผู้ใช้ เพื่อไม่ให้ข้อมูลปนกันในเครื่องเดียวกัน
 function getLikedKey() {
   const userId = getUserId();
   return userId ? `thaitrail_liked_places_${userId}` : 'thaitrail_liked_places_guest';
 }
 
+// แยก key ของรายการบันทึกตามผู้ใช้ เพื่อไม่ให้ข้อมูลปนกันในเครื่องเดียวกัน
 function getSavedKey() {
   const userId = getUserId();
   return userId ? `thaitrail_saved_places_${userId}` : 'thaitrail_saved_places_guest';
 }
 
 export const interactionStorage = {
+  // อ่านรายการสถานที่ที่กดถูกใจจาก localStorage (ถ้าอ่านไม่ได้ให้เป็นลิสต์ว่าง)
   getLikedPlaces() {
     try {
       return JSON.parse(localStorage.getItem(getLikedKey()) || '[]');
@@ -34,6 +38,7 @@ export const interactionStorage = {
     }
   },
 
+  // อ่านรายการสถานที่ที่บันทึกจาก localStorage (ถ้าอ่านไม่ได้ให้เป็นลิสต์ว่าง)
   getSavedPlaces() {
     try {
       return JSON.parse(localStorage.getItem(getSavedKey()) || '[]');
@@ -42,18 +47,21 @@ export const interactionStorage = {
     }
   },
 
+  // ตรวจว่าตอนนี้สถานที่นี้อยู่ในสถานะถูกใจใน local state หรือไม่
   isLiked(placeId) {
     if (!placeId) return false;
     const list = this.getLikedPlaces();
     return list.some((p) => String(p.id) === String(placeId));
   },
 
+  // ตรวจว่าตอนนี้สถานที่นี้อยู่ในสถานะบันทึกใน local state หรือไม่
   isSaved(placeId) {
     if (!placeId) return false;
     const list = this.getSavedPlaces();
     return list.some((p) => String(p.id) === String(placeId));
   },
 
+  // สลับสถานะถูกใจในเครื่องก่อน เพื่อให้ UI ตอบสนองทันที แล้วค่อยส่งไป backend
   toggleLike(place) {
     if (!place || !place.id) return false;
     const list = this.getLikedPlaces();
@@ -70,7 +78,7 @@ export const interactionStorage = {
 
     localStorage.setItem(getLikedKey(), JSON.stringify(list));
 
-    // Send signal to MySQL backend if user is logged in
+    // ส่ง signal ไป backend เฉพาะกรณีที่ผู้ใช้ล็อกอินอยู่
     if (getUserId()) {
       try {
         api.signals.log({
@@ -85,6 +93,7 @@ export const interactionStorage = {
     return isLikedNow;
   },
 
+  // สลับสถานะบันทึกในเครื่องก่อน เพื่อให้ UI ตอบสนองทันที แล้วค่อยส่งไป backend
   toggleSave(place) {
     if (!place || !place.id) return false;
     const list = this.getSavedPlaces();
@@ -101,7 +110,7 @@ export const interactionStorage = {
 
     localStorage.setItem(getSavedKey(), JSON.stringify(list));
 
-    // Send signal to MySQL backend if user is logged in
+    // ส่ง signal ไป backend เฉพาะกรณีที่ผู้ใช้ล็อกอินอยู่
     if (getUserId()) {
       try {
         api.signals.log({
@@ -116,6 +125,7 @@ export const interactionStorage = {
     return isSavedNow;
   },
 
+  // รวมข้อมูลจาก backend กับ local cache เพื่อไม่ให้ interaction หายหลัง refresh/login
   syncBackend(likedPlacesBackend = [], savedPlacesBackend = []) {
     if (Array.isArray(likedPlacesBackend)) {
       const current = this.getLikedPlaces();
