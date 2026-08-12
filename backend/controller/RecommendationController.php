@@ -22,12 +22,10 @@ class RecommendationController
     /**
      * GET /api/recommendations
      *
-     * Smart Hybrid Recommendation & Diversity Interleaving Algorithm:
-     * 1. Base Score: SUM(user_interests.weight) จากหมวดหมู่ที่สนใจ
-     * 2. Location Similarity Bonus (+2.5): เพิ่มคะแนนสถานที่ในจังหวัดที่ผู้ใช้เข้าดูบ่อยล่าสุด (เช่น ร้อยเอ็ด)
-     * 3. Diversity Interleaving (คละหมวดหมู่แบบสมดุล):
-     *    แบ่งกลุ่มสถานที่ตามหมวดหมู่ แล้วดึงสลับกัน (เช่น สวนสัตว์ 2 แห่ง ➔ ถ่ายภาพ 2 แห่ง ➔ ธรรมชาติ 2 แห่ง)
-     *    ป้องกันไม่ให้หน้าแนะนำมีแต่หมวดเดิมซ้ำซาก 100% แต่สอดแทรกสถานที่ใกล้เคียงและหมวดหมู่อื่นที่สนใจลงไปด้วย
+     * 70/20/10 Feed Allocation based on preference_score and user interactions:
+     * - 70% from user's Top Category (highest preference_score).
+     * - 20% from places the user viewed but didn't like/save/share.
+     * - 10% random discovery from unseen categories (interacted_count = 0).
      */
     public function index(array $params, array $body): array
     {
@@ -35,7 +33,7 @@ class RecommendationController
         $limit  = min((int) ($params['limit']  ?? 24), 50);
         $offset = max((int) ($params['offset'] ?? 0),  0);
 
-        // 1. ดึงจังหวัดที่ผู้ใช้เข้าดูซ้ำจนถึงเกณฑ์ (อย่างน้อย 3 ครั้ง)
+        // 1. ดึงจังหวัดที่ผู้ใช้เข้าดูซ้ำจนถึงเกณฑ์ (อย่างน้อย 3 ครั้ง) เพื่อใช้บวกโบนัสทำเลใกล้เคียง (+2.5)
         $topProvincesStmt = $this->pdo->prepare("
             SELECT p.province, COUNT(*) as view_cnt
             FROM user_signals us
@@ -49,25 +47,248 @@ class RecommendationController
         $topProvincesStmt->execute([':user_id' => $userId]);
         $topProvinces = $topProvincesStmt->fetchAll(PDO::FETCH_COLUMN);
 
-        // 2. ดึงรายการสถานที่ที่ผู้ใช้เข้าดูซ้ำจนถึงเกณฑ์ (อย่างน้อย 3 ครั้ง) เท่านั้น! (ไม่ใช่ดูครั้งเดียวแล้วขึ้นเลย)
-        $viewedStmt = $this->pdo->prepare("
-            SELECT place_id, COUNT(*) as cnt
-            FROM user_signals
-            WHERE user_id = :user_id AND signal_type = 'view'
-            GROUP BY place_id
-            HAVING cnt >= 3
-        ");
-        $viewedStmt->execute([':user_id' => $userId]);
-        $viewedPlaceIds = $viewedStmt->fetchAll(PDO::FETCH_COLUMN);
+        // 2. คำนวณสล็อตของฟีดแบบ 70/20/10 โดยอิงตามจำนวนที่ต้องสร้างทั้งหมด (limit + offset)
+        $totalToGenerate = $limit + $offset;
+        $numTop          = (int) round($totalToGenerate * 0.70);
+        $numViewed       = (int) round($totalToGenerate * 0.20);
+        $numUnseen       = $totalToGenerate - $numTop - $numViewed;
 
-        // 3. คำนวณคะแนนสถานที่ (Base Score + Direct View Bonus + Location Similarity Bonus)
+        $usedIds = [];
+
+        // ─── GROUP 1 (70%): Top Category ────────────────────────────
+        // ดึงหมวดหมู่ที่ผู้ใช้มีคะแนนความสนใจสูงสุด (Top Category) จาก user_preferences
+        $topCatStmt = $this->pdo->prepare("
+            SELECT category_id FROM user_preferences
+            WHERE user_id = :user_id AND preference_score > 0
+            ORDER BY preference_score DESC
+            LIMIT 1
+        ");
+        $topCatStmt->execute([':user_id' => $userId]);
+        $topCategoryId = $topCatStmt->fetchColumn();
+
+        $topCategoryPlaceIds = [];
+        if ($topCategoryId) {
+            $stmt = $this->pdo->prepare("
+                SELECT p.id
+                FROM places p
+                INNER JOIN tourism_types tt ON p.id = tt.place_id
+                LEFT JOIN user_place_scores ups ON p.id = ups.place_id AND ups.user_id = :user_id
+                WHERE tt.category_id = :category_id
+                  AND p.id NOT IN (
+                      SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
+                  )
+                ORDER BY COALESCE(ups.score, 0) DESC, p.place_name ASC
+                LIMIT :limit
+            ");
+            $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindValue(':category_id', $topCategoryId, PDO::PARAM_INT);
+            $stmt->bindValue(':user_id2', $userId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $totalToGenerate * 2, PDO::PARAM_INT);
+            $stmt->execute();
+            $topCategoryPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }
+
+        // ─── GROUP 2 (20%): Viewed but not Liked/Saved/Shared ───────
+        $viewedPlaceIds = [];
+        $stmt = $this->pdo->prepare("
+            SELECT ui.place_id
+            FROM user_interactions ui
+            WHERE ui.user_id = :user_id
+              AND (ui.click_count > 0 OR ui.total_dwell_time > 0)
+              AND COALESCE(ui.has_liked, 0) = 0
+              AND COALESCE(ui.has_saved, 0) = 0
+              AND COALESCE(ui.has_shared, 0) = 0
+              AND ui.place_id NOT IN (
+                  SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
+              )
+            ORDER BY ui.last_action_at DESC
+            LIMIT :limit
+        ");
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id2', $userId, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $totalToGenerate * 2, PDO::PARAM_INT);
+        $stmt->execute();
+        $viewedPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        // ─── GROUP 3 (10%): Discovery (Unseen Categories) ───────────
+        $unseenCatsStmt = $this->pdo->prepare("
+            SELECT c.id FROM categories c
+            LEFT JOIN user_preferences up ON c.id = up.category_id AND up.user_id = :user_id
+            WHERE up.category_id IS NULL OR COALESCE(up.interacted_count, 0) = 0
+        ");
+        $unseenCatsStmt->execute([':user_id' => $userId]);
+        $unseenCategoryIds = $unseenCatsStmt->fetchAll(PDO::FETCH_COLUMN);
+
+        if (empty($unseenCategoryIds)) {
+            $leastStmt = $this->pdo->prepare("
+                SELECT category_id FROM user_preferences
+                WHERE user_id = :user_id
+                ORDER BY interacted_count ASC, preference_score ASC
+            ");
+            $leastStmt->execute([':user_id' => $userId]);
+            $unseenCategoryIds = $leastStmt->fetchAll(PDO::FETCH_COLUMN);
+        }
+
+        if (empty($unseenCategoryIds)) {
+            $unseenCategoryIds = $this->pdo->query("SELECT id FROM categories")->fetchAll(PDO::FETCH_COLUMN);
+        }
+
+        $unseenCategoryPlaceIds = [];
+        if (!empty($unseenCategoryIds)) {
+            $catPlaceholders = implode(',', array_fill(0, count($unseenCategoryIds), '?'));
+            $stmt = $this->pdo->prepare("
+                SELECT DISTINCT p.id
+                FROM places p
+                INNER JOIN tourism_types tt ON p.id = tt.place_id
+                WHERE tt.category_id IN ($catPlaceholders)
+                  AND p.id NOT IN (
+                      SELECT place_id FROM user_signals WHERE user_id = ? AND signal_type = 'dismiss'
+                  )
+                ORDER BY RAND()
+                LIMIT " . (int)($totalToGenerate * 2) . "
+            ");
+            $queryParams = array_merge($unseenCategoryIds, [$userId]);
+            $stmt->execute($queryParams);
+            $unseenCategoryPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }
+
+        // ─── FALLBACK: General Recommendations ───────────────────────
+        $stmt = $this->pdo->prepare("
+            SELECT p.id
+            FROM places p
+            LEFT JOIN user_place_scores ups ON p.id = ups.place_id AND ups.user_id = :user_id
+            WHERE p.id NOT IN (
+                SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
+            )
+            ORDER BY COALESCE(ups.score, 0) DESC, p.place_name ASC
+            LIMIT :limit
+        ");
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id2', $userId, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $totalToGenerate * 2, PDO::PARAM_INT);
+        $stmt->execute();
+        $fallbackPlaceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        // ─── SELECT IDs per Group ────────────────────────────────────
+        // 1) หมวดหมู่หลัก (70%)
+        $topList = [];
+        foreach ($topCategoryPlaceIds as $pid) {
+            $pid = (int) $pid;
+            if (count($topList) >= $numTop) break;
+            if (!in_array($pid, $usedIds, true)) {
+                $topList[] = $pid;
+                $usedIds[] = $pid;
+            }
+        }
+
+        // 2) เคยดูแต่ไม่ถูกใจ/บันทึก (20%)
+        $viewedList = [];
+        foreach ($viewedPlaceIds as $pid) {
+            $pid = (int) $pid;
+            if (count($viewedList) >= $numViewed) break;
+            if (!in_array($pid, $usedIds, true)) {
+                $viewedList[] = $pid;
+                $usedIds[]    = $pid;
+            }
+        }
+
+        // 3) ค้นพบสิ่งใหม่ (10%)
+        $unseenList = [];
+        foreach ($unseenCategoryPlaceIds as $pid) {
+            $pid = (int) $pid;
+            if (count($unseenList) >= $numUnseen) break;
+            if (!in_array($pid, $usedIds, true)) {
+                $unseenList[] = $pid;
+                $usedIds[]    = $pid;
+            }
+        }
+
+        // 4) Backfill แต่ละกลุ่มหากแคนดิเดตมีไม่เพียงพอ
+        $fallbackIndex = 0;
+        
+        while (count($topList) < $numTop && $fallbackIndex < count($fallbackPlaceIds)) {
+            $pid = (int) $fallbackPlaceIds[$fallbackIndex++];
+            if (!in_array($pid, $usedIds, true)) {
+                $topList[] = $pid;
+                $usedIds[] = $pid;
+            }
+        }
+        
+        while (count($viewedList) < $numViewed && $fallbackIndex < count($fallbackPlaceIds)) {
+            $pid = (int) $fallbackPlaceIds[$fallbackIndex++];
+            if (!in_array($pid, $usedIds, true)) {
+                $viewedList[] = $pid;
+                $usedIds[]    = $pid;
+            }
+        }
+        
+        while (count($unseenList) < $numUnseen && $fallbackIndex < count($fallbackPlaceIds)) {
+            $pid = (int) $fallbackPlaceIds[$fallbackIndex++];
+            if (!in_array($pid, $usedIds, true)) {
+                $unseenList[] = $pid;
+                $usedIds[]    = $pid;
+            }
+        }
+
+        // ─── FETCH DETAILS & SORT ────────────────────────────────────
+        $topDetails    = $this->fetchPlaceDetails($topList, $userId, $topProvinces);
+        $viewedDetails = $this->fetchPlaceDetails($viewedList, $userId, $topProvinces);
+        $unseenDetails = $this->fetchPlaceDetails($unseenList, $userId, $topProvinces);
+
+        usort($topDetails,    static fn($a, $b) => $b['score'] <=> $a['score']);
+        usort($viewedDetails, static fn($a, $b) => $b['score'] <=> $a['score']);
+        usort($unseenDetails, static fn($a, $b) => $b['score'] <=> $a['score']);
+
+        // ─── INTERLEAVE 7:2:1 RATIO ──────────────────────────────────
+        $finalPlaces = [];
+        $i = 0; $j = 0; $k = 0;
+        
+        while (
+            $i < count($topDetails) || 
+            $j < count($viewedDetails) || 
+            $k < count($unseenDetails)
+        ) {
+            // ดึง Top Category (7)
+            for ($x = 0; $x < 7; $x++) {
+                if (isset($topDetails[$i])) {
+                    $finalPlaces[] = $topDetails[$i++];
+                }
+            }
+            // ดึง Viewed but not liked/saved (2)
+            for ($x = 0; $x < 2; $x++) {
+                if (isset($viewedDetails[$j])) {
+                    $finalPlaces[] = $viewedDetails[$j++];
+                }
+            }
+            // ดึง Discovery (1)
+            if (isset($unseenDetails[$k])) {
+                $finalPlaces[] = $unseenDetails[$k++];
+            }
+        }
+
+        // ตัดแบ่งหน้าตาความกว้างหน้าของ Pagination
+        $paginatedPlaces = array_slice($finalPlaces, $offset, $limit);
+
+        return [
+            'success' => true,
+            'data'    => $paginatedPlaces,
+            'limit'   => $limit,
+            'offset'  => $offset,
+            'count'   => count($paginatedPlaces),
+        ];
+    }
+
+    private function fetchPlaceDetails(array $placeIds, int $userId, array $topProvinces): array
+    {
+        if (empty($placeIds)) {
+            return [];
+        }
+
+        $placeholders = implode(',', array_fill(0, count($placeIds), '?'));
+        
         $inProvinces = !empty($topProvinces)
             ? implode(',', array_fill(0, count($topProvinces), '?'))
             : "'__none__'";
-
-        $inViewed = !empty($viewedPlaceIds)
-            ? implode(',', array_fill(0, count($viewedPlaceIds), '?'))
-            : '0';
 
         $sql = "
             SELECT
@@ -81,90 +302,41 @@ class RecommendationController
                 p.latitude,
                 p.longitude,
                 ROUND(
-                    ups.score +
+                    COALESCE(ups.score, 0) +
                     (CASE WHEN p.province IN ($inProvinces) THEN 2.5 ELSE 0 END),
                     2
                 ) AS score,
                 GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.id SEPARATOR ',') AS categories,
                 GROUP_CONCAT(DISTINCT c.id            ORDER BY c.id SEPARATOR ',') AS category_ids
-
-            FROM user_place_scores ups
-            INNER JOIN places p ON p.id = ups.place_id
-            INNER JOIN tourism_types tt ON tt.place_id = p.id
-            INNER JOIN categories c ON c.id = tt.category_id
-            WHERE ups.user_id = ?
-              AND p.id NOT IN (
-                SELECT place_id
-                FROM user_signals
-                WHERE user_id = ? AND signal_type = 'dismiss'
-            )
+            FROM places p
+            LEFT JOIN user_place_scores ups ON p.id = ups.place_id AND ups.user_id = ?
+            LEFT JOIN tourism_types tt ON tt.place_id = p.id
+            LEFT JOIN categories c ON c.id = tt.category_id
+            WHERE p.id IN ($placeholders)
             GROUP BY p.id
-            ORDER BY score DESC, p.place_name ASC
-            LIMIT 150
         ";
 
         $queryParams = array_merge(
             !empty($topProvinces) ? $topProvinces : [],
-            [$userId, $userId]
+            [$userId],
+            $placeIds
         );
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($queryParams);
-        $rawPlaces = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Format ข้อมูลเป็น Types ที่ถูกต้อง
-        foreach ($rawPlaces as &$place) {
+        // Format fields
+        foreach ($rows as &$place) {
             $place['id']           = (int)   $place['id'];
             $place['score']        = (float) $place['score'];
             $place['latitude']     = $place['latitude']  ? (float) $place['latitude']  : null;
             $place['longitude']    = $place['longitude'] ? (float) $place['longitude'] : null;
-            $place['categories']   = $place['categories']
-                ? explode(',', $place['categories'])
-                : [];
-            $place['category_ids'] = $place['category_ids']
-                ? array_map('intval', explode(',', $place['category_ids']))
-                : [];
+            $place['categories']   = $place['categories'] ? explode(',', $place['categories']) : [];
+            $place['category_ids'] = $place['category_ids'] ? array_map('intval', explode(',', $place['category_ids'])) : [];
         }
         unset($place);
 
-        // 3. Diversity Interleaving Algorithm (คละหมวดหมู่อย่างสมดุล)
-        // จัดกลุ่มตามหมวดหมู่หลัก แล้วดึงสลับกันเพื่อไม่ให้หมวดใดหมวดหนึ่งกินพื้นที่ทั้งหมด
-        $categoryBuckets = [];
-        foreach ($rawPlaces as $place) {
-            $primaryCat = $place['category_ids'][0] ?? 0;
-            if (!isset($categoryBuckets[$primaryCat])) {
-                $categoryBuckets[$primaryCat] = [];
-            }
-            $categoryBuckets[$primaryCat][] = $place;
-        }
-
-        // ดึงวนสลับหมวดหมู่ (Round-Robin) เช่น หมวด A 2 แห่ง ➔ หมวด B 2 แห่ง ➔ หมวด C 2 แห่ง...
-        $mixedPlaces = [];
-        $hasItems = true;
-        while ($hasItems && count($mixedPlaces) < 150) {
-            $hasItems = false;
-            foreach ($categoryBuckets as $catId => &$bucket) {
-                if (!empty($bucket)) {
-                    $take = array_splice($bucket, 0, 2);
-                    foreach ($take as $item) {
-                        $mixedPlaces[] = $item;
-                    }
-                    if (!empty($bucket)) {
-                        $hasItems = true;
-                    }
-                }
-            }
-        }
-
-        // 4. ตัดแบ่งหน้า (Pagination: limit & offset)
-        $paginatedPlaces = array_slice($mixedPlaces, $offset, $limit);
-
-        return [
-            'success' => true,
-            'data'    => $paginatedPlaces,
-            'limit'   => $limit,
-            'offset'  => $offset,
-            'count'   => count($paginatedPlaces),
-        ];
+        return $rows;
     }
 }
