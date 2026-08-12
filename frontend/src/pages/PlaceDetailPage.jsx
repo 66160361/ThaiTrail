@@ -290,18 +290,6 @@ function PlaceDetailPage() {
                 <polyline points="12 19 5 12 12 5"></polyline>
               </svg>
             </button>
-
-            <button
-              className={`detail-hero-fav-btn${liked ? ' active' : ''}`}
-              onClick={() => handleSignal('like')}
-              title={liked ? 'เลิกถูกใจ' : 'ถูกใจ'}
-              aria-label={liked ? 'เลิกถูกใจ' : 'ถูกใจ'}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill={liked ? '#0D330E' : 'none'} stroke="#0D330E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
-            </button>
-
             {/* Location Tag */}
             {place.province && (
               <div className="detail-hero-loc-tag">
