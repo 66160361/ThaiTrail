@@ -52,8 +52,10 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
   };
 
   const categories = Array.isArray(place.categories)
-    ? place.categories
-    : (place.categories || '').split(',').filter(Boolean);
+    ? place.categories.filter(Boolean)
+    : (place.categories || '').split(',').map((cat) => cat.trim()).filter(Boolean);
+
+  const normalizedCategories = categories.filter((cat) => cat && !/^ทั่วไป$/i.test(cat));
 
   if (dismissed) return null;
 
@@ -62,9 +64,14 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
     navigate(`/places/${place.id}`);
   };
 
+  const primaryCategory = normalizedCategories[0] || null;
+  const secondaryCategory = normalizedCategories[1] || null;
+  const provinceLabel = [place.province, place.district].filter(Boolean)[0] || null;
+  const descriptionText = place.description || place.summary ||
+    `${[place.district, place.province].filter(Boolean).join(', ') || 'สถานที่ท่องเที่ยว'} — แหล่งท่องเที่ยวที่มีความสวยงามและน่าสนใจสำหรับการพักผ่อน`;
+
   return (
     <article className="place-card fade-in" onClick={handleCardClick}>
-      {/* Image */}
       <div className="place-card-image">
         <img
           src={imgSrc}
@@ -72,13 +79,20 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
           onError={() => setImgSrc(FALLBACK_IMAGES[Math.abs(Number(place.id) || 0) % FALLBACK_IMAGES.length])}
           loading="lazy"
         />
+
         <div className="place-card-gradient" />
 
         {showScore && place.score != null && (
           <div className="place-card-score">⭐ {place.score.toFixed(1)}</div>
         )}
 
-        {/* Action buttons (appear on hover via CSS) */}
+        {provinceLabel && (
+          <div className="place-card-spot">
+            <span className="place-card-spot-dot" />
+            {provinceLabel}
+          </div>
+        )}
+
         <div className="place-card-actions">
           <button
             className={`action-btn${liked ? ' liked' : ''}`}
@@ -90,11 +104,13 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
         </div>
       </div>
 
-      {/* Text */}
       <div className="place-card-body">
+        <h3 className="place-card-name">{place.place_name}</h3>
+        <p className="place-card-location">{descriptionText}</p>
+
         <div className="place-card-cats">
-          {categories.slice(0, 2).map((cat) => {
-            const style = CATEGORY_STYLES[cat] || { color: '#94A3B8', bg: 'rgba(148,163,184,0.1)' };
+          {[primaryCategory, secondaryCategory].filter(Boolean).slice(0, 2).map((cat) => {
+            const style = CATEGORY_STYLES[cat] || { color: '#94A3B8', bg: 'rgba(148,163,184,0.12)' };
             return (
               <span
                 key={cat}
@@ -106,10 +122,6 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
             );
           })}
         </div>
-        <h3 className="place-card-name">{place.place_name}</h3>
-        <p className="place-card-location">
-          📍 {[place.district, place.province].filter(Boolean).join(', ') || '—'}
-        </p>
       </div>
     </article>
   );
