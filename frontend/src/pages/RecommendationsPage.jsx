@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar';
 const PAGE_SIZE = 24;
 
 const TABS = [
-  { id: 'recommend', name: '✨ แนะนำสถานที่' },
+  { id: 'recommend', name: 'แนะนำสถานที่' },
   { id: 'all', name: 'ทั้งหมด' },
   { id: '1', name: 'ศาสนาและความเชื่อ' },
   { id: '2', name: 'ธรรมชาติและผจญภัย' },
@@ -22,7 +22,7 @@ const TABS = [
 
 function RecommendationsPage() {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   const [allPlacesRaw, setAllPlacesRaw] = useState([]);
   const [userRecommendedPlaces, setUserRecommendedPlaces] = useState([]);
@@ -118,56 +118,60 @@ function RecommendationsPage() {
     setAllPlacesRaw((prev) => prev.filter((p) => p.id !== placeId));
   };
 
-  const handleEditInterests = () => navigate('/onboarding');
-
-  const handleLogout = async () => {
-    try {
-      if (logout) {
-        await logout();
-      }
-      sessionStorage.clear();
-      localStorage.clear();
-      navigate('/login', { replace: true });
-    } catch {
-      sessionStorage.clear();
-      localStorage.clear();
-      navigate('/login', { replace: true });
-    }
-  };
+  const activeTabName = TABS.find((t) => t.id === activeTab)?.name || 'แนะนำสถานที่';
+  const userName = user?.name || 'Niyada';
 
   return (
-    <div className="page">
+    <div className="tt-page-root">
       <Navbar />
-      <div className="container">
-        {/* Hero Banner */}
-        <div className="hero fade-in">
-          <p className="hero-eyebrow">✨ แนะนำและค้นหา</p>
-          <h1 className="hero-title">
-            สวัสดี, <span className="gradient-text">{user?.name || 'ผู้เยี่ยมชม'}</span>
+
+      {/* Hero Section with Scenic Background */}
+      <section className="tt-hero">
+        <div className="tt-hero-bg-overlay" />
+        
+        <div className="tt-hero-container">
+          <h1 className="tt-hero-title">
+            สวัสดี, {userName}
           </h1>
-          <p className="hero-subtitle">
-            ค้นพบสถานที่ท่องเที่ยวและกิจกรรมที่เหมาะกับไลฟ์สไตล์ของคุณ
+          <p className="tt-hero-subtitle">
+            ค้นพบสถานที่ท่องเที่ยวและกิจกรรมที่เหมาะสมกับไลฟ์สไตล์ของคุณ
           </p>
-        </div>
 
-        {/* Tab Filters */}
-        <div className="filter-bar fade-in-2">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              className={`filter-chip${activeTab === tab.id ? ' active' : ''}`}
-              onClick={() => handleTabChange(tab.id)}
-            >
-              {tab.name}
-            </button>
-          ))}
+          {/* 2-Row Filter Pill Container */}
+          <div className="tt-filter-pills-container">
+            <div className="tt-filter-row">
+              {TABS.slice(0, 5).map((tab) => (
+                <button
+                  key={tab.id}
+                  className={`tt-filter-pill ${activeTab === tab.id ? 'is-active' : ''}`}
+                  onClick={() => handleTabChange(tab.id)}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </div>
+            <div className="tt-filter-row">
+              {TABS.slice(5).map((tab) => (
+                <button
+                  key={tab.id}
+                  className={`tt-filter-pill ${activeTab === tab.id ? 'is-active' : ''}`}
+                  onClick={() => handleTabChange(tab.id)}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
+      </section>
 
+      {/* Main Content Area */}
+      <main className="tt-main-content">
         {/* Loading State */}
         {loading && (
           <div style={{ padding: '60px 0', textAlign: 'center' }}>
             <div className="spinner" style={{ margin: '0 auto 16px' }} />
-            <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>กำลังโหลดข้อมูล...</p>
+            <p style={{ color: '#727272', fontSize: 15 }}>กำลังโหลดข้อมูล...</p>
           </div>
         )}
 
@@ -186,25 +190,18 @@ function RecommendationsPage() {
             <p className="empty-sub">
               ลองเลือกหมวดหมู่อื่น หรือแก้ไขความสนใจของคุณเพื่อรับคำแนะนำใหม่ๆ
             </p>
-            {activeTab === 'recommend' && (
-              <button className="btn btn-primary" onClick={handleEditInterests} style={{ marginTop: 12 }}>
-                ⚙️ แก้ไขความสนใจ
-              </button>
-            )}
           </div>
         )}
 
-        {/* Places Grid */}
+        {/* Places Grid Header & Content */}
         {!loading && !error && placesToShow.length > 0 && (
           <>
-            <div className="section-header fade-in-2">
-              <h2 className="section-title">
-                {TABS.find((t) => t.id === activeTab)?.name}
-              </h2>
-              <span className="section-count">{displayedPlaces.length} แห่ง</span>
+            <div className="tt-section-header">
+              <h2 className="tt-section-title">{activeTabName}</h2>
+              <span className="tt-section-count">{displayedPlaces.length} แห่ง</span>
             </div>
 
-            <div className="places-grid fade-in-2" key={activeTab}>
+            <div className="tt-places-grid" key={activeTab}>
               {placesToShow.map((place) => (
                 <PlaceCard
                   key={place.id}
@@ -216,17 +213,15 @@ function RecommendationsPage() {
             </div>
 
             {hasMore && (
-              <div style={{ textAlign: 'center', marginTop: 36 }}>
-                <button className="btn btn-ghost" onClick={loadMore}>
+              <div style={{ textAlign: 'center', marginTop: 40, marginBottom: 40 }}>
+                <button className="tt-load-more-btn" onClick={loadMore}>
                   โหลดเพิ่มเติม
                 </button>
               </div>
             )}
-
-
           </>
         )}
-      </div>
+      </main>
     </div>
   );
 }

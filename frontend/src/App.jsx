@@ -3,13 +3,13 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 // Pages
-import LoginPage           from './pages/LoginPage';
-import OnboardingPage      from './pages/OnboardingPage';
+import LoginPage from './pages/LoginPage';
+import OnboardingPage from './pages/OnboardingPage';
 import RecommendationsPage from './pages/RecommendationsPage';
-import PlaceDetailPage     from './pages/PlaceDetailPage';
-import ProfilePage         from './pages/ProfilePage';
-import SettingsPage        from './pages/SettingsPage';
-import SearchPage          from './pages/SearchPage';
+import PlaceDetailPage from './pages/PlaceDetailPage';
+import ProfilePage from './pages/ProfilePage';
+import SettingsPage from './pages/SettingsPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   return (
