@@ -4032,19 +4032,27 @@ a {
 }
 
 .tt-hcard-heart-btn {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #DAC2AE;
+  border-radius: 9999px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   cursor: pointer;
-  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   outline: none;
-  transition: transform 0.2s ease;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .tt-hcard-heart-btn:hover {
-  transform: scale(1.15);
+  background: #FFFFFF;
+  border-color: #544434;
+  transform: scale(1.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .tt-hcard-desc {
