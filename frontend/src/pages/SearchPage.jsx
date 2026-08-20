@@ -171,10 +171,10 @@ function SearchPage() {
     return places.filter((place) => {
       const categories = toCategoryArray(place);
 
-      // 1. Category filter (multiple selection)
+      // 1. Category filter (must match ALL selected categories)
       if (selectedCategories.length > 0) {
-        const hasMatch = categories.some((c) => selectedCategories.includes(c));
-        if (!hasMatch) return false;
+        const matchesAll = selectedCategories.every((selectedCat) => categories.includes(selectedCat));
+        if (!matchesAll) return false;
       }
 
       // 2. Province filter
