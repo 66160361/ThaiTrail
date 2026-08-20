@@ -32,7 +32,20 @@ function countWords(?string $value): int
         return 0;
     }
 
-    return count(preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY));
+    // English/space-separated words
+    $spaceSeparatedWords = count(preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY));
+
+    // Thai usually has no spaces between words, so estimate by Thai character length.
+    // Average Thai word length is approximated at ~4.5 chars.
+    preg_match_all('/[\x{0E00}-\x{0E7F}]/u', $text, $thaiMatches);
+    $thaiCharCount = count($thaiMatches[0]);
+    $thaiWordEstimate = (int) ceil($thaiCharCount / 4.5);
+
+    // Avoid double counting Thai segments that appear as a single whitespace token.
+    $textWithoutThai = preg_replace('/[\x{0E00}-\x{0E7F}]+/u', ' ', $text);
+    $nonThaiWords = count(preg_split('/\s+/u', trim((string) $textWithoutThai), -1, PREG_SPLIT_NO_EMPTY));
+
+    return max($thaiWordEstimate + $nonThaiWords, $spaceSeparatedWords);
 }
 
 function countPhotos(?string $value): int
