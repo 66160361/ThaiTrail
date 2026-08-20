@@ -86,9 +86,10 @@ function SearchPage() {
   const [error, setError] = useState('');
 
   const [query, setQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(() => {
+  const [selectedCategories, setSelectedCategories] = useState(() => {
     const catParam = searchParams.get('category');
-    return CATEGORY_ID_MAP[catParam] || catParam || '';
+    const initCat = CATEGORY_ID_MAP[catParam] || catParam || '';
+    return initCat ? [initCat] : [];
   });
   const [selectedProvince, setSelectedProvince] = useState('');
   const [distanceId, setDistanceId] = useState('any');
@@ -96,6 +97,21 @@ function SearchPage() {
   const [page, setPage] = useState(1);
   const [userLocation, setUserLocation] = useState(null);
   const [, setLikedTick] = useState(0);
+
+  const toggleCategory = (catId) => {
+    setPage(1);
+    if (!catId) {
+      setSelectedCategories([]);
+      return;
+    }
+    setSelectedCategories((prev) => {
+      if (prev.includes(catId)) {
+        return prev.filter((c) => c !== catId);
+      } else {
+        return [...prev, catId];
+      }
+    });
+  };
 
   const handleToggleLike = (e, place) => {
     e.stopPropagation();
@@ -155,9 +171,10 @@ function SearchPage() {
     return places.filter((place) => {
       const categories = toCategoryArray(place);
 
-      // 1. Category filter
-      if (selectedCategory && !categories.includes(selectedCategory)) {
-        return false;
+      // 1. Category filter (multiple selection)
+      if (selectedCategories.length > 0) {
+        const hasMatch = categories.some((c) => selectedCategories.includes(c));
+        if (!hasMatch) return false;
       }
 
       // 2. Province filter
@@ -203,7 +220,7 @@ function SearchPage() {
 
       return true;
     });
-  }, [places, selectedCategory, selectedProvince, normalizedQuery, openNowOnly, distanceId, userLocation]);
+  }, [places, selectedCategories, selectedProvince, normalizedQuery, openNowOnly, distanceId, userLocation]);
 
   const totalPages = Math.max(1, Math.ceil(filteredPlaces.length / PAGE_SIZE));
 
@@ -231,7 +248,7 @@ function SearchPage() {
 
   const clearAllFilters = () => {
     setQuery('');
-    setSelectedCategory('');
+    setSelectedCategories([]);
     setSelectedProvince('');
     setDistanceId('any');
     setOpenNowOnly(false);
@@ -293,17 +310,16 @@ function SearchPage() {
               </div>
               <div className="tt-category-checkbox-list">
                 {CATEGORY_CHECKBOXES.map((item) => {
-                  const isChecked = selectedCategory === item.id;
+                  const isAllOption = !item.id;
+                  const isChecked = isAllOption
+                    ? selectedCategories.length === 0
+                    : selectedCategories.includes(item.id);
                   return (
                     <label key={item.id || 'all'} className="tt-checkbox-item">
                       <input
-                        type="radio"
-                        name="search_category"
+                        type="checkbox"
                         checked={isChecked}
-                        onChange={() => {
-                          setSelectedCategory(item.id);
-                          setPage(1);
-                        }}
+                        onChange={() => toggleCategory(item.id)}
                         className="tt-checkbox-input"
                       />
                       <span className={`tt-checkbox-custom ${isChecked ? 'is-checked' : ''}`} />
