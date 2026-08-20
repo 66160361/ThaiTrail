@@ -48,9 +48,8 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
 
   const rawCats = Array.isArray(place.categories)
     ? place.categories
-    : (place.categories || '').split(',').filter(Boolean);
+    : (place.categories || '').split(',').map((cat) => cat.trim()).filter(Boolean);
 
-  // Shorten category names for clean badges
   const categories = rawCats.slice(0, 2).map(c => {
     return c.replace('และผจญภัย', '')
             .replace('และเกาะ', '')
@@ -94,7 +93,7 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
         {/* Bottom-Left Location Floating Tag */}
         <div className="tt-card-location-tag">
           <svg width="14" height="15" viewBox="0 0 24 24" fill="#FF9F1C" style={{ flexShrink: 0 }}>
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5-2.5z" />
           </svg>
           <span className="tt-card-location-text">{locationText}</span>
         </div>

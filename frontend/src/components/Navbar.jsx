@@ -102,7 +102,7 @@ function Navbar() {
               textDecoration: 'none',
               padding: '12px 24px',
               borderRadius: '999px',
-              background: 'linear-gradient(135deg, #1C2B6E, #2A3F9D)',
+              background: 'linear-gradient(135deg, #1c380d, #0d3c2b)',
               color: '#FFFFFF',
               fontSize: '16px',
               fontWeight: '600',

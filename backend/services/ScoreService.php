@@ -9,11 +9,13 @@
  *            + (L(u,i) * w_like)
  *            + (w_dwell * min(ln(1 + T(u,i)), ln(1 + T_cap)))
  *            + (w_click * ln(1 + C(u,i)))
+ *            + (w_expect * min(T(u,i) / E(i), 1))
  *
  * โดยที่:
  * - S/B/L คือค่าสถานะแบบไบนารีจาก user_interactions.has_shared/has_saved/has_liked
  * - T คือค่า user_interactions.total_dwell_time
  * - C คือค่า user_interactions.click_count
+ * - E คือค่า places.expected_read_time (เวลาคาดการณ์ในการอ่าน/ดูเนื้อหาของสถานที่)
  * - T_cap คือเพดานเวลา dwell คงที่ (วินาที)
  */
 class ScoreService
@@ -26,6 +28,7 @@ class ScoreService
     private const W_LIKE = 2.0;
     private const W_DWELL = 1.5;
     private const W_CLICK = 1.0;
+    private const W_EXPECT = 2.0;
     private const DWELL_CAP_SECONDS = 180;
     private const TIME_DECAY_RATE = 0.05;
 
@@ -40,14 +43,19 @@ class ScoreService
      */
     public function recalcPlace(int $userId, int $placeId): void
     {
-        // คำนวณคะแนนตามสูตร Share/Save/Like + Dwell(Log-capped) + Click(Log)
+        // คำนวณคะแนนตามสูตร Share/Save/Like + Dwell(Log-capped) + Click(Log) + Expected-time completion
         $scoreStmt = $this->pdo->prepare('
             SELECT ROUND(
                 (:w_share * COALESCE(ui.has_shared, 0))
                 + (:w_save * COALESCE(ui.has_saved, 0))
                 + (:w_like * COALESCE(ui.has_liked, 0))
                 + (:w_dwell * LEAST(LN(1 + GREATEST(COALESCE(ui.total_dwell_time, 0), 0)), LN(1 + :dwell_cap)))
-                + (:w_click * LN(1 + GREATEST(COALESCE(ui.click_count, 0), 0))),
+                + (:w_click * LN(1 + GREATEST(COALESCE(ui.click_count, 0), 0)))
+                + COALESCE((:w_expect * LEAST(
+                    GREATEST(COALESCE(ui.total_dwell_time, 0), 0)
+                    / NULLIF(GREATEST(COALESCE(p.expected_read_time, 0), 0), 0),
+                    1
+                )), 0),
                 2
             ) AS score
             FROM places p
@@ -63,6 +71,7 @@ class ScoreService
             ':w_like' => self::W_LIKE,
             ':w_dwell' => self::W_DWELL,
             ':w_click' => self::W_CLICK,
+            ':w_expect' => self::W_EXPECT,
             ':dwell_cap' => self::DWELL_CAP_SECONDS,
         ]);
         $row = $scoreStmt->fetch(PDO::FETCH_ASSOC);
@@ -99,7 +108,12 @@ class ScoreService
                     + (:w_save * COALESCE(ui.has_saved, 0))
                     + (:w_like * COALESCE(ui.has_liked, 0))
                     + (:w_dwell * LEAST(LN(1 + GREATEST(COALESCE(ui.total_dwell_time, 0), 0)), LN(1 + :dwell_cap)))
-                    + (:w_click * LN(1 + GREATEST(COALESCE(ui.click_count, 0), 0))),
+                    + (:w_click * LN(1 + GREATEST(COALESCE(ui.click_count, 0), 0)))
+                    + COALESCE((:w_expect * LEAST(
+                        GREATEST(COALESCE(ui.total_dwell_time, 0), 0)
+                        / NULLIF(GREATEST(COALESCE(p.expected_read_time, 0), 0), 0),
+                        1
+                    )), 0),
                     2
                 ) AS score
             FROM places p
@@ -118,6 +132,7 @@ class ScoreService
             ':w_like' => self::W_LIKE,
             ':w_dwell' => self::W_DWELL,
             ':w_click' => self::W_CLICK,
+            ':w_expect' => self::W_EXPECT,
             ':dwell_cap' => self::DWELL_CAP_SECONDS,
         ]);
 
