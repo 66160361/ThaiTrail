@@ -68,6 +68,7 @@ function OnboardingPage() {
     if (user?.id) {
       localStorage.setItem(`thaitrail_user_interests_${user.id}`, JSON.stringify(selected));
     }
+    localStorage.setItem('thaitrail_user_interests', JSON.stringify(selected));
 
     // Always try to save to backend (session must be active)
     try {

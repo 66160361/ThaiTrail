@@ -120,20 +120,26 @@ function ProfilePage() {
   }), []);
 
   const parsedInterests = useMemo(() => {
-    let raw = baseUser?.interests;
-    if (!raw || (Array.isArray(raw) && raw.length === 0)) {
-      try {
-        let stored = null;
-        if (user && user.id) {
-          stored = localStorage.getItem(`thaitrail_user_interests_${user.id}`);
-        }
-        if (stored) {
-          raw = JSON.parse(stored);
-        }
-      } catch {
-        raw = null;
+    let raw = null;
+    try {
+      if (user && user.id) {
+        raw = localStorage.getItem(`thaitrail_user_interests_${user.id}`);
       }
+      if (!raw) {
+        raw = localStorage.getItem('thaitrail_user_interests');
+      }
+      if (raw) {
+        raw = JSON.parse(raw);
+      }
+    } catch {
+      raw = null;
     }
+
+    // Fallback to baseUser?.interests only if localStorage has no stored user interests
+    if (!raw || (Array.isArray(raw) && raw.length === 0)) {
+      raw = baseUser?.interests;
+    }
+
     if (!raw) return [];
     let list = [];
     if (Array.isArray(raw)) {
