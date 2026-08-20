@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../services/api';
 import Navbar from '../components/Navbar';
+import { useAuth } from '../context/AuthContext';
 import { interactionStorage } from '../services/interactionStorage';
 import { resolvePlaceImage, FALLBACK_IMAGES } from '../services/placeImageResolver';
 
@@ -79,6 +80,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 function SearchPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { user } = useAuth();
   const resultsRef = useRef(null);
 
   const [places, setPlaces] = useState([]);
@@ -113,11 +115,16 @@ function SearchPage() {
     });
   };
 
-  const handleToggleLike = (e, place) => {
+  const handleToggleLike = async (e, place) => {
     e.stopPropagation();
     e.preventDefault();
-    interactionStorage.toggleLike(place);
+    const nextLiked = interactionStorage.toggleLike(place);
     setLikedTick((t) => t + 1);
+    if (user) {
+      try {
+        await api.signals.log({ place_id: place.id, signal_type: 'like' });
+      } catch { /* silent */ }
+    }
   };
 
   useEffect(() => {
@@ -489,8 +496,21 @@ function SearchPage() {
                       onClick={() => navigate(`/places/${place.id}`)}
                     >
                       {/* Left Image Section */}
-                      <div className="tt-hcard-image-wrapper">
+                      <div className="tt-hcard-image-wrapper" style={{ position: 'relative' }}>
                         <img src={image} alt={place.place_name} loading="lazy" className="tt-hcard-img" />
+
+                        {/* Top-Right Heart Button (Same as Home PlaceCard) */}
+                        <button
+                          type="button"
+                          className={`tt-card-heart-btn ${isLiked ? 'is-liked' : ''}`}
+                          onClick={(e) => handleToggleLike(e, place)}
+                          title={isLiked ? 'เลิกถูกใจ' : 'ถูกใจ'}
+                          aria-label="Heart button"
+                        >
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill={isLiked ? '#E53E3E' : 'none'} stroke={isLiked ? '#E53E3E' : '#000000'} strokeWidth="1.8">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                          </svg>
+                        </button>
                         
                         {/* Floating Location Tag */}
                         <div className="tt-hcard-location-tag">
@@ -505,16 +525,6 @@ function SearchPage() {
                       <div className="tt-hcard-body">
                         <div className="tt-hcard-header">
                           <h3 className="tt-hcard-title">{place.place_name}</h3>
-                          <button
-                            type="button"
-                            className={`tt-hcard-heart-btn ${isLiked ? 'is-liked' : ''}`}
-                            onClick={(e) => handleToggleLike(e, place)}
-                            title={isLiked ? 'เลิกถูกใจ' : 'ถูกใจ'}
-                          >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill={isLiked ? '#E53E3E' : 'none'} stroke={isLiked ? '#E53E3E' : '#000000'} strokeWidth="1.8">
-                              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                            </svg>
-                          </button>
                         </div>
 
                         <p className="tt-hcard-desc">
