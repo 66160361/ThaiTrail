@@ -110,15 +110,17 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
         {/* Category Badges */}
         <div className="tt-card-badges">
           {categories.map((cat, idx) => {
-            const style = CATEGORY_TAG_STYLES[idx % CATEGORY_TAG_STYLES.length];
+            const rawCat = rawCats[idx] || '';
+            const catStyle = CATEGORY_STYLES[rawCat.trim()];
+            const fallback = CATEGORY_TAG_STYLES[idx % CATEGORY_TAG_STYLES.length];
             return (
               <span
                 key={cat + idx}
                 className="tt-card-badge"
                 style={{
-                  background: style.bg,
-                  border: style.border,
-                  color: style.color,
+                  background: catStyle ? catStyle.bg : fallback.bg,
+                  border: catStyle ? `1px solid ${catStyle.color}22` : fallback.border,
+                  color: catStyle ? catStyle.color : fallback.color,
                 }}
               >
                 {cat}

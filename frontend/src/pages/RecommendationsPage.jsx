@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -23,6 +23,7 @@ const TABS = [
 function RecommendationsPage() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const gridRef = useRef(null);
 
   const [allPlacesRaw, setAllPlacesRaw] = useState([]);
   const [userRecommendedPlaces, setUserRecommendedPlaces] = useState([]);
@@ -32,7 +33,10 @@ function RecommendationsPage() {
     const saved = sessionStorage.getItem('active_tab');
     return TABS.some((t) => t.id === saved) ? saved : 'recommend';
   });
-  const [limit, setLimit] = useState(PAGE_SIZE);
+  const [page, setPage] = useState(() => {
+    const saved = sessionStorage.getItem('current_page');
+    return saved ? parseInt(saved, 10) : 1;
+  });
 
   // Fetch all places & user-specific recommendations
   const loadData = useCallback(async () => {
@@ -44,7 +48,7 @@ function RecommendationsPage() {
               setUserRecommendedPlaces(res.data);
             }
           })
-          .catch(() => {});
+          .catch(() => { });
       }
       const res = await api.places.getAll();
       const allPlaces = Array.isArray(res) ? res : (res.data || []);
@@ -80,20 +84,53 @@ function RecommendationsPage() {
     }
   }, [activeTab, allPlacesRaw, userRecommendedPlaces]);
 
-  const placesToShow = useMemo(() => {
-    return displayedPlaces.slice(0, limit);
-  }, [displayedPlaces, limit]);
+  const totalPages = Math.max(1, Math.ceil(displayedPlaces.length / PAGE_SIZE));
+
+  // Reset page to 1 if current page exceeds totalPages (only after data loaded)
+  useEffect(() => {
+    if (!loading && page > totalPages) {
+      setPage(1);
+      sessionStorage.setItem('current_page', '1');
+    }
+  }, [loading, page, totalPages]);
+
+  const pagedPlaces = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return displayedPlaces.slice(start, start + PAGE_SIZE);
+  }, [displayedPlaces, page]);
+
+  const pageNumbers = useMemo(() => {
+    const maxButtons = 5;
+    const start = Math.max(1, Math.min(page - 2, totalPages - maxButtons + 1));
+    const end = Math.min(totalPages, Math.max(start + maxButtons - 1, 1));
+    const pages = [];
+    for (let i = Math.max(1, start); i <= end; i += 1) {
+      pages.push(i);
+    }
+    return pages;
+  }, [page, totalPages]);
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
+    setPage(1);
     sessionStorage.setItem('active_tab', tabId);
+    sessionStorage.setItem('current_page', '1');
     sessionStorage.removeItem('scroll_pos');
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    sessionStorage.setItem('current_page', String(newPage));
+    if (gridRef.current) {
+      const top = gridRef.current.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  };
+
   // Restore scroll position when returning from detail page
   useEffect(() => {
-    if (!loading && placesToShow.length > 0) {
+    if (!loading && pagedPlaces.length > 0) {
       const savedScroll = sessionStorage.getItem('scroll_pos');
       if (savedScroll) {
         setTimeout(() => {
@@ -101,18 +138,7 @@ function RecommendationsPage() {
         }, 50);
       }
     }
-  }, [loading, placesToShow.length]);
-
-  // Reset limit when changing tab
-  useEffect(() => {
-    setLimit(PAGE_SIZE);
-  }, [activeTab]);
-
-  const hasMore = displayedPlaces.length > limit;
-
-  const loadMore = () => {
-    setLimit((prev) => prev + PAGE_SIZE);
-  };
+  }, [loading, pagedPlaces.length]);
 
   const handleDismissed = (placeId) => {
     setAllPlacesRaw((prev) => prev.filter((p) => p.id !== placeId));
@@ -128,7 +154,7 @@ function RecommendationsPage() {
       {/* Hero Section with Scenic Background */}
       <section className="tt-hero">
         <div className="tt-hero-bg-overlay" />
-        
+
         <div className="tt-hero-container">
           <h1 className="tt-hero-title">
             สวัสดี, {userName}
@@ -183,7 +209,7 @@ function RecommendationsPage() {
         )}
 
         {/* Empty State */}
-        {!loading && !error && placesToShow.length === 0 && (
+        {!loading && !error && pagedPlaces.length === 0 && (
           <div className="empty-state">
             <span className="empty-icon">🗺️</span>
             <h2 className="empty-title">ไม่พบสถานที่</h2>
@@ -194,15 +220,15 @@ function RecommendationsPage() {
         )}
 
         {/* Places Grid Header & Content */}
-        {!loading && !error && placesToShow.length > 0 && (
+        {!loading && !error && pagedPlaces.length > 0 && (
           <>
-            <div className="tt-section-header">
+            <div className="tt-section-header" ref={gridRef}>
               <h2 className="tt-section-title">{activeTabName}</h2>
               <span className="tt-section-count">{displayedPlaces.length} แห่ง</span>
             </div>
 
-            <div className="tt-places-grid" key={activeTab}>
-              {placesToShow.map((place) => (
+            <div className="tt-places-grid" key={`${activeTab}-${page}`}>
+              {pagedPlaces.map((place) => (
                 <PlaceCard
                   key={place.id}
                   place={place}
@@ -212,10 +238,61 @@ function RecommendationsPage() {
               ))}
             </div>
 
-            {hasMore && (
-              <div style={{ textAlign: 'center', marginTop: 40, marginBottom: 40 }}>
-                <button className="tt-load-more-btn" onClick={loadMore}>
-                  โหลดเพิ่มเติม
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="tt-pagination">
+                <button
+                  className="tt-page-btn"
+                  onClick={() => handlePageChange(Math.max(1, page - 1))}
+                  disabled={page === 1}
+                >
+                  ‹
+                </button>
+
+                {pageNumbers[0] > 1 && (
+                  <>
+                    <button
+                      className={`tt-page-btn ${page === 1 ? 'is-active' : ''}`}
+                      onClick={() => handlePageChange(1)}
+                    >
+                      1
+                    </button>
+                    {pageNumbers[0] > 2 && (
+                      <span className="tt-page-ellipsis">…</span>
+                    )}
+                  </>
+                )}
+
+                {pageNumbers.map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    className={`tt-page-btn ${pageNum === page ? 'is-active' : ''}`}
+                    onClick={() => handlePageChange(pageNum)}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+
+                {pageNumbers[pageNumbers.length - 1] < totalPages && (
+                  <>
+                    {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
+                      <span className="tt-page-ellipsis">…</span>
+                    )}
+                    <button
+                      className={`tt-page-btn ${page === totalPages ? 'is-active' : ''}`}
+                      onClick={() => handlePageChange(totalPages)}
+                    >
+                      {totalPages}
+                    </button>
+                  </>
+                )}
+
+                <button
+                  className="tt-page-btn"
+                  onClick={() => handlePageChange(Math.min(totalPages, page + 1))}
+                  disabled={page === totalPages}
+                >
+                  ›
                 </button>
               </div>
             )}

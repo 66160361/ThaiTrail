@@ -4157,6 +4157,13 @@ a {
   cursor: not-allowed;
 }
 
+.tt-page-ellipsis {
+  font-size: 15px;
+  color: #877462;
+  padding: 0 2px;
+  user-select: none;
+}
+
 /* Responsive Search Page */
 @media (max-width: 900px) {
   .tt-search-layout {
