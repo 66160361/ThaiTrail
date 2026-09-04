@@ -5,6 +5,7 @@ import { api } from '../services/api';
 import Navbar from '../components/Navbar';
 import PlaceCard from '../components/PlaceCard';
 import { interactionStorage } from '../services/interactionStorage';
+import { resolvePlaceImage, FALLBACK_IMAGES } from '../services/placeImageResolver';
 
 const PASTEL_PALETTES = [
   { bg: 'linear-gradient(135deg, #E0F2FE, #BAE6FD)', color: '#0369A1' },
@@ -170,29 +171,15 @@ function ProfilePage() {
     <div style={{ minHeight: '100vh', background: 'var(--bg)', backgroundAttachment: 'fixed', paddingTop: '96px' }}>
       <Navbar />
 
-      <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '40px 20px' }}>
+      <div className="tt-profile-page-root" style={{ maxWidth: '1080px', margin: '0 auto', padding: '40px 20px' }}>
 
         {/* ── Unified White Container ── */}
-        <div style={{
-          background: '#FFFFFF',
-          borderRadius: '24px',
-          padding: '40px 44px',
-          boxShadow: '0 8px 32px rgba(13, 51, 14, 0.06)',
-          border: '1px solid #E8E2DE',
-        }}>
+        <div className="tt-profile-card">
 
           {/* ── Profile Header ── */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '36px',
-            flexWrap: 'wrap',
-            paddingBottom: '36px',
-            borderBottom: '1px solid #E8E2DE',
-          }}>
+          <div className="tt-profile-header">
             {/* Avatar */}
-            <div style={{
+            <div className="tt-profile-avatar-wrapper" style={{
               flexShrink: 0,
               width: '140px',
               height: '140px',
@@ -411,19 +398,36 @@ function ProfilePage() {
                 <div className="spinner" />
               </div>
             ) : currentPlaces.length > 0 ? (
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '24px',
-              }}>
-                {currentPlaces.map((place) => (
-                  <PlaceCard
-                    key={place.id}
-                    place={place}
-                    showScore={false}
-                    onDismissed={handleDismissed}
-                  />
-                ))}
+              <div className="tt-profile-places-grid">
+                {currentPlaces.map((place) => {
+                  const imgSrc = resolvePlaceImage(place, FALLBACK_IMAGES);
+                  return (
+                    <div
+                      key={place.id}
+                      className="tt-ig-grid-item"
+                      onClick={() => {
+                        sessionStorage.setItem('scroll_pos', window.scrollY);
+                        navigate(`/places/${place.id}`);
+                      }}
+                    >
+                      <img
+                        src={imgSrc}
+                        alt={place.place_name}
+                        loading="lazy"
+                        className="tt-ig-grid-img"
+                        onError={(e) => {
+                          e.currentTarget.src = FALLBACK_IMAGES[Math.abs(Number(place.id) || 0) % FALLBACK_IMAGES.length];
+                        }}
+                      />
+                      <div className="tt-ig-grid-overlay">
+                        <span className="tt-ig-grid-badge">
+                          {activeTab === 'liked' ? '❤️' : '🔖'}
+                        </span>
+                        <span className="tt-ig-grid-title">{place.place_name}</span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div style={{ textAlign: 'center', padding: '64px 20px' }}>

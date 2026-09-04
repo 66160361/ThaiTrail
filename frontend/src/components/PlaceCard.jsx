@@ -66,10 +66,37 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
     navigate(`/places/${place.id}`);
   };
 
+  const [showHeartBurst, setShowHeartBurst] = useState(false);
+
+  const handleDoubleTap = (e) => {
+    e.stopPropagation();
+    if (!liked) {
+      const nextLiked = interactionStorage.toggleLike(place);
+      setLiked(nextLiked);
+      setSaved(nextLiked);
+    }
+    setShowHeartBurst(true);
+    setTimeout(() => setShowHeartBurst(false), 900);
+  };
+
   return (
     <article className="tt-card fade-in" onClick={handleCardClick}>
-      {/* Top Image Section */}
-      <div className="tt-card-image-wrapper">
+      {/* 1. IG-Style Post Header */}
+      <div className="tt-card-ig-header">
+        <div className="tt-card-ig-avatar">
+          <span>📍</span>
+        </div>
+        <div className="tt-card-ig-userinfo">
+          <span className="tt-card-ig-name">{place.place_name}</span>
+          <span className="tt-card-ig-loc">{locationText}</span>
+        </div>
+        {categories[0] && (
+          <span className="tt-card-ig-tag">{categories[0]}</span>
+        )}
+      </div>
+
+      {/* 2. Top Image Section with Double Tap */}
+      <div className="tt-card-image-wrapper" onDoubleClick={handleDoubleTap}>
         <img
           src={imgSrc}
           alt={place.place_name}
@@ -78,32 +105,77 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
           className="tt-card-img"
         />
 
-        {/* Top-Right Heart Button */}
-        <button
-          className={`tt-card-heart-btn ${liked ? 'is-liked' : ''}`}
-          onClick={(e) => signal(e, 'like')}
-          title={liked ? 'เลิกถูกใจ' : 'ถูกใจ'}
-          aria-label="Heart button"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill={liked ? '#E53E3E' : 'none'} stroke={liked ? '#E53E3E' : '#000000'} strokeWidth="1.8">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-          </svg>
-        </button>
-
-        {/* Bottom-Left Location Floating Tag */}
-        <div className="tt-card-location-tag">
-          <svg width="14" height="15" viewBox="0 0 24 24" fill="#FF9F1C" style={{ flexShrink: 0 }}>
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5-2.5z" />
-          </svg>
-          <span className="tt-card-location-text">{locationText}</span>
-        </div>
+        {/* IG-style Heart Pop on Double Tap */}
+        {showHeartBurst && (
+          <div className="tt-card-heart-burst">
+            <svg width="68" height="68" viewBox="0 0 24 24" fill="#E53E3E">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+          </div>
+        )}
       </div>
 
-      {/* Card Content */}
+      {/* 3. IG Action Bar (Heart / Share / Bookmark) */}
+      <div className="tt-card-ig-actions" onClick={(e) => e.stopPropagation()}>
+        <div className="tt-card-ig-actions-left">
+          {/* Like Button */}
+          <button
+            className={`tt-ig-action-btn ${liked ? 'is-liked' : ''}`}
+            onClick={(e) => signal(e, 'like')}
+            title={liked ? 'เลิกถูกใจ' : 'ถูกใจ'}
+            aria-label="Heart button"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill={liked ? '#E53E3E' : 'none'} stroke={liked ? '#E53E3E' : '#262626'} strokeWidth="1.8">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+          </button>
+
+          {/* Share Button */}
+          <button
+            className="tt-ig-action-btn"
+            onClick={async (e) => {
+              e.stopPropagation();
+              if (navigator.share) {
+                try {
+                  await navigator.share({
+                    title: place.place_name,
+                    text: place.description || '',
+                    url: `${window.location.origin}/places/${place.id}`,
+                  });
+                } catch { /* cancel */ }
+              } else {
+                navigator.clipboard.writeText(`${window.location.origin}/places/${place.id}`);
+                alert('📋 คัดลอกลิงก์เรียบร้อยแล้ว');
+              }
+            }}
+            title="แชร์"
+            aria-label="Share button"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Bookmark Button on Right */}
+        <button
+          className={`tt-ig-action-btn ${saved ? 'is-saved' : ''}`}
+          onClick={(e) => signal(e, 'save')}
+          title={saved ? 'ยกเลิกการบันทึก' : 'บันทึก'}
+          aria-label="Save button"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill={saved ? '#0D330E' : 'none'} stroke={saved ? '#0D330E' : '#262626'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+          </svg>
+        </button>
+      </div>
+
+      {/* 4. Card Caption & Badges */}
       <div className="tt-card-body">
-        <h3 className="tt-card-title">{place.place_name}</h3>
         <p className="tt-card-desc">
-          {place.description || 'สถานที่ท่องเที่ยวบรรยากาศสวยงาม เหมาะแก่การพักผ่อนและสัมผัสความสวยงามของธรรมชาติ'}
+          <strong className="tt-card-caption-title">{place.place_name}</strong>{' '}
+          {place.description || 'สถานที่ท่องเที่ยวบรรยากาศสวยงาม เหมาะแก่การพักผ่อน'}
         </p>
 
         {/* Category Badges */}
