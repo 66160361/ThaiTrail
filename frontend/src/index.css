@@ -3207,7 +3207,7 @@ a {
 .tt-filter-pills-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
 
@@ -3215,7 +3215,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .tt-filter-pill {
@@ -3223,11 +3223,11 @@ a {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 32px;
+  padding: 8px 20px;
   height: 42px;
   background: #FFFFFF;
   border: 1px solid #000000;
-  border-radius: 100px;
+  border-radius: 9999px;
   font-family: 'Prompt', sans-serif;
   font-style: normal;
   font-weight: 400;
