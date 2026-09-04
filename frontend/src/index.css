@@ -3203,53 +3203,53 @@ a {
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
 }
 
-/* Filter Pills Container */
+/* Filter Pills Container - Symmetrical Grid */
 .tt-filter-pills-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px 12px;
   width: 100%;
 }
 
-.tt-filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
 .tt-filter-pill {
+  width: 100%;
   box-sizing: border-box;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 20px;
-  height: 42px;
+  text-align: center;
+  padding: 8px 10px;
+  height: 44px;
   background: #FFFFFF;
-  border: 1px solid #000000;
+  border: 1.5px solid #000000;
   border-radius: 9999px;
   font-family: 'Prompt', sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #000000;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  color: #1B1B1C;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .tt-filter-pill:hover {
   border-color: #0D330E;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: #0D330E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .tt-filter-pill.is-active {
   background: #0D330E;
-  border: 1px solid #0D330E;
+  border-color: #0D330E;
   color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(13, 51, 14, 0.25);
 }
 
 /* Main Content Area */
@@ -3480,6 +3480,12 @@ a {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+
+  .tt-filter-pill {
+    font-size: 13.5px;
+    padding: 6px 6px;
+    height: 42px;
+  }
 }
 
 @media (max-width: 860px) {
@@ -3496,10 +3502,15 @@ a {
     padding: 24px 20px;
   }
 
+  .tt-filter-pills-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
   .tt-filter-pill {
-    padding: 6px 20px;
-    font-size: 14px;
-    height: 38px;
+    font-size: 13.5px;
+    padding: 6px 8px;
+    height: 40px;
   }
 }
 
@@ -3524,6 +3535,17 @@ a {
 
   .tt-main-content {
     padding: 16px;
+  }
+
+  .tt-filter-pills-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .tt-filter-pill {
+    font-size: 13px;
+    padding: 4px 6px;
+    height: 38px;
   }
 }
 

@@ -163,30 +163,17 @@ function RecommendationsPage() {
             ค้นพบสถานที่ท่องเที่ยวและกิจกรรมที่เหมาะสมกับไลฟ์สไตล์ของคุณ
           </p>
 
-          {/* 2-Row Filter Pill Container */}
+          {/* Category Filter Grid */}
           <div className="tt-filter-pills-container">
-            <div className="tt-filter-row">
-              {TABS.slice(0, 5).map((tab) => (
-                <button
-                  key={tab.id}
-                  className={`tt-filter-pill ${activeTab === tab.id ? 'is-active' : ''}`}
-                  onClick={() => handleTabChange(tab.id)}
-                >
-                  {tab.name}
-                </button>
-              ))}
-            </div>
-            <div className="tt-filter-row">
-              {TABS.slice(5).map((tab) => (
-                <button
-                  key={tab.id}
-                  className={`tt-filter-pill ${activeTab === tab.id ? 'is-active' : ''}`}
-                  onClick={() => handleTabChange(tab.id)}
-                >
-                  {tab.name}
-                </button>
-              ))}
-            </div>
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                className={`tt-filter-pill ${activeTab === tab.id ? 'is-active' : ''}`}
+                onClick={() => handleTabChange(tab.id)}
+              >
+                {tab.name}
+              </button>
+            ))}
           </div>
         </div>
       </section>
