@@ -100,6 +100,7 @@ class RecommendationController
                 FROM places p
                 INNER JOIN tourism_types tt ON p.id = tt.place_id
                 WHERE tt.category_id = :category_id
+                  AND p.province IS NOT NULL AND TRIM(p.province) != ''
                   AND p.id NOT IN (
                       SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
                   )
@@ -143,6 +144,7 @@ class RecommendationController
                 FROM places p
                 INNER JOIN tourism_types tt ON p.id = tt.place_id
                 WHERE tt.category_id = :category_id
+                  AND p.province IS NOT NULL AND TRIM(p.province) != ''
                   AND p.id NOT IN (
                       SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
                   )
@@ -198,6 +200,7 @@ class RecommendationController
                 FROM places p
                 INNER JOIN tourism_types tt ON p.id = tt.place_id
                 WHERE tt.category_id IN ($catPlaceholders)
+                  AND p.province IS NOT NULL AND TRIM(p.province) != ''
                   AND p.id NOT IN (
                       SELECT place_id FROM user_signals WHERE user_id = ? AND signal_type = 'dismiss'
                   )
@@ -214,7 +217,8 @@ class RecommendationController
             SELECT p.id
             FROM places p
             LEFT JOIN user_place_scores ups ON p.id = ups.place_id AND ups.user_id = :user_id
-            WHERE p.id NOT IN (
+            WHERE p.province IS NOT NULL AND TRIM(p.province) != ''
+              AND p.id NOT IN (
                 SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
             )
             ORDER BY $scoreSql DESC, p.place_name ASC

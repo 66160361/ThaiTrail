@@ -45,13 +45,14 @@ function RecommendationsPage() {
         api.recommendations.get()
           .then((res) => {
             if (res && Array.isArray(res.data)) {
-              setUserRecommendedPlaces(res.data);
+              setUserRecommendedPlaces(res.data.filter((p) => p.province && p.province.trim() !== ''));
             }
           })
           .catch(() => { });
       }
       const res = await api.places.getAll();
-      const allPlaces = Array.isArray(res) ? res : (res.data || []);
+      const raw = Array.isArray(res) ? res : (res.data || []);
+      const allPlaces = raw.filter((p) => p.province && p.province.trim() !== '');
       setAllPlacesRaw(allPlaces);
     } catch (err) {
       setError(err.message || 'ไม่สามารถโหลดข้อมูลสถานที่ได้');

@@ -132,7 +132,8 @@ function SearchPage() {
     setLoading(true);
     api.places.getAll()
       .then((res) => {
-        const data = Array.isArray(res) ? res : (res.data || []);
+        const raw = Array.isArray(res) ? res : (res.data || []);
+        const data = raw.filter((p) => p.province && p.province.trim() !== '');
         if (isMounted) setPlaces(data);
       })
       .catch((err) => {
@@ -504,7 +505,7 @@ function SearchPage() {
                           <svg width="12" height="13" viewBox="0 0 24 24" fill="#FF9F1C" style={{ flexShrink: 0 }}>
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                           </svg>
-                          <span className="tt-hcard-location-text">{place.province || 'กระบี่'}</span>
+                          <span className="tt-hcard-location-text">{place.province || place.district || ''}</span>
                         </div>
                       </div>
 

@@ -80,7 +80,9 @@ class PlacesController
                 $stmt = $this->pdo->prepare(
                     'SELECT p.* FROM places p
                      INNER JOIN tourism_types tt ON p.id = tt.place_id
-                     WHERE tt.category_id = :category_id'
+                     WHERE tt.category_id = :category_id
+                       AND p.province IS NOT NULL AND TRIM(p.province) != \'\'
+                     ORDER BY p.place_name'
                 );
                 $stmt->execute(['category_id' => $category['id']]);
                 $category['places'] = array_map([$this, 'normalizePlaceTimes'], $stmt->fetchAll(PDO::FETCH_ASSOC));
@@ -97,6 +99,7 @@ class PlacesController
                     INNER JOIN tourism_types tt ON p.id = tt.place_id
                     LEFT JOIN categories c ON tt.category_id = c.id
                     WHERE tt.category_id = :category_id
+                      AND p.province IS NOT NULL AND TRIM(p.province) != ''
                     GROUP BY p.id
                     ORDER BY p.place_name";
             $stmt = $this->pdo->prepare($sql);
@@ -111,6 +114,7 @@ class PlacesController
              FROM places p
              LEFT JOIN tourism_types tt ON p.id = tt.place_id
              LEFT JOIN categories c ON tt.category_id = c.id
+             WHERE p.province IS NOT NULL AND TRIM(p.province) != ''
              GROUP BY p.id
              ORDER BY p.place_name"
         );
