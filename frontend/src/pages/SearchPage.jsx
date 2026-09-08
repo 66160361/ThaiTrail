@@ -478,7 +478,7 @@ function SearchPage() {
                   const isLiked = interactionStorage.isLiked(place.id);
                   const locationText = place.province
                     ? `${place.district ? place.district + ' ' : ''}จ.${place.province}`
-                    : 'ประเทศไทย';
+                    : (place.district || '');
 
                   const displayCats = categories.slice(0, 2).map(c => {
                     return c.replace('และผจญภัย', '')
@@ -500,12 +500,14 @@ function SearchPage() {
                         <img src={image} alt={place.place_name} loading="lazy" className="tt-hcard-img" />
 
                         {/* Floating Location Tag */}
-                        <div className="tt-hcard-location-tag">
-                          <svg width="12" height="13" viewBox="0 0 24 24" fill="#FF9F1C" style={{ flexShrink: 0 }}>
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                          </svg>
-                          <span className="tt-hcard-location-text">{place.province || 'กระบี่'}</span>
-                        </div>
+                        {Boolean(place.province || place.district) && (
+                          <div className="tt-hcard-location-tag">
+                            <svg width="12" height="13" viewBox="0 0 24 24" fill="#FF9F1C" style={{ flexShrink: 0 }}>
+                              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                            </svg>
+                            <span className="tt-hcard-location-text">{place.province || place.district}</span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Right Body Content */}
