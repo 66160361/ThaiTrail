@@ -17,7 +17,7 @@ const CATEGORIES = [
 
 function OnboardingPage() {
   const navigate = useNavigate();
-  const { user, markOnboarded } = useAuth();
+  const { user, markOnboarded, logout } = useAuth();
 
   const [selected, setSelected] = useState(() => {
     try {
@@ -75,8 +75,9 @@ function OnboardingPage() {
       await api.user.setInterests({ category_ids: selected });
       if (markOnboarded) markOnboarded();
     } catch (err) {
-      // If 401, session is lost — alert user to try again
+      // If 401, session is lost — clear cache and redirect to login
       if (err?.status === 401) {
+        await logout();
         alert('เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง');
         navigate('/login', { replace: true });
         return;
