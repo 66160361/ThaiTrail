@@ -5,9 +5,10 @@ import { useAuth } from '../context/AuthContext';
  * ProtectedRoute — ห่อหน้าที่ต้องการ login
  * - loading: แสดง spinner รอ
  * - ไม่มี user: redirect ไป /login
- * - มี user: render ปกติ
+ * - มี user แต่ยังไม่ onboarded (และ requireOnboarding=true): redirect ไป /onboarding
+ * - ผ่านเงื่อนไข: render ปกติ
  */
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, requireOnboarding = true }) {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -35,6 +36,17 @@ function ProtectedRoute({ children }) {
 
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  const isOnboarded = Boolean(
+    user.onboarded === 1 ||
+    user.onboarded === '1' ||
+    user.onboarded === true ||
+    (Array.isArray(user.interests) && user.interests.length > 0)
+  );
+
+  if (requireOnboarding && !isOnboarded) {
+    return <Navigate to="/onboarding" replace />;
   }
 
   return children;

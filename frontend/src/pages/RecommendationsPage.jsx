@@ -145,7 +145,11 @@ function RecommendationsPage() {
   };
 
   const activeTabName = TABS.find((t) => t.id === activeTab)?.name || 'แนะนำสถานที่';
-  const userName = user?.name || 'Niyada';
+  const userKey = user?.email || user?.id;
+  const userName = user?.name
+    || (userKey ? localStorage.getItem(`thaitrail_user_name_${userKey}`) : null)
+    || localStorage.getItem('thaitrail_user_name')
+    || 'นักเดินทาง';
 
   return (
     <div className="tt-page-root">

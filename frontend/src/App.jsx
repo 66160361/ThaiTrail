@@ -19,7 +19,11 @@ function App() {
         <Routes>
           {/* ── Public routes (ไม่ต้อง login) ── */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/onboarding" element={<OnboardingPage />} />
+
+          {/* ── Onboarding route (ต้อง login แต่ยังไม่จำเป็นต้อง onboarded) ── */}
+          <Route path="/onboarding" element={
+            <ProtectedRoute requireOnboarding={false}><OnboardingPage /></ProtectedRoute>
+          } />
 
           {/* ── Protected routes (ต้อง login) ── */}
           <Route path="/" element={

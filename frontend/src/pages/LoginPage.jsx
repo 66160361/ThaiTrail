@@ -23,7 +23,11 @@ function LoginPage() {
   // ถ้า login อยู่แล้ว → ไปหน้าหลักเลย ไม่ต้องแสดงหน้า login
   useEffect(() => {
     if (!loading && user) {
-      const isOnboarded = user.onboarded === 1 || user.onboarded === '1';
+      const isOnboarded =
+        user.onboarded === 1 ||
+        user.onboarded === '1' ||
+        user.onboarded === true ||
+        (Array.isArray(user.interests) && user.interests.length > 0);
       navigate(isOnboarded ? '/' : '/onboarding', { replace: true });
     }
   }, [user, loading, navigate]);
