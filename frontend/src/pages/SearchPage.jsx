@@ -485,6 +485,7 @@ function SearchPage() {
                             .replace('คาเฟ่และไลฟ์สไตล์', '')
                             .replace('และเทศกาล', '');
                   });
+                  const isLiked = interactionStorage.isLiked(place.id);
 
                   return (
                     <article
