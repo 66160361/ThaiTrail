@@ -433,10 +433,7 @@ function SearchPage() {
               </div>
             </div>
 
-            {/* Submit Action Button */}
-            <button className="tt-search-submit-btn" onClick={applyFilters}>
-              ดูผลลัพธ์ ({filteredPlaces.length})
-            </button>
+
           </aside>
 
           {/* Right Results Column */}
