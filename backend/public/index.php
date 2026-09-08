@@ -5,13 +5,15 @@ $sessionLifetime = 86400 * 7; // 7 วัน
 ini_set('session.gc_maxlifetime', $sessionLifetime);
 ini_set('session.cookie_lifetime', $sessionLifetime);
 
+$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+
 session_set_cookie_params([
     'lifetime' => $sessionLifetime,
-    'path' => '/',
-    'secure' => false,
+    'path'     => '/',
+    'secure'   => $isHttps,
     'httponly' => true,
-    'samesite' => 'Lax',
-    // ไม่ set 'domain' ปล่อยให้ PHP ตั้งค่า default เอง (ป้องกัน cookie block บน localhost)
+    'samesite' => $isHttps ? 'None' : 'Lax',
 ]);
 session_start();
 
