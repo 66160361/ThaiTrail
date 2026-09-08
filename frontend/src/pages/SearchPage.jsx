@@ -475,10 +475,10 @@ function SearchPage() {
                 {pagedPlaces.map((place) => {
                   const categories = toCategoryArray(place);
                   const image = resolvePlaceImage(place, FALLBACK_IMAGES);
-                  const isLiked = interactionStorage.isLiked(place.id);
-                  const locationText = place.province
-                    ? `${place.district ? place.district + ' ' : ''}จ.${place.province}`
-                    : (place.district || '');
+                  const hasLocation = Boolean((place.province && place.province.trim()) || (place.district && place.district.trim()));
+                  const locationText = (place.province && place.province.trim())
+                    ? `${place.district ? place.district + ' ' : ''}จ.${place.province.trim()}`
+                    : (place.district ? place.district.trim() : '');
 
                   const displayCats = categories.slice(0, 2).map(c => {
                     return c.replace('และผจญภัย', '')
@@ -499,13 +499,13 @@ function SearchPage() {
                       <div className="tt-hcard-image-wrapper">
                         <img src={image} alt={place.place_name} loading="lazy" className="tt-hcard-img" />
 
-                        {/* Floating Location Tag */}
-                        {Boolean(place.province || place.district) && (
+                        {/* Floating Location Tag (only shown if location exists) */}
+                        {hasLocation && (
                           <div className="tt-hcard-location-tag">
                             <svg width="12" height="13" viewBox="0 0 24 24" fill="#FF9F1C" style={{ flexShrink: 0 }}>
                               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                             </svg>
-                            <span className="tt-hcard-location-text">{place.province || place.district}</span>
+                            <span className="tt-hcard-location-text">{place.province?.trim() || place.district?.trim()}</span>
                           </div>
                         )}
                       </div>
