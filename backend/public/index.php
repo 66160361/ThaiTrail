@@ -94,6 +94,58 @@ $routes = [
     'GET /api/debug/session' => null, // handled below
 ];
 
+// ─── Admin delete user endpoint ─────────────────────────────────────────────
+if ($requestUri === '/api/admin/delete-user') {
+    $body = json_decode(file_get_contents('php://input'), true) ?? [];
+    $email = trim($_GET['email'] ?? $body['email'] ?? '');
+    if (!$email) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Missing email'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    $stmt = $pdo->prepare("SELECT id, email, name FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        echo json_encode(['success' => true, 'message' => "User {$email} not found or already deleted"], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    $uid = (int) $user['id'];
+    $tables = [
+        'user_interests',
+        'user_preferences',
+        'user_signals',
+        'user_interactions',
+        'user_place_scores',
+    ];
+
+    $deletedRows = [];
+    foreach ($tables as $table) {
+        try {
+            $del = $pdo->prepare("DELETE FROM `{$table}` WHERE user_id = ?");
+            $del->execute([$uid]);
+            $deletedRows[$table] = $del->rowCount();
+        } catch (Throwable $e) {
+            $deletedRows[$table] = $e->getMessage();
+        }
+    }
+
+    $delUser = $pdo->prepare("DELETE FROM users WHERE id = ?");
+    $delUser->execute([$uid]);
+    $deletedRows['users'] = $delUser->rowCount();
+
+    echo json_encode([
+        'success' => true,
+        'deleted_user_id' => $uid,
+        'deleted_user_email' => $email,
+        'details' => $deletedRows,
+    ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    exit;
+}
+
 // ─── Debug session endpoint (dev only) ─────────────────────────────────────
 if ($requestUri === '/api/debug/session') {
     echo json_encode([
