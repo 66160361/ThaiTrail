@@ -5,7 +5,9 @@ import thaiTrailLogo from '../../images/thai_trail.png';
 import thaiTrailPicture from '../../images/picture.png';
 import { useAuth } from '../context/AuthContext';
 
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
+const GOOGLE_CLIENT_ID =
+  import.meta.env.VITE_GOOGLE_CLIENT_ID ||
+  '861431022222-fn8qm2bpv87blt8jr9l9kf1bas0mv7pt.apps.googleusercontent.com';
 
 function LoginPage() {
   const navigate = useNavigate();
