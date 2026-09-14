@@ -87,6 +87,66 @@ function RecommendationsPage() {
       if (userRecommendedPlaces.length > 0) {
         return userRecommendedPlaces.slice(0, 24);
       }
+
+      // Smart 70/20/10 fallback based on user's selected interests (from localStorage / user state)
+      let selectedCatIds = [];
+      try {
+        const stored = (user?.id && localStorage.getItem(`thaitrail_user_interests_${user.id}`))
+          || localStorage.getItem('thaitrail_user_interests');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) {
+            selectedCatIds = parsed.map(Number).filter((n) => !isNaN(n) && n > 0);
+          }
+        }
+      } catch {
+        // ignore
+      }
+
+      if (selectedCatIds.length > 0 && allPlacesRaw.length > 0) {
+        const topCatId = selectedCatIds[0];
+        const secondCatId = selectedCatIds[1] || (topCatId === 1 ? 2 : (topCatId === 2 ? 3 : 1));
+
+        const getCatIds = (p) => {
+          if (!p.category_ids) return [];
+          if (Array.isArray(p.category_ids)) return p.category_ids.map(Number);
+          return String(p.category_ids).split(',').map(Number);
+        };
+
+        const topPlaces = allPlacesRaw.filter((p) => getCatIds(p).includes(topCatId));
+        const secondPlaces = allPlacesRaw.filter((p) => getCatIds(p).includes(secondCatId) && !getCatIds(p).includes(topCatId));
+        const discoveryPlaces = allPlacesRaw.filter((p) => !getCatIds(p).includes(topCatId) && !getCatIds(p).includes(secondCatId));
+
+        const targetTop = 17;
+        const targetSecond = 5;
+        const targetDiscovery = 2;
+
+        const pickedTop = topPlaces.slice(0, targetTop);
+        const pickedSecond = secondPlaces.slice(0, targetSecond);
+        const pickedDiscovery = discoveryPlaces.slice(0, targetDiscovery);
+
+        const combined = [];
+        let i = 0;
+        let j = 0;
+        let k = 0;
+        while (combined.length < 24 && (i < pickedTop.length || j < pickedSecond.length || k < pickedDiscovery.length)) {
+          for (let x = 0; x < 7 && i < pickedTop.length; x += 1) combined.push(pickedTop[i++]);
+          for (let x = 0; x < 2 && j < pickedSecond.length; x += 1) combined.push(pickedSecond[j++]);
+          if (k < pickedDiscovery.length) combined.push(pickedDiscovery[k++]);
+        }
+
+        if (combined.length < 24) {
+          for (const p of allPlacesRaw) {
+            if (!combined.some((item) => item.id === p.id)) {
+              combined.push(p);
+              if (combined.length >= 24) break;
+            }
+          }
+        }
+
+        return combined.slice(0, 24);
+      }
+
       return allPlacesRaw.slice(0, 24);
     } else if (activeTab === 'all') {
       return allPlacesRaw;
@@ -100,7 +160,7 @@ function RecommendationsPage() {
         return catIds.includes(targetCatId);
       });
     }
-  }, [activeTab, allPlacesRaw, userRecommendedPlaces]);
+  }, [activeTab, allPlacesRaw, userRecommendedPlaces, user]);
 
   const totalPages = Math.max(1, Math.ceil(displayedPlaces.length / PAGE_SIZE));
 
