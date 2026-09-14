@@ -66,17 +66,36 @@ function PlaceDetailPage() {
     const sendDuration = () => {
       if (sent || !enterAtRef.current) return;
 
-      const durationSeconds = Math.round((Date.now() - enterAtRef.current) / 1000);
-      if (durationSeconds < 2) return;
+      const elapsedMs = Date.now() - enterAtRef.current;
+      const durationSeconds = Math.max(1, Math.round(elapsedMs / 1000));
 
-      sent = true;
       const payload = {
         place_id: Number(place.id),
-        signal_type: 'dwell_time',
+        signal_type: 'view',
+        duration_only: true,
         duration_seconds: durationSeconds,
+        platform: 'web',
       };
 
-      trackUserSignal(payload);
+      sent = true;
+
+      try {
+        if (navigator.sendBeacon) {
+          const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+          navigator.sendBeacon('/api/signals', blob);
+          return;
+        }
+      } catch {
+        // Fall back to keepalive fetch below.
+      }
+
+      fetch('/api/signals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        keepalive: true,
+        body: JSON.stringify(payload),
+      }).catch(() => { });
     };
 
     const onPageHide = () => sendDuration();

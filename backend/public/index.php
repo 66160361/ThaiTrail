@@ -5,24 +5,12 @@ $sessionLifetime = 86400 * 7; // 7 วัน
 ini_set('session.gc_maxlifetime', $sessionLifetime);
 ini_set('session.cookie_lifetime', $sessionLifetime);
 
-$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
-    || (isset($_SERVER['HTTP_ORIGIN']) && str_starts_with($_SERVER['HTTP_ORIGIN'], 'https://'));
-
-if ($isHttps) {
-    session_set_cookie_params([
-        'lifetime' => $sessionLifetime,
-        'path'     => '/',
-        'secure'   => true,
-        'httponly' => true,
-        'samesite' => 'None',
-    ]);
-} else {
-    ini_set('session.cookie_samesite', '');
-    ini_set('session.cookie_path', '/');
-    ini_set('session.cookie_httponly', '1');
-    ini_set('session.cookie_secure', '0');
-}
+// Dev: ไม่ set SameSite เพื่อให้ browser ส่ง cookie ข้าม port ได้ (5173 → 8000)
+// ini_set ก่อน session_start เพื่อให้มีผล
+ini_set('session.cookie_samesite', '');
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_secure', '0');
 session_start();
 
 require_once __DIR__ . '/../config/env.php';
