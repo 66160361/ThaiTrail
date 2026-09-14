@@ -5,12 +5,22 @@ $sessionLifetime = 86400 * 7; // 7 วัน
 ini_set('session.gc_maxlifetime', $sessionLifetime);
 ini_set('session.cookie_lifetime', $sessionLifetime);
 
-// Dev: ไม่ set SameSite เพื่อให้ browser ส่ง cookie ข้าม port ได้ (5173 → 8000)
-// ini_set ก่อน session_start เพื่อให้มีผล
-ini_set('session.cookie_samesite', '');
+$isHttps = (
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+    ($_SERVER['SERVER_PORT'] ?? '') == 443 ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on')
+);
+
+if ($isHttps) {
+    ini_set('session.cookie_samesite', 'None');
+    ini_set('session.cookie_secure', '1');
+} else {
+    ini_set('session.cookie_samesite', 'Lax');
+    ini_set('session.cookie_secure', '0');
+}
 ini_set('session.cookie_path', '/');
 ini_set('session.cookie_httponly', '1');
-ini_set('session.cookie_secure', '0');
 session_start();
 
 require_once __DIR__ . '/../config/env.php';
@@ -24,6 +34,27 @@ require_once __DIR__ . '/../controller/SignalController.php';
 
 loadAppEnv();
 
+// ─── Header-based Authentication Fallback (when cookies are restricted) ───
+if (empty($_SESSION['user_id'])) {
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+    $userIdHeader = $_SERVER['HTTP_X_USER_ID'] ?? '';
+    $candidateId = null;
+
+    if (preg_match('/Bearer\s+(\d+)/i', $authHeader, $matches)) {
+        $candidateId = (int) $matches[1];
+    } elseif ($userIdHeader && is_numeric($userIdHeader)) {
+        $candidateId = (int) $userIdHeader;
+    }
+
+    if ($candidateId && $candidateId > 0) {
+        $stmt = $pdo->prepare('SELECT id FROM users WHERE id = ?');
+        $stmt->execute([$candidateId]);
+        if ($stmt->fetch()) {
+            $_SESSION['user_id'] = $candidateId;
+        }
+    }
+}
+
 $method = $_SERVER['REQUEST_METHOD'];
 $requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 $requestUri = rtrim($requestUri, '/');
@@ -36,7 +67,7 @@ $origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
 header("Access-Control-Allow-Origin: $origin");
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-User-Id');
 
 if ($method === 'OPTIONS') {
     http_response_code(204);

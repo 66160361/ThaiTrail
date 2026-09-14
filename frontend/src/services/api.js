@@ -6,10 +6,25 @@ const BASE = '/api';
 
 async function request(method, path, data = null) {
   let url = `${BASE}${path}`;
+  const headers = { 'Content-Type': 'application/json' };
+
+  try {
+    const raw = localStorage.getItem('thaitrail_auth_user');
+    if (raw) {
+      const u = JSON.parse(raw);
+      if (u && u.id) {
+        headers['Authorization'] = `Bearer ${u.id}`;
+        headers['X-User-Id'] = String(u.id);
+      }
+    }
+  } catch {
+    // ignore
+  }
+
   const options = {
     method,
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include', // send/receive session cookie via Vite proxy
+    headers,
+    credentials: 'include', // send/receive session cookie
   };
 
   if (method === 'GET') {
