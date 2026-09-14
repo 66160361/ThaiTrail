@@ -43,18 +43,18 @@ function RecommendationsPage() {
   const loadData = useCallback(async () => {
     try {
       if (user) {
-        api.recommendations.get()
-          .then((res) => {
-            if (res && Array.isArray(res.data)) {
-              setUserRecommendedPlaces(res.data);
-            }
-          })
-          .catch((err) => {
-            // ถ้า session หมด (401) → ไปหน้า login
-            if (err?.status === 401) {
-              navigate('/login', { replace: true });
-            }
-          });
+        try {
+          const recRes = await api.recommendations.get({ limit: 24 });
+          if (recRes && Array.isArray(recRes.data)) {
+            setUserRecommendedPlaces(recRes.data);
+          }
+        } catch (err) {
+          // ถ้า session หมด (401) → ไปหน้า login
+          if (err?.status === 401) {
+            navigate('/login', { replace: true });
+            return;
+          }
+        }
       }
       const res = await api.places.getAll();
       const allPlaces = Array.isArray(res) ? res : (res.data || []);
