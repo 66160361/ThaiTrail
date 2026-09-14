@@ -9,14 +9,35 @@ class RecommendationController
         $this->pdo = $pdo;
     }
 
-    private function requireAuth(): int
+    private function requireAuth(array $params = []): int
     {
-        if (empty($_SESSION['user_id'])) {
-            http_response_code(401);
-            echo json_encode(['success' => false, 'message' => 'Unauthorized'], JSON_UNESCAPED_UNICODE);
-            exit;
+        if (!empty($_SESSION['user_id'])) {
+            return (int) $_SESSION['user_id'];
         }
-        return (int) $_SESSION['user_id'];
+
+        $userId = !empty($params['user_id']) ? (int)$params['user_id'] : 0;
+        if (!$userId) {
+            $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+            $userIdHeader = $_SERVER['HTTP_X_USER_ID'] ?? '';
+            if (preg_match('/Bearer\s+(\d+)/i', $authHeader, $matches)) {
+                $userId = (int) $matches[1];
+            } elseif ($userIdHeader && is_numeric($userIdHeader)) {
+                $userId = (int) $userIdHeader;
+            }
+        }
+
+        if ($userId > 0) {
+            $stmt = $this->pdo->prepare('SELECT id FROM users WHERE id = ?');
+            $stmt->execute([$userId]);
+            if ($stmt->fetch()) {
+                $_SESSION['user_id'] = $userId;
+                return $userId;
+            }
+        }
+
+        http_response_code(401);
+        echo json_encode(['success' => false, 'message' => 'Unauthorized'], JSON_UNESCAPED_UNICODE);
+        exit;
     }
 
     /**
@@ -33,7 +54,7 @@ class RecommendationController
      */
     public function index(array $params, array $body): array
     {
-        $userId = $this->requireAuth();
+        $userId = $this->requireAuth($params);
         $limit  = min((int) ($params['limit']  ?? 24), 50);
         $offset = max((int) ($params['offset'] ?? 0),  0);
 

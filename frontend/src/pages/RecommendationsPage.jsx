@@ -42,8 +42,22 @@ function RecommendationsPage() {
   // Fetch all places & user-specific recommendations
   const loadData = useCallback(async () => {
     try {
+      let currentUserId = user?.id;
+      if (!currentUserId) {
+        try {
+          const cached = JSON.parse(localStorage.getItem('thaitrail_auth_user') || '{}');
+          currentUserId = cached?.id;
+        } catch {
+          // ignore
+        }
+      }
+
       try {
-        const recRes = await api.recommendations.get({ limit: 24 });
+        const recParams = { limit: 24 };
+        if (currentUserId) {
+          recParams.user_id = currentUserId;
+        }
+        const recRes = await api.recommendations.get(recParams);
         if (recRes && Array.isArray(recRes.data) && recRes.data.length > 0) {
           setUserRecommendedPlaces(recRes.data);
         }
@@ -60,7 +74,7 @@ function RecommendationsPage() {
     } catch (err) {
       setError(err.message || 'ไม่สามารถโหลดข้อมูลสถานที่ได้');
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   useEffect(() => {
     setLoading(true);
