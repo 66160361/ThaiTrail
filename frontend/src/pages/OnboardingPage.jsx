@@ -70,13 +70,27 @@ function OnboardingPage() {
     }
     localStorage.setItem('thaitrail_user_interests', JSON.stringify(selected));
 
-    // Always try to save to backend (session must be active)
+    let currentUserId = user?.id;
+    if (!currentUserId) {
+      try {
+        const cached = JSON.parse(localStorage.getItem('thaitrail_auth_user') || '{}');
+        currentUserId = cached?.id;
+      } catch {
+        // ignore
+      }
+    }
+
+    // Always try to save to backend
     try {
-      await api.user.setInterests({ category_ids: selected });
+      const payload = { category_ids: selected };
+      if (currentUserId) {
+        payload.user_id = currentUserId;
+      }
+      await api.user.setInterests(payload);
       if (markOnboarded) markOnboarded();
     } catch (err) {
-      // If 401, session is lost — alert user to try again
-      if (err?.status === 401) {
+      // If 401 and no cached user, redirect to login
+      if (err?.status === 401 && !localStorage.getItem('thaitrail_auth_user')) {
         alert('เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง');
         navigate('/login', { replace: true });
         return;

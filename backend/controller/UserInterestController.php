@@ -30,20 +30,41 @@ class UserInterestController
         }
     }
 
-    private function requireAuth(): int
+    private function requireAuth(array $params = [], array $body = []): int
     {
-        if (empty($_SESSION['user_id'])) {
-            http_response_code(401);
-            echo json_encode(['success' => false, 'message' => 'Unauthorized'], JSON_UNESCAPED_UNICODE);
-            exit;
+        if (!empty($_SESSION['user_id'])) {
+            return (int) $_SESSION['user_id'];
         }
-        return (int) $_SESSION['user_id'];
+
+        $userId = !empty($params['user_id']) ? (int)$params['user_id'] : (!empty($body['user_id']) ? (int)$body['user_id'] : 0);
+        if (!$userId) {
+            $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+            $userIdHeader = $_SERVER['HTTP_X_USER_ID'] ?? '';
+            if (preg_match('/Bearer\s+(\d+)/i', $authHeader, $matches)) {
+                $userId = (int) $matches[1];
+            } elseif ($userIdHeader && is_numeric($userIdHeader)) {
+                $userId = (int) $userIdHeader;
+            }
+        }
+
+        if ($userId > 0) {
+            $stmt = $this->pdo->prepare('SELECT id FROM users WHERE id = ?');
+            $stmt->execute([$userId]);
+            if ($stmt->fetch()) {
+                $_SESSION['user_id'] = $userId;
+                return $userId;
+            }
+        }
+
+        http_response_code(401);
+        echo json_encode(['success' => false, 'message' => 'Unauthorized'], JSON_UNESCAPED_UNICODE);
+        exit;
     }
 
     /** GET /api/user/interests — return current interests */
     public function index(array $params, array $body): array
     {
-        $userId = $this->requireAuth();
+        $userId = $this->requireAuth($params, $body);
 
         $stmt = $this->pdo->prepare(
             'SELECT ui.category_id, c.category_name, ui.weight
@@ -66,7 +87,7 @@ class UserInterestController
     /** POST /api/user/interests — save selected interests, mark onboarded=1 */
     public function store(array $params, array $body): array
     {
-        $userId = $this->requireAuth();
+        $userId = $this->requireAuth($params, $body);
         $categoryIds = $body['category_ids'] ?? [];
 
         if (empty($categoryIds) || !is_array($categoryIds)) {
