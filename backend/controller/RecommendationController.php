@@ -127,6 +127,11 @@ class RecommendationController
             $topCategoryId = $interestTopStmt->fetchColumn();
         }
 
+        // Ultimate fallback: ธรรมชาติและผจญภัย (Category 2)
+        if (!$topCategoryId) {
+            $topCategoryId = 2;
+        }
+
         $topCategoryPlaceIds = [];
         if ($topCategoryId) {
             $stmt = $this->pdo->prepare("
@@ -151,11 +156,11 @@ class RecommendationController
         // ดึงหมวดหมู่ที่มีคะแนนความสนใจเป็นอันดับถัดมา (อันดับที่ 2) จาก user_preferences
         $secondCatStmt = $this->pdo->prepare("
             SELECT category_id FROM user_preferences
-            WHERE user_id = :user_id AND preference_score > 0
+            WHERE user_id = :user_id AND preference_score > 0 AND category_id != :top_id
             ORDER BY preference_score DESC
-            LIMIT 1 OFFSET 1
+            LIMIT 1
         ");
-        $secondCatStmt->execute([':user_id' => $userId]);
+        $secondCatStmt->execute([':user_id' => $userId, ':top_id' => $topCategoryId]);
         $secondCategoryId = $secondCatStmt->fetchColumn();
 
         // Fallback: user ใหม่ → ดึงอันดับ 2 จาก user_interests
@@ -180,6 +185,10 @@ class RecommendationController
             ");
             $otherCatStmt->execute([':top_id' => $topCategoryId ?: 0]);
             $secondCategoryId = $otherCatStmt->fetchColumn();
+        }
+
+        if (!$secondCategoryId) {
+            $secondCategoryId = ($topCategoryId == 2 ? 7 : 2);
         }
 
         $secondCategoryPlaceIds = [];
@@ -263,7 +272,7 @@ class RecommendationController
             WHERE p.id NOT IN (
                 SELECT place_id FROM user_signals WHERE user_id = :user_id2 AND signal_type = 'dismiss'
             )
-            ORDER BY $scoreSql DESC, p.place_name ASC
+            ORDER BY $scoreSql DESC, RAND()
             LIMIT :limit
         ");
         $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);

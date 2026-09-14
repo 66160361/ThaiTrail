@@ -103,9 +103,14 @@ function RecommendationsPage() {
         // ignore
       }
 
-      if (selectedCatIds.length > 0 && allPlacesRaw.length > 0) {
-        const topCatId = selectedCatIds[0];
-        const secondCatId = selectedCatIds[1] || (topCatId === 1 ? 2 : (topCatId === 2 ? 3 : 1));
+      // Default to ธรรมชาติและผจญภัย (2) and อาหารคาเฟ่ (7) if no interests selected yet
+      if (selectedCatIds.length === 0) {
+        selectedCatIds = [2, 7];
+      }
+
+      if (allPlacesRaw.length > 0) {
+        const topCatId = selectedCatIds[0] || 2;
+        const secondCatId = selectedCatIds[1] || (topCatId === 1 ? 2 : (topCatId === 2 ? 7 : 1));
 
         const getCatIds = (p) => {
           if (!p.category_ids) return [];
