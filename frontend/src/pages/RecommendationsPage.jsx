@@ -101,9 +101,12 @@ function RecommendationsPage() {
   }, [loading, page, totalPages]);
 
   const pagedPlaces = useMemo(() => {
+    if (activeTab === 'recommend') {
+      return displayedPlaces;
+    }
     const start = (page - 1) * PAGE_SIZE;
     return displayedPlaces.slice(start, start + PAGE_SIZE);
-  }, [displayedPlaces, page]);
+  }, [activeTab, displayedPlaces, page]);
 
   const pageNumbers = useMemo(() => {
     const maxButtons = 5;
@@ -236,7 +239,7 @@ function RecommendationsPage() {
             </div>
 
             {/* Pagination Controls */}
-            {totalPages > 1 && (
+            {activeTab !== 'recommend' && totalPages > 1 && (
               <div className="tt-pagination">
                 <button
                   className="tt-page-btn"
