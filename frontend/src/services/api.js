@@ -2,7 +2,7 @@
 // All requests go to /api (proxied by Vite to localhost:8000)
 // Sessions are managed via cookies — credentials: 'include' is required.
 
-const BASE = '/api';
+const BASE = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '');
 
 async function request(method, path, data = null) {
   let url = `${BASE}${path}`;
