@@ -42,27 +42,25 @@ function RecommendationsPage() {
   // Fetch all places & user-specific recommendations
   const loadData = useCallback(async () => {
     try {
-      if (user) {
-        try {
-          const recRes = await api.recommendations.get({ limit: 24 });
-          if (recRes && Array.isArray(recRes.data)) {
-            setUserRecommendedPlaces(recRes.data);
-          }
-        } catch (err) {
-          // ถ้า session หมด (401) → ไปหน้า login
-          if (err?.status === 401) {
-            navigate('/login', { replace: true });
-            return;
-          }
+      try {
+        const recRes = await api.recommendations.get({ limit: 24 });
+        if (recRes && Array.isArray(recRes.data) && recRes.data.length > 0) {
+          setUserRecommendedPlaces(recRes.data);
+        }
+      } catch (err) {
+        if (err?.status === 401 && !localStorage.getItem('thaitrail_auth_user')) {
+          navigate('/login', { replace: true });
+          return;
         }
       }
+
       const res = await api.places.getAll();
       const allPlaces = Array.isArray(res) ? res : (res.data || []);
       setAllPlacesRaw(allPlaces);
     } catch (err) {
       setError(err.message || 'ไม่สามารถโหลดข้อมูลสถานที่ได้');
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     setLoading(true);
@@ -73,9 +71,9 @@ function RecommendationsPage() {
   const displayedPlaces = useMemo(() => {
     if (activeTab === 'recommend') {
       if (userRecommendedPlaces.length > 0) {
-        return userRecommendedPlaces;
+        return userRecommendedPlaces.slice(0, 24);
       }
-      return allPlacesRaw;
+      return allPlacesRaw.slice(0, 24);
     } else if (activeTab === 'all') {
       return allPlacesRaw;
     } else {
