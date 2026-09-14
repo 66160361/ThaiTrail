@@ -13,5 +13,5 @@ COPY . /app
 ENV PORT=8000
 EXPOSE 8000
 
-# Start server using router.php or backend/router.php
+# Start server using router.php (if inside backend) or backend/router.php
 CMD ["sh", "-c", "if [ -f router.php ]; then php -S 0.0.0.0:${PORT:-8000} router.php; else php -S 0.0.0.0:${PORT:-8000} backend/router.php; fi"]
