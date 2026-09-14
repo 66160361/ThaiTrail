@@ -49,7 +49,12 @@ function RecommendationsPage() {
               setUserRecommendedPlaces(res.data);
             }
           })
-          .catch(() => { });
+          .catch((err) => {
+            // ถ้า session หมด (401) → ไปหน้า login
+            if (err?.status === 401) {
+              navigate('/login', { replace: true });
+            }
+          });
       }
       const res = await api.places.getAll();
       const allPlaces = Array.isArray(res) ? res : (res.data || []);
@@ -57,7 +62,7 @@ function RecommendationsPage() {
     } catch (err) {
       setError(err.message || 'ไม่สามารถโหลดข้อมูลสถานที่ได้');
     }
-  }, [user]);
+  }, [user, navigate]);
 
   useEffect(() => {
     setLoading(true);

@@ -84,6 +84,7 @@ class RecommendationController
 
         // ─── GROUP 1 (70%): Top Category ────────────────────────────
         // ดึงหมวดหมู่ที่ผู้ใช้มีคะแนนความสนใจสูงสุด (Top Category) จาก user_preferences
+        // หากยังไม่มี preference score (user ใหม่) ให้ fallback ไปดู user_interests แทน
         $topCatStmt = $this->pdo->prepare("
             SELECT category_id FROM user_preferences
             WHERE user_id = :user_id AND preference_score > 0
@@ -92,6 +93,18 @@ class RecommendationController
         ");
         $topCatStmt->execute([':user_id' => $userId]);
         $topCategoryId = $topCatStmt->fetchColumn();
+
+        // Fallback: user ใหม่ยังไม่มี preference_score > 0 → ใช้ user_interests แทน
+        if (!$topCategoryId) {
+            $interestTopStmt = $this->pdo->prepare("
+                SELECT category_id FROM user_interests
+                WHERE user_id = :user_id
+                ORDER BY weight DESC, category_id ASC
+                LIMIT 1
+            ");
+            $interestTopStmt->execute([':user_id' => $userId]);
+            $topCategoryId = $interestTopStmt->fetchColumn();
+        }
 
         $topCategoryPlaceIds = [];
         if ($topCategoryId) {
@@ -123,6 +136,18 @@ class RecommendationController
         ");
         $secondCatStmt->execute([':user_id' => $userId]);
         $secondCategoryId = $secondCatStmt->fetchColumn();
+
+        // Fallback: user ใหม่ → ดึงอันดับ 2 จาก user_interests
+        if (!$secondCategoryId) {
+            $interestSecondStmt = $this->pdo->prepare("
+                SELECT category_id FROM user_interests
+                WHERE user_id = :user_id AND category_id != :top_id
+                ORDER BY weight DESC, category_id ASC
+                LIMIT 1
+            ");
+            $interestSecondStmt->execute([':user_id' => $userId, ':top_id' => $topCategoryId ?: 0]);
+            $secondCategoryId = $interestSecondStmt->fetchColumn();
+        }
 
         if (!$secondCategoryId) {
             // หากไม่มีอันดับสอง ให้เลือกหมวดหมู่อื่นที่ไม่ใช่หมวดหมู่แรกมาหนึ่งหมวดหมู่ (ถ้ามี)
@@ -361,7 +386,7 @@ class RecommendationController
                 p.province,
                 p.district,
                 p.subdistrict,
-                p.image_url,
+                p.images_json,
                 p.latitude,
                 p.longitude,
                 ROUND(

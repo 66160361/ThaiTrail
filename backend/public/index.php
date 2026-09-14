@@ -5,14 +5,12 @@ $sessionLifetime = 86400 * 7; // 7 วัน
 ini_set('session.gc_maxlifetime', $sessionLifetime);
 ini_set('session.cookie_lifetime', $sessionLifetime);
 
-session_set_cookie_params([
-    'lifetime' => $sessionLifetime,
-    'path' => '/',
-    'secure' => false,
-    'httponly' => true,
-    'samesite' => 'Lax',
-    // ไม่ set 'domain' ปล่อยให้ PHP ตั้งค่า default เอง (ป้องกัน cookie block บน localhost)
-]);
+// Dev: ไม่ set SameSite เพื่อให้ browser ส่ง cookie ข้าม port ได้ (5173 → 8000)
+// ini_set ก่อน session_start เพื่อให้มีผล
+ini_set('session.cookie_samesite', '');
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_secure', '0');
 session_start();
 
 require_once __DIR__ . '/../config/env.php';
@@ -62,7 +60,20 @@ $routes = [
     'GET /api/recommendations' => [RecommendationController::class, 'index'],
     'POST /api/signals' => [SignalController::class, 'store'],
     'GET /api/places' => [PlacesController::class, 'index'],
+    'GET /api/debug/session' => null, // handled below
 ];
+
+// ─── Debug session endpoint (dev only) ─────────────────────────────────────
+if ($requestUri === '/api/debug/session') {
+    echo json_encode([
+        'session_id' => session_id(),
+        'user_id' => $_SESSION['user_id'] ?? null,
+        'cookie_phpsessid' => $_COOKIE['PHPSESSID'] ?? null,
+        'all_cookies' => $_COOKIE,
+        'session_data' => $_SESSION,
+    ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    exit;
+}
 
 $routeKey = "$method $requestUri";
 $body = json_decode(file_get_contents('php://input'), true) ?? [];
