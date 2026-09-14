@@ -7,6 +7,7 @@ import PlaceCard from '../components/PlaceCard';
 import PlaceMap from '../components/PlaceMap';
 import Navbar from '../components/Navbar';
 import { interactionStorage } from '../services/interactionStorage';
+import { trackUserSignal, hasSignalConsent } from '../services/signalTracker';
 import { resolvePlaceImage, resolvePlaceImages } from '../services/placeImageResolver';
 
 
@@ -48,7 +49,7 @@ function PlaceDetailPage() {
         setImgSrc(resolvePlaceImage(found, FALLBACK_IMAGES));
 
         if (user) {
-          api.signals.log({ place_id: found.id, signal_type: 'view' }).catch(() => { });
+          trackUserSignal({ place_id: found.id, signal_type: 'view' });
         }
       })
       .catch((err) => setError(err.message))
@@ -57,7 +58,7 @@ function PlaceDetailPage() {
 
   // Track dwell time on place detail and send once when leaving the page.
   useEffect(() => {
-    if (!user || !place?.id) return;
+    if (!user || !place?.id || !hasSignalConsent()) return;
 
     enterAtRef.current = Date.now();
     let sent = false;
@@ -198,7 +199,7 @@ function PlaceDetailPage() {
       }
 
       if (user && place) {
-        api.signals.log({ place_id: place.id, signal_type: 'share' }).catch(() => { });
+        trackUserSignal({ place_id: place.id, signal_type: 'share' });
       }
       return;
     }
@@ -212,9 +213,7 @@ function PlaceDetailPage() {
       setSaved(nextSaved);
     }
     if (user && type !== 'like' && type !== 'save') {
-      try {
-        await api.signals.log({ place_id: place.id, signal_type: type });
-      } catch { /* silent */ }
+      trackUserSignal({ place_id: place.id, signal_type: type });
     }
   };
 

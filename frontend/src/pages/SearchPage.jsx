@@ -4,6 +4,7 @@ import { api } from '../services/api';
 import Navbar from '../components/Navbar';
 import { useAuth } from '../context/AuthContext';
 import { interactionStorage } from '../services/interactionStorage';
+import { trackUserSignal } from '../services/signalTracker';
 import { resolvePlaceImage, FALLBACK_IMAGES } from '../services/placeImageResolver';
 
 const CATEGORY_CHECKBOXES = [
@@ -121,9 +122,7 @@ function SearchPage() {
     const nextLiked = interactionStorage.toggleLike(place);
     setLikedTick((t) => t + 1);
     if (user) {
-      try {
-        await api.signals.log({ place_id: place.id, signal_type: 'like' });
-      } catch { /* silent */ }
+      trackUserSignal({ place_id: place.id, signal_type: 'like' });
     }
   };
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { trackUserSignal } from '../services/signalTracker';
 import { resolvePlaceImage, FALLBACK_IMAGES } from '../services/placeImageResolver';
 import { interactionStorage } from '../services/interactionStorage';
 
@@ -40,9 +40,7 @@ function PlaceCard({ place, showScore = false, onDismissed }) {
       setSaved(nextLiked);
     }
     if (user && type !== 'like' && type !== 'save') {
-      try {
-        await api.signals.log({ place_id: place.id, signal_type: type });
-      } catch { /* silent */ }
+      trackUserSignal({ place_id: place.id, signal_type: type });
     }
   };
 

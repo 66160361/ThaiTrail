@@ -1,4 +1,4 @@
-import { api } from './api';
+import { trackUserSignal } from './signalTracker';
 
 const USER_CACHE_KEY = 'thaitrail_auth_user';
 
@@ -78,16 +78,12 @@ export const interactionStorage = {
 
     localStorage.setItem(getLikedKey(), JSON.stringify(list));
 
-    // ส่ง signal ไป backend เฉพาะกรณีที่ผู้ใช้ล็อกอินอยู่
+    // ส่ง signal ไป backend เฉพาะกรณีที่ผู้ใช้ล็อกอินอยู่และยินยอมคุกกี้เพื่อการวิเคราะห์/ปรับเนื้อหา
     if (getUserId()) {
-      try {
-        api.signals.log({
-          place_id: Number(place.id),
-          signal_type: isLikedNow ? 'like' : 'unlike',
-        }).catch(() => { });
-      } catch (e) {
-        console.log('Signal log note:', e);
-      }
+      trackUserSignal({
+        place_id: Number(place.id),
+        signal_type: isLikedNow ? 'like' : 'unlike',
+      });
     }
 
     return isLikedNow;
@@ -110,16 +106,12 @@ export const interactionStorage = {
 
     localStorage.setItem(getSavedKey(), JSON.stringify(list));
 
-    // ส่ง signal ไป backend เฉพาะกรณีที่ผู้ใช้ล็อกอินอยู่
+    // ส่ง signal ไป backend เฉพาะกรณีที่ผู้ใช้ล็อกอินอยู่และยินยอมคุกกี้เพื่อการวิเคราะห์/ปรับเนื้อหา
     if (getUserId()) {
-      try {
-        api.signals.log({
-          place_id: Number(place.id),
-          signal_type: isSavedNow ? 'save' : 'unsave',
-        }).catch(() => { });
-      } catch (e) {
-        console.log('Signal log note:', e);
-      }
+      trackUserSignal({
+        place_id: Number(place.id),
+        signal_type: isSavedNow ? 'save' : 'unsave',
+      });
     }
 
     return isSavedNow;

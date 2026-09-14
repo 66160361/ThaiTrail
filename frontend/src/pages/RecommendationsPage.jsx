@@ -4,6 +4,7 @@ import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import PlaceCard from '../components/PlaceCard';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const PAGE_SIZE = 24;
 
@@ -290,6 +291,8 @@ function RecommendationsPage() {
           </>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 }
